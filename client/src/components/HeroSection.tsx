@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import heroImage from "@assets/generated_images/Person_in_calm_introspection_1e3df931.png";
+import heroImage from "@assets/generated_images/Person_viewing_metabolic_health_tablet_689ba318.png";
 
 export default function HeroSection() {
   return (
@@ -68,7 +68,7 @@ export default function HeroSection() {
             <div className="relative">
               <img 
                 src={heroImage} 
-                alt="Persona en calma conectando con su cuerpo, concepto de nutrición funcional y equilibrio interior — NutriMarvin" 
+                alt="Persona aprendiendo sobre salud metabólica en tablet, nutrición funcional y reversión de diabetes tipo 2 — NutriMarvin" 
                 className="rounded-lg shadow-lg w-full h-auto"
               />
             </div>
