@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resultados Funcionales - NutriMarvin</title>
+<style>
+body { font-family: 'Inter', sans-serif; background-color: #FAF8F4; color: #333; }
+section { margin: 2rem auto; padding: 2rem; max-width: 800px; background: #FFF; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+h2, h3 { color: #5B7553; }
+ul { list-style-type: none; padding: 0; }
+li { margin-bottom: 6px; }
+blockquote { font-style: italic; color: #7D6E5B; margin-top: 1rem; }
+.cta { text-align: center; margin-top: 2rem; padding: 1rem; background-color: #E9E6D7; border-radius: 8px; }
+.cta h4 { color: #4A593D; }
+.cta button { background: #5B7553; color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+.cta button:hover { background: #6E8B61; }
+</style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Resultados Funcionales – NutriMarvin 🌿</h2>
+
+<!-- Aquí inician los 16 bloques -->
+<section>
+<h3>🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa</h3>
+<p>Tu cuerpo no está fallando, está ajustando su energía para protegerte del exceso. Los picos de glucosa o bajones de energía no son errores: son adaptaciones.</p>
+<ul>
+<li><strong>REMOVE</strong> — Reduce ultraprocesados y periodos largos sin comer.</li>
+<li><strong>REPLACE</strong> — Combina proteína + fibra + grasa saludable.</li>
+<li><strong>REPAIR</strong> — Añade magnesio, zinc y caldos naturales.</li>
+<li><strong>REBALANCE</strong> — Cena temprano y camina 10 minutos postcomida.</li>
+<li><strong>RESTORE</strong> — Duerme 7–8 horas.</li>
+<li><strong>REFLECT</strong> — La fatiga no es debilidad, es adaptación.</li>
+</ul>
+<blockquote>🌿 Tu glucosa no sube para dañarte, sino para protegerte del exceso de demanda.</blockquote>
+</section>
+
+<section>
+<h3>💩 Patrón Digestivo — Estreñimiento Silencioso</h3>
+<p>Tu digestión refleja tu capacidad de liberar lo que el cuerpo ya no necesita. Cuando no hay flujo, hay acumulación e inflamación.</p>
+<ul>
+<li><strong>REMOVE</strong> — Elimina irritantes intestinales (harinas, lácteos, fritos).</li>
+<li><strong>REPLACE</strong> — Usa amargos naturales (rúcula, diente de león, manzanilla).</li>
+<li><strong>REPAIR</strong> — Grasas buenas y caldos reconstituyentes.</li>
+<li><strong>REBALANCE</strong> — Crea horario regular para evacuar.</li>
+<li><strong>RESTORE</strong> — Mueve el cuerpo y respira profundo.</li>
+<li><strong>REFLECT</strong> — El cuerpo libera cuando se siente seguro.</li>
+</ul>
+<blockquote>💬 Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende.</blockquote>
+</section>
+
+<section>
+<h3>🔥 Patrón Inflamatorio — Cuerpo en Alerta Constante</h3>
+<p>La inflamación no es el enemigo, es el lenguaje del cuerpo pidiendo equilibrio.</p>
+<ul>
+<li><strong>REDUCE</strong> — Baja la carga inflamatoria (azúcar, estrés, pantallas).</li>
+<li><strong>REBUILD</strong> — Proteínas limpias y omega 3.</li>
+<li><strong>REBALANCE</strong> — Regula el cortisol con luz natural y pausas.</li>
+<li><strong>RESTORE</strong> — Respira y duerme profundo.</li>
+<li><strong>REFLECT</strong> — Las emociones reprimidas también inflaman.</li>
+<li><strong>RECONNECT</strong> — Descansa sin culpa; es fisiología, no debilidad.</li>
+</ul>
+<blockquote>🔥 El cuerpo no necesita control, necesita descanso.</blockquote>
+</section>
+
+<section>
+<h3>🌙 Patrón del Sueño — Sistema en Modo Alerta</h3>
+<p>Si el cuerpo no descansa, no puede reparar ni estabilizar la glucosa. Dormir es medicina.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita pantallas y cafeína 6 h antes de dormir.</li>
+<li><strong>REPLACE</strong> — Cenas livianas, oscuridad y silencio.</li>
+<li><strong>REPAIR</strong> — Magnesio, respiración nasal, rutina fija.</li>
+<li><strong>REBALANCE</strong> — Luces cálidas al caer la tarde.</li>
+<li><strong>RESTORE</strong> — Duerme de 10 p.m. a 6 a.m. en oscuridad total.</li>
+<li><strong>REFLECT</strong> — El cuerpo no sana bajo vigilancia constante.</li>
+</ul>
+<blockquote>🌙 El descanso es el estado en que el cuerpo se repara solo.</blockquote>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h4>🌿 Da el siguiente paso con NutriMarvin</h4>
+  <p>Continúa tu proceso funcional y aprende a equilibrar tu cuerpo desde la raíz. Accede a planes, clases y guías exclusivas.</p>
+  <button onclick="window.location.href='https://nutrimarvin.com/suscripcion'">Suscríbete por $5/mes</button>
+</div>
+
+</body>
+</html>

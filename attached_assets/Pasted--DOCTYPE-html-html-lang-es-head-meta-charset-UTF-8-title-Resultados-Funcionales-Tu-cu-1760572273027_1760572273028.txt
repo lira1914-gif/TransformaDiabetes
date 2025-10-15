@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<title>Resultados Funcionales — Tu cuerpo no está roto, solo está protegiéndose</title>
+<style>
+body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#FAF8F4; color:#333; }
+header { text-align:center; padding: 2rem 1rem; }
+header h1 { color:#5B7553; margin:0 0 .25rem 0; }
+header p { color:#7D6E5B; margin:.25rem 0 0 0; }
+section.bloque { margin: 1.25rem auto; padding: 1.5rem; max-width: 860px; background:#FFF; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+section.bloque h3 { color:#5B7553; margin-top:0; }
+section.bloque p { line-height:1.6; }
+section.bloque ul { margin: .75rem 0 0 1.25rem; }
+section.bloque li { margin:.4rem 0; }
+blockquote { margin:1rem 0 0 0; padding:.75rem 1rem; background:#F4F1EA; border-left:4px solid #5B7553; color:#6E6356; border-radius:6px; }
+.cta { text-align:center; margin: 2rem auto; padding:1.25rem; max-width: 860px; background:#EDE9DD; border-radius:10px; }
+.cta h4 { color:#4A593D; margin:.25rem 0 .5rem 0; }
+.cta a.btn { display:inline-block; background:#5B7553; color:#fff; text-decoration:none; padding:.7rem 1.4rem; border-radius:8px; }
+.cta a.btn:hover { background:#6A8760; }
+footer { text-align:center; color:#8E867C; font-size:.9rem; padding: 1rem 0 2rem 0; }
+</style>
+</head>
+<body>
+<header><h1>Resultados Funcionales — Tu cuerpo no está roto, solo está protegiéndose</h1><p>Resultados personalizados con enfoque de nutrición funcional.</p></header>
+<section class='bloque'>
+<h3>🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa</h3>
+<p>Tu cuerpo ajusta su energía para protegerte del exceso. Los picos de glucosa o bajones de energía no son errores; son adaptaciones a un entorno exigente. El objetivo no es controlar, sino regular desde la raíz.</p>
+<ul>
+<li><strong>REMOVE</strong> — Reduce ultraprocesados y periodos largos sin comer.</li>
+<li><strong>REPLACE</strong> — Combina proteína + fibra + grasa saludable en cada comida.</li>
+<li><strong>REPAIR</strong> — Añade magnesio, zinc y caldos naturales para soporte celular.</li>
+<li><strong>REBALANCE</strong> — Cena temprano y camina 10 minutos postcomida.</li>
+<li><strong>RESTORE</strong> — Duerme 7–8 horas; el descanso regula tu glucosa.</li>
+<li><strong>REFLECT</strong> — Observa tu energía sin juicio: el cuerpo busca equilibrio.</li>
+</ul>
+<blockquote>🌿 Tu glucosa no sube para dañarte, sino para protegerte del exceso de demanda.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🩸 Patrón Metabólico–Digestivo</h3>
+<p>La digestión tensa o lenta hace trabajar de más a la insulina. Cuando comes con prisa o bajo estrés, la glucosa puede elevarse aunque evites el azúcar. Calmar el intestino estabiliza tu metabolismo.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita combinaciones pesadas (harinas + grasas + azúcar).</li>
+<li><strong>REPLACE</strong> — Fibra soluble y amargos (rúcula, berros, apio).</li>
+<li><strong>REPAIR</strong> — Caldos, grasas buenas y masticar 20 veces por bocado.</li>
+<li><strong>REBALANCE</strong> — Come sentado, sin pantallas ni prisa.</li>
+<li><strong>RESTORE</strong> — Camina 5–10 minutos tras comer para activar el flujo.</li>
+<li><strong>REFLECT</strong> — La digestión regula más que la dieta: regula tu entorno interno.</li>
+</ul>
+<blockquote>🩸 Una digestión lenta puede elevar la glucosa incluso sin comer azúcar.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🩸 Patrón Metabólico–Inflamatorio</h3>
+<p>La inflamación activa disminuye la eficiencia de la insulina. Tu cuerpo conserva energía para reparar tejidos; no es flojera, es protección. Bajar la carga inflamatoria estabiliza la glucosa.</p>
+<ul>
+<li><strong>REMOVE</strong> — Disminuye azúcar, harinas y aceites refinados.</li>
+<li><strong>REPLACE</strong> — Integra cúrcuma, jengibre y omega-3.</li>
+<li><strong>REPAIR</strong> — Prioriza sueño antes de las 11 p. m. para reparación celular.</li>
+<li><strong>REBALANCE</strong> — Pausas respiratorias de 2–3 minutos, 3 veces al día.</li>
+<li><strong>RESTORE</strong> — Movimiento suave diario para drenaje linfático.</li>
+<li><strong>REFLECT</strong> — La inflamación es lenguaje, no castigo.</li>
+</ul>
+<blockquote>🔥 El cuerpo no te sabotea, te está priorizando.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🩸 Patrón Metabólico–Hormonal</h3>
+<p>Tu cuerpo ajusta energía y ritmo hormonal. Cambios en apetito, ánimo o sueño son señales de ajuste, no de falla. Regular ritmos ayuda a estabilizar la glucosa.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita ayunos prolongados si hay ansiedad o irritabilidad.</li>
+<li><strong>REPLACE</strong> — Grasas buenas (aguacate, semillas, aceite de oliva).</li>
+<li><strong>REPAIR</strong> — Exposición a luz matinal para sincronizar ritmos.</li>
+<li><strong>REBALANCE</strong> — Come en horarios constantes (3–4 h).</li>
+<li><strong>RESTORE</strong> — Bajar intensidad de entrenamiento si duermes mal.</li>
+<li><strong>REFLECT</strong> — Tu energía no se pierde; se redistribuye.</li>
+</ul>
+<blockquote>💫 El cuerpo prioriza seguridad antes que productividad.</blockquote>
+</section>
+<section class='bloque'>
+<h3>💩 Patrón Digestivo–Metabólico</h3>
+<p>Cuando el intestino se enlentece, la insulina también. La evacuación regular y la masticación consciente mejoran la sensibilidad a la insulina y la energía.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita comer bajo estrés o prisa.</li>
+<li><strong>REPLACE</strong> — Amargos naturales (rúcula, menta, diente de león).</li>
+<li><strong>REPAIR</strong> — Grasas buenas y caldos minerales para mucosa intestinal.</li>
+<li><strong>REBALANCE</strong> — Horario fijo para comidas y evacuación.</li>
+<li><strong>RESTORE</strong> — Hidratación constante; agua tibia al despertar.</li>
+<li><strong>REFLECT</strong> — La calma digestiva precede al equilibrio metabólico.</li>
+</ul>
+<blockquote>🌱 La digestión tranquila es tu primer regulador de glucosa.</blockquote>
+</section>
+<section class='bloque'>
+<h3>💩 Patrón Digestivo–Inflamatorio</h3>
+<p>El intestino inflamado mantiene el cuerpo en modo defensa. Retirar irritantes y dar calma al sistema digestivo baja la carga inflamatoria y favorece la glucosa estable.</p>
+<ul>
+<li><strong>REMOVE</strong> — Elimina ultraprocesados, alcohol y fritos por 30 días.</li>
+<li><strong>REPLACE</strong> — Infusiones suaves (manzanilla, hinojo, menta).</li>
+<li><strong>REPAIR</strong> — Caldos, gelatinas naturales y alimentos templados.</li>
+<li><strong>REBALANCE</strong> — Ayuno nocturno de ~12 h (si no hay hipoglucemia).</li>
+<li><strong>RESTORE</strong> — Respiración diafragmática antes de comer.</li>
+<li><strong>REFLECT</strong> — Tu cuerpo pide alivio, no presión.</li>
+</ul>
+<blockquote>🍵 Tu cuerpo no pide control, pide alivio.</blockquote>
+</section>
+<section class='bloque'>
+<h3>💩 Patrón Digestivo–Estreñimiento Silencioso</h3>
+<p>Retener es una forma de protección cuando el terreno está sobrecargado. Fluir a diario reduce inflamación y estabiliza el metabolismo.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita cenas pesadas y exceso de café.</li>
+<li><strong>REPLACE</strong> — Agua, magnesio natural y vegetales cocidos.</li>
+<li><strong>REPAIR</strong> — Fibra soluble (chía, linaza, avena cocida).</li>
+<li><strong>REBALANCE</strong> — Rutina de evacuación diaria en calma.</li>
+<li><strong>RESTORE</strong> — Caminar, estirarte y respirar activa el intestino.</li>
+<li><strong>REFLECT</strong> — ¿Qué estás reteniendo además de desechos?</li>
+</ul>
+<blockquote>💩 Si no fluyes, acumulas; y si acumulas, el cuerpo se protege.</blockquote>
+</section>
+<section class='bloque'>
+<h3>💩 Patrón Digestivo–Detox Lento</h3>
+<p>El hígado, intestino y piel limpian más lento bajo carga. No es debilidad: es falta de soporte. Facilitar el drenaje reduce glucosa e inflamación.</p>
+<ul>
+<li><strong>REMOVE</strong> — Alcohol, frituras y exceso de proteína procesada.</li>
+<li><strong>REPLACE</strong> — Verduras amargas y jugos verdes sin fruta.</li>
+<li><strong>REPAIR</strong> — Caldos, electrolitos naturales y descanso profundo.</li>
+<li><strong>REBALANCE</strong> — Cena liviana antes de las 8 p. m.</li>
+<li><strong>RESTORE</strong> — Sudoración suave (caminata, baño tibio).</li>
+<li><strong>REFLECT</strong> — Tu cuerpo limpia cuando se siente seguro.</li>
+</ul>
+<blockquote>🌿 El detox real es diario, no extremo.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🌙 Patrón Estrés–Metabólico</h3>
+<p>El estrés eleva el cortisol y altera tu glucosa. No es flojera ni falta de voluntad: es fisiología en modo defensa. Bajar la carga simpática estabiliza el azúcar.</p>
+<ul>
+<li><strong>REMOVE</strong> — Reduce cafeína y pantallas nocturnas.</li>
+<li><strong>REPLACE</strong> — Cenas templadas y livianas (sopas, caldos).</li>
+<li><strong>REPAIR</strong> — Magnesio por la tarde y luz natural al despertar.</li>
+<li><strong>REBALANCE</strong> — Respiración 4-7-8 al acostarte.</li>
+<li><strong>RESTORE</strong> — Pausas de 2 minutos, 3 veces al día.</li>
+<li><strong>REFLECT</strong> — No puedes sanar en el mismo estado que te enfermó.</li>
+</ul>
+<blockquote>🌙 El descanso es requisito metabólico, no lujo.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🌙 Patrón Estrés–Hormonal</h3>
+<p>El cuerpo prioriza supervivencia: altera ritmos hormonales para protegerte. Asentar el sistema nervioso devuelve la regularidad y mejora la glucosa.</p>
+<ul>
+<li><strong>REMOVE</strong> — Disminuye entrenamiento intenso si duermes mal.</li>
+<li><strong>REPLACE</strong> — Comidas cálidas y regulares; evita saltarte comidas.</li>
+<li><strong>REPAIR</strong> — Exposición matutina al sol para sincronizar ritmos.</li>
+<li><strong>REBALANCE</strong> — Rutina nocturna sin pantallas la última hora.</li>
+<li><strong>RESTORE</strong> — Dormir más horas el fin de semana para recuperar.</li>
+<li><strong>REFLECT</strong> — Tu cuerpo no está roto, está priorizando seguridad.</li>
+</ul>
+<blockquote>💫 La calma organiza tus hormonas.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🌙 Patrón Estrés–Energético</h3>
+<p>Tu energía está dirigida a sostener la alerta, no la vitalidad. Bajar la hipervigilancia libera energía para reparar y digerir.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita noticias/inputs estresantes por la noche.</li>
+<li><strong>REPLACE</strong> — Agua con minerales naturales (sal marina) en el día.</li>
+<li><strong>REPAIR</strong> — Rutinas cortas de respiración o caminatas sin pantalla.</li>
+<li><strong>REBALANCE</strong> — Límite de multitarea: bloques de enfoque + pausas.</li>
+<li><strong>RESTORE</strong> — Micro-siestas de 10–20 minutos si lo permite tu día.</li>
+<li><strong>REFLECT</strong> — La energía regresa cuando el cuerpo confía.</li>
+</ul>
+<blockquote>🌤️ El cuerpo baja la velocidad para protegerte.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🌙 Patrón Estrés–Digestivo</h3>
+<p>El intestino refleja tu nivel de calma. Estrés y prisa detienen el flujo digestivo y elevan la glucosa. Comer en calma reactiva el nervio vago.</p>
+<ul>
+<li><strong>REMOVE</strong> — Evita comer de pie o con pantalla.</li>
+<li><strong>REPLACE</strong> — Infusiones suaves y masticación consciente.</li>
+<li><strong>REPAIR</strong> — Pausas de respiración antes de cada comida.</li>
+<li><strong>REBALANCE</strong> — Horarios estables para comer.</li>
+<li><strong>RESTORE</strong> — Gratitud breve antes de masticar (activa parasimpático).</li>
+<li><strong>REFLECT</strong> — El cuerpo solo digiere en calma.</li>
+</ul>
+<blockquote>🌾 Alimentarte en calma es terapia metabólica.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🔥 Patrón Inflamatorio–Digestivo</h3>
+<p>Tu intestino es el centro de la inflamación actual. Retirar irritantes y nutrir la mucosa reduce la alarma y estabiliza el metabolismo.</p>
+<ul>
+<li><strong>REMOVE</strong> — Azúcar, ultraprocesados y alcohol.</li>
+<li><strong>REPLACE</strong> — Antiinflamatorios naturales (cúrcuma, frutos rojos).</li>
+<li><strong>REPAIR</strong> — Caldos, gelatinas naturales y descanso nocturno.</li>
+<li><strong>REBALANCE</strong> — Paseos suaves diarios; evita sobreentrenar.</li>
+<li><strong>RESTORE</strong> — Hidratación constante durante el día.</li>
+<li><strong>REFLECT</strong> — Tu cuerpo busca reparar, no castigarte.</li>
+</ul>
+<blockquote>🔥 La inflamación es un intento de reparación.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🔥 Patrón Inflamatorio–Metabólico</h3>
+<p>Inflamación y glucosa se retroalimentan. Reducir picos y bajar la carga inflamatoria devuelve la sensibilidad a la insulina.</p>
+<ul>
+<li><strong>REMOVE</strong> — Harinas refinadas y snacks frecuentes.</li>
+<li><strong>REPLACE</strong> — Omega-3, verduras de raíz y proteínas limpias.</li>
+<li><strong>REPAIR</strong> — Dormir 7–8 h; acostarte antes de las 11 p. m.</li>
+<li><strong>REBALANCE</strong> — Ventanas de comida estables (evita picoteo).</li>
+<li><strong>RESTORE</strong> — Movimiento suave y constante (no extenuante).</li>
+<li><strong>REFLECT</strong> — El cuerpo conserva energía para cuidarte.</li>
+</ul>
+<blockquote>🌿 Regular no es restringir: es darle ritmo al cuerpo.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🔥 Patrón Inflamatorio–Energético</h3>
+<p>El cuerpo está cansado de sostener una inflamación prolongada. Ahorra energía para protegerte. Bajar la demanda y priorizar descanso lo devuelve a la reparación.</p>
+<ul>
+<li><strong>REMOVE</strong> — Excesos de entrenamiento o jornadas extendidas.</li>
+<li><strong>REPLACE</strong> — Comidas sencillas y templadas; hidrátate bien.</li>
+<li><strong>REPAIR</strong> — Sueño profundo y luz tenue por la noche.</li>
+<li><strong>REBALANCE</strong> — Rutinas suaves (estiramientos, caminatas).</li>
+<li><strong>RESTORE</strong> — 3 pausas conscientes al día para bajar el eje HPA.</li>
+<li><strong>REFLECT</strong> — El descanso también es medicina.</li>
+</ul>
+<blockquote>💤 El cuerpo cura cuando descansa.</blockquote>
+</section>
+<section class='bloque'>
+<h3>🔥 Patrón Inflamatorio–Estreñimiento Silencioso</h3>
+<p>Cuando el cuerpo no elimina, la inflamación aumenta. No es descuido: es un freno protector. Recuperar el flujo reduce la carga inflamatoria y estabiliza la glucosa.</p>
+<ul>
+<li><strong>REMOVE</strong> — Exceso de lácteos, fritos y comidas nocturnas tardías.</li>
+<li><strong>REPLACE</strong> — Fibra soluble (chía/linaza), agua tibia y amargos.</li>
+<li><strong>REPAIR</strong> — Caldos y grasas buenas para la mucosa.</li>
+<li><strong>REBALANCE</strong> — Horario diario para evacuar sin prisa.</li>
+<li><strong>RESTORE</strong> — Caminar y estirarte después de las comidas.</li>
+<li><strong>REFLECT</strong> — Soltar es parte de sanar.</li>
+</ul>
+<blockquote>💧 El cuerpo no acumula por error: se protege mientras te pide ayuda.</blockquote>
+</section>
+
+<div class="cta">
+  <h4>🌿 Da el siguiente paso con NutriMarvin</h4>
+  <p>Continúa tu proceso funcional y aprende a equilibrar tu cuerpo desde la raíz con acceso a planes, clases y mini-retos.</p>
+  <a class="btn" href="/suscripcion">Suscríbete por $5/mes</a>
+</div>
+
+<footer>
+  <p><strong>Privacidad y confidencialidad:</strong> La información que compartes en NutriMarvin es confidencial y se usa únicamente para ofrecerte orientación educativa y personalizada dentro de la plataforma.</p>
+</footer>
+</body>
+</html>
