@@ -75,6 +75,26 @@ export default function Footer() {
             Esta información es de carácter educativo y no sustituye el consejo médico profesional. 
             Consulta siempre con tu médico antes de realizar cambios en tu tratamiento.
           </p>
+          
+          <div 
+            className="mt-6 pt-4 mx-auto"
+            style={{
+              borderTop: '1px solid rgba(166, 166, 138, 0.6)',
+              maxWidth: '900px'
+            }}
+          >
+            <p 
+              className="text-xs leading-relaxed"
+              style={{ color: '#D9D7C8' }}
+            >
+              <strong>Privacidad y Confidencialidad</strong><br />
+              La información que compartes en NutriMarvin es completamente confidencial.<br />
+              No vendemos, compartimos ni divulgamos tus datos personales a terceros.<br />
+              Cualquier respuesta proporcionada en el diagnóstico funcional se usa únicamente para ofrecerte resultados educativos y personalizados dentro de nuestra plataforma.<br />
+              Cumplimos con las regulaciones de privacidad aplicables en EE. UU. y protegemos tu información mediante protocolos seguros de encriptación y almacenamiento.<br />
+              Puedes leer nuestra <Link href="/privacidad" className="underline hover:opacity-80 transition-opacity">Política de Privacidad completa</Link> para más información.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
