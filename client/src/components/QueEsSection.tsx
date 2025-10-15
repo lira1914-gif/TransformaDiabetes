@@ -1,4 +1,4 @@
-import { Activity, Heart, Sparkles } from "lucide-react";
+import { Zap, HeartPulse, Sun } from "lucide-react";
 
 export default function QueEsSection() {
   return (
@@ -20,7 +20,7 @@ export default function QueEsSection() {
           <div className="grid md:grid-cols-3 gap-6 py-8">
             <div className="flex flex-col items-center text-center space-y-3 p-6 rounded-2xl bg-[#F7F4EE] shadow-sm hover:shadow-md transition-shadow hover-elevate">
               <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(106, 117, 85, 0.1)' }}>
-                <Activity className="h-8 w-8" style={{ color: '#6A7555' }} />
+                <Zap className="h-8 w-8" strokeWidth={2} style={{ color: '#6A7555' }} />
               </div>
               <h3 className="font-semibold text-lg">Mejora Metabólica</h3>
               <p className="text-sm text-muted-foreground">
@@ -30,7 +30,7 @@ export default function QueEsSection() {
             
             <div className="flex flex-col items-center text-center space-y-3 p-6 rounded-2xl bg-[#F7F4EE] shadow-sm hover:shadow-md transition-shadow hover-elevate">
               <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(106, 117, 85, 0.1)' }}>
-                <Heart className="h-8 w-8" style={{ color: '#6A7555' }} />
+                <HeartPulse className="h-8 w-8" strokeWidth={2} style={{ color: '#6A7555' }} />
               </div>
               <h3 className="font-semibold text-lg">Salud Cardiovascular</h3>
               <p className="text-sm text-muted-foreground">
@@ -40,7 +40,7 @@ export default function QueEsSection() {
             
             <div className="flex flex-col items-center text-center space-y-3 p-6 rounded-2xl bg-[#F7F4EE] shadow-sm hover:shadow-md transition-shadow hover-elevate">
               <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(106, 117, 85, 0.1)' }}>
-                <Sparkles className="h-8 w-8" style={{ color: '#6A7555' }} />
+                <Sun className="h-8 w-8" strokeWidth={2} style={{ color: '#6A7555' }} />
               </div>
               <h3 className="font-semibold text-lg">Energía y Vitalidad</h3>
               <p className="text-sm text-muted-foreground">
