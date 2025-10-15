@@ -77,7 +77,7 @@ export default function Resultados() {
 
   useEffect(() => {
     // Get answers from localStorage
-    const storedAnswers = localStorage.getItem('diagnostico_answers');
+    const storedAnswers = localStorage.getItem('respuestasNutriMarvin');
     
     if (!storedAnswers) {
       // Redirect to diagnostico if no answers found
@@ -89,6 +89,7 @@ export default function Resultados() {
       const answers = JSON.parse(storedAnswers);
       const patron = interpretarPatron(answers);
       setResultado(patron);
+      console.log("Patrón interpretado:", patron);
     } catch (error) {
       console.error("Error parsing answers:", error);
       setLocation("/diagnostico");

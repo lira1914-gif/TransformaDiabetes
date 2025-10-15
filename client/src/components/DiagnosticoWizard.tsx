@@ -73,7 +73,7 @@ export default function DiagnosticoWizard() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // Save answers to localStorage and navigate to results
-      localStorage.setItem('diagnostico_answers', JSON.stringify(answers));
+      localStorage.setItem('respuestasNutriMarvin', JSON.stringify(answers));
       setLocation("/resultados");
     }
   };
