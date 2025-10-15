@@ -14,11 +14,11 @@ export default function Diagnostico() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {!started ? (
             <div 
-              className="text-center space-y-8 animate-in fade-in duration-700"
+              className="text-center space-y-8"
               style={{ maxWidth: '800px', margin: '0 auto' }}
             >
               <h1 
-                className="text-3xl md:text-5xl font-serif font-semibold"
+                className="text-3xl md:text-5xl font-serif font-semibold animate-in fade-in duration-700"
                 style={{ color: '#6B7041' }}
               >
                 Descubre tu patrón funcional
@@ -28,14 +28,15 @@ export default function Diagnostico() {
                 className="text-lg md:text-xl leading-relaxed"
                 style={{ color: '#5A5A4F' }}
               >
-                Tu cuerpo siempre busca equilibrio. Este diagnóstico te ayudará a identificar qué área necesita más atención para recuperar tu energía y revertir la resistencia a la insulina desde la raíz.
+                Tu cuerpo siempre busca equilibrio. Este diagnóstico te ayudará a reconocer qué área necesita más apoyo para recuperar tu energía y revertir la resistencia a la insulina desde la raíz.
               </p>
 
               <div 
-                className="p-6 rounded-xl"
+                className="p-6 rounded-xl mx-auto"
                 style={{ 
                   backgroundColor: '#FFFFFF',
-                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+                  maxWidth: '700px'
                 }}
               >
                 <p className="text-base leading-relaxed" style={{ color: '#7A7A6F' }}>
@@ -44,10 +45,14 @@ export default function Diagnostico() {
                 </p>
               </div>
 
-              <div className="pt-6">
+              <p className="text-sm italic" style={{ color: '#8C847A' }}>
+                Respira profundo antes de comenzar. No hay respuestas buenas o malas, solo señales que nos ayudan a entender tu cuerpo.
+              </p>
+
+              <div className="pt-6 animate-in fade-in duration-700">
                 <Button 
                   size="lg"
-                  className="rounded-xl font-medium text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+                  className="rounded-xl font-medium text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105 w-[90%] max-w-[320px]"
                   style={{ backgroundColor: '#6B7041' }}
                   onClick={() => setStarted(true)}
                   data-testid="button-comenzar-diagnostico"
