@@ -1,0 +1,66 @@
+Please update the “Historias de Éxito” section with the following text and design:
+
+---
+
+🟩 TITLE  
+"Historias de Éxito Real"  
+Subtitle: "Personas que recuperaron su salud, energía y libertad con un enfoque funcional."
+Center both title and subtitle.  
+Font: Playfair Display for title, Inter for subtitle.  
+Colors: #5E6647 for title, #7A7A6F for subtitle.  
+
+---
+
+💬 TESTIMONIAL CARDS (3)
+Layout: 3 cards on desktop, stacked on mobile.  
+Each card:
+- Background: #FCFBF9  
+- Rounded corners (xl), shadow-md  
+- Padding: 6  
+- Subtle hover scale (1.02)  
+- Quote icon on top-left (#C6C6A6)  
+- Italic quote text  
+- Bold name and age  
+- Result line in green (#6B8A5A)  
+- Key note in muted brown (#8C847A)  
+
+---
+
+🧍‍♂️ TESTIMONIAL 1
+Quote:
+"Llegué con una A1c de 11.5% y más de 65 libras de sobrepeso.  
+En menos de 6 meses, mi glucosa se estabilizó, bajé 40 libras y, por primera vez en años, duermo sin dolor.  
+Lo que aprendí con NutriMarvin cambió mi relación con la comida y conmigo mismo."
+Name: Peter B., 57 años  
+Result line: "HbA1c de 11.5% → 6.5% | -40 lb"  
+Key note: "Energía, descanso y libertad del miedo al azúcar."
+
+---
+
+🧍‍♂️ TESTIMONIAL 2
+Quote:
+"Pensé que la diabetes era para siempre. Hoy entiendo que mi cuerpo no estaba roto, solo necesitaba apoyo.  
+Mis niveles se normalizaron, mi energía regresó y ya no vivo con niebla mental.  
+Aprendí a escuchar las señales de mi cuerpo."
+Name: José Luis M., 50 años  
+Result line: "HbA1c de 9.2% → 5.7% | -22 lb"  
+Key note: "Claridad mental y control estable de glucosa."
+
+---
+
+🧍‍♂️ TESTIMONIAL 3
+Quote:
+"Después de años de medicación, neuropatía y cansancio, decidí aplicar lo que predico.  
+Bajé mi A1c de 12.5% a 5.5%, recuperé sensibilidad en mis pies y volví a sentir energía.  
+Este enfoque funcional no solo cambió mi salud, sino también mi propósito."
+Name: Marvin L., 56 años  
+Result line: "HbA1c de 12.5% → 5.5% | -40 lb"  
+Key note: "Reversión completa, sin medicamentos."
+
+---
+
+🎨 DESIGN NOTES
+- Add background gradient: from #FDFCF9 (top) to #F8F6F1 (bottom).  
+- Use serif font for quotes (Playfair Display or Georgia).  
+- Maintain consistent spacing with previous sections.  
+- On hover: increase shadow and elevate slightly.  
