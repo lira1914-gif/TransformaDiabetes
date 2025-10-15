@@ -1,0 +1,63 @@
+// === INTERPRETACIÓN FUNCIONAL NUTRIMARVIN ===
+// Este motor detecta el patrón dominante a partir de las respuestas
+
+function interpretarPatron(respuestas) {
+  // Definimos rangos de influencia de cada grupo funcional
+  let scoreMetabolico = 0;
+  let scoreDigestivo = 0;
+  let scoreEstres = 0;
+
+  respuestas.forEach((r, i) => {
+    if (i < 5) scoreMetabolico += r.valor;      // preguntas 1–5
+    else if (i < 10) scoreDigestivo += r.valor; // preguntas 6–10
+    else scoreEstres += r.valor;                // preguntas 11–15
+  });
+
+  const maxScore = Math.max(scoreMetabolico, scoreDigestivo, scoreEstres);
+  let patron = "";
+  let descripcion = "";
+  let recomendaciones = [];
+
+  if (maxScore === scoreMetabolico) {
+    patron = "🩸 Patrón Metabólico";
+    descripcion = "Tu cuerpo muestra señales de energía irregular o picos de glucosa. Este patrón se asocia con cansancio postcomida, antojos o dificultad para mantener el peso.";
+    recomendaciones = [
+      "Desayuna con proteína y fibra para evitar picos de azúcar.",
+      "Evita comer distraído o en estrés.",
+      "Camina 10 minutos después de las comidas para mejorar sensibilidad a la insulina."
+    ];
+  } else if (maxScore === scoreDigestivo) {
+    patron = "💩 Patrón Digestivo";
+    descripcion = "Tu cuerpo muestra señales de digestión lenta o eliminación irregular. Este patrón suele reflejar sobrecarga intestinal o dificultad para eliminar toxinas.";
+    recomendaciones = [
+      "Prioriza comidas ricas en vegetales y agua tibia en ayunas.",
+      "Evita comer con prisa; mastica conscientemente.",
+      "Usa hierbas amargas o té digestivo después de comer."
+    ];
+  } else {
+    patron = "🌙 Patrón de Estrés y Sueño";
+    descripcion = "Tu cuerpo muestra señales de estrés sostenido o sueño superficial. Este patrón impacta directamente la regulación hormonal y la glucosa.";
+    recomendaciones = [
+      "Evita pantallas 1 hora antes de dormir.",
+      "Realiza 3 respiraciones profundas al despertar y antes de dormir.",
+      "Incluye fuentes de magnesio o alimentos ricos en triptófano."
+    ];
+  }
+
+  return { patron, descripcion, recomendaciones };
+}
+
+// === RENDERIZAR RESULTADOS ===
+function mostrarResultados(respuestas) {
+  const resultado = interpretarPatron(respuestas);
+  document.getElementById("tituloPatron").textContent = resultado.patron;
+  document.getElementById("descripcionPatron").textContent = resultado.descripcion;
+
+  const lista = document.getElementById("recomendaciones");
+  lista.innerHTML = "";
+  resultado.recomendaciones.forEach(rec => {
+    const li = document.createElement("li");
+    li.textContent = rec;
+    lista.appendChild(li);
+  });
+}

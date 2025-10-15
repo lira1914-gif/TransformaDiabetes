@@ -1,0 +1,74 @@
+/* === NUTRIMARVIN – MOTOR DE INTERPRETACIÓN FUNCIONAL ===
+   Este bloque calcula el patrón predominante a partir de las respuestas.
+   No modifica el HTML todavía. Solo define funciones listas para usar.
+   ------------------------------------------------------------------- */
+
+// Espera un arreglo "respuestas" con 15 elementos (ó los que uses),
+// en el mismo orden en que presentas las preguntas.
+// Cada elemento debe tener un número 1..5 en la propiedad "valor".
+// Ejemplo: [{valor:3},{valor:5},...]
+function interpretarPatron(respuestas) {
+  if (!Array.isArray(respuestas) || respuestas.length === 0) {
+    console.warn("interpretarPatron: respuestas inválidas");
+    return {
+      patron: "Patrón no determinado",
+      descripcion: "No pudimos interpretar tus respuestas. Intenta completar el diagnóstico nuevamente.",
+      recomendaciones: []
+    };
+  }
+
+  // Suma por bloques (ajusta los cortes si cambiaste el número de preguntas)
+  // Suposición: 1–5 Metabólico, 6–10 Digestivo, 11–15 Estrés/Sueño
+  let scoreMetabolico = 0;
+  let scoreDigestivo = 0;
+  let scoreEstres = 0;
+
+  respuestas.forEach((r, i) => {
+    const v = Number(r?.valor) || 0;
+    if (i < 5) scoreMetabolico += v;        // preguntas 0–4
+    else if (i < 10) scoreDigestivo += v;   // preguntas 5–9
+    else scoreEstres += v;                  // preguntas 10–14
+  });
+
+  const maxScore = Math.max(scoreMetabolico, scoreDigestivo, scoreEstres);
+
+  // Construcción del resultado
+  let patron, descripcion, recomendaciones;
+
+  if (maxScore === scoreMetabolico) {
+    patron = "🩸 Patrón Metabólico";
+    descripcion =
+      "Tu cuerpo muestra señales de energía irregular o picos de glucosa. Este patrón se asocia con cansancio postcomida, antojos o dificultad para mantener el peso.";
+    recomendaciones = [
+      "Desayuna con proteína y fibra para evitar picos de azúcar.",
+      "Evita comer con prisa o en estrés (respira antes de empezar).",
+      "Camina 10 minutos después de las comidas para mejorar la sensibilidad a la insulina."
+    ];
+  } else if (maxScore === scoreDigestivo) {
+    patron = "💩 Patrón Digestivo";
+    descripcion =
+      "Tu cuerpo muestra señales de digestión lenta o eliminación irregular. Este patrón suele reflejar sobrecarga intestinal o dificultad para eliminar toxinas.";
+    recomendaciones = [
+      "Agua tibia al despertar y vegetales en 2 de tus comidas.",
+      "Mastica conscientemente; evita comer de pie o con pantallas.",
+      "Incluye amargos suaves (rúcula, diente de león) o té digestivo."
+    ];
+  } else {
+    patron = "🌙 Patrón de Estrés y Sueño";
+    descripcion =
+      "Tu cuerpo muestra señales de estrés sostenido o descanso superficial. Este patrón impacta la regulación hormonal y la glucosa.";
+    recomendaciones = [
+      "Evita pantallas 60 minutos antes de dormir.",
+      "3 pausas de respiración (2 min) al día para bajar el eje HPA.",
+      "Incluye fuentes de magnesio o alimentos ricos en triptófano por la tarde."
+    ];
+  }
+
+  return { patron, descripcion, recomendaciones, scoreMetabolico, scoreDigestivo, scoreEstres };
+}
+
+/* Exponemos una función para que el flujo la pueda llamar luego
+   (en el siguiente paso conectaremos esta salida con el HTML). */
+window.NutriMarvinResultados = {
+  interpretarPatron
+};

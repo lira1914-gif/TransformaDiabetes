@@ -72,6 +72,8 @@ export default function DiagnosticoWizard() {
       // Smooth scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
+      // Save answers to localStorage and navigate to results
+      localStorage.setItem('diagnostico_answers', JSON.stringify(answers));
       setLocation("/resultados");
     }
   };
