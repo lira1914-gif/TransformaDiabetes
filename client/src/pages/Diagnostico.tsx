@@ -1,22 +1,70 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import DiagnosticoWizard from "@/components/DiagnosticoWizard";
+import { Button } from "@/components/ui/button";
 
 export default function Diagnostico() {
+  const [started, setStarted] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-accent/30 to-background flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F9F7F2' }}>
       <Header />
-      <main className="flex-1 py-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
-              Diagnóstico de Salud Metabólica
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Responde estas preguntas para obtener un análisis personalizado de tu situación actual
-            </p>
-          </div>
-          <DiagnosticoWizard />
+      <main className="flex-1 py-12 md:py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {!started ? (
+            <div 
+              className="text-center space-y-8 animate-in fade-in duration-700"
+              style={{ maxWidth: '800px', margin: '0 auto' }}
+            >
+              <h1 
+                className="text-3xl md:text-5xl font-serif font-semibold"
+                style={{ color: '#6B7041' }}
+              >
+                Descubre tu patrón funcional
+              </h1>
+              
+              <p 
+                className="text-lg md:text-xl leading-relaxed"
+                style={{ color: '#5A5A4F' }}
+              >
+                Tu cuerpo siempre busca equilibrio. Este diagnóstico te ayudará a identificar qué área necesita más atención para recuperar tu energía y revertir la resistencia a la insulina desde la raíz.
+              </p>
+
+              <div 
+                className="p-6 rounded-xl"
+                style={{ 
+                  backgroundColor: '#FFFFFF',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
+                }}
+              >
+                <p className="text-base leading-relaxed" style={{ color: '#7A7A6F' }}>
+                  El siguiente diagnóstico funcional tiene 14 preguntas y te tomará menos de 3 minutos.<br />
+                  Tus respuestas son confidenciales y se usan únicamente con fines educativos.
+                </p>
+              </div>
+
+              <div className="pt-6">
+                <Button 
+                  size="lg"
+                  className="rounded-xl font-medium text-white px-8 py-6 text-lg transition-all duration-300 hover:scale-105"
+                  style={{ backgroundColor: '#6B7041' }}
+                  onClick={() => setStarted(true)}
+                  data-testid="button-comenzar-diagnostico"
+                >
+                  Comenzar Diagnóstico
+                </Button>
+              </div>
+
+              <p className="text-sm pt-8" style={{ color: '#999999' }}>
+                Esta herramienta es educativa y no sustituye la orientación médica profesional.
+              </p>
+            </div>
+          ) : (
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <DiagnosticoWizard />
+            </div>
+          )}
         </div>
       </main>
       <Footer />
