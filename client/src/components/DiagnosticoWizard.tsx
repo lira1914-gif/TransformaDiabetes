@@ -4,50 +4,53 @@ import { Progress } from "@/components/ui/progress";
 import { ChevronRight } from "lucide-react";
 import { useLocation } from "wouter";
 
+type ScaleType = "frecuencia" | "intensidad" | "calidad" | "acuerdo";
+
 interface Question {
   id: string;
   question: string;
+  scaleType: ScaleType;
 }
 
 const steps = [
   {
     title: "Energía y Metabolismo",
     questions: [
-      { id: "energia_estable", question: "¿Sueles sentirte con energía estable durante el día?" },
-      { id: "antojos", question: "¿Tienes antojos frecuentes de azúcar o carbohidratos?" },
-      { id: "cansancio_comida", question: "¿Notas cansancio después de comer?" },
-      { id: "peso", question: "¿Te cuesta bajar de peso o lo recuperas fácilmente?" },
-      { id: "sueno_horas", question: "¿Duermes al menos 7 horas la mayoría de las noches?" }
+      { id: "energia_estable", question: "¿Sueles sentirte con energía estable durante el día?", scaleType: "calidad" as ScaleType },
+      { id: "antojos", question: "¿Tienes antojos frecuentes de azúcar o carbohidratos?", scaleType: "frecuencia" as ScaleType },
+      { id: "cansancio_comida", question: "¿Notas cansancio o sueño después de comer?", scaleType: "frecuencia" as ScaleType },
+      { id: "peso", question: "¿Te cuesta bajar de peso o mantenerlo estable?", scaleType: "acuerdo" as ScaleType },
+      { id: "sueno_horas", question: "¿Duermes al menos 7 horas la mayoría de las noches?", scaleType: "frecuencia" as ScaleType }
     ]
   },
   {
     title: "Digestión y Eliminación",
     questions: [
-      { id: "evacuaciones", question: "¿Tienes evacuaciones diarias sin esfuerzo?" },
-      { id: "gases", question: "¿Sueles tener gases, inflamación o sensación de pesadez?" },
-      { id: "apetito_animo", question: "¿Tu apetito cambia según tu estado de ánimo?" },
-      { id: "digestion_lenta", question: "¿Sientes que tu digestión es lenta o irregular?" },
-      { id: "agua_alimentos", question: "¿Consumes agua suficiente y alimentos naturales cada día?" }
+      { id: "evacuaciones", question: "¿Tienes evacuaciones diarias y sin esfuerzo?", scaleType: "frecuencia" as ScaleType },
+      { id: "gases", question: "¿Sueles tener gases, inflamación o sensación de pesadez?", scaleType: "frecuencia" as ScaleType },
+      { id: "apetito_emocional", question: "¿Tu apetito cambia según tu estado emocional?", scaleType: "frecuencia" as ScaleType },
+      { id: "digestion_lenta", question: "¿Sientes que tu digestión es lenta o irregular?", scaleType: "acuerdo" as ScaleType },
+      { id: "agua_alimentos", question: "¿Consumes suficiente agua y alimentos naturales cada día?", scaleType: "frecuencia" as ScaleType }
     ]
   },
   {
-    title: "Estrés e Inflamación",
+    title: "Estrés y Sueño",
     questions: [
-      { id: "despertar_tension", question: "¿Sueles despertar con tensión o preocupación?" },
-      { id: "sueno_descanso", question: "¿Duermes bien y te levantas descansado?" },
-      { id: "cuerpo_estres", question: "¿Tu piel, articulaciones o digestión cambian cuando estás estresado?" },
-      { id: "alerta", question: "¿Sientes que tu cuerpo está en alerta o que \"no logra relajarse\"?" }
+      { id: "despertar_tension", question: "¿Sueles despertar con tensión o pensamientos acelerados?", scaleType: "frecuencia" as ScaleType },
+      { id: "sueno_descanso", question: "¿Duermes bien y te levantas descansado/a?", scaleType: "calidad" as ScaleType },
+      { id: "cuerpo_estres", question: "¿Notas que tu digestión o tu piel cambian cuando estás estresado/a?", scaleType: "acuerdo" as ScaleType },
+      { id: "alerta", question: "¿Sientes que tu cuerpo está en alerta o que te cuesta relajarte?", scaleType: "frecuencia" as ScaleType },
+      { id: "calma", question: "¿Tienes momentos de calma o respiración consciente durante el día?", scaleType: "frecuencia" as ScaleType }
     ]
   }
 ];
 
-const scaleOptions = [
-  { value: 1, emoji: "😴", label: "Muy bajo" },
-  { value: 2, emoji: "😐", label: "Bajo" },
-  { value: 3, emoji: "🙂", label: "Promedio" },
-  { value: 4, emoji: "😊", label: "Bueno" },
-  { value: 5, emoji: "🔥", label: "Excelente" }
-];
+const scaleLabels: Record<ScaleType, string[]> = {
+  frecuencia: ["Nunca", "A veces", "La mayoría de los días", "Casi siempre", "Siempre"],
+  intensidad: ["Muy leve", "Leve", "Moderada", "Alta", "Muy alta"],
+  calidad: ["Muy baja", "Baja", "Promedio", "Buena", "Excelente"],
+  acuerdo: ["Totalmente en desacuerdo", "En desacuerdo", "Neutral", "De acuerdo", "Totalmente de acuerdo"]
+};
 
 export default function DiagnosticoWizard() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -111,36 +114,41 @@ export default function DiagnosticoWizard() {
           boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)'
         }}
       >
-        {currentStep.questions.map((question, index) => (
-          <div key={question.id} className="space-y-4">
-            <p className="text-base md:text-lg font-medium" style={{ color: '#3A3A35' }}>
-              {index + 1}. {question.question}
-            </p>
-            
-            {/* Likert Scale */}
-            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
-              {scaleOptions.map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => handleAnswer(question.id, option.value)}
-                  className="flex flex-col items-center p-3 md:p-4 rounded-xl transition-all duration-200 hover:scale-105 min-w-[70px] md:min-w-[80px]"
-                  style={{
-                    backgroundColor: answers[question.id] === option.value ? '#F9F7F2' : '#FAFAF8',
-                    borderWidth: '2px',
-                    borderStyle: 'solid',
-                    borderColor: answers[question.id] === option.value ? '#6B7041' : '#E8E6DB'
-                  }}
-                  data-testid={`scale-${question.id}-${option.value}`}
-                >
-                  <span className="text-2xl mb-1">{option.emoji}</span>
-                  <span className="text-xs text-center" style={{ color: '#7A7A6F' }}>
-                    {option.label}
-                  </span>
-                </button>
-              ))}
+        {currentStep.questions.map((question, index) => {
+          const labels = scaleLabels[question.scaleType];
+          return (
+            <div key={question.id} className="space-y-4">
+              <p className="text-base md:text-lg font-medium" style={{ color: '#3A3A35' }}>
+                {index + 1}. {question.question}
+              </p>
+              
+              {/* Scale Options */}
+              <div className="flex flex-wrap justify-center gap-2">
+                {labels.map((label, idx) => {
+                  const value = idx + 1;
+                  return (
+                    <button
+                      key={value}
+                      onClick={() => handleAnswer(question.id, value)}
+                      className="flex flex-col items-center justify-center p-3 md:p-4 rounded-xl transition-all duration-200 hover:scale-105 min-w-[85px] md:min-w-[95px] text-center"
+                      style={{
+                        backgroundColor: answers[question.id] === value ? '#F9F7F2' : '#FAFAF8',
+                        borderWidth: '2px',
+                        borderStyle: 'solid',
+                        borderColor: answers[question.id] === value ? '#6B7041' : '#E8E6DB'
+                      }}
+                      data-testid={`scale-${question.id}-${value}`}
+                    >
+                      <span className="text-xs leading-tight" style={{ color: '#7A7A6F' }}>
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
 
         {/* Next Button */}
         <div className="pt-6">

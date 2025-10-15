@@ -1,0 +1,36 @@
+UEVO MODELO DE PREGUNTAS NUTRIMARVIN ===
+// Cada grupo tiene su propia escala coherente con el tipo de señal corporal.
+
+const escalas = {
+  frecuencia: ["Nunca", "A veces", "La mayoría de los días", "Casi siempre", "Siempre"],
+  intensidad: ["Muy leve", "Leve", "Moderada", "Alta", "Muy alta"],
+  calidad: ["Muy baja", "Baja", "Promedio", "Buena", "Excelente"],
+  acuerdo: ["Totalmente en desacuerdo", "En desacuerdo", "Neutral", "De acuerdo", "Totalmente de acuerdo"]
+};
+
+// === BLOQUE METABÓLICO (energía y glucosa) ===
+const metabolismo = [
+  { pregunta: "¿Sueles sentirte con energía estable durante el día?", tipo: "calidad" },
+  { pregunta: "¿Tienes antojos frecuentes de azúcar o carbohidratos?", tipo: "frecuencia" },
+  { pregunta: "¿Notas cansancio o sueño después de comer?", tipo: "frecuencia" },
+  { pregunta: "¿Te cuesta bajar de peso o mantenerlo estable?", tipo: "acuerdo" },
+  { pregunta: "¿Duermes al menos 7 horas la mayoría de las noches?", tipo: "frecuencia" }
+];
+
+// === BLOQUE DIGESTIVO ===
+const digestion = [
+  { pregunta: "¿Tienes evacuaciones diarias y sin esfuerzo?", tipo: "frecuencia" },
+  { pregunta: "¿Sueles tener gases, inflamación o sensación de pesadez?", tipo: "frecuencia" },
+  { pregunta: "¿Tu apetito cambia según tu estado emocional?", tipo: "frecuencia" },
+  { pregunta: "¿Sientes que tu digestión es lenta o irregular?", tipo: "acuerdo" },
+  { pregunta: "¿Consumes suficiente agua y alimentos naturales cada día?", tipo: "frecuencia" }
+];
+
+// === BLOQUE ESTRÉS Y SUEÑO ===
+const estres = [
+  { pregunta: "¿Sueles despertar con tensión o pensamientos acelerados?", tipo: "frecuencia" },
+  { pregunta: "¿Duermes bien y te levantas descansado/a?", tipo: "calidad" },
+  { pregunta: "¿Notas que tu digestión o tu piel cambian cuando estás estresado/a?", tipo: "acuerdo" },
+  { pregunta: "¿Sientes que tu cuerpo está en alerta o que te cuesta relajarte?", tipo: "frecuencia" },
+  { pregunta: "¿Tienes momentos de calma o respiración consciente durante el día?", tipo: "frecuencia" }
+];

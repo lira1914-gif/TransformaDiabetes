@@ -48,7 +48,7 @@ export default function Diagnostico() {
               }}
             >
               <p className="text-base leading-relaxed" style={{ color: '#7A7A6F' }}>
-                El siguiente diagnóstico funcional tiene 14 preguntas y te tomará menos de 3 minutos.<br />
+                El siguiente diagnóstico funcional tiene 15 preguntas y te tomará menos de 3 minutos.<br />
                 Tus respuestas son confidenciales y se usan únicamente con fines educativos.
               </p>
             </div>
