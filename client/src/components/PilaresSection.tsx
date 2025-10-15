@@ -58,7 +58,7 @@ export default function PilaresSection() {
                 key={index} 
                 className="hover-elevate transition-all hover:scale-[1.03]"
               >
-                <CardHeader>
+                <CardHeader className="flex flex-col items-center md:items-start text-center md:text-left">
                   <div className="mb-4 p-3 rounded-full bg-accent w-fit">
                     <Icon 
                       className="h-10 w-10" 
@@ -68,7 +68,7 @@ export default function PilaresSection() {
                   </div>
                   <CardTitle className="text-2xl font-semibold">{pilar.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="text-center md:text-left">
                   <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                     {pilar.description}
                   </p>
