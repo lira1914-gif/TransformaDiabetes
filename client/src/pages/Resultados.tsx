@@ -154,18 +154,20 @@ export default function Resultados() {
             </ul>
           </div>
 
-          <div className="mt-8">
-            <Link 
-              href="/guia"
-              className="inline-block px-6 py-3 rounded-md text-white font-medium transition"
-              style={{ backgroundColor: '#6B7041' }}
-              data-testid="button-descargar-guia"
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#596036'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B7041'}
-            >
-              Descargar mi Guía Funcional
-            </Link>
-          </div>
+          {resultado && resultado.patron && (
+            <div id="bloqueGuia" className="mt-8">
+              <Link 
+                href="/guia"
+                className="inline-block px-6 py-3 rounded-md text-white font-medium transition"
+                style={{ backgroundColor: '#6B7041' }}
+                data-testid="button-descargar-guia"
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#596036'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B7041'}
+              >
+                Descargar mi Guía Funcional
+              </Link>
+            </div>
+          )}
         </section>
       </main>
       <Footer />
