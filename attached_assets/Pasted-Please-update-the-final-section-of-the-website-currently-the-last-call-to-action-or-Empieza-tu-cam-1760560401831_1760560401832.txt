@@ -1,0 +1,65 @@
+Please update the final section of the website (currently the last call-to-action or "Empieza tu cambio" block) with the following structure and visual adjustments, aligned with the NutriMarvin Functional brand:
+
+---
+
+🟩 TITLE
+Replace the current title with:
+"Tu cuerpo no necesita control, necesita comprensión."
+
+🟫 SUBTITLE
+Add the following subtitle below it:
+"Empieza hoy a leer las señales que te guían hacia la reversión de tu resistencia a la insulina."
+
+Center both texts. 
+Font: Playfair Display for the title, Inter for the subtitle.
+Colors: 
+- Title: #5E6647 (olive green)
+- Subtitle: #7A7A6F (soft warm gray)
+Font sizes:
+- Title: text-4xl on desktop, text-2xl on mobile
+- Subtitle: text-base, max-width: 700px
+
+---
+
+🟢 CTA BUTTON
+Update the main button with the following:
+Text: "Haz tu diagnóstico gratuito ahora"
+Link: /diagnostico
+Style:
+- Background color: #3D5A3A (olive green)
+- Text color: #FFFFFF
+- Rounded corners (xl)
+- Font weight: medium
+- Padding: py-3 px-8
+- Hover effect: scale-105 and background lighten to #4E6A4B
+- Transition: smooth (duration-300)
+
+---
+
+🟤 MICROCOPY (below the button)
+Add the following line under the button:
+"Solo 3 minutos, sin registro, resultados personalizados según tus respuestas."
+Style:
+- Font-size: text-sm
+- Color: #8C847A
+- Margin-top: 1rem
+- Centered
+
+---
+
+🎨 BACKGROUND & LAYOUT
+Set background color for this section to #FDFBF7 (light beige).
+Add a subtle top-to-bottom gradient: from #F8F6F1 (top) to #FFFFFF (bottom).
+Keep text centered vertically and horizontally with generous padding (py-20).
+Maintain full responsiveness.
+
+---
+
+🖼️ IMAGE PLACEMENT
+Add a soft, subtle hero image or background illustration on the right or behind the text (depending on layout width). 
+The image should visually convey physiology, balance, and calm — not food or fitness.
+
+---
+
+🧭 OVERALL TONE
+Ensure this block feels like a calm but motivating closure: hopeful, educational, and functional. It should invite visitors to take the next step in understanding their body, not “fix” it.
