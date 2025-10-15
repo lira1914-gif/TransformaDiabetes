@@ -1,0 +1,52 @@
+Please update the section currently titled “¿Qué es la Reversión de DM2?” following these detailed instructions:
+
+---
+
+🔹 Title  
+Replace the title with:
+"¿Qué significa revertir la diabetes desde la raíz?"
+
+Keep the same typography and spacing, but use slightly softer olive green (#5E6647).
+
+---
+
+🔹 Introductory paragraph  
+Replace the current text with:
+"Revertir la diabetes tipo 2 no es un milagro, es un proceso fisiológico posible cuando entiendes lo que tu cuerpo necesita. 
+A través de cambios conscientes en tu alimentación, descanso y estilo de vida, puedes restaurar tu sensibilidad a la insulina y recuperar equilibrio, energía y claridad mental."
+
+The tone should be warm, hopeful, and educational — like a functional health coach, not a doctor.
+
+---
+
+🔹 Feature blocks  
+Keep the same 3-column layout but update the texts as follows:
+
+1️⃣ **Mejora Metabólica**  
+"Restaura tu metabolismo, mejora la sensibilidad a la insulina y enseña a tu cuerpo a usar la glucosa como fuente de energía."
+
+2️⃣ **Salud Cardiovascular**  
+"Fortalece tu corazón reduciendo la inflamación y equilibrando tus niveles de azúcar y presión."
+
+3️⃣ **Energía y Vitalidad**  
+"Recupera la claridad mental, el descanso profundo y la energía estable que tu cuerpo merece."
+
+Design details:
+- Keep icons minimalist, outlined in olive green (#6A7555).
+- Use light beige cards (#F7F4EE) with soft shadows and rounded corners (radius: 1rem).
+- Maintain hover effect with a soft olive tint.
+
+---
+
+🔹 Final paragraph  
+Replace the last paragraph with:
+"La clave está en comprender que la diabetes tipo 2 no es una sentencia, sino una respuesta adaptativa de tu cuerpo. 
+Cuando abordas las causas raíz —la resistencia a la insulina y la inflamación crónica—, el cuerpo puede volver a su equilibrio natural."
+
+Style notes:
+- Slightly smaller font size than the title, medium line height, and olive text color.
+- Add subtle top margin (mt-8) for breathing space.
+
+---
+
+Keep the section fully responsive and visually aligned with the NutriMarvin color palette: beige background, olive accents, and soft terracotta details.
