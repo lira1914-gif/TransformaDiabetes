@@ -21,7 +21,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content */}
-          <div className="space-y-8 order-2 lg:order-1">
+          <div className="space-y-8 order-2 lg:order-1 text-center lg:text-left">
             <h1 className="text-5xl md:text-6xl font-serif font-bold text-primary leading-[1.2]">
               Tu cuerpo no está roto.
               <br />
@@ -35,22 +35,22 @@ export default function HeroSection() {
               es entender causas.<br />
               Nutrición funcional clara, aplicada a tu día a día.
             </p>
-            <div className="space-y-4 pt-4">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/diagnostico">
+            <div className="space-y-4 pt-4 flex flex-col items-center lg:items-start">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <Link href="/diagnostico" className="w-full sm:w-auto">
                   <Button 
                     size="lg" 
-                    className="bg-terracota hover:bg-terracota text-terracota-foreground border border-terracota w-full sm:w-auto"
+                    className="bg-terracota hover:bg-terracota text-terracota-foreground border border-terracota w-full"
                     data-testid="button-diagnostico-hero"
                   >
                     Empieza tu diagnóstico gratuito
                   </Button>
                 </Link>
-                <Link href="/guia">
+                <Link href="/guia" className="w-full sm:w-auto">
                   <Button 
                     variant="outline" 
                     size="lg" 
-                    className="bg-accent/50 backdrop-blur-sm w-full sm:w-auto"
+                    className="bg-accent/50 backdrop-blur-sm w-full"
                     data-testid="button-descargar-guia-hero"
                   >
                     Descargar guía funcional
