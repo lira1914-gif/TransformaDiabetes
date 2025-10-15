@@ -36,27 +36,15 @@ export default function HeroSection() {
               Nutrición funcional clara, aplicada a tu día a día.
             </p>
             <div className="space-y-4 pt-4 flex flex-col items-center lg:items-start">
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <Link href="/diagnostico" className="w-full sm:w-auto">
-                  <Button 
-                    size="lg" 
-                    className="bg-terracota hover:bg-terracota text-terracota-foreground border border-terracota w-full"
-                    data-testid="button-diagnostico-hero"
-                  >
-                    Empieza tu diagnóstico gratuito
-                  </Button>
-                </Link>
-                <Link href="/guia" className="w-full sm:w-auto">
-                  <Button 
-                    variant="outline" 
-                    size="lg" 
-                    className="bg-accent/50 backdrop-blur-sm w-full"
-                    data-testid="button-descargar-guia-hero"
-                  >
-                    Descargar guía funcional
-                  </Button>
-                </Link>
-              </div>
+              <Link href="/diagnostico" className="w-full sm:w-auto">
+                <Button 
+                  size="lg" 
+                  className="bg-terracota hover:bg-terracota text-terracota-foreground border border-terracota w-full"
+                  data-testid="button-diagnostico-hero"
+                >
+                  Empieza tu diagnóstico gratuito
+                </Button>
+              </Link>
               <p className="text-sm text-muted-foreground">
                 Gratis • 3–5 minutos • Resultado personalizado
               </p>
