@@ -21,12 +21,25 @@ function interpretarPatron(answers: Record<string, number>): PatronResult {
     "despertar_tension", "sueno_descanso", "cuerpo_estres", "alerta", "calma"
   ];
 
+  // Questions that are negatively phrased (higher value = worse health, need inversion)
+  const negativeQuestions = new Set([
+    "antojos", "cansancio_comida", "peso", // Step 1
+    "gases", "apetito_emocional", "digestion_lenta", // Step 2
+    "despertar_tension", "cuerpo_estres", "alerta" // Step 3
+  ]);
+
   let scoreMetabolico = 0;
   let scoreDigestivo = 0;
   let scoreEstres = 0;
 
   questionIds.forEach((id, i) => {
-    const valor = answers[id] || 3; // Default to 3 if missing
+    let valor = answers[id] || 3; // Default to 3 if missing
+    
+    // Invert negatively phrased questions (6 - valor converts scale)
+    if (negativeQuestions.has(id)) {
+      valor = 6 - valor;
+    }
+    
     if (i < 5) scoreMetabolico += valor;      // questions 1-5
     else if (i < 10) scoreDigestivo += valor; // questions 6-10
     else scoreEstres += valor;                // questions 11-15
@@ -34,6 +47,8 @@ function interpretarPatron(answers: Record<string, number>): PatronResult {
 
   // The pattern with the LOWEST score is the dominant one (area needing most attention)
   const minScore = Math.min(scoreMetabolico, scoreDigestivo, scoreEstres);
+  
+  console.log("Scores after inversion:", { scoreMetabolico, scoreDigestivo, scoreEstres, minScore });
   
   if (minScore === scoreMetabolico) {
     return {
@@ -109,47 +124,30 @@ export default function Resultados() {
       <Header />
       <main className="flex-1 py-12 px-6">
         <section className="text-center max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-4" style={{ color: '#6B7041' }}>
-            Tu Patrón Funcional Predominante
+          <h2 
+            id="tituloPatron" 
+            className="text-2xl font-semibold mb-4" 
+            style={{ color: '#6B7041' }}
+          >
+            {resultado.patron}
           </h2>
-          <p className="max-w-2xl mx-auto mb-8 text-base md:text-lg" style={{ color: '#6B635A' }}>
-            Basado en tus respuestas, tu cuerpo muestra un patrón principal que refleja
-            cómo está manejando la energía, la digestión y el descanso. 
-            Recuerda: no hay nada "malo", solo señales que te ayudan a entenderte mejor.
+          
+          <p 
+            id="descripcionPatron" 
+            className="max-w-2xl mx-auto mb-8" 
+            style={{ color: '#6B635A' }}
+          >
+            {resultado.descripcion}
           </p>
 
           <div 
-            className="rounded-lg shadow-md p-6 mb-6 max-w-2xl mx-auto text-left"
-            style={{ backgroundColor: '#F7F5F0' }}
-          >
-            <h3 className="font-bold mb-2 text-xl" style={{ color: '#6B7041' }}>
-              {resultado.patron}
-            </h3>
-            <p style={{ color: '#4A4A4A' }}>
-              {resultado.descripcion}
-            </p>
-          </div>
-
-          <div 
-            className="rounded-lg shadow-md p-6 mb-6 max-w-2xl mx-auto text-left"
+            className="rounded-lg shadow-md p-6 max-w-2xl mx-auto text-left"
             style={{ backgroundColor: '#F7F5F0' }}
           >
             <h3 className="font-bold mb-2" style={{ color: '#6B7041' }}>
-              🌿 Aspecto positivo
+              🌿 Recomendaciones Iniciales
             </h3>
-            <p style={{ color: '#4A4A4A' }}>
-              {resultado.aspectoPositivo}
-            </p>
-          </div>
-
-          <div 
-            className="rounded-lg shadow-md p-6 mb-6 max-w-2xl mx-auto text-left"
-            style={{ backgroundColor: '#F7F5F0' }}
-          >
-            <h3 className="font-bold mb-2" style={{ color: '#6B7041' }}>
-              💪 Primeros pasos funcionales
-            </h3>
-            <ul className="list-disc pl-6 space-y-2" style={{ color: '#4A4A4A' }}>
+            <ul id="recomendaciones" className="list-disc pl-6 space-y-2" style={{ color: '#4A4A4A' }}>
               {resultado.recomendaciones.map((rec, index) => (
                 <li key={index}>{rec}</li>
               ))}
@@ -159,9 +157,11 @@ export default function Resultados() {
           <div className="mt-8">
             <Link 
               href="/guia"
-              className="inline-block px-6 py-3 rounded-md text-white font-medium transition-all duration-300 hover:scale-105"
+              className="inline-block px-6 py-3 rounded-md text-white font-medium transition"
               style={{ backgroundColor: '#6B7041' }}
               data-testid="button-descargar-guia"
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#596036'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B7041'}
             >
               Descargar mi Guía Funcional
             </Link>
