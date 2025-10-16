@@ -37,6 +37,10 @@ Preferred communication style: Simple, everyday language.
   - Sections have IDs for anchor navigation (#que-es, #pilares, #suscripcion)
   - Header "Inicio" link scrolls to top when already on home page
   - /suscripcion route redirects to home with scroll to #suscripcion section
+- **Subscription Flow**: Integrated welcome section within same page:
+  - Clicking "Unirme por $5 USD/mes" reveals welcome section with fade-in animation
+  - No route change, smooth scroll to welcome content
+  - Welcome section includes subscription benefits and "Empezar mi registro funcional" CTA
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
 - **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
 
