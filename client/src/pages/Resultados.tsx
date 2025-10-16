@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
-import { loadStripe } from '@stripe/stripe-js';
 
 interface PatronResult {
   patron: string;
@@ -267,25 +266,7 @@ export default function Resultados() {
   const handleSubscribe = async () => {
     setLoading(true);
 
-    const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
-    
-    if (!stripePublicKey) {
-      toast({
-        title: "Configuración pendiente",
-        description: "La suscripción aún no está disponible. Por favor, contacta al administrador.",
-        variant: "destructive"
-      });
-      setLoading(false);
-      return;
-    }
-
     try {
-      const stripe = await loadStripe(stripePublicKey);
-      
-      if (!stripe) {
-        throw new Error('Failed to load Stripe');
-      }
-
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -299,6 +280,7 @@ export default function Resultados() {
         throw new Error(session.error || 'Error creating checkout session');
       }
 
+      // Redirect to Paddle checkout
       window.location.href = session.url;
     } catch (error) {
       console.error('Subscription error:', error);

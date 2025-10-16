@@ -1,26 +1,28 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import Stripe from "stripe";
+import { Paddle, Environment } from "@paddle/paddle-node-sdk";
 
-// Initialize Stripe with secret key from environment
-const stripe = process.env.STRIPE_SECRET_KEY 
-  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2025-09-30.clover" })
+// Initialize Paddle with API key from environment
+const paddle = process.env.PADDLE_API_KEY 
+  ? new Paddle(process.env.PADDLE_API_KEY, {
+      environment: process.env.NODE_ENV === 'production' ? Environment.production : Environment.sandbox
+    })
   : null;
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Stripe Checkout Session endpoint for subscriptions
+  // Paddle Checkout endpoint for subscriptions
   app.post("/api/create-checkout-session", async (req, res) => {
     try {
-      if (!stripe) {
-        console.error("Stripe not configured: STRIPE_SECRET_KEY is missing");
+      if (!paddle) {
+        console.error("Paddle not configured: PADDLE_API_KEY is missing");
         return res.status(500).json({ 
           error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
         });
       }
 
-      if (!process.env.STRIPE_PRICE_ID) {
-        console.error("Stripe PRICE_ID not configured");
+      if (!process.env.PADDLE_PRICE_ID) {
+        console.error("Paddle PRICE_ID not configured");
         return res.status(500).json({ 
           error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
         });
@@ -29,23 +31,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Get the origin for success/cancel URLs
       const origin = req.headers.origin || `${req.protocol}://${req.get('host')}`;
 
-      const session = await stripe.checkout.sessions.create({
-        mode: "subscription",
-        line_items: [
+      // Create a transaction with Paddle
+      const transaction = await paddle.transactions.create({
+        items: [
           {
-            price: process.env.STRIPE_PRICE_ID,
+            priceId: process.env.PADDLE_PRICE_ID,
             quantity: 1,
           },
         ],
-        success_url: `${origin}/bienvenida?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${origin}/resultados`,
-        // Optional: collect customer email
-        customer_email: req.body.email || undefined,
+        // Optional: include customer email if provided
+        ...(req.body.email && {
+          customData: {
+            email: req.body.email
+          }
+        })
       });
 
-      res.json({ url: session.url });
+      // Return the checkout URL from the transaction
+      const checkoutUrl = transaction.checkout?.url;
+      
+      if (!checkoutUrl) {
+        throw new Error("No checkout URL returned from Paddle");
+      }
+
+      res.json({ url: checkoutUrl });
     } catch (error: any) {
-      console.error("Error creating Stripe checkout session:", error);
+      console.error("Error creating Paddle checkout:", error);
       res.status(500).json({ 
         error: "No se pudo procesar la solicitud de pago. Por favor, intenta nuevamente." 
       });
