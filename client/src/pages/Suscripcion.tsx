@@ -16,7 +16,9 @@ export default function Suscripcion() {
         <div className="wrap">
           <h1>🌿 Tu transformación funcional comienza aquí</h1>
           <p className="sub">
-            Acompañamiento humano + ciencia funcional para equilibrar tu glucosa y energía.
+            Acompañamiento humano + ciencia funcional para recuperar tu energía, estabilizar tu glucosa y reconectar con tu cuerpo.
+            <br />
+            <em>"Tu cuerpo no está roto — solo está protegiéndose."</em>
           </p>
 
           <h2>Suscripción NutriMarvin Funcional</h2>
@@ -24,18 +26,19 @@ export default function Suscripcion() {
           <div>
             <h3>Qué recibes por $5/mes:</h3>
             <ul>
-              <li>Acceso a las 10 mini guías funcionales ampliadas.</li>
-              <li>Recomendaciones personalizadas para revertir resistencia a la insulina.</li>
-              <li>Opción de subir tus análisis de sangre para revisión funcional.</li>
-              <li>Microhábitos semanales para digestión, descanso y claridad mental.</li>
+              <li>Acceso a 10 mini guías funcionales ampliadas.</li>
+              <li>Recomendaciones prácticas para equilibrar tu glucosa y energía.</li>
+              <li>Revisión opcional de tus análisis de sangre para orientación funcional.</li>
+              <li>Microhábitos semanales para mejorar digestión, descanso y claridad mental.</li>
+              <li>Acceso al diario funcional y seguimiento personalizado.</li>
             </ul>
 
             <h3>Cómo funciona:</h3>
             <ol>
-              <li>Suscríbete y obtén acceso seguro a tu área personal.</li>
+              <li>Suscríbete y obtén acceso a tu área personal.</li>
               <li>Completa tu historial funcional (intake médico y hábitos).</li>
-              <li>Registra 5 días de comidas, sueño y digestión.</li>
-              <li>Recibe tu análisis y recomendaciones iniciales.</li>
+              <li>Registra tus 5 días de comidas, sueño y digestión.</li>
+              <li>Recibe tu primer análisis funcional y plan de ajustes personalizado.</li>
             </ol>
 
             <div className="cta">
@@ -48,7 +51,7 @@ export default function Suscripcion() {
             </div>
 
             <div className="footer-note">
-              *Al suscribirte, accederás a tu formulario funcional y guía inicial paso a paso.
+              *El enlace de suscripción se habilitará pronto. Al registrarte, accederás a tu formulario de inicio funcional y diario de 5 días.
             </div>
           </div>
         </div>
