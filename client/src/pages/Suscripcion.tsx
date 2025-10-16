@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "../styles/suscripcion.css";
+import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.jpg";
 
 export default function Suscripcion() {
   const handleSubscribe = () => {
@@ -9,10 +10,13 @@ export default function Suscripcion() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="suscripcion-page">
       <Header />
       
-      <section className="suscripcion">
+      <div 
+        className="suscripcion"
+        style={{ '--suscripcion-bg-image': `url(${backgroundImage})` } as React.CSSProperties}
+      >
         <div className="wrap">
           <h1>🌿 Tu transformación funcional comienza aquí</h1>
           <p className="sub">
@@ -55,7 +59,7 @@ export default function Suscripcion() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </div>

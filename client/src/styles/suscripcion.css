@@ -2,20 +2,50 @@
    ESTILOS SUSCRIPCIÓN NUTRIMARVIN
    ================================ */
 
+/* ===== Página completa ===== */
+.suscripcion-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ===== Fondo translúcido con hojas suaves ===== */
 .suscripcion {
-  background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-              url('https://i.imgur.com/Zbg8q0K.jpg');
+  flex: 1;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.suscripcion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--suscripcion-bg-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  min-height: 100vh;
-  padding: 2rem 0;
-  margin: 0;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.suscripcion::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.9);
+  z-index: 0;
 }
 
 /* ===== Contenedor principal ===== */
 .suscripcion .wrap {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
   margin: 4rem auto;
   background: rgba(255, 255, 255, 0.85);
