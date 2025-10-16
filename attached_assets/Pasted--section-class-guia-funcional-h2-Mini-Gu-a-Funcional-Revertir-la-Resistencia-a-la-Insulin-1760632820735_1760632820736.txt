@@ -1,0 +1,58 @@
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Revertir la Resistencia a la Insulina</h2>
+
+  <h3>🔎 Entendiendo tu metabolismo</h3>
+  <p>Tu cuerpo busca equilibrio, no castigo. La resistencia a la insulina no aparece de la nada; es una señal de que tus células están saturadas de energía y necesitan volver a escuchar la señal de la insulina. Este proceso puede revertirse con cambios sostenibles en tu alimentación, descanso y movimiento. El objetivo no es “controlar” la glucosa, sino enseñarle a tu cuerpo a confiar nuevamente en su propio equilibrio.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea tu metabolismo</h3>
+  <ul>
+    <li><strong>Azúcar y harinas refinadas:</strong> elevan picos de glucosa y hacen que tu cuerpo libere más insulina.</li>
+    <li><strong>Comer tarde o saltarte comidas:</strong> confunde tu reloj metabólico y altera tus hormonas del apetito.</li>
+    <li><strong>Estrés crónico:</strong> el cortisol elevado aumenta la glucosa en sangre y dificulta la pérdida de grasa.</li>
+    <li><strong>Falta de sueño:</strong> reduce tu sensibilidad a la insulina y favorece el aumento de peso.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a revertirla</h3>
+  <ul>
+    <li><strong>Incluye grasa, fibra y proteína en cada comida:</strong> esta combinación estabiliza la glucosa, reduce antojos y prolonga tu energía.</li>
+    <li><strong>Desayuna con proteína y fibra:</strong> huevos, aguacate, semillas o yogurt natural sin azúcar.</li>
+    <li><strong>Evita azúcares ocultos:</strong> revisa etiquetas; el jarabe de maíz, maltosa y dextrosa actúan igual que el azúcar.</li>
+    <li><strong>Camina 10–15 minutos después de comer:</strong> ayuda a tus músculos a usar la glucosa en lugar de almacenarla.</li>
+    <li><strong>Prioriza alimentos reales:</strong> vegetales, grasas buenas y proteína limpia son tu mejor “medicina”.</li>
+    <li><strong>Reduce la cafeína y el alcohol:</strong> permiten que tu hígado recupere su función de equilibrio glucémico.</li>
+    <li><strong>Regula el estrés:</strong> la respiración consciente, los descansos breves y el sueño profundo son herramientas metabólicas, no lujos.</li>
+  </ul>
+
+  <blockquote>💫 Tu cuerpo no puede sanar en estado de alerta. Dale permiso para descansar y reparar.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, inositol, cromo y omega-3 pueden apoyar tu sensibilidad a la insulina.</li>
+    <li><strong>Descansa antes de las 11 p.m.:</strong> durante ese horario tu cuerpo regula cortisol y glucosa.</li>
+    <li><strong>Hidratación inteligente:</strong> agua, infusiones o agua con limón — evita refrescos, incluso “sin azúcar”.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu azúcar, sino de enseñarle a tu cuerpo a confiar otra vez.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan personalizado basado en tus hábitos, síntomas y análisis de sangre. Juntos podemos revertir la resistencia a la insulina desde la raíz.</p>
+
+  <p><strong>Incluye:</strong></p>
+  <ul>
+    <li>Evaluación funcional completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes con acceso completo a guías, recetas y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
