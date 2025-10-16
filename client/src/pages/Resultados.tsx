@@ -84,18 +84,19 @@ function interpretarPatron(answers: Record<string, number>): PatronResult {
     { name: "Inflamatorio", value: scoreInflamatorio }
   ].sort((a, b) => a.value - b.value);
 
-  const threshold = 1; // Tighter threshold for combined patterns
+  const threshold = 2; // Threshold for combined patterns (matches user specification)
   const lowest = scores[0].value;
+  const secondLowest = scores[1].value;
   
-  // Find all axes within threshold of the lowest
-  const tiedAxes = scores.filter(s => Math.abs(s.value - lowest) <= threshold);
+  // Check if two axes are within threshold (combined pattern)
+  const isCombined = Math.abs(lowest - secondLowest) <= threshold;
   
   let patronKey = "";
   
-  if (tiedAxes.length >= 2) {
-    // Combined pattern - use first two tied axes
-    const axis1 = tiedAxes[0].name;
-    const axis2 = tiedAxes[1].name;
+  if (isCombined) {
+    // Combined pattern - use first two lowest axes
+    const axis1 = scores[0].name;
+    const axis2 = scores[1].name;
     patronKey = getCombinedPatternKey(axis1, axis2);
   } else {
     // Single dominant pattern
@@ -270,84 +271,6 @@ function loadPatronContent(patronKey: string): PatronResult {
         "REFLECT — El descanso también es medicina."
       ],
       aspectoPositivo: "💤 El cuerpo cura cuando descansa."
-    },
-    "🩸 Patrón Metabólico–Hormonal": {
-      patron: "🩸 Patrón Metabólico–Hormonal",
-      descripcion: "Tu cuerpo ajusta energía y ritmo hormonal. Cambios en apetito, ánimo o sueño son señales de ajuste, no de falla. Regular ritmos ayuda a estabilizar la glucosa.",
-      recomendaciones: [
-        "REMOVE — Evita ayunos prolongados si hay ansiedad o irritabilidad.",
-        "REPLACE — Grasas buenas (aguacate, semillas, aceite de oliva).",
-        "REPAIR — Exposición a luz matinal para sincronizar ritmos.",
-        "REBALANCE — Come en horarios constantes (3–4 h).",
-        "RESTORE — Bajar intensidad de entrenamiento si duermes mal.",
-        "REFLECT — Tu energía no se pierde; se redistribuye."
-      ],
-      aspectoPositivo: "💫 El cuerpo prioriza seguridad antes que productividad."
-    },
-    "💩 Patrón Digestivo–Metabólico": {
-      patron: "💩 Patrón Digestivo–Metabólico",
-      descripcion: "Cuando el intestino se enlentece, la insulina también. La evacuación regular y la masticación consciente mejoran la sensibilidad a la insulina y la energía.",
-      recomendaciones: [
-        "REMOVE — Evita comer bajo estrés o prisa.",
-        "REPLACE — Amargos naturales (rúcula, menta, diente de león).",
-        "REPAIR — Grasas buenas y caldos minerales para mucosa intestinal.",
-        "REBALANCE — Horario fijo para comidas y evacuación.",
-        "RESTORE — Hidratación constante; agua tibia al despertar.",
-        "REFLECT — La calma digestiva precede al equilibrio metabólico."
-      ],
-      aspectoPositivo: "🌱 La digestión tranquila es tu primer regulador de glucosa."
-    },
-    "💩 Patrón Digestivo–Detox Lento": {
-      patron: "💩 Patrón Digestivo–Detox Lento",
-      descripcion: "El hígado, intestino y piel limpian más lento bajo carga. No es debilidad: es falta de soporte. Facilitar el drenaje reduce glucosa e inflamación.",
-      recomendaciones: [
-        "REMOVE — Alcohol, frituras y exceso de proteína procesada.",
-        "REPLACE — Verduras amargas y jugos verdes sin fruta.",
-        "REPAIR — Caldos, electrolitos naturales y descanso profundo.",
-        "REBALANCE — Cena liviana antes de las 8 p. m.",
-        "RESTORE — Sudoración suave (caminata, baño tibio).",
-        "REFLECT — Tu cuerpo limpia cuando se siente seguro."
-      ],
-      aspectoPositivo: "🌿 El detox real es diario, no extremo."
-    },
-    "🌙 Patrón Estrés–Hormonal": {
-      patron: "🌙 Patrón Estrés–Hormonal",
-      descripcion: "El cuerpo prioriza supervivencia: altera ritmos hormonales para protegerte. Asentar el sistema nervioso devuelve la regularidad y mejora la glucosa.",
-      recomendaciones: [
-        "REMOVE — Disminuye entrenamiento intenso si duermes mal.",
-        "REPLACE — Comidas cálidas y regulares; evita saltarte comidas.",
-        "REPAIR — Exposición matutina al sol para sincronizar ritmos.",
-        "REBALANCE — Rutina nocturna sin pantallas la última hora.",
-        "RESTORE — Dormir más horas el fin de semana para recuperar.",
-        "REFLECT — Tu cuerpo no está roto, está priorizando seguridad."
-      ],
-      aspectoPositivo: "💫 La calma organiza tus hormonas."
-    },
-    "🔥 Patrón Inflamatorio–Metabólico": {
-      patron: "🔥 Patrón Inflamatorio–Metabólico",
-      descripcion: "Inflamación y glucosa se retroalimentan. Reducir picos y bajar la carga inflamatoria devuelve la sensibilidad a la insulina.",
-      recomendaciones: [
-        "REMOVE — Harinas refinadas y snacks frecuentes.",
-        "REPLACE — Omega-3, verduras de raíz y proteínas limpias.",
-        "REPAIR — Dormir 7–8 h; acostarte antes de las 11 p. m.",
-        "REBALANCE — Ventanas de comida estables (evita picoteo).",
-        "RESTORE — Movimiento suave y constante (no extenuante).",
-        "REFLECT — El cuerpo conserva energía para cuidarte."
-      ],
-      aspectoPositivo: "🌿 Regular no es restringir: es darle ritmo al cuerpo."
-    },
-    "🔥 Patrón Inflamatorio–Estreñimiento Silencioso": {
-      patron: "🔥 Patrón Inflamatorio–Estreñimiento Silencioso",
-      descripcion: "Cuando el cuerpo no elimina, la inflamación aumenta. No es descuido: es un freno protector. Recuperar el flujo reduce la carga inflamatoria y estabiliza la glucosa.",
-      recomendaciones: [
-        "REMOVE — Exceso de lácteos, fritos y comidas nocturnas tardías.",
-        "REPLACE — Fibra soluble (chía/linaza), agua tibia y amargos.",
-        "REPAIR — Caldos y grasas buenas para la mucosa.",
-        "REBALANCE — Horario diario para evacuar sin prisa.",
-        "RESTORE — Caminar y estirarte después de las comidas.",
-        "REFLECT — Soltar es parte de sanar."
-      ],
-      aspectoPositivo: "💧 El cuerpo no acumula por error: se protege mientras te pide ayuda."
     }
   };
 
