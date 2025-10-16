@@ -154,6 +154,22 @@
   margin-top: 0.5rem;
 }
 
+/* ===== Mini-Disclaimer / Footer Compacto ===== */
+.suscripcion .mini-disclaimer {
+  background: rgba(255, 255, 255, 0.75);
+  border-top: 1px solid #e3e0d8;
+  text-align: center;
+  padding: 1rem 0.5rem;
+  font-size: 0.8rem;
+  color: #6b6a66;
+  margin-top: 3rem;
+}
+
+.suscripcion .mini-disclaimer p {
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   .suscripcion .wrap {

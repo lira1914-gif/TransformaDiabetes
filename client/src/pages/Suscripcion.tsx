@@ -71,6 +71,13 @@ export default function Suscripcion() {
                 <em>Última actualización: Octubre 2025</em>
               </p>
             </section>
+
+            <footer className="mini-disclaimer">
+              <p>
+                © 2025 NutriMarvin. Este contenido es educativo y no sustituye la orientación médica profesional. 
+                Consulta siempre con tu médico antes de realizar cambios en tu alimentación o tratamiento.
+              </p>
+            </footer>
           </div>
         </div>
       </div>
