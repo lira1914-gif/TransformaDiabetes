@@ -317,35 +317,9 @@ export default function Resultados() {
     }
   }, [toast]);
 
-  const handleSubscribe = async () => {
-    setLoading(true);
-
-    try {
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const session = await response.json();
-
-      if (!response.ok) {
-        throw new Error(session.error || 'Error creating checkout session');
-      }
-
-      // Redirect to Paddle checkout
-      window.location.href = session.url;
-    } catch (error) {
-      console.error('Subscription error:', error);
-      toast({
-        title: "Error en suscripción",
-        description: error instanceof Error ? error.message : "No se pudo procesar la suscripción. Intenta nuevamente.",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
+  const handleSubscribe = () => {
+    // Redirect to subscription page instead of Paddle (Paddle integration pending)
+    window.location.href = '/suscripcion';
   };
 
   if (!patron) {

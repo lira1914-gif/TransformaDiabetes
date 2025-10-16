@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import PreRegistro from "@/pages/PreRegistro";
 import Diagnostico from "@/pages/Diagnostico";
 import Resultados from "@/pages/Resultados";
+import Suscripcion from "@/pages/Suscripcion";
 import Bienvenida from "@/pages/Bienvenida";
 import Perfil from "@/pages/Perfil";
 import Analisis from "@/pages/Analisis";
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/pre-registro" component={PreRegistro} />
       <Route path="/diagnostico" component={Diagnostico} />
       <Route path="/resultados" component={Resultados} />
+      <Route path="/suscripcion" component={Suscripcion} />
       <Route path="/bienvenida" component={Bienvenida} />
       <Route path="/perfil" component={Perfil} />
       <Route path="/analisis" component={Analisis} />
