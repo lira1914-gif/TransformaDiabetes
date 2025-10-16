@@ -309,97 +309,77 @@ export default function Resultados() {
             boxShadow: '0 4px 12px rgba(0,0,0,0.06)'
           }}
         >
-          {/* Título Principal */}
+          {/* Título: Patrón Detectado */}
           <h2 
             className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4" 
             style={{ color: '#3E3E2E' }}
           >
-            Tu Guía Funcional Personalizada 🌿
+            Tu Patrón Funcional Detectado
           </h2>
           
-          {/* Subtítulo */}
+          {/* Nombre del Patrón */}
           <p 
-            className="max-w-2xl mx-auto mb-8 text-sm sm:text-base leading-relaxed" 
-            style={{ color: '#6F6E66' }}
+            id="tituloPatron"
+            className="text-xl sm:text-2xl font-semibold mb-8" 
+            style={{ color: '#6B7041' }}
           >
-            Basado en tus respuestas, este es tu plan funcional inicial.  
-            Recuerda: no hay nada "malo", solo señales que te ayudan a reconectar con tu cuerpo.
+            {resultado.patron}
           </p>
 
-          {/* Patrón Detectado */}
-          <div className="mb-6">
+          {/* Guía Funcional Personalizada */}
+          <div className="max-w-2xl mx-auto mb-8">
             <h3 
-              id="tituloPatron" 
-              className="text-xl sm:text-2xl font-semibold mb-3" 
+              className="text-xl sm:text-2xl font-bold mb-4" 
               style={{ color: '#3E3E2E' }}
             >
-              {resultado.patron}
+              Tu Guía Funcional Personalizada
             </h3>
             
             <p 
               id="descripcionPatron" 
-              className="max-w-2xl mx-auto text-sm sm:text-base" 
+              className="mb-6 text-sm sm:text-base leading-relaxed" 
               style={{ color: '#6F6E66' }}
             >
-              {resultado.descripcion}
+              Basado en tus respuestas, esta guía está diseñada para ayudarte a entender 
+              cómo tu cuerpo se protege y qué pasos puedes seguir para restaurar el equilibrio.
+            </p>
+
+            {/* Recomendaciones */}
+            <div 
+              className="rounded-lg p-4 sm:p-6 text-left text-sm sm:text-base mb-6"
+              style={{ 
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+              }}
+            >
+              <ul id="recomendaciones" className="list-none pl-0 space-y-3 leading-relaxed" style={{ color: '#4B4B3B' }}>
+                {resultado.recomendaciones.map((rec, index) => (
+                  <li key={index}>{rec}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Frase de Cierre */}
+            <p 
+              id="fraseMotivacional" 
+              className="text-center italic text-base sm:text-lg"
+              style={{ color: '#6F6E66' }}
+            >
+              "{resultado.fraseMotivacional}"
             </p>
           </div>
 
-          {/* Recomendaciones Personalizadas */}
-          <div 
-            className="rounded-lg p-4 sm:p-6 max-w-2xl mx-auto text-left text-sm sm:text-base mb-6"
-            style={{ 
-              backgroundColor: '#FFFFFF',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
-            }}
-          >
-            <h3 className="font-semibold mb-4 text-base sm:text-lg" style={{ color: '#3E3E2E' }}>
-              Recomendaciones iniciales:
-            </h3>
-            <ul id="recomendaciones" className="list-none pl-0 space-y-3 leading-relaxed" style={{ color: '#4B4B3B' }}>
-              {resultado.recomendaciones.map((rec, index) => (
-                <li key={index}>{rec}</li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Frase Motivacional */}
-          <p 
-            id="fraseMotivacional" 
-            className="text-center italic text-base sm:text-lg mb-8"
-            style={{ color: '#6F6E66' }}
-          >
-            💬 "{resultado.fraseMotivacional}"
-          </p>
-
-          {/* Botón Descargar Guía */}
-          {resultado && resultado.patron && (
-            <div id="bloqueGuia" className="mb-8">
-              <Link 
-                href="/guia"
-                className="inline-block px-6 py-3 rounded-md text-white font-semibold transition text-sm sm:text-base"
-                style={{ backgroundColor: '#6B7041' }}
-                data-testid="button-descargar-guia"
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#596036'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B7041'}
-              >
-                Descargar mi Guía Funcional
-              </Link>
-            </div>
-          )}
-
-          {/* Subscription CTA Mejorado */}
+          {/* CTA de Suscripción */}
           <div 
             className="max-w-3xl mx-auto rounded-lg p-6 sm:p-8" 
             style={{ backgroundColor: '#EFEDE8' }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: '#3E3E2E' }}>
-              Continúa tu camino con NutriMarvin Funcional
-            </h3>
+            <h4 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: '#3E3E2E' }}>
+              Tu siguiente paso
+            </h4>
             <p className="mb-6 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#6F6E66' }}>
-              Accede a <strong>16 guías prácticas</strong>, microhábitos funcionales,  
-              videos educativos y acompañamiento continuo por solo <strong>$5 USD/mes</strong>.  
-              Aprende a revertir tu resistencia a la insulina desde la raíz.
+              Profundiza en tu transformación funcional y recibe acompañamiento mensual con herramientas, 
+              seguimiento y soporte personalizado.
             </p>
             <a
               href="https://stan.store/nutrimarvin"

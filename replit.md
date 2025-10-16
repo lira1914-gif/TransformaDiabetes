@@ -178,17 +178,21 @@ Preferred communication style: Simple, everyday language.
 - Contact email: privacidad@nutrimarvin.com
 - Professional white container design with responsive layout
 
-### Results Page Enhancements
+### Results Page Structure
 - Enhanced visual design with card-based layout and subtle shadows
 - Main container with warm beige background (#F8F7F3) and rounded corners
-- Title: "Tu Guía Funcional Personalizada 🌿" with empathetic subtitle
-- Pattern-specific recommendations displayed in white card with 5 numbered points (1️⃣-5️⃣)
-- Motivational phrase with 💬 emoji and quotation marks
-- Download CTA button for functional guide
-- Improved subscription section with detailed offer:
-  - "Continúa tu camino con NutriMarvin Funcional"
-  - 16 guías prácticas, microhábitos, videos educativos
-  - $5 USD/mes pricing with cancellation policy
-  - Direct link to https://stan.store/nutrimarvin
+- **Title Section:**
+  - H2: "Tu Patrón Funcional Detectado"
+  - Pattern name displayed prominently with emoji (🩸/💩/🌙/🔥)
+- **Guide Section:**
+  - H3: "Tu Guía Funcional Personalizada"
+  - Intro: "Basado en tus respuestas, esta guía está diseñada para ayudarte a entender cómo tu cuerpo se protege..."
+  - Recommendations: White card with 5 numbered personalized points (1️⃣-5️⃣)
+  - Closing quote: Motivational phrase in quotation marks
+- **CTA Section:**
+  - H4: "Tu siguiente paso"
+  - Description: "Profundiza en tu transformación funcional..."
+  - Button: "Suscríbete al Plan NutriMarvin ($5/mes)"
+  - Link: https://stan.store/nutrimarvin
+  - Privacy note: "Cancela en cualquier momento. Tu información es 100% confidencial"
 - Full responsive design (mobile, tablet, desktop)
-- Proper spacing and typography for all devices
