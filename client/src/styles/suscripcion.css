@@ -1,0 +1,153 @@
+/* ================================
+   ESTILOS SUSCRIPCIÓN NUTRIMARVIN
+   ================================ */
+
+:root {
+  --olive: #556B2F;
+  --terra: #A15C38;
+  --beige: #FAF8F4;
+  --muted: #6F6E66;
+  --text: #3A3A3A;
+  --border: #E6E3D9;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
+.suscripcion {
+  background: var(--beige);
+  min-height: 100vh;
+}
+
+.suscripcion .wrap {
+  max-width: 850px;
+  margin: 3rem auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+/* ---------- Encabezado principal ---------- */
+
+.suscripcion h1 {
+  text-align: center;
+  color: var(--olive);
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.suscripcion .sub {
+  text-align: center;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 1.8rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* ---------- Bloques de columnas ---------- */
+
+.suscripcion .columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.suscripcion .col h3 {
+  color: var(--olive);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--terra);
+  padding-left: 0.5rem;
+}
+
+.suscripcion .col ul,
+.suscripcion .col ol {
+  padding-left: 1.2rem;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.suscripcion .col li {
+  margin-bottom: 0.6rem;
+}
+
+/* ---------- CTA (botón principal) ---------- */
+
+.suscripcion .cta {
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.suscripcion .cta button {
+  background-color: var(--terra);
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 1rem 2.2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.suscripcion .cta button:hover {
+  background-color: #8c4c2d;
+  transform: scale(1.02);
+}
+
+.suscripcion .cta p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- Credibilidad / Confianza ---------- */
+
+.suscripcion .trust {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ---------- Imagen principal ---------- */
+
+.suscripcion .hero-image {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.suscripcion .hero-image img {
+  max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.suscripcion h2 {
+  color: var(--olive);
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .suscripcion .columns {
+    grid-template-columns: 1fr;
+  }
+
+  .suscripcion .wrap {
+    padding: 2rem 1.5rem;
+  }
+
+  .suscripcion h1 {
+    font-size: 1.6rem;
+  }
+}
