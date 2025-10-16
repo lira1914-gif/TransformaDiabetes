@@ -1,0 +1,90 @@
+<header style="
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E6E3D9;
+  font-family: 'Poppins', sans-serif;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+">
+  <!-- LOGO / NOMBRE -->
+  <div style="display: flex; align-items: center;">
+    <img src="https://i.ibb.co/XZcPNfw/nutrimarvin-logo-olivo.png" alt="NutriMarvin Logo" style="height: 42px; margin-right: 10px;">
+    <h1 style="font-size: 1.3rem; color: #4B4B3B; margin: 0;">NutriMarvin</h1>
+  </div>
+
+  <!-- BOTÓN MENÚ MÓVIL -->
+  <button id="menu-toggle" style="
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #4B4B3B;
+    display: none;
+  ">☰</button>
+
+  <!-- MENÚ DE NAVEGACIÓN -->
+  <nav id="main-nav" style="
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  ">
+    <a href="/index.html" style="text-decoration: none; color: #4B4B3B; font-weight: 500;">Inicio</a>
+    <a href="/diagnostico.html" style="text-decoration: none; color: #4B4B3B; font-weight: 500;">Diagnóstico</a>
+    <a href="/guia.html" style="text-decoration: none; color: #4B4B3B; font-weight: 500;">Guías</a>
+    <a href="/resultado.html" style="text-decoration: none; color: #4B4B3B; font-weight: 500;">Resultados</a>
+  </nav>
+
+  <!-- CTA -->
+  <div class="cta-header">
+    <a href="/diagnostico.html" style="
+      background-color: #A15C38;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    ">Empieza tu diagnóstico</a>
+  </div>
+</header>
+
+<!-- SCRIPT DE MENU RESPONSIVE -->
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mainNav = document.getElementById('main-nav');
+  const ctaHeader = document.querySelector('.cta-header');
+
+  function adjustMenu() {
+    if (window.innerWidth <= 768) {
+      menuToggle.style.display = 'block';
+      mainNav.style.display = 'none';
+      ctaHeader.style.display = 'none';
+    } else {
+      menuToggle.style.display = 'none';
+      mainNav.style.display = 'flex';
+      ctaHeader.style.display = 'block';
+    }
+  }
+
+  menuToggle.addEventListener('click', () => {
+    const visible = mainNav.style.display === 'flex';
+    mainNav.style.display = visible ? 'none' : 'flex';
+    ctaHeader.style.display = visible ? 'none' : 'block';
+  });
+
+  window.addEventListener('resize', adjustMenu);
+  adjustMenu();
+</script><div id="header-container"></div>
+<script>
+  fetch("header.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("header-container").innerHTML = data;
+    })
+    .catch(error => console.error("Error al cargar el header:", error));
+</script>

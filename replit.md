@@ -155,6 +155,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Header Redesign
+- Logo integration: NutriMarvin olive logo displayed prominently
+- Simplified navigation: Inicio, Diagnóstico, Guías, Resultados
+- CTA button: "Empieza tu diagnóstico" in terracotta color
+- Mobile responsive: Hamburger menu (☰) for mobile devices
+- Sticky positioning with white background (#FFFFFF)
+- Clean border and hover effects
+
 ### Footer Redesign
 - Simplified, centered design with clean layout
 - Dynamic copyright year using React useEffect
