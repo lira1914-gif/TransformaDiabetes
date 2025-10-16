@@ -56,4 +56,9 @@ Preferred communication style: Simple, everyday language.
 - tsx
 
 ### Payment Integration
-- Stripe (for subscriptions via `/api/create-checkout-session` and client-side integration).
+- **Paddle Billing** (for $5/month subscriptions)
+  - Server-side: `@paddle/paddle-node-sdk` for transaction creation
+  - API endpoint: `/api/create-checkout-session` creates Paddle transactions and returns checkout URLs
+  - Environment: Sandbox mode for testing (configured via PADDLE_API_KEY and PADDLE_PRICE_ID secrets)
+  - Flow: User clicks subscribe → Backend creates transaction → Redirect to Paddle hosted checkout
+  - Advantages: Multi-currency support (30+ currencies), automatic tax/VAT compliance, acts as Merchant of Record
