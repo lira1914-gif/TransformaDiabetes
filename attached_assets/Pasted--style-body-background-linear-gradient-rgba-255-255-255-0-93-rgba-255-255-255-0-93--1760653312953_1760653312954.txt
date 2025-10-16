@@ -1,0 +1,117 @@
+<style>
+  body {
+    background: linear-gradient(rgba(255,255,255,0.93), rgba(255,255,255,0.93)),
+                url('https://i.imgur.com/jpbUZJQ.jpg'); /* Fondo con hojas translúcidas */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    color: #3a3a3a;
+    margin: 0;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 4rem auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    border: 1px solid #e6e3d9;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #4e6b2b;
+    margin-bottom: 0.5rem;
+  }
+
+  h1::before {
+    content: "🌿 ";
+  }
+
+  p.sub {
+    text-align: center;
+    color: #6f6f6f;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    text-align: center;
+    color: #5e5d57;
+  }
+
+  h3 {
+    color: #4e6b2b;
+    margin-top: 2rem;
+  }
+
+  ul, ol {
+    line-height: 1.6;
+    color: #444;
+  }
+
+  ul li, ol li {
+    margin-bottom: 0.5rem;
+  }
+
+  button {
+    background-color: #a15c38;
+    color: #fff;
+    border: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 2rem auto 0;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #8b4e31;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #787878;
+    margin-top: 2rem;
+    line-height: 1.4;
+  }
+</style>
+
+<div class="wrap">
+  <h1>Tu transformación funcional comienza aquí</h1>
+  <p class="sub">Acompañamiento humano + ciencia funcional para recuperar tu energía, estabilizar tu glucosa y reconectar con tu cuerpo.<br>
+  <em>"Tu cuerpo no está roto — solo está protegiéndose."</em></p>
+
+  <h2>Suscripción NutriMarvin Funcional</h2>
+
+  <div>
+    <h3>Qué recibes por $5/mes:</h3>
+    <ul>
+      <li>Acceso a 10 mini guías funcionales ampliadas.</li>
+      <li>Recomendaciones prácticas para equilibrar tu glucosa y energía.</li>
+      <li>Revisión opcional de tus análisis de sangre para orientación funcional.</li>
+      <li>Microhábitos semanales para mejorar digestión, descanso y claridad mental.</li>
+      <li>Acceso al diario funcional y seguimiento personalizado.</li>
+    </ul>
+
+    <h3>Cómo funciona:</h3>
+    <ol>
+      <li>Suscríbete y obtén acceso a tu área personal.</li>
+      <li>Completa tu historial funcional (intake médico y hábitos).</li>
+      <li>Registra tus 5 días de comidas, sueño y digestión.</li>
+      <li>Recibe tu primer análisis funcional y plan de ajustes personalizado.</li>
+    </ol>
+
+    <button>Unirme por $5 USD/mes</button>
+
+    <footer>
+      *El enlace de suscripción se habilitará pronto. Al registrarte, accederás a tu formulario de inicio funcional y diario de 5 días.
+    </footer>
+  </div>
+</div>
