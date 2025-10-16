@@ -189,6 +189,6 @@ Preferred communication style: Simple, everyday language.
   - "Continúa tu camino con NutriMarvin Funcional"
   - 16 guías prácticas, microhábitos, videos educativos
   - $5 USD/mes pricing with cancellation policy
-  - Direct link to https://stan.store/NutriMarvin
+  - Direct link to https://stan.store/nutrimarvin
 - Full responsive design (mobile, tablet, desktop)
 - Proper spacing and typography for all devices

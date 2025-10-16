@@ -402,7 +402,7 @@ export default function Resultados() {
               Aprende a revertir tu resistencia a la insulina desde la raíz.
             </p>
             <a
-              href="https://stan.store/NutriMarvin"
+              href="https://stan.store/nutrimarvin"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block w-full sm:w-auto px-7 py-3 rounded-lg text-white font-semibold transition text-sm sm:text-base"
