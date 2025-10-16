@@ -174,6 +174,45 @@ Preferred communication style: Simple, everyday language.
   - CTAs to return home or view guides
   - Clears diagnostic answers from localStorage
 
+## Health Profile & Blood Analysis Features (October 2025)
+
+### Welcome Page Updates (Bienvenida)
+- **Combined approach:** Educational content + Health profile orientation
+- **Benefits listed:**
+  - Recomendaciones de nutrición funcional individualizadas
+  - Interpretación de análisis de sangre (A1C, colesterol, triglicéridos, etc.)
+  - Planes nutricionales y suplementación personalizada
+  - Seguimiento de progreso y soporte continuo
+- **Primary CTA:** "Completar mi perfil de salud" → `/perfil`
+- **Secondary CTAs:** "Interpretar análisis de sangre" → `/analisis`, "Volver al Inicio" → `/`
+- Uses Lucide React icons throughout (no emojis)
+
+### Health Profile Page (`/perfil`)
+- **Data collected:**
+  - Basic info: Age, gender
+  - Physical metrics: Weight (kg), height (cm), physical activity level
+  - Current symptoms: Checklist of 8 common symptoms (fatigue, cravings, digestive issues, etc.)
+  - Medical history: Previous/current conditions, current medications
+- **Storage:** NO storage - data passed via URL params only (gender for interpretation context)
+- **Educational disclaimer:** Explicit warning that tool is educational only and does not store medical data
+- **Flow:** After saving → redirects to `/analisis?genero={value}`
+
+### Blood Analysis Interpretation Page (`/analisis`)
+- **Values accepted:**
+  - A1C (Hemoglobin A1C %)
+  - Fasting glucose (mg/dL)
+  - Total cholesterol (mg/dL)
+  - LDL (bad cholesterol) (mg/dL)
+  - HDL (good cholesterol) (mg/dL)
+  - Triglycerides (mg/dL)
+  - Hemoglobin (g/dL)
+- **Interpretation logic:**
+  - Color-coded results (normal, alert, high, low)
+  - Evidence-based reference ranges
+  - Personalized recommendations based on values and gender
+  - Icons: CheckCircle (normal), AlertTriangle (alert), AlertCircle (high/low)
+- **Educational disclaimer:** "Esta interpretación es educativa y no sustituye la consulta médica profesional"
+
 ## Recent Updates (October 2025)
 
 ### Header Redesign

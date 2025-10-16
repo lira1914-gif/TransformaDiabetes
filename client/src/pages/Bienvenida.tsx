@@ -64,19 +64,24 @@ export default function Bienvenida() {
             style={{ backgroundColor: '#FFFFFF' }}
           >
             <h2 
-              className="text-xl sm:text-2xl font-bold mb-6 text-center" 
+              className="text-xl sm:text-2xl font-bold mb-4 text-center" 
               style={{ color: '#3E3E2E' }}
             >
-              Qué esperar de tu plan mensual
+              Tu espacio personalizado de salud
             </h2>
+            
+            <p className="text-center mb-6 text-sm sm:text-base" style={{ color: '#6F6E66' }}>
+              A partir de ahora tendrás acceso a herramientas personalizadas para comprender y 
+              revertir la resistencia a la insulina desde la raíz.
+            </p>
             
             <ul className="space-y-4" style={{ color: '#4B4B3B' }}>
               <li className="flex items-start gap-3">
                 <BookOpen className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#6B7041' }} />
                 <div>
-                  <strong className="block mb-1">Guías prácticas personalizadas</strong>
+                  <strong className="block mb-1">Recomendaciones de nutrición funcional individualizadas</strong>
                   <span className="text-sm" style={{ color: '#6F6E66' }}>
-                    Acceso a contenido educativo según tu patrón funcional
+                    Guías prácticas adaptadas a tu patrón metabólico específico
                   </span>
                 </div>
               </li>
@@ -84,9 +89,9 @@ export default function Bienvenida() {
               <li className="flex items-start gap-3">
                 <Target className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#6B7041' }} />
                 <div>
-                  <strong className="block mb-1">Herramientas de seguimiento</strong>
+                  <strong className="block mb-1">Interpretación de análisis de sangre</strong>
                   <span className="text-sm" style={{ color: '#6F6E66' }}>
-                    Recursos para monitorear tu progreso y síntomas
+                    Comprende tus valores de A1C, colesterol, triglicéridos y más
                   </span>
                 </div>
               </li>
@@ -94,9 +99,9 @@ export default function Bienvenida() {
               <li className="flex items-start gap-3">
                 <UtensilsCrossed className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#6B7041' }} />
                 <div>
-                  <strong className="block mb-1">Recetas y planes nutricionales</strong>
+                  <strong className="block mb-1">Planes nutricionales y suplementación personalizada</strong>
                   <span className="text-sm" style={{ color: '#6F6E66' }}>
-                    Menús adaptados a tu patrón metabólico
+                    Recetas, menús y guía de suplementos adaptados a ti
                   </span>
                 </div>
               </li>
@@ -104,9 +109,9 @@ export default function Bienvenida() {
               <li className="flex items-start gap-3">
                 <MessageCircle className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#6B7041' }} />
                 <div>
-                  <strong className="block mb-1">Soporte continuo</strong>
+                  <strong className="block mb-1">Seguimiento de progreso y soporte continuo</strong>
                   <span className="text-sm" style={{ color: '#6F6E66' }}>
-                    Acompañamiento mensual para resolver tus dudas
+                    Monitorea síntomas, energía y recibe acompañamiento mensual
                   </span>
                 </div>
               </li>
@@ -133,37 +138,70 @@ export default function Bienvenida() {
             </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/">
+          {/* Primary CTA */}
+          <div className="mb-6">
+            <Link href="/perfil">
               <button
-                className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold transition text-sm sm:text-base flex items-center justify-center gap-2"
-                style={{ 
-                  backgroundColor: '#6B7041',
-                  color: '#FFFFFF'
-                }}
-                data-testid="button-volver-inicio"
-                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#5A5F35'}
-                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6B7041'}
-              >
-                <Home className="w-4 h-4" />
-                Volver al Inicio
-              </button>
-            </Link>
-            
-            <Link href="/guia">
-              <button
-                className="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold transition text-sm sm:text-base flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-10 py-4 rounded-lg font-bold transition text-base sm:text-lg flex items-center justify-center gap-2 mx-auto"
                 style={{ 
                   backgroundColor: '#A15C38',
                   color: '#FFFFFF'
                 }}
-                data-testid="button-ver-guias"
+                data-testid="button-completar-perfil"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#8C4E30'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
               >
+                <Target className="w-5 h-5" />
+                Completar mi perfil de salud
+              </button>
+            </Link>
+          </div>
+
+          {/* Secondary CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link href="/analisis">
+              <button
+                className="w-full sm:w-auto px-6 py-2.5 rounded-lg font-semibold transition text-sm flex items-center justify-center gap-2"
+                style={{ 
+                  backgroundColor: 'transparent',
+                  color: '#6B7041',
+                  border: '2px solid #6B7041'
+                }}
+                data-testid="button-analisis-sangre"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#6B7041';
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#6B7041';
+                }}
+              >
                 <FileText className="w-4 h-4" />
-                Ver Guías
+                Interpretar análisis de sangre
+              </button>
+            </Link>
+            
+            <Link href="/">
+              <button
+                className="w-full sm:w-auto px-6 py-2.5 rounded-lg font-semibold transition text-sm flex items-center justify-center gap-2"
+                style={{ 
+                  backgroundColor: 'transparent',
+                  color: '#6B7041',
+                  border: '2px solid #6B7041'
+                }}
+                data-testid="button-volver-inicio"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#6B7041';
+                  e.currentTarget.style.color = '#FFFFFF';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = '#6B7041';
+                }}
+              >
+                <Home className="w-4 h-4" />
+                Volver al Inicio
               </button>
             </Link>
           </div>

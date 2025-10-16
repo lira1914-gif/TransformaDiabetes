@@ -7,6 +7,8 @@ import Home from "@/pages/Home";
 import Diagnostico from "@/pages/Diagnostico";
 import Resultados from "@/pages/Resultados";
 import Bienvenida from "@/pages/Bienvenida";
+import Perfil from "@/pages/Perfil";
+import Analisis from "@/pages/Analisis";
 import Guia from "@/pages/Guia";
 import Privacidad from "@/pages/Privacidad";
 import NotFound from "@/pages/not-found";
@@ -18,6 +20,8 @@ function Router() {
       <Route path="/diagnostico" component={Diagnostico} />
       <Route path="/resultados" component={Resultados} />
       <Route path="/bienvenida" component={Bienvenida} />
+      <Route path="/perfil" component={Perfil} />
+      <Route path="/analisis" component={Analisis} />
       <Route path="/guia" component={Guia} />
       <Route path="/privacidad" component={Privacidad} />
       <Route component={NotFound} />
