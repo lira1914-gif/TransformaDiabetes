@@ -11,8 +11,14 @@ Preferred communication style: Simple, everyday language.
 ### Frontend
 - **Frameworks & Libraries**: React 18 with TypeScript, Vite, Wouter for routing, TanStack Query for state management.
 - **UI/UX**: Radix UI primitives, shadcn/ui (New York style), Tailwind CSS with custom design tokens. Uses Playfair Display for headings and Inter for body text. Features a wellness-focused color palette (olive green, beige, terracotta) and a responsive, mobile-first design.
-- **Key Features**: Multi-step diagnostic wizard (3 questions mapping to 4 health axes and 10 patterns), personalized results with 5-point recommendations integrated with Mini Guía Funcional (complete guide to reversing insulin resistance), and static pages (Home, Diagnostico, Resultados, Pre-registro, Bienvenida, Perfil, Analisis, Privacidad).
+- **Key Features**: Multi-step diagnostic wizard (3 questions mapping to 4 health axes and 10 patterns), personalized results with 5-point recommendations integrated with pattern-specific Mini Guías Funcionales, and static pages (Home, Diagnostico, Resultados, Pre-registro, Bienvenida, Perfil, Analisis, Privacidad).
 - **Diagnostic System**: Simplified 3-question diagnostic leading to 10 possible functional patterns (4 individual, 6 combined).
+- **Mini Guías Funcionales**: Pattern-specific educational guides that display unique title and blockquote based on detected pattern:
+  - 🩸 Metabólico → "Guía Metabólica" + "Tu cuerpo no puede sanar en estado de alerta."
+  - 💩 Digestivo → "Guía Digestiva" + "Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende."
+  - 🌙 Estrés → "Guía del Estrés" + "No todo lo que te acelera te impulsa; a veces te apaga."
+  - 🔥 Inflamatorio → "Guía Inflamatoria" + "La inflamación no es enemiga; es el lenguaje de tu cuerpo pidiendo equilibrio."
+  - Combined patterns inherit guide from their primary pattern.
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
 ### Backend
