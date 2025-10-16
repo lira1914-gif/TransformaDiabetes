@@ -1,0 +1,142 @@
+<section style="
+  background-color: var(--res-bg);
+  color: var(--res-text);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  padding: 3rem 1rem;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 3rem auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 0.3s ease-in-out;
+">
+
+  <!-- TÍTULO PRINCIPAL -->
+  <h2 style="
+    font-size: 1.8rem;
+    color: var(--res-title);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  ">
+    Tu Guía Funcional Personalizada 🌿
+  </h2>
+
+  <!-- SUBTÍTULO -->
+  <p style="
+    font-size: 1rem;
+    color: var(--res-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  ">
+    Basado en tus respuestas, este es tu plan funcional inicial.  
+    Recuerda: no hay nada “malo”, solo señales que te ayudan a reconectar con tu cuerpo.
+  </p>
+
+  <!-- RECOMENDACIONES FUNCIONALES -->
+  <div style="
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    background-color: var(--res-card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  ">
+    <h3 style="color: var(--res-title); font-size: 1.1rem; margin-bottom: 1rem;">Recomendaciones iniciales:</h3>
+    <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.8;">
+      <li>🥦 Prioriza comidas reales con proteína y fibra.</li>
+      <li>💧 Hidrátate con agua y evita bebidas procesadas.</li>
+      <li>🚶‍♀️ Camina 10 minutos después de cada comida.</li>
+      <li>🧘‍♂️ Incluye pausas de respiración o relajación consciente.</li>
+      <li>🌙 Duerme antes de las 11 p. m. para mejorar la regulación hormonal.</li>
+    </ul>
+  </div>
+
+  <!-- FRASE EMPÁTICA -->
+  <p style="
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--res-muted);
+    margin-bottom: 2rem;
+  ">
+    “Tu cuerpo no necesita control, necesita descanso.”
+  </p>
+
+  <!-- BLOQUE DE SUSCRIPCIÓN INTEGRADO -->
+  <div style="
+    background-color: var(--sus-bg);
+    padding: 2rem 1rem;
+    border-radius: 10px;
+    max-width: 750px;
+    margin: 0 auto;
+  ">
+    <h3 style="
+      font-size: 1.4rem;
+      color: var(--res-title);
+      margin-bottom: 1rem;
+    ">
+      Continúa tu camino con NutriMarvin Funcional
+    </h3>
+    <p style="
+      color: var(--res-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+    ">
+      Accede a <strong>16 guías prácticas</strong>, microhábitos funcionales,  
+      videos educativos y acompañamiento continuo por solo <strong>$5 USD/mes</strong>.  
+      Aprende a revertir tu resistencia a la insulina desde la raíz.
+    </p>
+    <a href="https://stan.store/NutriMarvin" target="_blank" style="
+      display: inline-block;
+      background-color: var(--cta-bg);
+      color: var(--cta-text);
+      padding: 0.9rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    ">
+      Suscribirme ahora
+    </a>
+    <p style="
+      font-size: 0.8rem;
+      color: var(--res-muted);
+      margin-top: 1rem;
+    ">
+      Cancela en cualquier momento. Tu información es 100% confidencial.
+    </p>
+  </div>
+</section>
+
+<style>
+  :root {
+    --res-bg: #F8F7F3;
+    --res-text: #4B4B3B;
+    --res-muted: #6F6E66;
+    --res-title: #3E3E2E;
+    --res-card-bg: #FFFFFF;
+    --cta-bg: #A15C38;
+    --cta-text: #FFFFFF;
+    --sus-bg: #EFEDE8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --res-bg: #1E1E1E;
+      --res-text: #EDEBE6;
+      --res-muted: #B2B0A8;
+      --res-title: #FFFFFF;
+      --res-card-bg: #2C2C2C;
+      --cta-bg: #C47B55;
+      --cta-text: #FFFFFF;
+      --sus-bg: #292929;
+    }
+  }
+
+  a:hover {
+    opacity: 0.9;
+  }
+</style>

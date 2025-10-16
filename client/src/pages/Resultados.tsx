@@ -302,52 +302,82 @@ export default function Resultados() {
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F9F7F2' }}>
       <Header />
       <main className="flex-1 py-8 sm:py-12 px-4 sm:px-6">
-        <section className="text-center max-w-4xl mx-auto w-full sm:w-[95%] lg:w-[90%]">
+        <section 
+          className="text-center max-w-4xl mx-auto w-full sm:w-[95%] lg:w-[90%] p-6 sm:p-8 lg:p-12 rounded-xl transition-all duration-300"
+          style={{ 
+            backgroundColor: '#F8F7F3',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.06)'
+          }}
+        >
+          {/* Título Principal */}
           <h2 
-            id="tituloPatron" 
-            className="text-xl sm:text-2xl lg:text-2xl font-semibold mb-4" 
-            style={{ color: '#6B7041' }}
+            className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4" 
+            style={{ color: '#3E3E2E' }}
           >
-            {resultado.patron}
+            Tu Guía Funcional Personalizada 🌿
           </h2>
           
+          {/* Subtítulo */}
           <p 
-            id="descripcionPatron" 
-            className="max-w-2xl mx-auto mb-8 text-sm sm:text-base" 
-            style={{ color: '#6B635A' }}
+            className="max-w-2xl mx-auto mb-8 text-sm sm:text-base leading-relaxed" 
+            style={{ color: '#6F6E66' }}
           >
-            {resultado.descripcion}
+            Basado en tus respuestas, este es tu plan funcional inicial.  
+            Recuerda: no hay nada "malo", solo señales que te ayudan a reconectar con tu cuerpo.
           </p>
 
-          <div 
-            className="rounded-lg shadow-md sm:shadow-md shadow-none border sm:border-0 border-[#EDEAE3] p-4 sm:p-6 lg:p-6 max-w-2xl mx-auto text-left text-sm sm:text-base"
-            style={{ backgroundColor: '#F7F5F0' }}
-          >
-            <h3 className="font-bold mb-2" style={{ color: '#6B7041' }}>
-              🌿 Recomendaciones Iniciales
+          {/* Patrón Detectado */}
+          <div className="mb-6">
+            <h3 
+              id="tituloPatron" 
+              className="text-xl sm:text-2xl font-semibold mb-3" 
+              style={{ color: '#3E3E2E' }}
+            >
+              {resultado.patron}
             </h3>
-            <ul id="recomendaciones" className="list-disc pl-6 space-y-2" style={{ color: '#4A4A4A' }}>
+            
+            <p 
+              id="descripcionPatron" 
+              className="max-w-2xl mx-auto text-sm sm:text-base" 
+              style={{ color: '#6F6E66' }}
+            >
+              {resultado.descripcion}
+            </p>
+          </div>
+
+          {/* Recomendaciones Personalizadas */}
+          <div 
+            className="rounded-lg p-4 sm:p-6 max-w-2xl mx-auto text-left text-sm sm:text-base mb-6"
+            style={{ 
+              backgroundColor: '#FFFFFF',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
+            }}
+          >
+            <h3 className="font-semibold mb-4 text-base sm:text-lg" style={{ color: '#3E3E2E' }}>
+              Recomendaciones iniciales:
+            </h3>
+            <ul id="recomendaciones" className="list-none pl-0 space-y-3 leading-relaxed" style={{ color: '#4B4B3B' }}>
               {resultado.recomendaciones.map((rec, index) => (
                 <li key={index}>{rec}</li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-6 max-w-2xl mx-auto">
-            <p 
-              id="fraseMotivacional" 
-              className="text-center italic text-base sm:text-lg"
-              style={{ color: '#C77851' }}
-            >
-              💬 "{resultado.fraseMotivacional}"
-            </p>
-          </div>
+          {/* Frase Motivacional */}
+          <p 
+            id="fraseMotivacional" 
+            className="text-center italic text-base sm:text-lg mb-8"
+            style={{ color: '#6F6E66' }}
+          >
+            💬 "{resultado.fraseMotivacional}"
+          </p>
 
+          {/* Botón Descargar Guía */}
           {resultado && resultado.patron && (
-            <div id="bloqueGuia" className="mt-8">
+            <div id="bloqueGuia" className="mb-8">
               <Link 
                 href="/guia"
-                className="inline-block px-6 py-3 rounded-md text-white font-medium transition text-sm sm:text-base"
+                className="inline-block px-6 py-3 rounded-md text-white font-semibold transition text-sm sm:text-base"
                 style={{ backgroundColor: '#6B7041' }}
                 data-testid="button-descargar-guia"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#596036'}
@@ -358,37 +388,33 @@ export default function Resultados() {
             </div>
           )}
 
-          {/* Subscription CTA */}
+          {/* Subscription CTA Mejorado */}
           <div 
-            className="mt-8 sm:mt-12 max-w-2xl mx-auto rounded-lg shadow-md sm:shadow-md shadow-none border sm:border-0 border-[#E5E0D5] p-4 sm:p-6 lg:p-8" 
-            style={{ backgroundColor: '#F7F5F0' }}
+            className="max-w-3xl mx-auto rounded-lg p-6 sm:p-8" 
+            style={{ backgroundColor: '#EFEDE8' }}
           >
-            <h3 className="text-lg sm:text-xl lg:text-xl font-bold mb-2 sm:mb-3" style={{ color: '#6B7041' }}>
-              Suscríbete a NutriMarvin Funcional
+            <h3 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: '#3E3E2E' }}>
+              Continúa tu camino con NutriMarvin Funcional
             </h3>
-            <p className="mb-4 sm:mb-6 text-sm sm:text-base" style={{ color: '#6B635A' }}>
-              Accede a técnicas guiadas, recetas funcionales y seguimiento mensual por solo $5.
+            <p className="mb-6 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#6F6E66' }}>
+              Accede a <strong>16 guías prácticas</strong>, microhábitos funcionales,  
+              videos educativos y acompañamiento continuo por solo <strong>$5 USD/mes</strong>.  
+              Aprende a revertir tu resistencia a la insulina desde la raíz.
             </p>
-            <button
-              className="w-full sm:w-auto px-6 py-3 sm:py-3 rounded-md text-white font-medium transition text-sm sm:text-base"
-              style={{ backgroundColor: '#C77851' }}
+            <a
+              href="https://stan.store/NutriMarvin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block w-full sm:w-auto px-7 py-3 rounded-lg text-white font-semibold transition text-sm sm:text-base"
+              style={{ backgroundColor: '#A15C38' }}
               data-testid="button-suscribirse"
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#B3663F'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#C77851'}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#8C4E30'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
             >
               Suscribirme ahora
-            </button>
-          </div>
-
-          {/* Privacy Footer */}
-          <div className="mt-6 sm:mt-12 max-w-2xl mx-auto text-center p-4 sm:p-6 rounded-lg" style={{ backgroundColor: '#E8E4DC' }}>
-            <p className="font-bold mb-2 text-sm sm:text-base" style={{ color: '#6B7041' }}>
-              Privacidad y Confidencialidad
-            </p>
-            <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#6B635A' }}>
-              La información que compartes en NutriMarvin es confidencial.
-              <br />
-              No vendemos ni compartimos tus datos. Usamos protocolos seguros para proteger tu información.
+            </a>
+            <p className="mt-4 text-xs sm:text-sm" style={{ color: '#6F6E66' }}>
+              Cancela en cualquier momento. Tu información es 100% confidencial.
             </p>
           </div>
         </section>

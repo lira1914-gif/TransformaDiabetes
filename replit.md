@@ -179,7 +179,16 @@ Preferred communication style: Simple, everyday language.
 - Professional white container design with responsive layout
 
 ### Results Page Enhancements
-- Subscription CTA section ($5/month offer)
-- Privacy notice on results page
+- Enhanced visual design with card-based layout and subtle shadows
+- Main container with warm beige background (#F8F7F3) and rounded corners
+- Title: "Tu Guía Funcional Personalizada 🌿" with empathetic subtitle
+- Pattern-specific recommendations displayed in white card with 5 numbered points (1️⃣-5️⃣)
+- Motivational phrase with 💬 emoji and quotation marks
+- Download CTA button for functional guide
+- Improved subscription section with detailed offer:
+  - "Continúa tu camino con NutriMarvin Funcional"
+  - 16 guías prácticas, microhábitos, videos educativos
+  - $5 USD/mes pricing with cancellation policy
+  - Direct link to https://stan.store/NutriMarvin
 - Full responsive design (mobile, tablet, desktop)
 - Proper spacing and typography for all devices
