@@ -301,11 +301,11 @@ export default function Resultados() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F9F7F2' }}>
       <Header />
-      <main className="flex-1 py-12 px-6">
-        <section className="text-center max-w-4xl mx-auto">
+      <main className="flex-1 py-8 sm:py-12 px-4 sm:px-6">
+        <section className="text-center max-w-4xl mx-auto w-full sm:w-[95%] lg:w-[90%]">
           <h2 
             id="tituloPatron" 
-            className="text-2xl font-semibold mb-4" 
+            className="text-xl sm:text-2xl lg:text-2xl font-semibold mb-4" 
             style={{ color: '#6B7041' }}
           >
             {resultado.patron}
@@ -313,14 +313,14 @@ export default function Resultados() {
           
           <p 
             id="descripcionPatron" 
-            className="max-w-2xl mx-auto mb-8" 
+            className="max-w-2xl mx-auto mb-8 text-sm sm:text-base" 
             style={{ color: '#6B635A' }}
           >
             {resultado.descripcion}
           </p>
 
           <div 
-            className="rounded-lg shadow-md p-6 max-w-2xl mx-auto text-left"
+            className="rounded-lg shadow-md sm:shadow-md shadow-none border sm:border-0 border-[#EDEAE3] p-4 sm:p-6 lg:p-6 max-w-2xl mx-auto text-left text-sm sm:text-base"
             style={{ backgroundColor: '#F7F5F0' }}
           >
             <h3 className="font-bold mb-2" style={{ color: '#6B7041' }}>
@@ -336,7 +336,7 @@ export default function Resultados() {
           <div className="mt-6 max-w-2xl mx-auto">
             <p 
               id="fraseMotivacional" 
-              className="text-center italic text-lg"
+              className="text-center italic text-base sm:text-lg"
               style={{ color: '#C77851' }}
             >
               💬 "{resultado.fraseMotivacional}"
@@ -347,7 +347,7 @@ export default function Resultados() {
             <div id="bloqueGuia" className="mt-8">
               <Link 
                 href="/guia"
-                className="inline-block px-6 py-3 rounded-md text-white font-medium transition"
+                className="inline-block px-6 py-3 rounded-md text-white font-medium transition text-sm sm:text-base"
                 style={{ backgroundColor: '#6B7041' }}
                 data-testid="button-descargar-guia"
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#596036'}
@@ -359,15 +359,18 @@ export default function Resultados() {
           )}
 
           {/* Subscription CTA */}
-          <div className="mt-12 max-w-2xl mx-auto rounded-lg shadow-md p-8" style={{ backgroundColor: '#F7F5F0' }}>
-            <h3 className="text-xl font-bold mb-3" style={{ color: '#6B7041' }}>
+          <div 
+            className="mt-8 sm:mt-12 max-w-2xl mx-auto rounded-lg shadow-md sm:shadow-md shadow-none border sm:border-0 border-[#E5E0D5] p-4 sm:p-6 lg:p-8" 
+            style={{ backgroundColor: '#F7F5F0' }}
+          >
+            <h3 className="text-lg sm:text-xl lg:text-xl font-bold mb-2 sm:mb-3" style={{ color: '#6B7041' }}>
               Suscríbete a NutriMarvin Funcional
             </h3>
-            <p className="mb-6" style={{ color: '#6B635A' }}>
+            <p className="mb-4 sm:mb-6 text-sm sm:text-base" style={{ color: '#6B635A' }}>
               Accede a técnicas guiadas, recetas funcionales y seguimiento mensual por solo $5.
             </p>
             <button
-              className="px-6 py-3 rounded-md text-white font-medium transition"
+              className="w-full sm:w-auto px-6 py-3 sm:py-3 rounded-md text-white font-medium transition text-sm sm:text-base"
               style={{ backgroundColor: '#C77851' }}
               data-testid="button-suscribirse"
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#B3663F'}
@@ -378,11 +381,11 @@ export default function Resultados() {
           </div>
 
           {/* Privacy Footer */}
-          <div className="mt-12 max-w-2xl mx-auto text-center p-6 rounded-lg" style={{ backgroundColor: '#E8E4DC' }}>
-            <p className="font-bold mb-2" style={{ color: '#6B7041' }}>
+          <div className="mt-6 sm:mt-12 max-w-2xl mx-auto text-center p-4 sm:p-6 rounded-lg" style={{ backgroundColor: '#E8E4DC' }}>
+            <p className="font-bold mb-2 text-sm sm:text-base" style={{ color: '#6B7041' }}>
               Privacidad y Confidencialidad
             </p>
-            <p className="text-sm" style={{ color: '#6B635A' }}>
+            <p className="text-xs sm:text-sm leading-relaxed" style={{ color: '#6B635A' }}>
               La información que compartes en NutriMarvin es confidencial.
               <br />
               No vendemos ni compartimos tus datos. Usamos protocolos seguros para proteger tu información.
