@@ -152,3 +152,24 @@ Preferred communication style: Simple, everyday language.
 - Custom asset path aliasing (@assets/) for static images
 - Generated images stored in attached_assets directory
 - Design guideline documents for content reference
+
+## Recent Updates (October 2025)
+
+### Footer Redesign
+- Simplified, centered design with clean layout
+- Dynamic copyright year using React useEffect
+- Educational disclaimer with empowering message: "Tu cuerpo no está roto, solo está protegiéndose"
+- Privacy policy link opens in new tab (target="_blank" with security attributes)
+- Consistent styling across all pages (#F7F5EF background, #4B4B3B text, #A15C38 links)
+
+### Privacy Policy
+- Comprehensive 7-section privacy policy page
+- Covers: data collection, usage, protection, user rights, legal compliance (GDPR, US, LATAM), cookies, and policy updates
+- Contact email: privacidad@nutrimarvin.com
+- Professional white container design with responsive layout
+
+### Results Page Enhancements
+- Subscription CTA section ($5/month offer)
+- Privacy notice on results page
+- Full responsive design (mobile, tablet, desktop)
+- Proper spacing and typography for all devices

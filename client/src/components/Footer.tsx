@@ -1,102 +1,42 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Link } from "wouter";
-import { Facebook, Instagram, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+  const [currentYear, setCurrentYear] = useState(2025);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h3 className="text-xl font-serif font-bold mb-4">NutriMarvin</h3>
-            <p className="text-sm text-primary-foreground/80 leading-relaxed">
-              Transformando vidas a través de la nutrición funcional y el poder de la reversión de DM2.
-            </p>
-          </div>
+    <footer 
+      className="text-center px-4 py-8 mt-12 border-t"
+      style={{ 
+        backgroundColor: '#F7F5EF',
+        color: '#4B4B3B',
+        borderTopColor: '#E0DED5'
+      }}
+    >
+      <p className="text-sm sm:text-base mb-2">
+        © {currentYear} <strong>NutriMarvin</strong> — Todos los derechos reservados.
+      </p>
 
-          <div>
-            <h4 className="font-semibold mb-4">Enlaces Rápidos</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link href="/diagnostico" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Diagnóstico Gratuito
-                </Link>
-              </li>
-              <li>
-                <button className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Descargar Guía
-                </button>
-              </li>
-            </ul>
-          </div>
+      <p className="text-xs sm:text-sm leading-relaxed mb-3 max-w-3xl mx-auto">
+        La información en esta plataforma tiene fines educativos y no sustituye orientación médica profesional.
+        <br />
+        Tu cuerpo no está roto, solo está protegiéndose.
+      </p>
 
-          <div>
-            <h4 className="font-semibold mb-4">Newsletter</h4>
-            <p className="text-sm text-primary-foreground/80 mb-4">
-              Recibe consejos semanales de salud
-            </p>
-            <div className="flex gap-2">
-              <Input 
-                type="email" 
-                placeholder="tu@email.com" 
-                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50"
-                data-testid="input-newsletter"
-              />
-              <Button 
-                variant="secondary" 
-                size="icon"
-                data-testid="button-newsletter-submit"
-              >
-                <Mail className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex gap-4 mt-6">
-              <button className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                <Facebook className="h-5 w-5" />
-              </button>
-              <button className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                <Instagram className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-primary-foreground/20 pt-8 text-center">
-          <p className="text-xs text-primary-foreground/60">
-            © 2025 NutriMarvin. Todos los derechos reservados.
-          </p>
-          <p className="text-xs text-primary-foreground/60 mt-2">
-            Esta información es de carácter educativo y no sustituye el consejo médico profesional. 
-            Consulta siempre con tu médico antes de realizar cambios en tu tratamiento.
-          </p>
-          
-          <div 
-            className="mt-6 pt-4 mx-auto"
-            style={{
-              borderTop: '1px solid rgba(166, 166, 138, 0.6)',
-              maxWidth: '900px'
-            }}
-          >
-            <p 
-              className="text-xs leading-relaxed"
-              style={{ color: '#D9D7C8' }}
-            >
-              <strong>Privacidad y Confidencialidad</strong><br />
-              La información que compartes en NutriMarvin es completamente confidencial.<br />
-              No vendemos, compartimos ni divulgamos tus datos personales a terceros.<br />
-              Cualquier respuesta proporcionada en el diagnóstico funcional se usa únicamente para ofrecerte resultados educativos y personalizados dentro de nuestra plataforma.<br />
-              Cumplimos con las regulaciones de privacidad aplicables en EE. UU. y protegemos tu información mediante protocolos seguros de encriptación y almacenamiento.<br />
-              Puedes leer nuestra <Link href="/privacidad" className="underline hover:opacity-80 transition-opacity">Política de Privacidad completa</Link> para más información.
-            </p>
-          </div>
-        </div>
-      </div>
+      <p className="text-sm">
+        <a 
+          href="/privacidad" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium hover:underline transition-all"
+          style={{ color: '#A15C38' }}
+        >
+          Política de Privacidad Completa
+        </a>
+      </p>
     </footer>
   );
 }
