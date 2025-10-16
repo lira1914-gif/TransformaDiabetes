@@ -4,11 +4,25 @@ import { storage } from "./storage";
 import { Paddle, Environment } from "@paddle/paddle-node-sdk";
 
 // Initialize Paddle with API key from environment
+// Auto-detect environment based on API key prefix
+const getEnvironment = () => {
+  const apiKey = process.env.PADDLE_API_KEY || '';
+  if (apiKey.includes('_sdbx_')) {
+    return Environment.sandbox;
+  } else if (apiKey.includes('_live_')) {
+    return Environment.production;
+  }
+  // Fallback to sandbox for development
+  return process.env.NODE_ENV === 'production' ? Environment.production : Environment.sandbox;
+};
+
 const paddle = process.env.PADDLE_API_KEY 
   ? new Paddle(process.env.PADDLE_API_KEY, {
-      environment: process.env.NODE_ENV === 'production' ? Environment.production : Environment.sandbox
+      environment: getEnvironment()
     })
   : null;
+
+console.log('Paddle initialized with environment:', getEnvironment());
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Paddle Checkout endpoint for subscriptions
@@ -57,9 +71,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ url: checkoutUrl });
     } catch (error: any) {
       console.error("Error creating Paddle checkout:", error);
-      res.status(500).json({ 
-        error: "No se pudo procesar la solicitud de pago. Por favor, intenta nuevamente." 
-      });
+      
+      // Provide more specific error messages based on Paddle error codes
+      let errorMessage = "No se pudo procesar la solicitud de pago. Por favor, intenta nuevamente.";
+      
+      if (error.code === 'transaction_checkout_not_enabled') {
+        errorMessage = "El sistema de pagos está en proceso de configuración. Por favor, intenta más tarde.";
+      } else if (error.code === 'forbidden') {
+        errorMessage = "Error de configuración del servicio de pagos. Contacta al soporte.";
+      }
+      
+      res.status(500).json({ error: errorMessage });
     }
   });
 
