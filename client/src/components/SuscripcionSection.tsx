@@ -1,10 +1,27 @@
+import { useState, useRef, useEffect } from "react";
 import "../styles/suscripcion.css";
 import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.jpg";
 
 export default function SuscripcionSection() {
+  const [showBienvenida, setShowBienvenida] = useState(false);
+  const bienvenidaRef = useRef<HTMLDivElement>(null);
+
   const handleSubscribe = () => {
-    // TODO: Integrar Paddle cuando esté listo
-    alert("Paddle se integrará próximamente");
+    // Mostrar sección de bienvenida
+    setShowBienvenida(true);
+  };
+
+  useEffect(() => {
+    if (showBienvenida && bienvenidaRef.current) {
+      // Hacer scroll suave a la sección de bienvenida
+      setTimeout(() => {
+        bienvenidaRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [showBienvenida]);
+
+  const handleIniciarRegistro = () => {
+    alert("Aquí se mostrará el formulario de registro de 5 días.");
   };
 
   return (
@@ -75,6 +92,85 @@ export default function SuscripcionSection() {
             </p>
           </footer>
         </div>
+
+        {/* Sección de Bienvenida - Aparece después de suscribirse */}
+        {showBienvenida && (
+          <div 
+            ref={bienvenidaRef}
+            className="bienvenida-section"
+            style={{
+              marginTop: '3rem',
+              background: '#fff',
+              border: '1px solid #E6E3D9',
+              borderRadius: '12px',
+              padding: '2rem',
+              boxShadow: '0 6px 18px rgba(0,0,0,0.05)',
+              animation: 'fadeInUp 1.2s ease forwards'
+            }}
+          >
+            <h1 style={{ color: '#556B2F', textAlign: 'center' }}>
+              ✨ Bienvenido a NutriMarvin Funcional
+            </h1>
+            <h2 style={{ color: '#A15C38', textAlign: 'center', fontSize: '1.5rem', marginTop: '0.5rem' }}>
+              Tu camino hacia el equilibrio comienza hoy
+            </h2>
+            <p style={{ color: '#6F6E66', textAlign: 'center', maxWidth: '600px', margin: '1rem auto' }}>
+              Gracias por unirte a la suscripción funcional. Aquí aprenderás a escuchar a tu cuerpo paso a paso, 
+              desde un enfoque humano y basado en fisiología funcional.
+            </p>
+
+            <div style={{ 
+              background: 'rgba(161,92,56,0.1)', 
+              padding: '1rem', 
+              borderRadius: '8px', 
+              color: '#A15C38', 
+              fontWeight: 600, 
+              margin: '1.5rem auto', 
+              maxWidth: '600px',
+              textAlign: 'center'
+            }}>
+              💡 Tu primer paso: Registrar tus primeros 5 días de alimentación, sueño y digestión.
+            </div>
+
+            <div style={{ textAlign: 'left', maxWidth: '700px', margin: '0 auto' }}>
+              <h3 style={{ color: '#556B2F' }}>📋 ¿Qué incluye tu suscripción?</h3>
+              <ul style={{ color: '#3A3A3A' }}>
+                <li>Análisis funcional de tu historial médico y hábitos.</li>
+                <li>Interpretación personalizada de tus resultados y síntomas.</li>
+                <li>Recomendaciones iniciales de alimentación y estilo de vida.</li>
+                <li>Seguimiento semanal y actualización de tus avances.</li>
+                <li>Evaluación de suplementos según tu caso, con precauciones.</li>
+              </ul>
+
+              <h3 style={{ color: '#556B2F' }}>🧠 Antes de iniciar</h3>
+              <p style={{ color: '#3A3A3A' }}>
+                Durante los próximos 5 días, anota lo que comes, cómo duermes y cómo evacúas.  
+                No cambies nada aún — queremos conocer cómo responde tu cuerpo tal como está hoy.
+              </p>
+              <p style={{ color: '#3A3A3A' }}>
+                Este registro será la base para tus recomendaciones personalizadas.
+              </p>
+              <button 
+                onClick={handleIniciarRegistro}
+                data-testid="button-iniciar-registro"
+                style={{
+                  display: 'block',
+                  margin: '2rem auto',
+                  background: '#556B2F',
+                  color: '#fff',
+                  padding: '1rem 2rem',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontWeight: 600,
+                  fontSize: '1rem'
+                }}
+              >
+                Empezar mi registro funcional
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

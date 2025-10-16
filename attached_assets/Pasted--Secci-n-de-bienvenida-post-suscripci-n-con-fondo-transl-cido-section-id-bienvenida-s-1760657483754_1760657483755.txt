@@ -1,0 +1,60 @@
+<!-- 🔹 Sección de bienvenida post-suscripción con fondo translúcido -->
+<section id="bienvenida" style="display:none; opacity:0; transition:opacity 1.2s ease, transform 1s ease; background:rgba(250,248,244,0.9) url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat fixed;">
+  <div class="wrap" style="margin:4rem auto; background:rgba(255,255,255,0.85); border:1px solid #E6E3D9; border-radius:12px; padding:2rem; box-shadow:0 8px 22px rgba(0,0,0,0.05); max-width:800px;">
+    
+    <h1 style="color:#556B2F; text-align:center;">✨ Bienvenido a NutriMarvin Funcional</h1>
+    <h2 style="color:#A15C38; text-align:center;">Tu camino hacia el equilibrio comienza hoy</h2>
+
+    <p style="color:#3A3A3A; text-align:center; max-width:650px; margin:1rem auto; line-height:1.6;">
+      Gracias por unirte a la suscripción funcional. Aquí aprenderás a escuchar a tu cuerpo, paso a paso, 
+      desde un enfoque humano y basado en fisiología funcional.
+    </p>
+
+    <div style="background:rgba(161,92,56,0.1); padding:1rem; border-radius:8px; color:#A15C38; font-weight:600; margin:1.5rem auto; max-width:600px; text-align:center;">
+      💡 Tu primer paso: Registrar tus primeros 5 días de alimentación, sueño y digestión.
+    </div>
+
+    <div style="text-align:left; max-width:700px; margin:0 auto;">
+      <h3 style="color:#556B2F;">📋 ¿Qué incluye tu suscripción?</h3>
+      <ul style="color:#3A3A3A; line-height:1.6;">
+        <li>Análisis funcional de tu historial médico y hábitos.</li>
+        <li>Interpretación personalizada de tus resultados y síntomas.</li>
+        <li>Recomendaciones iniciales de alimentación y estilo de vida.</li>
+        <li>Seguimiento semanal y actualización de tus avances.</li>
+        <li>Evaluación de suplementos según tu caso, con precauciones y disclaimers.</li>
+      </ul>
+
+      <h3 style="color:#556B2F;">🧠 Antes de iniciar</h3>
+      <p>
+        Durante los próximos 5 días, anota lo que comes, cómo duermes y cómo evacúas.  
+        No cambies nada aún — queremos conocer cómo responde tu cuerpo tal como está hoy.
+      </p>
+      <p>
+        Este registro será la base para tus recomendaciones personalizadas.
+      </p>
+
+      <button id="btnRegistro" style="display:block; margin:2rem auto; background:#556B2F; color:#fff; padding:1rem 2rem; border:none; border-radius:8px; cursor:pointer; font-weight:600; transition:background 0.3s;">
+        Empezar mi registro funcional
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Detectar cuando el usuario presiona el botón de suscripción
+  document.getElementById("suscribirseBtn")?.addEventListener("click", (e) => {
+    e.preventDefault(); // Evita redirecciones
+    const bienvenida = document.getElementById("bienvenida");
+    bienvenida.style.display = "block";
+    setTimeout(() => {
+      bienvenida.style.opacity = "1";
+      bienvenida.style.transform = "translateY(0)";
+      bienvenida.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  });
+
+  // Continuar al registro funcional
+  document.getElementById("btnRegistro")?.addEventListener("click", () => {
+    alert("Aquí se mostrará el formulario de registro de 5 días (alimentación, sueño, digestión).");
+  });
+</script>
