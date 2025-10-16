@@ -11,77 +11,72 @@ interface PatronResult {
 }
 
 function interpretarPatron(answers: Record<string, number>): PatronResult {
-  // Questions that are negatively phrased (higher value = worse health, need inversion)
-  const negativeQuestions = new Set([
-    "antojos", "cansancio_comida", "peso", 
-    "gases", "apetito_emocional", "digestion_lenta",
-    "despertar_tension", "cuerpo_estres", "alerta"
-  ]);
+  // Declarative question → axis mapping with weights
+  const questionAxisMap: Record<string, { axis: string[], invert: boolean }> = {
+    // Metabólico questions
+    "energia_estable": { axis: ["Metabólico"], invert: false },
+    "antojos": { axis: ["Metabólico"], invert: true },
+    "cansancio_comida": { axis: ["Metabólico", "Inflamatorio"], invert: true },
+    "peso": { axis: ["Metabólico", "Inflamatorio"], invert: true },
+    "sueno_horas": { axis: ["Metabólico", "Estrés"], invert: false },
+    
+    // Digestivo questions
+    "evacuaciones": { axis: ["Digestivo"], invert: false },
+    "gases": { axis: ["Digestivo", "Inflamatorio"], invert: true },
+    "apetito_emocional": { axis: ["Digestivo", "Estrés"], invert: true },
+    "digestion_lenta": { axis: ["Digestivo"], invert: true },
+    "agua_alimentos": { axis: ["Digestivo"], invert: false },
+    
+    // Estrés questions
+    "despertar_tension": { axis: ["Estrés"], invert: true },
+    "sueno_descanso": { axis: ["Estrés"], invert: false },
+    "cuerpo_estres": { axis: ["Estrés", "Inflamatorio"], invert: true },
+    "alerta": { axis: ["Estrés"], invert: true },
+    "calma": { axis: ["Estrés"], invert: false }
+  };
 
-  // Initialize 4 axis scores
-  let scoreMetabolico = 0;
-  let scoreDigestivo = 0;
-  let scoreEstres = 0;
-  let scoreInflamatorio = 0;
+  // Initialize axis accumulators
+  const axisScores: Record<string, { sum: number, count: number }> = {
+    "Metabólico": { sum: 0, count: 0 },
+    "Digestivo": { sum: 0, count: 0 },
+    "Estrés": { sum: 0, count: 0 },
+    "Inflamatorio": { sum: 0, count: 0 }
+  };
 
-  // Process each answer and assign to appropriate axes
-  Object.entries(answers).forEach(([id, rawValue]) => {
+  // Process each question
+  Object.keys(questionAxisMap).forEach((questionId) => {
+    const config = questionAxisMap[questionId];
+    const rawValue = answers[questionId] ?? 3; // Default to midpoint if missing
+    
     let valor = rawValue;
-    
-    // Invert negatively phrased questions
-    if (negativeQuestions.has(id)) {
-      valor = 6 - valor;
+    if (config.invert) {
+      valor = 6 - rawValue;
     }
     
-    // Assign scores to each axis based on question relevance
-    switch(id) {
-      // Metabólico axis
-      case "energia_estable":
-      case "antojos":
-      case "cansancio_comida":
-      case "peso":
-      case "sueno_horas":
-        scoreMetabolico += valor;
-        break;
-      
-      // Digestivo axis
-      case "evacuaciones":
-      case "gases":
-      case "apetito_emocional":
-      case "digestion_lenta":
-      case "agua_alimentos":
-        scoreDigestivo += valor;
-        break;
-      
-      // Estrés axis
-      case "despertar_tension":
-      case "sueno_descanso":
-      case "cuerpo_estres":
-      case "alerta":
-      case "calma":
-        scoreEstres += valor;
-        break;
-    }
-    
-    // Some questions contribute to Inflamatorio axis as well
-    if (["gases", "cuerpo_estres", "peso", "cansancio_comida"].includes(id)) {
-      scoreInflamatorio += valor;
-    }
-    
-    // Cross-axis contributions
-    if (id === "sueno_horas") scoreEstres += valor;
-    if (id === "apetito_emocional") scoreEstres += valor;
+    // Add to each relevant axis
+    config.axis.forEach(axisName => {
+      axisScores[axisName].sum += valor;
+      axisScores[axisName].count += 1;
+    });
   });
 
-  // Normalize scores (optional, for better comparison)
-  scoreMetabolico = Math.round(scoreMetabolico / 5);
-  scoreDigestivo = Math.round(scoreDigestivo / 5);
-  scoreEstres = Math.round(scoreEstres / 7); // 7 because it gets contributions from 7 questions
-  scoreInflamatorio = Math.round(scoreInflamatorio / 4);
+  // Calculate normalized averages
+  const scoreMetabolico = axisScores["Metabólico"].count > 0 
+    ? Math.round(axisScores["Metabólico"].sum / axisScores["Metabólico"].count) 
+    : 3;
+  const scoreDigestivo = axisScores["Digestivo"].count > 0 
+    ? Math.round(axisScores["Digestivo"].sum / axisScores["Digestivo"].count) 
+    : 3;
+  const scoreEstres = axisScores["Estrés"].count > 0 
+    ? Math.round(axisScores["Estrés"].sum / axisScores["Estrés"].count) 
+    : 3;
+  const scoreInflamatorio = axisScores["Inflamatorio"].count > 0 
+    ? Math.round(axisScores["Inflamatorio"].sum / axisScores["Inflamatorio"].count) 
+    : 3;
 
   console.log("Scores after inversion:", { scoreMetabolico, scoreDigestivo, scoreEstres, scoreInflamatorio });
 
-  // Determine pattern based on lowest scores
+  // Sort axes by score (lowest = needs most attention)
   const scores = [
     { name: "Metabólico", value: scoreMetabolico },
     { name: "Digestivo", value: scoreDigestivo },
@@ -89,43 +84,42 @@ function interpretarPatron(answers: Record<string, number>): PatronResult {
     { name: "Inflamatorio", value: scoreInflamatorio }
   ].sort((a, b) => a.value - b.value);
 
+  const threshold = 1; // Tighter threshold for combined patterns
   const lowest = scores[0].value;
-  const secondLowest = scores[1].value;
-  const threshold = 2; // If scores are within 2 points, consider them tied
-
+  
+  // Find all axes within threshold of the lowest
+  const tiedAxes = scores.filter(s => Math.abs(s.value - lowest) <= threshold);
+  
   let patronKey = "";
   
-  // Check if two axes are similarly low (combined pattern)
-  if (Math.abs(lowest - secondLowest) <= threshold) {
-    const axis1 = scores[0].name;
-    const axis2 = scores[1].name;
-    
-    // Map to combined pattern names
-    if ((axis1 === "Metabólico" && axis2 === "Digestivo") || (axis1 === "Digestivo" && axis2 === "Metabólico")) {
-      patronKey = "🩸 Patrón Metabólico–Digestivo";
-    } else if ((axis1 === "Metabólico" && axis2 === "Inflamatorio") || (axis1 === "Inflamatorio" && axis2 === "Metabólico")) {
-      patronKey = "🩸 Patrón Metabólico–Inflamatorio";
-    } else if ((axis1 === "Digestivo" && axis2 === "Inflamatorio") || (axis1 === "Inflamatorio" && axis2 === "Digestivo")) {
-      patronKey = "💩 Patrón Digestivo–Inflamatorio";
-    } else if ((axis1 === "Estrés" && axis2 === "Metabólico") || (axis1 === "Metabólico" && axis2 === "Estrés")) {
-      patronKey = "🌙 Patrón Estrés–Metabólico";
-    } else if ((axis1 === "Estrés" && axis2 === "Digestivo") || (axis1 === "Digestivo" && axis2 === "Estrés")) {
-      patronKey = "🌙 Patrón Estrés–Digestivo";
-    } else if ((axis1 === "Estrés" && axis2 === "Inflamatorio") || (axis1 === "Inflamatorio" && axis2 === "Estrés")) {
-      patronKey = "🔥 Patrón Inflamatorio–Energético";
-    } else {
-      // Fallback to single pattern
-      patronKey = getSinglePatternKey(scores[0].name);
-    }
+  if (tiedAxes.length >= 2) {
+    // Combined pattern - use first two tied axes
+    const axis1 = tiedAxes[0].name;
+    const axis2 = tiedAxes[1].name;
+    patronKey = getCombinedPatternKey(axis1, axis2);
   } else {
     // Single dominant pattern
     patronKey = getSinglePatternKey(scores[0].name);
   }
 
   console.log("Patrón detectado:", patronKey);
-
-  // Load pattern content from file
   return loadPatronContent(patronKey);
+}
+
+function getCombinedPatternKey(axis1: string, axis2: string): string {
+  // Normalize order for lookup
+  const pair = [axis1, axis2].sort().join("-");
+  
+  const combinedPatterns: Record<string, string> = {
+    "Digestivo-Metabólico": "🩸 Patrón Metabólico–Digestivo",
+    "Inflamatorio-Metabólico": "🩸 Patrón Metabólico–Inflamatorio",
+    "Digestivo-Inflamatorio": "💩 Patrón Digestivo–Inflamatorio",
+    "Estrés-Metabólico": "🌙 Patrón Estrés–Metabólico",
+    "Digestivo-Estrés": "🌙 Patrón Estrés–Digestivo",
+    "Estrés-Inflamatorio": "🔥 Patrón Inflamatorio–Energético"
+  };
+  
+  return combinedPatterns[pair] || getSinglePatternKey(axis1);
 }
 
 function getSinglePatternKey(axisName: string): string {
@@ -276,6 +270,84 @@ function loadPatronContent(patronKey: string): PatronResult {
         "REFLECT — El descanso también es medicina."
       ],
       aspectoPositivo: "💤 El cuerpo cura cuando descansa."
+    },
+    "🩸 Patrón Metabólico–Hormonal": {
+      patron: "🩸 Patrón Metabólico–Hormonal",
+      descripcion: "Tu cuerpo ajusta energía y ritmo hormonal. Cambios en apetito, ánimo o sueño son señales de ajuste, no de falla. Regular ritmos ayuda a estabilizar la glucosa.",
+      recomendaciones: [
+        "REMOVE — Evita ayunos prolongados si hay ansiedad o irritabilidad.",
+        "REPLACE — Grasas buenas (aguacate, semillas, aceite de oliva).",
+        "REPAIR — Exposición a luz matinal para sincronizar ritmos.",
+        "REBALANCE — Come en horarios constantes (3–4 h).",
+        "RESTORE — Bajar intensidad de entrenamiento si duermes mal.",
+        "REFLECT — Tu energía no se pierde; se redistribuye."
+      ],
+      aspectoPositivo: "💫 El cuerpo prioriza seguridad antes que productividad."
+    },
+    "💩 Patrón Digestivo–Metabólico": {
+      patron: "💩 Patrón Digestivo–Metabólico",
+      descripcion: "Cuando el intestino se enlentece, la insulina también. La evacuación regular y la masticación consciente mejoran la sensibilidad a la insulina y la energía.",
+      recomendaciones: [
+        "REMOVE — Evita comer bajo estrés o prisa.",
+        "REPLACE — Amargos naturales (rúcula, menta, diente de león).",
+        "REPAIR — Grasas buenas y caldos minerales para mucosa intestinal.",
+        "REBALANCE — Horario fijo para comidas y evacuación.",
+        "RESTORE — Hidratación constante; agua tibia al despertar.",
+        "REFLECT — La calma digestiva precede al equilibrio metabólico."
+      ],
+      aspectoPositivo: "🌱 La digestión tranquila es tu primer regulador de glucosa."
+    },
+    "💩 Patrón Digestivo–Detox Lento": {
+      patron: "💩 Patrón Digestivo–Detox Lento",
+      descripcion: "El hígado, intestino y piel limpian más lento bajo carga. No es debilidad: es falta de soporte. Facilitar el drenaje reduce glucosa e inflamación.",
+      recomendaciones: [
+        "REMOVE — Alcohol, frituras y exceso de proteína procesada.",
+        "REPLACE — Verduras amargas y jugos verdes sin fruta.",
+        "REPAIR — Caldos, electrolitos naturales y descanso profundo.",
+        "REBALANCE — Cena liviana antes de las 8 p. m.",
+        "RESTORE — Sudoración suave (caminata, baño tibio).",
+        "REFLECT — Tu cuerpo limpia cuando se siente seguro."
+      ],
+      aspectoPositivo: "🌿 El detox real es diario, no extremo."
+    },
+    "🌙 Patrón Estrés–Hormonal": {
+      patron: "🌙 Patrón Estrés–Hormonal",
+      descripcion: "El cuerpo prioriza supervivencia: altera ritmos hormonales para protegerte. Asentar el sistema nervioso devuelve la regularidad y mejora la glucosa.",
+      recomendaciones: [
+        "REMOVE — Disminuye entrenamiento intenso si duermes mal.",
+        "REPLACE — Comidas cálidas y regulares; evita saltarte comidas.",
+        "REPAIR — Exposición matutina al sol para sincronizar ritmos.",
+        "REBALANCE — Rutina nocturna sin pantallas la última hora.",
+        "RESTORE — Dormir más horas el fin de semana para recuperar.",
+        "REFLECT — Tu cuerpo no está roto, está priorizando seguridad."
+      ],
+      aspectoPositivo: "💫 La calma organiza tus hormonas."
+    },
+    "🔥 Patrón Inflamatorio–Metabólico": {
+      patron: "🔥 Patrón Inflamatorio–Metabólico",
+      descripcion: "Inflamación y glucosa se retroalimentan. Reducir picos y bajar la carga inflamatoria devuelve la sensibilidad a la insulina.",
+      recomendaciones: [
+        "REMOVE — Harinas refinadas y snacks frecuentes.",
+        "REPLACE — Omega-3, verduras de raíz y proteínas limpias.",
+        "REPAIR — Dormir 7–8 h; acostarte antes de las 11 p. m.",
+        "REBALANCE — Ventanas de comida estables (evita picoteo).",
+        "RESTORE — Movimiento suave y constante (no extenuante).",
+        "REFLECT — El cuerpo conserva energía para cuidarte."
+      ],
+      aspectoPositivo: "🌿 Regular no es restringir: es darle ritmo al cuerpo."
+    },
+    "🔥 Patrón Inflamatorio–Estreñimiento Silencioso": {
+      patron: "🔥 Patrón Inflamatorio–Estreñimiento Silencioso",
+      descripcion: "Cuando el cuerpo no elimina, la inflamación aumenta. No es descuido: es un freno protector. Recuperar el flujo reduce la carga inflamatoria y estabiliza la glucosa.",
+      recomendaciones: [
+        "REMOVE — Exceso de lácteos, fritos y comidas nocturnas tardías.",
+        "REPLACE — Fibra soluble (chía/linaza), agua tibia y amargos.",
+        "REPAIR — Caldos y grasas buenas para la mucosa.",
+        "REBALANCE — Horario diario para evacuar sin prisa.",
+        "RESTORE — Caminar y estirarte después de las comidas.",
+        "REFLECT — Soltar es parte de sanar."
+      ],
+      aspectoPositivo: "💧 El cuerpo no acumula por error: se protege mientras te pide ayuda."
     }
   };
 
