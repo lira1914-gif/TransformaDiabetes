@@ -1,0 +1,53 @@
+<section class="suscripcion">
+  <div class="wrap">
+    <h1>🌿 Tu transformación funcional comienza aquí</h1>
+    <p class="sub">
+      Acompañamiento humano + ciencia funcional para recuperar tu energía, estabilizar tu glucosa y reconectar con tu cuerpo.  
+      <br>Tu cuerpo no está roto — solo está protegiéndose.
+    </p>
+
+    <div class="hero-image" style="text-align:center;margin:1.5rem 0;">
+      <img src="https://images.unsplash.com/photo-1556228578-4cdd6d0a6d2b?auto=format&fit=crop&w=800&q=80"
+           alt="Persona relajada revisando su progreso funcional"
+           style="max-width:90%;border-radius:10px;">
+    </div>
+
+    <h2 style="color:#556B2F;text-align:center;">Suscripción NutriMarvin Funcional</h2>
+
+    <div class="columns" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;">
+      <div class="col">
+        <h3>💚 Qué recibes por $5/mes</h3>
+        <ul>
+          <li>Acceso a <strong>10 mini guías funcionales</strong> ampliadas.</li>
+          <li>Recomendaciones prácticas para <strong>equilibrar tu glucosa</strong> y tu energía.</li>
+          <li>Opción de enviar tus <strong>análisis de sangre</strong> para revisión personalizada.</li>
+          <li>Microhábitos semanales para mejorar digestión, estrés y descanso.</li>
+          <li>Contenido educativo sobre nutrición funcional y hormonas.</li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h3>🧭 Cómo funciona</h3>
+        <ol>
+          <li>Suscríbete para obtener acceso seguro y exclusivo.</li>
+          <li>Completa tu <strong>historial funcional</strong> (alimentación, sueño, síntomas, hábitos).</li>
+          <li>Registra tus comidas y sensaciones durante los <strong>primeros 5 días</strong>.</li>
+          <li>Recibe tus recomendaciones iniciales + plan de ajustes personalizados.</li>
+          <li>Accede a la comunidad y herramientas de seguimiento.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="cta" style="text-align:center;margin:2.5rem 0;">
+      <button style="background-color:#A15C38;color:white;font-size:1.1rem;padding:1rem 2rem;border:none;border-radius:8px;cursor:pointer;">
+        💳 Unirme por $5 USD/mes
+      </button>
+      <p style="margin-top:.5rem;font-size:.9rem;color:#6F6E66;">Cancela en cualquier momento. Sin permanencia.</p>
+    </div>
+
+    <div class="trust" style="text-align:center;margin-top:2rem;color:#6F6E66;font-size:.9rem;">
+      <p>Más de 300 personas ya han iniciado su camino funcional con NutriMarvin.</p>
+      <p>Este programa es educativo y no sustituye el consejo médico profesional.</p>
+    </div>
+  </div>
+</section>
