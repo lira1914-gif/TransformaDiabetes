@@ -164,11 +164,13 @@ Preferred communication style: Simple, everyday language.
 - Clean border and hover effects
 
 ### Footer Redesign
-- Simplified, centered design with clean layout
+- Logo integration in footer with motivational phrase
+- Navigation links: Inicio, Diagnóstico, Guías, Resultados, Política de Privacidad (separated by |)
 - Dynamic copyright year using React useEffect
-- Educational disclaimer with empowering message: "Tu cuerpo no está roto, solo está protegiéndose"
-- Privacy policy link opens in new tab (target="_blank" with security attributes)
-- Consistent styling across all pages (#F7F5EF background, #4B4B3B text, #A15C38 links)
+- Empowering message: "Tu cuerpo no está roto, solo está protegiéndose"
+- Privacy information with confidentiality and security details
+- Consistent styling across all pages (#F8F7F3 background, #4B4B3B text, #A15C38 links, #7A776F muted)
+- Responsive design with link wrapping on mobile
 
 ### Privacy Policy
 - Comprehensive 7-section privacy policy page
