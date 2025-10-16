@@ -62,7 +62,7 @@ export default function Header() {
           Inicio
         </Link>
         <Link 
-          href="/diagnostico" 
+          href="/pre-registro" 
           className="font-medium hover:opacity-80 transition-opacity"
           style={{ color: '#4B4B3B', textDecoration: 'none' }}
           data-testid="link-diagnostico-nav"
@@ -90,7 +90,7 @@ export default function Header() {
       {/* CTA Desktop */}
       <div className="hidden md:block">
         <Link
-          href="/diagnostico"
+          href="/pre-registro"
           className="inline-block px-4 py-2 rounded-md text-white font-semibold transition-all"
           style={{ backgroundColor: '#A15C38', textDecoration: 'none' }}
           data-testid="button-cta-diagnostico"
@@ -114,7 +114,7 @@ export default function Header() {
             Inicio
           </Link>
           <Link 
-            href="/diagnostico" 
+            href="/pre-registro" 
             className="font-medium py-2"
             style={{ color: '#4B4B3B', textDecoration: 'none' }}
             onClick={() => setMobileMenuOpen(false)}
@@ -141,7 +141,7 @@ export default function Header() {
             Resultados
           </Link>
           <Link
-            href="/diagnostico"
+            href="/pre-registro"
             className="inline-block px-4 py-2 rounded-md text-white font-semibold text-center mt-2"
             style={{ backgroundColor: '#A15C38', textDecoration: 'none' }}
             onClick={() => setMobileMenuOpen(false)}

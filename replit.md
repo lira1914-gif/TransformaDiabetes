@@ -107,8 +107,12 @@ Preferred communication style: Simple, everyday language.
 
 **Page Structure**
 - `/` - Home (educational landing page with all sections)
+- `/pre-registro` - Pre-registration form (name, email, age, sex, diagnosis) before diagnostic
 - `/diagnostico` - Diagnostic assessment wizard
 - `/resultados` - Results display after assessment with subscription CTA and privacy notice
+- `/bienvenida` - Welcome page after subscription with health profile access
+- `/perfil` - Health profile form (age, gender, symptoms, medical history)
+- `/analisis` - Blood analysis interpretation tool
 - `/guia` - Guide download page
 - `/privacidad` - Privacy policy page (accessible from footer)
 - Sticky header navigation with smooth scroll to sections
@@ -173,6 +177,25 @@ Preferred communication style: Simple, everyday language.
   - Email confirmation notice
   - CTAs to return home or view guides
   - Clears diagnostic answers from localStorage
+
+## Pre-Registration Flow (October 2025)
+
+### Pre-Registration Page (`/pre-registro`)
+- **Purpose:** Collect user information before starting the diagnostic
+- **Data collected:**
+  - Personal: Name, Email
+  - Demographics: Age, Sex (F/M/Other)
+  - Medical status: Current diagnosis (none, prediabetes, DM2, insulin resistance)
+- **Storage:** localStorage (`NM_pre` key) with timestamp
+- **Flow:** After submission → redirects to `/diagnostico`
+- **Privacy notice:** Disclaimer about data usage for personalization
+- **Cancel button:** Returns to home page
+- **Design:** Clean form with Poppins font, olive/terracotta color scheme
+
+### Updated CTAs
+- All main CTAs now point to `/pre-registro` instead of direct to diagnostic
+- Hero button text: "Iniciar mi diagnóstico funcional gratuito"
+- Header, navigation, and CTA sections updated
 
 ## Health Profile & Blood Analysis Features (October 2025)
 

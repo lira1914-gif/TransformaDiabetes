@@ -36,13 +36,13 @@ export default function HeroSection() {
               Nutrición funcional clara, aplicada a tu día a día.
             </p>
             <div className="space-y-4 pt-4 flex flex-col items-center lg:items-start">
-              <Link href="/diagnostico" className="w-full sm:w-auto">
+              <Link href="/pre-registro" className="w-full sm:w-auto">
                 <Button 
                   size="lg" 
                   className="bg-terracota hover:bg-terracota text-terracota-foreground border border-terracota w-full"
                   data-testid="button-diagnostico-hero"
                 >
-                  Empieza tu diagnóstico gratuito
+                  Iniciar mi diagnóstico funcional gratuito
                 </Button>
               </Link>
               <p className="text-sm text-muted-foreground">

@@ -5,7 +5,7 @@ export default function CTASection() {
   return (
     <section className="py-12 md:py-20 bg-[#F8F6F1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/diagnostico">
+        <Link href="/pre-registro">
           <div className="relative cursor-pointer transition-transform duration-300 hover:scale-[1.02]">
             <img 
               src={ctaImage} 
