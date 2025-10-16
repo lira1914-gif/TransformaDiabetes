@@ -57,6 +57,20 @@ export default function Suscripcion() {
             <div className="footer-note">
               *El enlace de suscripción se habilitará pronto. Al registrarte, accederás a tu formulario de inicio funcional y diario de 5 días.
             </div>
+
+            <section className="disclaimer">
+              <p>
+                <strong>🩺 Aviso importante:</strong><br />
+                El contenido presentado en NutriMarvin tiene fines exclusivamente educativos y no sustituye el consejo, diagnóstico ni tratamiento médico profesional. 
+                La información compartida busca ayudarte a comprender mejor las señales de tu cuerpo desde un enfoque de nutrición funcional y autoconocimiento.
+              </p>
+              <p>
+                Siempre consulta con tu médico o profesional de salud antes de realizar cambios en tu alimentación, suplementación o tratamiento médico.
+              </p>
+              <p className="update">
+                <em>Última actualización: Octubre 2025</em>
+              </p>
+            </section>
           </div>
         </div>
       </div>

@@ -131,6 +131,29 @@
   line-height: 1.4;
 }
 
+/* ===== Disclaimer / Aviso Legal ===== */
+.suscripcion .disclaimer {
+  margin-top: 2.5rem;
+  background: rgba(255,255,255,0.8);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #e3e0d8;
+  font-size: 0.9rem;
+  color: #5a5a5a;
+  line-height: 1.6;
+}
+
+.suscripcion .disclaimer strong {
+  color: #8b4e31;
+}
+
+.suscripcion .disclaimer .update {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   .suscripcion .wrap {
