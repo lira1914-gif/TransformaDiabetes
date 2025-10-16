@@ -12,6 +12,8 @@ import Perfil from "@/pages/Perfil";
 import Analisis from "@/pages/Analisis";
 import Guia from "@/pages/Guia";
 import Privacidad from "@/pages/Privacidad";
+import Terminos from "@/pages/Terminos";
+import Reembolsos from "@/pages/Reembolsos";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +28,8 @@ function Router() {
       <Route path="/analisis" component={Analisis} />
       <Route path="/guia" component={Guia} />
       <Route path="/privacidad" component={Privacidad} />
+      <Route path="/terminos" component={Terminos} />
+      <Route path="/reembolsos" component={Reembolsos} />
       <Route component={NotFound} />
     </Switch>
   );
