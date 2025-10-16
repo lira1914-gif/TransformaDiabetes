@@ -59,6 +59,14 @@ Preferred communication style: Simple, everyday language.
 - **Paddle Billing** (for $5/month subscriptions)
   - Server-side: `@paddle/paddle-node-sdk` for transaction creation
   - API endpoint: `/api/create-checkout-session` creates Paddle transactions and returns checkout URLs
-  - Environment: Sandbox mode for testing (configured via PADDLE_API_KEY and PADDLE_PRICE_ID secrets)
+  - Environment: Auto-detects sandbox vs production based on API key prefix (pdl_sdbx_ = sandbox, pdl_live_ = production)
+  - Current Status: **Configured in Sandbox mode** - fully functional for testing
+    - Sandbox API Key: pdl_sdbx_... (configured in secrets)
+    - Sandbox Price ID: pri_01k7q8k5740qednqg9wepm2g5v
+    - Default Payment Link: Configured in Paddle dashboard
+  - Production Migration: When Paddle onboarding completes, update secrets with production credentials:
+    - Replace PADDLE_API_KEY with live key (pdl_live_...)
+    - Replace PADDLE_PRICE_ID with production price ID
+    - System will auto-detect and switch to production mode
   - Flow: User clicks subscribe → Backend creates transaction → Redirect to Paddle hosted checkout
   - Advantages: Multi-currency support (30+ currencies), automatic tax/VAT compliance, acts as Merchant of Record
