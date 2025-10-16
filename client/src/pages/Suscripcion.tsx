@@ -16,56 +16,40 @@ export default function Suscripcion() {
         <div className="wrap">
           <h1>🌿 Tu transformación funcional comienza aquí</h1>
           <p className="sub">
-            Acompañamiento humano + ciencia funcional para recuperar tu energía, estabilizar tu glucosa y reconectar con tu cuerpo.  
-            <br />Tu cuerpo no está roto — solo está protegiéndose.
+            Acompañamiento humano + ciencia funcional para equilibrar tu glucosa y energía.
           </p>
-
-          <div className="hero-image">
-            <img 
-              src="https://images.unsplash.com/photo-1556228578-4cdd6d0a6d2b?auto=format&fit=crop&w=800&q=80"
-              alt="Persona relajada revisando su progreso funcional"
-            />
-          </div>
 
           <h2>Suscripción NutriMarvin Funcional</h2>
 
-          <div className="columns">
-            <div className="col">
-              <h3>💚 Qué recibes por $5/mes</h3>
-              <ul>
-                <li>Acceso a <strong>10 mini guías funcionales</strong> ampliadas.</li>
-                <li>Recomendaciones prácticas para <strong>equilibrar tu glucosa</strong> y tu energía.</li>
-                <li>Opción de enviar tus <strong>análisis de sangre</strong> para revisión personalizada.</li>
-                <li>Microhábitos semanales para mejorar digestión, estrés y descanso.</li>
-                <li>Contenido educativo sobre nutrición funcional y hormonas.</li>
-              </ul>
+          <div>
+            <h3>Qué recibes por $5/mes:</h3>
+            <ul>
+              <li>Acceso a las 10 mini guías funcionales ampliadas.</li>
+              <li>Recomendaciones personalizadas para revertir resistencia a la insulina.</li>
+              <li>Opción de subir tus análisis de sangre para revisión funcional.</li>
+              <li>Microhábitos semanales para digestión, descanso y claridad mental.</li>
+            </ul>
+
+            <h3>Cómo funciona:</h3>
+            <ol>
+              <li>Suscríbete y obtén acceso seguro a tu área personal.</li>
+              <li>Completa tu historial funcional (intake médico y hábitos).</li>
+              <li>Registra 5 días de comidas, sueño y digestión.</li>
+              <li>Recibe tu análisis y recomendaciones iniciales.</li>
+            </ol>
+
+            <div className="cta">
+              <button 
+                onClick={handleSubscribe}
+                data-testid="button-subscribe-page"
+              >
+                Unirme por $5 USD/mes
+              </button>
             </div>
 
-            <div className="col">
-              <h3>🧭 Cómo funciona</h3>
-              <ol>
-                <li>Suscríbete para obtener acceso seguro y exclusivo.</li>
-                <li>Completa tu <strong>historial funcional</strong> (alimentación, sueño, síntomas, hábitos).</li>
-                <li>Registra tus comidas y sensaciones durante los <strong>primeros 5 días</strong>.</li>
-                <li>Recibe tus recomendaciones iniciales + plan de ajustes personalizados.</li>
-                <li>Accede a la comunidad y herramientas de seguimiento.</li>
-              </ol>
+            <div className="footer-note">
+              *Al suscribirte, accederás a tu formulario funcional y guía inicial paso a paso.
             </div>
-          </div>
-
-          <div className="cta">
-            <button 
-              onClick={handleSubscribe}
-              data-testid="button-subscribe-page"
-            >
-              💳 Unirme por $5 USD/mes
-            </button>
-            <p>Cancela en cualquier momento. Sin permanencia.</p>
-          </div>
-
-          <div className="trust">
-            <p>Más de 300 personas ya han iniciado su camino funcional con NutriMarvin.</p>
-            <p>Este programa es educativo y no sustituye el consejo médico profesional.</p>
           </div>
         </div>
       </section>

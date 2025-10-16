@@ -3,28 +3,33 @@
    ================================ */
 
 :root {
-  --olive: #556B2F;
-  --terra: #A15C38;
+  --olive: #4e6b2b;
+  --terra: #a15c38;
   --beige: #FAF8F4;
-  --muted: #6F6E66;
-  --text: #3A3A3A;
-  --border: #E6E3D9;
+  --muted: #6f6f6f;
+  --text: #3a3a3a;
+  --border: #e5e2da;
   --shadow: rgba(0, 0, 0, 0.05);
 }
 
 .suscripcion {
-  background: var(--beige);
+  background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)),
+              url('https://i.imgur.com/2cLxvZg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   min-height: 100vh;
+  padding: 2rem 0;
 }
 
 .suscripcion .wrap {
-  max-width: 850px;
-  margin: 3rem auto;
-  background: #fff;
-  border: 1px solid var(--border);
+  max-width: 760px;
+  margin: 4rem auto;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem 2.5rem;
   border-radius: 12px;
-  padding: 3rem 2rem;
-  box-shadow: 0 8px 24px var(--shadow);
+  box-shadow: 0 8px 25px var(--shadow);
+  border: 1px solid var(--border);
 }
 
 /* ---------- Encabezado principal ---------- */
@@ -32,7 +37,7 @@
 .suscripcion h1 {
   text-align: center;
   color: var(--olive);
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -40,38 +45,36 @@
 .suscripcion .sub {
   text-align: center;
   color: var(--muted);
-  max-width: 600px;
-  margin: 0 auto 1.8rem;
+  margin-bottom: 2rem;
   font-size: 1.05rem;
   line-height: 1.6;
 }
 
-/* ---------- Bloques de columnas ---------- */
-
-.suscripcion .columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
+.suscripcion h2 {
+  color: var(--olive);
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.suscripcion .col h3 {
+.suscripcion h3 {
   color: var(--olive);
   font-size: 1.2rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
-  border-left: 4px solid var(--terra);
-  padding-left: 0.5rem;
 }
 
-.suscripcion .col ul,
-.suscripcion .col ol {
-  padding-left: 1.2rem;
+.suscripcion ul,
+.suscripcion ol {
+  padding-left: 1.5rem;
   color: var(--text);
   font-size: 0.98rem;
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
 }
 
-.suscripcion .col li {
+.suscripcion li {
   margin-bottom: 0.6rem;
 }
 
@@ -79,72 +82,42 @@
 
 .suscripcion .cta {
   text-align: center;
-  margin: 2.5rem 0;
+  margin: 2rem 0;
 }
 
 .suscripcion .cta button {
   background-color: var(--terra);
   color: #fff;
-  font-size: 1.1rem;
-  padding: 1rem 2.2rem;
+  font-size: 1rem;
+  padding: 0.9rem 1.4rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
+  display: inline-block;
 }
 
 .suscripcion .cta button:hover {
-  background-color: #8c4c2d;
-  transform: scale(1.02);
+  background-color: #8c4e31;
 }
 
-.suscripcion .cta p {
-  margin-top: 0.5rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
+/* ---------- Footer / Nota ---------- */
 
-/* ---------- Credibilidad / Confianza ---------- */
-
-.suscripcion .trust {
-  margin-top: 2rem;
+.suscripcion .footer-note {
   text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #787878;
+  margin-top: 2rem;
   line-height: 1.5;
-}
-
-/* ---------- Imagen principal ---------- */
-
-.suscripcion .hero-image {
-  text-align: center;
-  margin: 1.5rem 0;
-}
-
-.suscripcion .hero-image img {
-  max-width: 90%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px var(--shadow);
-}
-
-.suscripcion h2 {
-  color: var(--olive);
-  text-align: center;
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
 }
 
 /* ---------- Responsive ---------- */
 
 @media (max-width: 720px) {
-  .suscripcion .columns {
-    grid-template-columns: 1fr;
-  }
-
   .suscripcion .wrap {
     padding: 2rem 1.5rem;
+    margin: 2rem 1rem;
   }
 
   .suscripcion h1 {

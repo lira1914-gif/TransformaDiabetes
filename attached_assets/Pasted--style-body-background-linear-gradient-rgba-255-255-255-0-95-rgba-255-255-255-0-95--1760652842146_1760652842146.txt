@@ -1,0 +1,91 @@
+<style>
+  body {
+    background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)),
+                url('https://i.imgur.com/2cLxvZg.png'); /* Fondo tenue con textura natural */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Poppins', sans-serif;
+    color: #3a3a3a;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 4rem auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    border: 1px solid #e5e2da;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #4e6b2b;
+    margin-bottom: 0.5rem;
+  }
+
+  h1::before {
+    content: "🌿 ";
+  }
+
+  p.sub {
+    text-align: center;
+    color: #6f6f6f;
+    margin-bottom: 2rem;
+  }
+
+  button {
+    background-color: #a15c38;
+    color: #fff;
+    border: none;
+    padding: 0.9rem 1.4rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 2rem auto 0;
+  }
+
+  button:hover {
+    background-color: #8c4e31;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #787878;
+    margin-top: 2rem;
+  }
+</style>
+
+<div class="wrap">
+  <h1>Tu transformación funcional comienza aquí</h1>
+  <p class="sub">Acompañamiento humano + ciencia funcional para equilibrar tu glucosa y energía.</p>
+
+  <h2>Suscripción NutriMarvin Funcional</h2>
+  <div>
+    <h3>Qué recibes por $5/mes:</h3>
+    <ul>
+      <li>Acceso a las 10 mini guías funcionales ampliadas.</li>
+      <li>Recomendaciones personalizadas para revertir resistencia a la insulina.</li>
+      <li>Opción de subir tus análisis de sangre para revisión funcional.</li>
+      <li>Microhábitos semanales para digestión, descanso y claridad mental.</li>
+    </ul>
+
+    <h3>Cómo funciona:</h3>
+    <ol>
+      <li>Suscríbete y obtén acceso seguro a tu área personal.</li>
+      <li>Completa tu historial funcional (intake médico y hábitos).</li>
+      <li>Registra 5 días de comidas, sueño y digestión.</li>
+      <li>Recibe tu análisis y recomendaciones iniciales.</li>
+    </ol>
+
+    <button>Unirme por $5 USD/mes</button>
+
+    <footer>
+      *Al suscribirte, accederás a tu formulario funcional y guía inicial paso a paso.
+    </footer>
+  </div>
+</div>
