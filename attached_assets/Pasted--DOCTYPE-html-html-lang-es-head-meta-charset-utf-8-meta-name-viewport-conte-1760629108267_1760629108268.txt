@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagnóstico | NutriMarvin</title>
+  <style>
+    :root{
+      --bg:#FAF8F4; --card:#FFFFFF; --text:#3A3A3A; --muted:#6F6E66;
+      --olive:#556B2F; --terra:#A15C38; --border:#E6E3D9;
+    }
+    body{font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
+    .wrap{max-width:720px;margin:4rem auto;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    h1{margin:0 0 1rem;color:var(--olive);font-size:1.8rem;text-align:center}
+    p.sub{margin:.25rem 0 1.5rem;text-align:center;color:var(--muted)}
+    .quiz{display:grid;gap:1.5rem}
+    .question{background:#FDFCF9;border:1px solid var(--border);border-radius:8px;padding:1rem}
+    .question p{margin-top:0;font-weight:600}
+    .answers button{margin:.3rem .3rem 0 0;padding:.6rem 1.1rem;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer}
+    .answers button:hover{background:#F4F2EC}
+    .continue{display:block;margin:2rem auto 0;padding:.9rem 1.5rem;background:var(--terra);color:#fff;font-weight:700;border:none;border-radius:8px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 id="saludo">Tu diagnóstico funcional</h1>
+    <p class="sub">Responde con calma. Solo te tomará 1–2 minutos.</p>
+
+    <div class="quiz">
+
+      <!-- Pregunta 1 -->
+      <div class="question">
+        <p>1️⃣ ¿Qué área de tu salud te preocupa más últimamente?</p>
+        <div class="answers">
+          <button>Glucosa / resistencia a la insulina</button>
+          <button>Digestión / inflamación</button>
+          <button>Hormonas / peso</button>
+          <button>Estrés / sueño</button>
+        </div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="question">
+        <p>2️⃣ ¿Qué describe mejor tu estado actual?</p>
+        <div class="answers">
+          <button>Me cuesta bajar el azúcar o mantenerla estable</button>
+          <button>Tengo antojos frecuentes de azúcar o carbohidratos</button>
+          <button>Siento inflamación abdominal o digestiva</button>
+          <button>Estoy cansado aunque duerma bien</button>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="question">
+        <p>3️⃣ ¿Qué te gustaría lograr?</p>
+        <div class="answers">
+          <button>Controlar mis niveles de azúcar</button>
+          <button>Revertir mi resistencia a la insulina o diabetes tipo 2</button>
+          <button>Reducir la inflamación y el cansancio</button>
+          <button>Recuperar mi energía y equilibrio hormonal</button>
+        </div>
+      </div>
+
+      <button class="continue" id="continuar">Ver mi resultado funcional</button>
+    </div>
+  </div>
+
+  <script>
+    // Leer los datos guardados del pre-registro
+    const pre = JSON.parse(localStorage.getItem('NM_pre'));
+    const saludo = document.getElementById('saludo');
+
+    if(pre && pre.nombre){
+      saludo.innerHTML = `Hola, ${pre.nombre} 👋<br>Vamos a conocer cómo se está comunicando tu cuerpo.`;
+    }
+
+    // cuando termine el diagnóstico, ir a resultados
+    document.getElementById('continuar').addEventListener('click', () => {
+      window.location.href = 'resultados.html';
+    });
+  </script>
+</body>
+</html>

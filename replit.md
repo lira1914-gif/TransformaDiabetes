@@ -39,17 +39,18 @@ Preferred communication style: Simple, everyday language.
 - Static page architecture (Home, Diagnostico, Resultados, Guia)
 - Reusable section components (Hero, QueEs, Pilares, Historias, CTA)
 
-**Diagnostic System**
-- 15 questions mapped to 4 health axes using declarative configuration
-- Multi-axis question contributions with proper normalization
-- Score calculation: sum of (inverted) answers / count of contributions per axis
+**Diagnostic System (Simplified - October 2025)**
+- 3 simple questions for quick, accessible diagnostics
+- Questions mapped to 4 health axes (Metabólico, Digestivo, Estrés, Inflamatorio)
 - Pattern detection logic:
-  - Sorts axes by score (ascending - lower score = more problematic)
-  - If abs(lowest - secondLowest) <= 2 → Combined pattern
-  - Otherwise → Single dominant pattern
+  - Counts axis mentions across all 3 answers
+  - Most mentioned axis becomes dominant pattern
+  - Ties result in combined patterns
 - 10 reachable patterns:
   - Individual: Metabólico, Digestivo, Estrés, Inflamatorio
   - Combined: Metabólico–Digestivo, Metabólico–Estrés, Metabólico–Inflamatorio, Digestivo–Estrés, Digestivo–Inflamatorio, Estrés–Inflamatorio
+- Personalized greeting using pre-registration name
+- Storage: localStorage key `NM_diagnostico_simple`
 
 **Results Content Format**
 - Simplified 5-point recommendations (numbered with emoji 1️⃣ to 5️⃣)

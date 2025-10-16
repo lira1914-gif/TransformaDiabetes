@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { loadStripe } from '@stripe/stripe-js';
 
 interface PatronResult {
   patron: string;
@@ -11,105 +12,80 @@ interface PatronResult {
   fraseMotivacional: string;
 }
 
-function interpretarPatron(answers: Record<string, number>): PatronResult {
-  // Declarative question → axis mapping with weights
-  const questionAxisMap: Record<string, { axis: string[], invert: boolean }> = {
-    // Metabólico questions
-    "energia_estable": { axis: ["Metabólico"], invert: false },
-    "antojos": { axis: ["Metabólico"], invert: true },
-    "cansancio_comida": { axis: ["Metabólico", "Inflamatorio"], invert: true },
-    "peso": { axis: ["Metabólico", "Inflamatorio"], invert: true },
-    "sueno_horas": { axis: ["Metabólico", "Estrés"], invert: false },
-    
-    // Digestivo questions
-    "evacuaciones": { axis: ["Digestivo"], invert: false },
-    "gases": { axis: ["Digestivo", "Inflamatorio"], invert: true },
-    "apetito_emocional": { axis: ["Digestivo", "Estrés"], invert: true },
-    "digestion_lenta": { axis: ["Digestivo"], invert: true },
-    "agua_alimentos": { axis: ["Digestivo"], invert: false },
-    
-    // Estrés questions
-    "despertar_tension": { axis: ["Estrés"], invert: true },
-    "sueno_descanso": { axis: ["Estrés"], invert: false },
-    "cuerpo_estres": { axis: ["Estrés", "Inflamatorio"], invert: true },
-    "alerta": { axis: ["Estrés"], invert: true },
-    "calma": { axis: ["Estrés"], invert: false }
+interface Answer {
+  questionIndex: number;
+  answer: string;
+}
+
+function interpretarPatronSimple(answers: Answer[]): PatronResult {
+  // Map answers to axes
+  const axisCount: Record<string, number> = {
+    "Metabólico": 0,
+    "Digestivo": 0,
+    "Estrés": 0,
+    "Inflamatorio": 0
   };
 
-  // Initialize axis accumulators
-  const axisScores: Record<string, { sum: number, count: number }> = {
-    "Metabólico": { sum: 0, count: 0 },
-    "Digestivo": { sum: 0, count: 0 },
-    "Estrés": { sum: 0, count: 0 },
-    "Inflamatorio": { sum: 0, count: 0 }
-  };
-
-  // Process each question
-  Object.keys(questionAxisMap).forEach((questionId) => {
-    const config = questionAxisMap[questionId];
-    const rawValue = answers[questionId] ?? 3; // Default to midpoint if missing
+  answers.forEach(answer => {
+    const text = answer.answer.toLowerCase();
     
-    let valor = rawValue;
-    if (config.invert) {
-      valor = 6 - rawValue;
+    // Pregunta 1: ¿Qué área de tu salud te preocupa más?
+    if (text.includes('glucosa') || text.includes('insulina')) {
+      axisCount["Metabólico"]++;
+    } else if (text.includes('digestión') || text.includes('inflamación')) {
+      axisCount["Digestivo"]++;
+      axisCount["Inflamatorio"]++;
+    } else if (text.includes('hormonas') || text.includes('peso')) {
+      axisCount["Metabólico"]++;
+    } else if (text.includes('estrés') || text.includes('sueño')) {
+      axisCount["Estrés"]++;
     }
     
-    // Add to each relevant axis
-    config.axis.forEach(axisName => {
-      axisScores[axisName].sum += valor;
-      axisScores[axisName].count += 1;
-    });
+    // Pregunta 2: ¿Qué describe mejor tu estado actual?
+    if (text.includes('azúcar') || text.includes('estable')) {
+      axisCount["Metabólico"]++;
+    } else if (text.includes('antojos') || text.includes('carbohidratos')) {
+      axisCount["Metabólico"]++;
+    } else if (text.includes('inflamación') || text.includes('digestiva')) {
+      axisCount["Digestivo"]++;
+    } else if (text.includes('cansado') || text.includes('duerma')) {
+      axisCount["Estrés"]++;
+    }
+    
+    // Pregunta 3: ¿Qué te gustaría lograr?
+    if (text.includes('controlar') || text.includes('azúcar')) {
+      axisCount["Metabólico"]++;
+    } else if (text.includes('revertir') || text.includes('diabetes')) {
+      axisCount["Metabólico"]++;
+    } else if (text.includes('inflamación') || text.includes('cansancio')) {
+      axisCount["Inflamatorio"]++;
+    } else if (text.includes('energía') || text.includes('hormonal')) {
+      axisCount["Estrés"]++;
+    }
   });
 
-  // Calculate normalized averages
-  const scoreMetabolico = axisScores["Metabólico"].count > 0 
-    ? Math.round(axisScores["Metabólico"].sum / axisScores["Metabólico"].count) 
-    : 3;
-  const scoreDigestivo = axisScores["Digestivo"].count > 0 
-    ? Math.round(axisScores["Digestivo"].sum / axisScores["Digestivo"].count) 
-    : 3;
-  const scoreEstres = axisScores["Estrés"].count > 0 
-    ? Math.round(axisScores["Estrés"].sum / axisScores["Estrés"].count) 
-    : 3;
-  const scoreInflamatorio = axisScores["Inflamatorio"].count > 0 
-    ? Math.round(axisScores["Inflamatorio"].sum / axisScores["Inflamatorio"].count) 
-    : 3;
+  console.log("Axis counts:", axisCount);
 
-  console.log("Scores after inversion:", { scoreMetabolico, scoreDigestivo, scoreEstres, scoreInflamatorio });
+  // Sort by count
+  const sorted = Object.entries(axisCount)
+    .sort((a, b) => b[1] - a[1]);
 
-  // Sort axes by score (lowest = needs most attention)
-  const scores = [
-    { name: "Metabólico", value: scoreMetabolico },
-    { name: "Digestivo", value: scoreDigestivo },
-    { name: "Estrés", value: scoreEstres },
-    { name: "Inflamatorio", value: scoreInflamatorio }
-  ].sort((a, b) => a.value - b.value);
+  const topAxis = sorted[0][0];
+  const topCount = sorted[0][1];
+  const secondAxis = sorted[1][0];
+  const secondCount = sorted[1][1];
 
-  const threshold = 2; // Threshold for combined patterns (matches user specification)
-  const lowest = scores[0].value;
-  const secondLowest = scores[1].value;
-  
-  // Check if two axes are within threshold (combined pattern)
-  const isCombined = Math.abs(lowest - secondLowest) <= threshold;
-  
-  let patronKey = "";
-  
-  if (isCombined) {
-    // Combined pattern - use first two lowest axes
-    const axis1 = scores[0].name;
-    const axis2 = scores[1].name;
-    patronKey = getCombinedPatternKey(axis1, axis2);
+  // If there's a tie or close match, create combined pattern
+  if (topCount === secondCount && topCount > 0) {
+    const patronKey = getCombinedPatternKey(topAxis, secondAxis);
+    return loadPatronContent(patronKey);
   } else {
-    // Single dominant pattern
-    patronKey = getSinglePatternKey(scores[0].name);
+    const patronKey = getSinglePatternKey(topAxis);
+    return loadPatronContent(patronKey);
   }
-
-  console.log("Patrón detectado:", patronKey);
-  return loadPatronContent(patronKey);
 }
 
 function getCombinedPatternKey(axis1: string, axis2: string): string {
-  // Normalize order for lookup
   const pair = [axis1, axis2].sort().join("-");
   
   const combinedPatterns: Record<string, string> = {
@@ -173,93 +149,93 @@ function loadPatronContent(patronKey: string): PatronResult {
         "2️⃣ Come en calma; evita pantallas y discusiones al comer.",
         "3️⃣ Evita cafeína en exceso; sustituye por infusiones adaptogénicas.",
         "4️⃣ Camina 10 minutos al aire libre después de trabajar.",
-        "5️⃣ Cierra el día con una pausa de gratitud o journaling."
+        "5️⃣ Duerme en oscuridad total para regular melatonina y cortisol."
       ],
-      fraseMotivacional: 'Tu cuerpo no te sabotea, te está protegiendo.'
+      fraseMotivacional: 'El estrés crónico no es una debilidad; es tu cuerpo tratando de sobrevivir. Enséñale a descansar.'
     },
     "🔥 Inflamatorio": {
       patron: "🔥 Inflamatorio",
-      descripcion: "Tu cuerpo está tratando de reparar algo. Este patrón muestra inflamación crónica o sobrecarga inmunológica.",
+      descripcion: "El fuego interno no siempre es visible. Este patrón señala inflamación crónica en tu organismo.",
       recomendaciones: [
-        "1️⃣ Reduce ultraprocesados y aceites refinados.",
-        "2️⃣ Aumenta consumo de omega-3, cúrcuma y vegetales coloridos.",
-        "3️⃣ Duerme 7–8 horas continuas.",
-        "4️⃣ Practica pausas conscientes durante el día.",
-        "5️⃣ Revisa tu digestión: si no eliminas, no reparas."
+        "1️⃣ Elimina gluten, lácteos y azúcar refinada durante 21 días.",
+        "2️⃣ Añade antiinflamatorios naturales: cúrcuma, jengibre, omega-3.",
+        "3️⃣ Hidrátate con agua natural, no bebidas azucaradas.",
+        "4️⃣ Repara tu microbiota con alimentos fermentados reales.",
+        "5️⃣ Respira profundo antes de comer para bajar el cortisol inflamatorio."
       ],
-      fraseMotivacional: 'La inflamación no es el problema. Es tu cuerpo pidiendo calma.'
+      fraseMotivacional: 'La inflamación es una señal de alarma, no una sentencia. Escucha y actúa.'
     },
     "🩸 Metabólico–Digestivo": {
       patron: "🩸 Metabólico–Digestivo",
-      descripcion: "Cuando el metabolismo y la digestión se enlazan, hay resistencia a la insulina y estreñimiento funcional.",
+      descripcion: "Tu glucosa y tu digestión están conectadas. Ambos sistemas piden equilibrio.",
       recomendaciones: [
-        "1️⃣ Reduce azúcares y mejora evacuaciones.",
-        "2️⃣ Incluye fibra natural, magnesio y amargos digestivos.",
-        "3️⃣ Camina tras las comidas para activar la motilidad intestinal.",
-        "4️⃣ Cena temprano y duerme antes de las 11 p.m.",
-        "5️⃣ Usa respiraciones profundas antes de comer."
+        "1️⃣ Come proteína y fibra en cada comida para estabilizar glucosa.",
+        "2️⃣ Mastica despacio; la digestión comienza en la boca.",
+        "3️⃣ Evita comer en estrés: activa tu sistema parasimpático antes de comer.",
+        "4️⃣ Añade probióticos naturales (kéfir, chucrut) para tu microbiota.",
+        "5️⃣ Duerme 7–8 horas: el sueño repara metabolismo y digestión."
       ],
-      fraseMotivacional: 'Sin digestión no hay glucosa estable.'
+      fraseMotivacional: 'Tu digestión y tu glucosa están hablando. Escúchalas juntas.'
     },
     "🩸 Metabólico–Estrés": {
       patron: "🩸 Metabólico–Estrés",
-      descripcion: "El exceso de alerta eleva tu azúcar incluso sin comer. Aquí el cuerpo prioriza sobrevivir, no sanar.",
+      descripcion: "El estrés eleva tu glucosa. Tu metabolismo necesita calma.",
       recomendaciones: [
-        "1️⃣ Baja la carga digital 2 h antes de dormir.",
-        "2️⃣ Incluye comidas con grasa y proteína para estabilidad.",
-        "3️⃣ Haz pausas activas cada 2 h para regular cortisol.",
-        "4️⃣ Evita ayunos prolongados sin descanso suficiente.",
-        "5️⃣ Prioriza calma antes que productividad."
+        "1️⃣ Reduce azúcares y carbohidratos refinados que amplifican el estrés.",
+        "2️⃣ Come cada 3–4 horas para evitar picos de cortisol por ayuno.",
+        "3️⃣ Practica respiración profunda antes de comer.",
+        "4️⃣ Evita cafeína en exceso; usa adaptógenos (ashwagandha, rhodiola).",
+        "5️⃣ Duerme en oscuridad total para equilibrar insulina y cortisol."
       ],
-      fraseMotivacional: 'Tu cuerpo no necesita control, necesita descanso.'
+      fraseMotivacional: 'El estrés eleva tu glucosa. Calmar tu mente es sanar tu metabolismo.'
     },
     "🩸 Metabólico–Inflamatorio": {
       patron: "🩸 Metabólico–Inflamatorio",
-      descripcion: "Cuando hay glucosa alta y dolor articular o hinchazón, hay inflamación por resistencia a la insulina.",
+      descripcion: "La inflamación crónica desregula tu glucosa. Ambos necesitan antiinflamación profunda.",
       recomendaciones: [
-        "1️⃣ Reduce panes, frituras y azúcar líquida.",
-        "2️⃣ Aumenta verduras, omega-3 y agua.",
-        "3️⃣ Descansa más: el cuerpo repara dormido.",
-        "4️⃣ Muévete suave, no en exceso.",
-        "5️⃣ Revisa tu digestión diaria."
+        "1️⃣ Elimina azúcares, gluten y aceites vegetales refinados.",
+        "2️⃣ Añade grasas antiinflamatorias: aguacate, aceite de oliva, omega-3.",
+        "3️⃣ Come alimentos reales, no procesados.",
+        "4️⃣ Muévete a diario para reducir inflamación metabólica.",
+        "5️⃣ Duerme profundo: la falta de sueño inflama y desregula la glucosa."
       ],
-      fraseMotivacional: 'La inflamación y el azúcar hablan el mismo idioma.'
+      fraseMotivacional: 'La inflamación y la glucosa están conectadas. Sanar una es sanar la otra.'
     },
     "💩 Digestivo–Estrés": {
       patron: "💩 Digestivo–Estrés",
-      descripcion: "El intestino y el sistema nervioso están conectados. Este patrón refleja ansiedad digestiva o nudo abdominal.",
+      descripcion: "El estrés altera tu digestión. Tu intestino necesita calma.",
       recomendaciones: [
-        "1️⃣ Evita comer apurado o en conflicto.",
-        "2️⃣ Añade alimentos cocidos y caldos digestivos.",
-        "3️⃣ Usa pausas de respiración 3 min antes de comer.",
-        "4️⃣ Evita cafeína con el estómago vacío.",
-        "5️⃣ Prioriza conexión social y descanso."
+        "1️⃣ Come sentado, sin pantallas, respirando antes de cada bocado.",
+        "2️⃣ Mastica hasta que los alimentos pierdan textura.",
+        "3️⃣ Añade alimentos amargos para estimular digestión.",
+        "4️⃣ Evita comer en modo 'apuro'; activa tu sistema parasimpático.",
+        "5️⃣ Duerme profundo: el sueño repara tu intestino."
       ],
-      fraseMotivacional: 'Tu intestino escucha tus pensamientos.'
+      fraseMotivacional: 'Un intestino estresado no digiere. Calma tu mente, sana tu digestión.'
     },
     "💩 Digestivo–Inflamatorio": {
       patron: "💩 Digestivo–Inflamatorio",
-      descripcion: "Si hay hinchazón, gases y cansancio, el cuerpo acumula residuos no eliminados.",
+      descripcion: "Tu intestino está inflamado. Necesita reparación y calma.",
       recomendaciones: [
-        "1️⃣ Revisa tu evacuación diaria (tipo 3–4 Bristol).",
-        "2️⃣ Reduce gluten, lácteos y ultraprocesados.",
-        "3️⃣ Añade probióticos naturales (chucrut, kéfir).",
-        "4️⃣ Bebe agua tibia durante el día.",
-        "5️⃣ Duerme bien para regenerar el intestino."
+        "1️⃣ Elimina gluten, lácteos y azúcar refinada durante 21 días.",
+        "2️⃣ Añade caldo de huesos para reparar tu mucosa intestinal.",
+        "3️⃣ Come probióticos reales (kéfir, chucrut) y prebióticos (alcachofa, ajo).",
+        "4️⃣ Mastica despacio para reducir estrés digestivo.",
+        "5️⃣ Evita comer en estrés: el cortisol inflama tu intestino."
       ],
-      fraseMotivacional: 'El intestino inflamado es un cuerpo en alerta.'
+      fraseMotivacional: 'Un intestino inflamado no nutre. Repáralo con paciencia.'
     },
     "🔥 Estrés–Inflamatorio": {
       patron: "🔥 Estrés–Inflamatorio",
-      descripcion: "El estrés perpetúa la inflamación y agota las glándulas suprarrenales.",
+      descripcion: "El estrés crónico inflama todo tu cuerpo. Necesitas calma profunda.",
       recomendaciones: [
-        "1️⃣ Evita multitarea, crea rutinas simples.",
-        "2️⃣ Consume alimentos antiinflamatorios.",
-        "3️⃣ Practica respiración o caminata diaria.",
-        "4️⃣ Evita pantallas 1 h antes de dormir.",
-        "5️⃣ Suplementa magnesio o infusiones relajantes."
+        "1️⃣ Practica respiración profunda o meditación diaria.",
+        "2️⃣ Elimina alimentos proinflamatorios: azúcar, gluten, aceites refinados.",
+        "3️⃣ Añade antiinflamatorios naturales: cúrcuma, jengibre, omega-3.",
+        "4️⃣ Camina al aire libre para bajar cortisol.",
+        "5️⃣ Duerme en oscuridad total: el sueño apaga la inflamación."
       ],
-      fraseMotivacional: 'La calma también es medicina.'
+      fraseMotivacional: 'El estrés inflama. La calma repara. Elige calma.'
     }
   };
 
@@ -267,172 +243,245 @@ function loadPatronContent(patronKey: string): PatronResult {
 }
 
 export default function Resultados() {
-  const [, setLocation] = useLocation();
-  const [resultado, setResultado] = useState<PatronResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const [patron, setPatron] = useState<PatronResult | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Get answers from localStorage
-    const storedAnswers = localStorage.getItem('respuestasNutriMarvin');
+    const answersData = localStorage.getItem('NM_diagnostico_simple');
     
-    if (!storedAnswers) {
-      // Redirect to diagnostico if no answers found
-      setLocation("/diagnostico");
+    if (answersData) {
+      try {
+        const answers: Answer[] = JSON.parse(answersData);
+        const result = interpretarPatronSimple(answers);
+        setPatron(result);
+      } catch (e) {
+        console.error('Error parsing answers:', e);
+        toast({
+          title: "Error",
+          description: "No se pudieron cargar tus respuestas. Por favor, completa el diagnóstico nuevamente.",
+          variant: "destructive"
+        });
+      }
+    } else {
+      toast({
+        title: "Sin diagnóstico",
+        description: "Por favor, completa el diagnóstico primero.",
+        variant: "destructive"
+      });
+    }
+  }, [toast]);
+
+  const handleSubscribe = async () => {
+    setLoading(true);
+
+    const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+    
+    if (!stripePublicKey) {
+      toast({
+        title: "Configuración pendiente",
+        description: "La suscripción aún no está disponible. Por favor, contacta al administrador.",
+        variant: "destructive"
+      });
+      setLoading(false);
       return;
     }
 
     try {
-      const answers = JSON.parse(storedAnswers);
-      const patron = interpretarPatron(answers);
-      setResultado(patron);
-      console.log("Patrón interpretado:", patron);
-    } catch (error) {
-      console.error("Error parsing answers:", error);
-      setLocation("/diagnostico");
-    }
-  }, [setLocation]);
+      const stripe = await loadStripe(stripePublicKey);
+      
+      if (!stripe) {
+        throw new Error('Failed to load Stripe');
+      }
 
-  const handleSubscribe = async () => {
-    setIsLoading(true);
-    
-    try {
-      // Create checkout session
-      const response = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      const session = await response.json();
 
       if (!response.ok) {
-        throw new Error("Error al crear la sesión de pago");
+        throw new Error(session.error || 'Error creating checkout session');
       }
 
-      const { url } = await response.json();
-      
-      if (!url) {
-        throw new Error("No se recibió la URL de pago");
-      }
-      
       // Redirect to Stripe Checkout
-      window.location.href = url;
-    } catch (error: any) {
-      console.error("Error al iniciar la sesión de pago:", error);
+      window.location.href = session.url;
+    } catch (error) {
+      console.error('Subscription error:', error);
       toast({
-        title: "Error al procesar el pago",
-        description: "Ocurrió un error. Por favor, intenta nuevamente.",
-        variant: "destructive",
+        title: "Error en suscripción",
+        description: error instanceof Error ? error.message : "No se pudo procesar la suscripción. Intenta nuevamente.",
+        variant: "destructive"
       });
-      setIsLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!resultado) {
+  if (!patron) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F9F7F2' }}>
-        <p style={{ color: '#6B7041' }}>Cargando resultados...</p>
+      <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F8F7F3' }}>
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <p style={{ color: '#6F6E66' }}>Cargando tu resultado...</p>
+          </div>
+        </main>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F9F7F2' }}>
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F8F7F3' }}>
       <Header />
-      <main className="flex-1 py-8 sm:py-12 px-4 sm:px-6">
-        <section 
-          className="text-center max-w-4xl mx-auto w-full sm:w-[95%] lg:w-[90%] p-6 sm:p-8 lg:p-12 rounded-xl transition-all duration-300"
-          style={{ 
-            backgroundColor: '#F8F7F3',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.06)'
-          }}
-        >
-          {/* Título: Patrón Detectado */}
-          <h2 
-            className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4" 
-            style={{ color: '#3E3E2E' }}
+      <main className="flex-1 py-8 md:py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          {/* Main container */}
+          <div 
+            className="rounded-xl p-6 md:p-8"
+            style={{ 
+              backgroundColor: '#FAF8F4',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.08)'
+            }}
           >
-            Tu Patrón Funcional Detectado
-          </h2>
-          
-          {/* Nombre del Patrón */}
-          <p 
-            id="tituloPatron"
-            className="text-xl sm:text-2xl font-semibold mb-8" 
-            style={{ color: '#6B7041' }}
-          >
-            {resultado.patron}
-          </p>
+            {/* Title */}
+            <h2 
+              className="text-2xl md:text-3xl font-bold text-center mb-6"
+              style={{ color: '#556B2F' }}
+            >
+              Tu Patrón Funcional Detectado
+            </h2>
 
-          {/* Guía Funcional Personalizada */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <h3 
-              className="text-xl sm:text-2xl font-bold mb-4" 
-              style={{ color: '#3E3E2E' }}
-            >
-              Tu Guía Funcional Personalizada
-            </h3>
-            
-            <p 
-              id="descripcionPatron" 
-              className="mb-6 text-sm sm:text-base leading-relaxed" 
-              style={{ color: '#6F6E66' }}
-            >
-              Basado en tus respuestas, esta guía está diseñada para ayudarte a entender 
-              cómo tu cuerpo se protege y qué pasos puedes seguir para restaurar el equilibrio.
-            </p>
-
-            {/* Recomendaciones */}
-            <div 
-              className="rounded-lg p-4 sm:p-6 text-left text-sm sm:text-base mb-6"
-              style={{ 
-                backgroundColor: '#FFFFFF',
-                boxShadow: '0 2px 6px rgba(0,0,0,0.04)'
-              }}
-            >
-              <ul id="recomendaciones" className="list-none pl-0 space-y-3 leading-relaxed" style={{ color: '#4B4B3B' }}>
-                {resultado.recomendaciones.map((rec, index) => (
-                  <li key={index}>{rec}</li>
-                ))}
-              </ul>
+            {/* Pattern name */}
+            <div className="text-center mb-6">
+              <h3 
+                className="text-3xl md:text-4xl font-bold mb-3"
+                style={{ color: '#3A3A3A' }}
+              >
+                {patron.patron}
+              </h3>
+              <p 
+                className="text-base md:text-lg"
+                style={{ color: '#6F6E66' }}
+              >
+                {patron.descripcion}
+              </p>
             </div>
 
-            {/* Frase de Cierre */}
-            <p 
-              id="fraseMotivacional" 
-              className="text-center italic text-base sm:text-lg"
-              style={{ color: '#6F6E66' }}
+            {/* Guide section */}
+            <div 
+              className="rounded-lg p-6 mb-6"
+              style={{ backgroundColor: '#FFFFFF' }}
             >
-              "{resultado.fraseMotivacional}"
-            </p>
+              <h3 
+                className="text-xl md:text-2xl font-bold mb-3"
+                style={{ color: '#556B2F' }}
+              >
+                Tu Guía Funcional Personalizada
+              </h3>
+              <p 
+                className="mb-4 text-sm md:text-base"
+                style={{ color: '#6F6E66' }}
+              >
+                Basado en tus respuestas, esta guía está diseñada para ayudarte a entender cómo tu cuerpo se protege...
+              </p>
+
+              {/* Recommendations */}
+              <div className="space-y-2 mb-4">
+                {patron.recomendaciones.map((rec, index) => (
+                  <p 
+                    key={index}
+                    className="text-sm md:text-base"
+                    style={{ color: '#3A3A3A' }}
+                  >
+                    {rec}
+                  </p>
+                ))}
+              </div>
+
+              {/* Motivational quote */}
+              <div 
+                className="mt-6 p-4 rounded-lg italic text-center"
+                style={{ 
+                  backgroundColor: '#F8F7F3',
+                  borderLeft: '4px solid #A15C38'
+                }}
+              >
+                <p style={{ color: '#6F6E66' }}>
+                  💬 "{patron.fraseMotivacional}"
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div 
+              className="rounded-lg p-6 text-center"
+              style={{ 
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #E6E3D9'
+              }}
+            >
+              <h4 
+                className="text-xl md:text-2xl font-bold mb-3"
+                style={{ color: '#556B2F' }}
+              >
+                Tu siguiente paso
+              </h4>
+              <p 
+                className="mb-4 text-sm md:text-base"
+                style={{ color: '#6F6E66' }}
+              >
+                Profundiza en tu transformación funcional con herramientas, planes nutricionales y seguimiento personalizado.
+              </p>
+              
+              <button
+                onClick={handleSubscribe}
+                disabled={loading}
+                className="w-full sm:w-auto px-6 py-3 rounded-lg font-bold text-white transition-all mb-3"
+                style={{ 
+                  backgroundColor: loading ? '#D1B9A8' : '#A15C38',
+                  cursor: loading ? 'not-allowed' : 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.backgroundColor = '#8C4E30';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.backgroundColor = '#A15C38';
+                  }
+                }}
+                data-testid="button-suscribirse"
+              >
+                {loading ? 'Procesando...' : 'Suscríbete al Plan NutriMarvin ($5/mes)'}
+              </button>
+
+              <p 
+                className="text-xs"
+                style={{ color: '#A6A28B' }}
+              >
+                Cancela en cualquier momento. Tu información es 100% confidencial.
+              </p>
+            </div>
           </div>
 
-          {/* CTA de Suscripción */}
-          <div 
-            className="max-w-3xl mx-auto rounded-lg p-6 sm:p-8" 
-            style={{ backgroundColor: '#EFEDE8' }}
-          >
-            <h4 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: '#3E3E2E' }}>
-              Tu siguiente paso
-            </h4>
-            <p className="mb-6 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#6F6E66' }}>
-              Profundiza en tu transformación funcional y recibe acompañamiento mensual con herramientas, 
-              seguimiento y soporte personalizado.
-            </p>
-            <button
-              onClick={handleSubscribe}
-              disabled={isLoading}
-              className="inline-block w-full sm:w-auto px-7 py-3 rounded-lg text-white font-semibold transition text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ backgroundColor: '#A15C38' }}
-              data-testid="button-suscribirse"
-              onMouseEnter={(e) => !isLoading && (e.currentTarget.style.backgroundColor = '#8C4E30')}
-              onMouseLeave={(e) => !isLoading && (e.currentTarget.style.backgroundColor = '#A15C38')}
+          {/* Back to home */}
+          <div className="text-center mt-6">
+            <Link 
+              href="/"
+              className="text-sm underline"
+              style={{ color: '#A15C38' }}
+              data-testid="link-volver-inicio"
             >
-              {isLoading ? "Procesando..." : "Suscríbete al Plan NutriMarvin ($5/mes)"}
-            </button>
-            <p className="mt-4 text-xs sm:text-sm" style={{ color: '#6F6E66' }}>
-              Cancela en cualquier momento. Tu información es 100% confidencial.
-            </p>
+              Volver al inicio
+            </Link>
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
     </div>
