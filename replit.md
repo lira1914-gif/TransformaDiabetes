@@ -11,7 +11,7 @@ Preferred communication style: Simple, everyday language.
 ### Frontend
 - **Frameworks & Libraries**: React 18 with TypeScript, Vite, Wouter for routing, TanStack Query for state management.
 - **UI/UX**: Radix UI primitives, shadcn/ui (New York style), Tailwind CSS with custom design tokens. Uses Playfair Display for headings and Inter for body text. Features a wellness-focused color palette (olive green, beige, terracotta) and a responsive, mobile-first design.
-- **Key Features**: Multi-step diagnostic wizard (3 questions mapping to 4 health axes and 10 patterns), personalized results with 5-point recommendations, educational content sections, and static pages (Home, Diagnostico, Resultados, Guia, Pre-registro, Bienvenida, Perfil, Analisis, Privacidad).
+- **Key Features**: Multi-step diagnostic wizard (3 questions mapping to 4 health axes and 10 patterns), personalized results with 5-point recommendations integrated with Mini Guía Funcional (complete guide to reversing insulin resistance), and static pages (Home, Diagnostico, Resultados, Pre-registro, Bienvenida, Perfil, Analisis, Privacidad).
 - **Diagnostic System**: Simplified 3-question diagnostic leading to 10 possible functional patterns (4 individual, 6 combined).
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
@@ -22,7 +22,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Routing
 - **Client-Side**: Wouter for SPA routing, including smooth scrolling and 404 handling.
-- **Page Flows**: Includes pre-registration, diagnostic assessment, results display with subscription CTA, welcome page, health profile form, blood analysis interpretation, and a mini functional guide.
+- **Page Flows**: Includes pre-registration, diagnostic assessment, results display with integrated Mini Guía Funcional and subscription CTA, welcome page, health profile form, and blood analysis interpretation.
 
 ## External Dependencies
 

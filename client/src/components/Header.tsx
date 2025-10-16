@@ -70,14 +70,6 @@ export default function Header() {
           Diagnóstico
         </Link>
         <Link 
-          href="/guia" 
-          className="font-medium hover:opacity-80 transition-opacity"
-          style={{ color: '#4B4B3B', textDecoration: 'none' }}
-          data-testid="link-guias"
-        >
-          Guías
-        </Link>
-        <Link 
           href="/resultados" 
           className="font-medium hover:opacity-80 transition-opacity"
           style={{ color: '#4B4B3B', textDecoration: 'none' }}
@@ -121,15 +113,6 @@ export default function Header() {
             data-testid="link-mobile-diagnostico"
           >
             Diagnóstico
-          </Link>
-          <Link 
-            href="/guia" 
-            className="font-medium py-2"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            onClick={() => setMobileMenuOpen(false)}
-            data-testid="link-mobile-guias"
-          >
-            Guías
           </Link>
           <Link 
             href="/resultados" 
