@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import QueEsSection from "@/components/QueEsSection";
 import PilaresSection from "@/components/PilaresSection";
 import HistoriasSection from "@/components/HistoriasSection";
+import SuscripcionSection from "@/components/SuscripcionSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <QueEsSection />
         <PilaresSection />
         <HistoriasSection />
+        <SuscripcionSection />
       </main>
       <Footer />
     </div>
