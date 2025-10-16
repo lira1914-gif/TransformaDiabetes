@@ -108,8 +108,9 @@ Preferred communication style: Simple, everyday language.
 **Page Structure**
 - `/` - Home (educational landing page with all sections)
 - `/diagnostico` - Diagnostic assessment wizard
-- `/resultados` - Results display after assessment
+- `/resultados` - Results display after assessment with subscription CTA and privacy notice
 - `/guia` - Guide download page
+- `/privacidad` - Privacy policy page (accessible from footer)
 - Sticky header navigation with smooth scroll to sections
 
 ## External Dependencies

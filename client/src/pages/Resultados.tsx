@@ -357,6 +357,37 @@ export default function Resultados() {
               </Link>
             </div>
           )}
+
+          {/* Subscription CTA */}
+          <div className="mt-12 max-w-2xl mx-auto rounded-lg shadow-md p-8" style={{ backgroundColor: '#F7F5F0' }}>
+            <h3 className="text-xl font-bold mb-3" style={{ color: '#6B7041' }}>
+              Suscríbete a NutriMarvin Funcional
+            </h3>
+            <p className="mb-6" style={{ color: '#6B635A' }}>
+              Accede a técnicas guiadas, recetas funcionales y seguimiento mensual por solo $5.
+            </p>
+            <button
+              className="px-6 py-3 rounded-md text-white font-medium transition"
+              style={{ backgroundColor: '#C77851' }}
+              data-testid="button-suscribirse"
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#B3663F'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#C77851'}
+            >
+              Suscribirme ahora
+            </button>
+          </div>
+
+          {/* Privacy Footer */}
+          <div className="mt-12 max-w-2xl mx-auto text-center p-6 rounded-lg" style={{ backgroundColor: '#E8E4DC' }}>
+            <p className="font-bold mb-2" style={{ color: '#6B7041' }}>
+              Privacidad y Confidencialidad
+            </p>
+            <p className="text-sm" style={{ color: '#6B635A' }}>
+              La información que compartes en NutriMarvin es confidencial.
+              <br />
+              No vendemos ni compartimos tus datos. Usamos protocolos seguros para proteger tu información.
+            </p>
+          </div>
         </section>
       </main>
       <Footer />
