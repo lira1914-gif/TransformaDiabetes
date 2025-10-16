@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
+
+  const handleInicioClick = (e: React.MouseEvent) => {
+    if (location === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,6 +66,7 @@ export default function Header() {
           className="font-medium hover:opacity-80 transition-opacity"
           style={{ color: '#4B4B3B', textDecoration: 'none' }}
           data-testid="link-inicio"
+          onClick={handleInicioClick}
         >
           Inicio
         </Link>
@@ -100,7 +109,10 @@ export default function Header() {
             href="/" 
             className="font-medium py-2"
             style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={(e) => {
+              setMobileMenuOpen(false);
+              handleInicioClick(e);
+            }}
             data-testid="link-mobile-inicio"
           >
             Inicio
