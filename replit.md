@@ -31,10 +31,32 @@ Preferred communication style: Simple, everyday language.
 - Responsive design with mobile-first approach
 
 **Key Features**
-- Multi-step diagnostic wizard with progress tracking
+- Multi-step diagnostic wizard with progress tracking (3 steps, 15 questions)
+- 4-axis health assessment system (Metabólico, Digestivo, Estrés, Inflamatorio)
+- 10-pattern detection system (4 individual + 6 combined patterns)
+- Threshold-based combined pattern detection (2-point threshold)
 - Educational content sections (reversión explanation, three pillars, testimonials)
 - Static page architecture (Home, Diagnostico, Resultados, Guia)
 - Reusable section components (Hero, QueEs, Pilares, Historias, CTA)
+
+**Diagnostic System**
+- 15 questions mapped to 4 health axes using declarative configuration
+- Multi-axis question contributions with proper normalization
+- Score calculation: sum of (inverted) answers / count of contributions per axis
+- Pattern detection logic:
+  - Sorts axes by score (ascending - lower score = more problematic)
+  - If abs(lowest - secondLowest) <= 2 → Combined pattern
+  - Otherwise → Single dominant pattern
+- 10 reachable patterns:
+  - Individual: Metabólico, Digestivo, Estrés, Inflamatorio
+  - Combined: Metabólico–Digestivo, Metabólico–Estrés, Metabólico–Inflamatorio, Digestivo–Estrés, Digestivo–Inflamatorio, Estrés–Inflamatorio
+
+**Results Content Format**
+- Simplified 5-point recommendations (numbered with emoji 1️⃣ to 5️⃣)
+- Motivational phrase displayed with 💬 emoji and quotation marks
+- Pattern title with corresponding emoji (🩸 🌙 💩 🔥)
+- Clear description of the detected pattern
+- Download CTA for functional guide
 
 ### Backend Architecture
 

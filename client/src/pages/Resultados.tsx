@@ -7,7 +7,7 @@ interface PatronResult {
   patron: string;
   descripcion: string;
   recomendaciones: string[];
-  aspectoPositivo: string;
+  fraseMotivacional: string;
 }
 
 function interpretarPatron(answers: Record<string, number>): PatronResult {
@@ -112,12 +112,12 @@ function getCombinedPatternKey(axis1: string, axis2: string): string {
   const pair = [axis1, axis2].sort().join("-");
   
   const combinedPatterns: Record<string, string> = {
-    "Digestivo-Metabólico": "🩸 Patrón Metabólico–Digestivo",
-    "Inflamatorio-Metabólico": "🩸 Patrón Metabólico–Inflamatorio",
-    "Digestivo-Inflamatorio": "💩 Patrón Digestivo–Inflamatorio",
-    "Estrés-Metabólico": "🌙 Patrón Estrés–Metabólico",
-    "Digestivo-Estrés": "🌙 Patrón Estrés–Digestivo",
-    "Estrés-Inflamatorio": "🔥 Patrón Inflamatorio–Energético"
+    "Digestivo-Metabólico": "🩸 Metabólico–Digestivo",
+    "Inflamatorio-Metabólico": "🩸 Metabólico–Inflamatorio",
+    "Digestivo-Inflamatorio": "💩 Digestivo–Inflamatorio",
+    "Estrés-Metabólico": "🩸 Metabólico–Estrés",
+    "Digestivo-Estrés": "💩 Digestivo–Estrés",
+    "Estrés-Inflamatorio": "🔥 Estrés–Inflamatorio"
   };
   
   return combinedPatterns[pair] || getSinglePatternKey(axis1);
@@ -126,155 +126,143 @@ function getCombinedPatternKey(axis1: string, axis2: string): string {
 function getSinglePatternKey(axisName: string): string {
   switch(axisName) {
     case "Metabólico":
-      return "🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa";
+      return "🩸 Metabólico";
     case "Digestivo":
-      return "💩 Patrón Digestivo–Estreñimiento Silencioso";
+      return "💩 Digestivo";
     case "Estrés":
-      return "🌙 Patrón Estrés–Energético";
+      return "🌙 Estrés";
     case "Inflamatorio":
-      return "🔥 Patrón Inflamatorio–Digestivo";
+      return "🔥 Inflamatorio";
     default:
-      return "🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa";
+      return "🩸 Metabólico";
   }
 }
 
 function loadPatronContent(patronKey: string): PatronResult {
-  // This will be replaced with actual file loading logic
-  // For now, return a placeholder structure
   const patronesContent: Record<string, PatronResult> = {
-    "🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa": {
-      patron: "🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa",
-      descripcion: "Tu cuerpo ajusta su energía para protegerte del exceso. Los picos de glucosa o bajones de energía no son errores; son adaptaciones a un entorno exigente. El objetivo no es controlar, sino regular desde la raíz.",
+    "🩸 Metabólico": {
+      patron: "🩸 Metabólico",
+      descripcion: "Tu cuerpo busca equilibrio. El patrón metabólico indica una sobrecarga de glucosa o estrés energético.",
       recomendaciones: [
-        "REMOVE — Reduce ultraprocesados y periodos largos sin comer.",
-        "REPLACE — Combina proteína + fibra + grasa saludable en cada comida.",
-        "REPAIR — Añade magnesio, zinc y caldos naturales para soporte celular.",
-        "REBALANCE — Cena temprano y camina 10 minutos postcomida.",
-        "RESTORE — Duerme 7–8 horas; el descanso regula tu glucosa.",
-        "REFLECT — Observa tu energía sin juicio: el cuerpo busca equilibrio."
+        "1️⃣ Reduce azúcares ocultos y alimentos procesados.",
+        "2️⃣ Prioriza proteínas limpias y grasas saludables.",
+        "3️⃣ Regula tu sueño para mejorar la sensibilidad a la insulina.",
+        "4️⃣ Muévete a diario, incluso 10 minutos después de comer.",
+        "5️⃣ Respira profundo antes de comer: baja el cortisol."
       ],
-      aspectoPositivo: "🌿 Tu glucosa no sube para dañarte, sino para protegerte del exceso de demanda."
+      fraseMotivacional: 'No se trata de controlar tu glucosa, sino de enseñarle a tu cuerpo a confiar nuevamente.'
     },
-    "🩸 Patrón Metabólico–Digestivo": {
-      patron: "🩸 Patrón Metabólico–Digestivo",
-      descripcion: "La digestión tensa o lenta hace trabajar de más a la insulina. Cuando comes con prisa o bajo estrés, la glucosa puede elevarse aunque evites el azúcar. Calmar el intestino estabiliza tu metabolismo.",
+    "💩 Digestivo": {
+      patron: "💩 Digestivo",
+      descripcion: "Tu digestión refleja tu capacidad de asimilar la vida. Este patrón indica inflamación o lentitud intestinal.",
       recomendaciones: [
-        "REMOVE — Evita combinaciones pesadas (harinas + grasas + azúcar).",
-        "REPLACE — Fibra soluble y amargos (rúcula, berros, apio).",
-        "REPAIR — Caldos, grasas buenas y masticar 20 veces por bocado.",
-        "REBALANCE — Come sentado, sin pantallas ni prisa.",
-        "RESTORE — Camina 5–10 minutos tras comer para activar el flujo.",
-        "REFLECT — La digestión regula más que la dieta: regula tu entorno interno."
+        "1️⃣ Mastica hasta que los alimentos pierdan textura.",
+        "2️⃣ Bebe agua tibia con limón al despertar.",
+        "3️⃣ Añade alimentos amargos (rúcula, berros, diente de león).",
+        "4️⃣ Evita distracciones al comer: el cuerpo digiere en calma.",
+        "5️⃣ Prioriza evacuaciones tipo 3–4 en la escala de Bristol."
       ],
-      aspectoPositivo: "🩸 Una digestión lenta puede elevar la glucosa incluso sin comer azúcar."
+      fraseMotivacional: 'Si fluyes, equilibras. Si equilibras, sanas.'
     },
-    "🩸 Patrón Metabólico–Inflamatorio": {
-      patron: "🩸 Patrón Metabólico–Inflamatorio",
-      descripcion: "La inflamación activa disminuye la eficiencia de la insulina. Tu cuerpo conserva energía para reparar tejidos; no es flojera, es protección. Bajar la carga inflamatoria estabiliza la glucosa.",
+    "🌙 Estrés": {
+      patron: "🌙 Estrés",
+      descripcion: "Tu sistema nervioso está en modo defensa. Este patrón revela agotamiento o exceso de alerta.",
       recomendaciones: [
-        "REMOVE — Disminuye azúcar, harinas y aceites refinados.",
-        "REPLACE — Integra cúrcuma, jengibre y omega-3.",
-        "REPAIR — Prioriza sueño antes de las 11 p. m. para reparación celular.",
-        "REBALANCE — Pausas respiratorias de 2–3 minutos, 3 veces al día.",
-        "RESTORE — Movimiento suave diario para drenaje linfático.",
-        "REFLECT — La inflamación es lenguaje, no castigo."
+        "1️⃣ Inicia el día con respiraciones profundas o exposición a la luz natural.",
+        "2️⃣ Come en calma; evita pantallas y discusiones al comer.",
+        "3️⃣ Evita cafeína en exceso; sustituye por infusiones adaptogénicas.",
+        "4️⃣ Camina 10 minutos al aire libre después de trabajar.",
+        "5️⃣ Cierra el día con una pausa de gratitud o journaling."
       ],
-      aspectoPositivo: "🔥 El cuerpo no te sabotea, te está priorizando."
+      fraseMotivacional: 'Tu cuerpo no te sabotea, te está protegiendo.'
     },
-    "💩 Patrón Digestivo–Estreñimiento Silencioso": {
-      patron: "💩 Patrón Digestivo–Estreñimiento Silencioso",
-      descripcion: "Retener es una forma de protección cuando el terreno está sobrecargado. Fluir a diario reduce inflamación y estabiliza el metabolismo.",
+    "🔥 Inflamatorio": {
+      patron: "🔥 Inflamatorio",
+      descripcion: "Tu cuerpo está tratando de reparar algo. Este patrón muestra inflamación crónica o sobrecarga inmunológica.",
       recomendaciones: [
-        "REMOVE — Evita cenas pesadas y exceso de café.",
-        "REPLACE — Agua, magnesio natural y vegetales cocidos.",
-        "REPAIR — Fibra soluble (chía, linaza, avena cocida).",
-        "REBALANCE — Rutina de evacuación diaria en calma.",
-        "RESTORE — Caminar, estirarte y respirar activa el intestino.",
-        "REFLECT — ¿Qué estás reteniendo además de desechos?"
+        "1️⃣ Reduce ultraprocesados y aceites refinados.",
+        "2️⃣ Aumenta consumo de omega-3, cúrcuma y vegetales coloridos.",
+        "3️⃣ Duerme 7–8 horas continuas.",
+        "4️⃣ Practica pausas conscientes durante el día.",
+        "5️⃣ Revisa tu digestión: si no eliminas, no reparas."
       ],
-      aspectoPositivo: "💩 Si no fluyes, acumulas; y si acumulas, el cuerpo se protege."
+      fraseMotivacional: 'La inflamación no es el problema. Es tu cuerpo pidiendo calma.'
     },
-    "💩 Patrón Digestivo–Inflamatorio": {
-      patron: "💩 Patrón Digestivo–Inflamatorio",
-      descripcion: "El intestino inflamado mantiene el cuerpo en modo defensa. Retirar irritantes y dar calma al sistema digestivo baja la carga inflamatoria y favorece la glucosa estable.",
+    "🩸 Metabólico–Digestivo": {
+      patron: "🩸 Metabólico–Digestivo",
+      descripcion: "Cuando el metabolismo y la digestión se enlazan, hay resistencia a la insulina y estreñimiento funcional.",
       recomendaciones: [
-        "REMOVE — Elimina ultraprocesados, alcohol y fritos por 30 días.",
-        "REPLACE — Infusiones suaves (manzanilla, hinojo, menta).",
-        "REPAIR — Caldos, gelatinas naturales y alimentos templados.",
-        "REBALANCE — Ayuno nocturno de ~12 h (si no hay hipoglucemia).",
-        "RESTORE — Respiración diafragmática antes de comer.",
-        "REFLECT — Tu cuerpo pide alivio, no presión."
+        "1️⃣ Reduce azúcares y mejora evacuaciones.",
+        "2️⃣ Incluye fibra natural, magnesio y amargos digestivos.",
+        "3️⃣ Camina tras las comidas para activar la motilidad intestinal.",
+        "4️⃣ Cena temprano y duerme antes de las 11 p.m.",
+        "5️⃣ Usa respiraciones profundas antes de comer."
       ],
-      aspectoPositivo: "🍵 Tu cuerpo no pide control, pide alivio."
+      fraseMotivacional: 'Sin digestión no hay glucosa estable.'
     },
-    "🌙 Patrón Estrés–Metabólico": {
-      patron: "🌙 Patrón Estrés–Metabólico",
-      descripcion: "El estrés eleva el cortisol y altera tu glucosa. No es flojera ni falta de voluntad: es fisiología en modo defensa. Bajar la carga simpática estabiliza el azúcar.",
+    "🩸 Metabólico–Estrés": {
+      patron: "🩸 Metabólico–Estrés",
+      descripcion: "El exceso de alerta eleva tu azúcar incluso sin comer. Aquí el cuerpo prioriza sobrevivir, no sanar.",
       recomendaciones: [
-        "REMOVE — Reduce cafeína y pantallas nocturnas.",
-        "REPLACE — Cenas templadas y livianas (sopas, caldos).",
-        "REPAIR — Magnesio por la tarde y luz natural al despertar.",
-        "REBALANCE — Respiración 4-7-8 al acostarte.",
-        "RESTORE — Pausas de 2 minutos, 3 veces al día.",
-        "REFLECT — No puedes sanar en el mismo estado que te enfermó."
+        "1️⃣ Baja la carga digital 2 h antes de dormir.",
+        "2️⃣ Incluye comidas con grasa y proteína para estabilidad.",
+        "3️⃣ Haz pausas activas cada 2 h para regular cortisol.",
+        "4️⃣ Evita ayunos prolongados sin descanso suficiente.",
+        "5️⃣ Prioriza calma antes que productividad."
       ],
-      aspectoPositivo: "🌙 El descanso es requisito metabólico, no lujo."
+      fraseMotivacional: 'Tu cuerpo no necesita control, necesita descanso.'
     },
-    "🌙 Patrón Estrés–Digestivo": {
-      patron: "🌙 Patrón Estrés–Digestivo",
-      descripcion: "El intestino refleja tu nivel de calma. Estrés y prisa detienen el flujo digestivo y elevan la glucosa. Comer en calma reactiva el nervio vago.",
+    "🩸 Metabólico–Inflamatorio": {
+      patron: "🩸 Metabólico–Inflamatorio",
+      descripcion: "Cuando hay glucosa alta y dolor articular o hinchazón, hay inflamación por resistencia a la insulina.",
       recomendaciones: [
-        "REMOVE — Evita comer de pie o con pantalla.",
-        "REPLACE — Infusiones suaves y masticación consciente.",
-        "REPAIR — Pausas de respiración antes de cada comida.",
-        "REBALANCE — Horarios estables para comer.",
-        "RESTORE — Gratitud breve antes de masticar (activa parasimpático).",
-        "REFLECT — El cuerpo solo digiere en calma."
+        "1️⃣ Reduce panes, frituras y azúcar líquida.",
+        "2️⃣ Aumenta verduras, omega-3 y agua.",
+        "3️⃣ Descansa más: el cuerpo repara dormido.",
+        "4️⃣ Muévete suave, no en exceso.",
+        "5️⃣ Revisa tu digestión diaria."
       ],
-      aspectoPositivo: "🌾 Alimentarte en calma es terapia metabólica."
+      fraseMotivacional: 'La inflamación y el azúcar hablan el mismo idioma.'
     },
-    "🌙 Patrón Estrés–Energético": {
-      patron: "🌙 Patrón Estrés–Energético",
-      descripcion: "Tu energía está dirigida a sostener la alerta, no la vitalidad. Bajar la hipervigilancia libera energía para reparar y digerir.",
+    "💩 Digestivo–Estrés": {
+      patron: "💩 Digestivo–Estrés",
+      descripcion: "El intestino y el sistema nervioso están conectados. Este patrón refleja ansiedad digestiva o nudo abdominal.",
       recomendaciones: [
-        "REMOVE — Evita noticias/inputs estresantes por la noche.",
-        "REPLACE — Agua con minerales naturales (sal marina) en el día.",
-        "REPAIR — Rutinas cortas de respiración o caminatas sin pantalla.",
-        "REBALANCE — Límite de multitarea: bloques de enfoque + pausas.",
-        "RESTORE — Micro-siestas de 10–20 minutos si lo permite tu día.",
-        "REFLECT — La energía regresa cuando el cuerpo confía."
+        "1️⃣ Evita comer apurado o en conflicto.",
+        "2️⃣ Añade alimentos cocidos y caldos digestivos.",
+        "3️⃣ Usa pausas de respiración 3 min antes de comer.",
+        "4️⃣ Evita cafeína con el estómago vacío.",
+        "5️⃣ Prioriza conexión social y descanso."
       ],
-      aspectoPositivo: "🌤️ El cuerpo baja la velocidad para protegerte."
+      fraseMotivacional: 'Tu intestino escucha tus pensamientos.'
     },
-    "🔥 Patrón Inflamatorio–Digestivo": {
-      patron: "🔥 Patrón Inflamatorio–Digestivo",
-      descripcion: "Tu intestino es el centro de la inflamación actual. Retirar irritantes y nutrir la mucosa reduce la alarma y estabiliza el metabolismo.",
+    "💩 Digestivo–Inflamatorio": {
+      patron: "💩 Digestivo–Inflamatorio",
+      descripcion: "Si hay hinchazón, gases y cansancio, el cuerpo acumula residuos no eliminados.",
       recomendaciones: [
-        "REMOVE — Azúcar, ultraprocesados y alcohol.",
-        "REPLACE — Antiinflamatorios naturales (cúrcuma, frutos rojos).",
-        "REPAIR — Caldos, gelatinas naturales y descanso nocturno.",
-        "REBALANCE — Paseos suaves diarios; evita sobreentrenar.",
-        "RESTORE — Hidratación constante durante el día.",
-        "REFLECT — Tu cuerpo busca reparar, no castigarte."
+        "1️⃣ Revisa tu evacuación diaria (tipo 3–4 Bristol).",
+        "2️⃣ Reduce gluten, lácteos y ultraprocesados.",
+        "3️⃣ Añade probióticos naturales (chucrut, kéfir).",
+        "4️⃣ Bebe agua tibia durante el día.",
+        "5️⃣ Duerme bien para regenerar el intestino."
       ],
-      aspectoPositivo: "🔥 La inflamación es un intento de reparación."
+      fraseMotivacional: 'El intestino inflamado es un cuerpo en alerta.'
     },
-    "🔥 Patrón Inflamatorio–Energético": {
-      patron: "🔥 Patrón Inflamatorio–Energético",
-      descripcion: "El cuerpo está cansado de sostener una inflamación prolongada. Ahorra energía para protegerte. Bajar la demanda y priorizar descanso lo devuelve a la reparación.",
+    "🔥 Estrés–Inflamatorio": {
+      patron: "🔥 Estrés–Inflamatorio",
+      descripcion: "El estrés perpetúa la inflamación y agota las glándulas suprarrenales.",
       recomendaciones: [
-        "REMOVE — Excesos de entrenamiento o jornadas extendidas.",
-        "REPLACE — Comidas sencillas y templadas; hidrátate bien.",
-        "REPAIR — Sueño profundo y luz tenue por la noche.",
-        "REBALANCE — Rutinas suaves (estiramientos, caminatas).",
-        "RESTORE — 3 pausas conscientes al día para bajar el eje HPA.",
-        "REFLECT — El descanso también es medicina."
+        "1️⃣ Evita multitarea, crea rutinas simples.",
+        "2️⃣ Consume alimentos antiinflamatorios.",
+        "3️⃣ Practica respiración o caminata diaria.",
+        "4️⃣ Evita pantallas 1 h antes de dormir.",
+        "5️⃣ Suplementa magnesio o infusiones relajantes."
       ],
-      aspectoPositivo: "💤 El cuerpo cura cuando descansa."
+      fraseMotivacional: 'La calma también es medicina.'
     }
   };
 
-  return patronesContent[patronKey] || patronesContent["🩸 Patrón Metabólico — Glucosa en Alerta Silenciosa"];
+  return patronesContent[patronKey] || patronesContent["🩸 Metabólico"];
 }
 
 export default function Resultados() {
@@ -343,6 +331,16 @@ export default function Resultados() {
                 <li key={index}>{rec}</li>
               ))}
             </ul>
+          </div>
+
+          <div className="mt-6 max-w-2xl mx-auto">
+            <p 
+              id="fraseMotivacional" 
+              className="text-center italic text-lg"
+              style={{ color: '#C77851' }}
+            >
+              💬 "{resultado.fraseMotivacional}"
+            </p>
           </div>
 
           {resultado && resultado.patron && (
