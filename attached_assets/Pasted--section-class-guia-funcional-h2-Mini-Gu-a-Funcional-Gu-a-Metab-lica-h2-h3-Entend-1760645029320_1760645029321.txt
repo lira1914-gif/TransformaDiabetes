@@ -1,0 +1,909 @@
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Metabólica</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu cuerpo no puede sanar en estado de alerta.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Digestiva</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Inflamatoria</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 La inflamación no es enemiga; es el lenguaje de tu cuerpo pidiendo equilibrio.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Hormonal</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu equilibrio hormonal empieza cuando te permites descansar.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía del Sueño</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Dormir no es pereza, es reparación celular profunda.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía del Estrés</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 No todo lo que te acelera te impulsa; a veces te apaga.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía de Ansiedad</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu ansiedad no es debilidad, es tu cuerpo pidiendo calma.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía de Energía</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 La fatiga no es flojera, es el lenguaje de un cuerpo sobrecargado.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Digestivo-Hepática</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu hígado no se queja, se protege de lo que no puede procesar.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Inmunológica</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu sistema inmune no está roto, solo está agotado de defenderte todo el tiempo.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Intestinal</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 El intestino no solo digiere comida, también emociones.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía de Peso</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu peso no es tu enemigo, es una señal de que algo necesita equilibrio.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Femenina</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tus hormonas no te sabotean, te están comunicando un desbalance interno.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Masculina</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 Tu energía vital depende de lo que consumes, piensas y liberas.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía Nerviosa</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 El sistema nervioso no necesita control, necesita seguridad.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>
+
+
+
+<section class="guia-funcional">
+  <h2>🌱 Mini Guía Funcional: Guía de Autoinmunidad</h2>
+
+  <h3>🔎 Entendiendo tu cuerpo</h3>
+  <p>Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.</p>
+
+  <hr>
+
+  <h3>🚫 Lo que bloquea el equilibrio</h3>
+  <ul>
+    <li><strong>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.</li>
+    <li><strong>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.</li>
+    <li><strong>Falta de descanso:</strong> sin sueño profundo, no hay reparación.</li>
+    <li><strong>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.</li>
+  </ul>
+
+  <hr>
+
+  <h3>✅ Lo que ayuda a restaurarlo</h3>
+  <ul>
+    <li><strong>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.</li>
+    <li><strong>Digestión consciente:</strong> mastica lento y come con calma.</li>
+    <li><strong>Movimiento funcional:</strong> camina, estira, respira profundo.</li>
+    <li><strong>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.</li>
+  </ul>
+
+  <blockquote>💫 El cuerpo no se ataca, se protege de algo que percibe como amenaza.</blockquote>
+
+  <hr>
+
+  <h3>🌿 Tips funcionales extra</h3>
+  <ul>
+    <li><strong>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.</li>
+    <li><strong>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.</li>
+    <li><strong>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.</li>
+  </ul>
+
+  <blockquote>“No se trata de controlar tu síntoma, sino de entender su mensaje.”</blockquote>
+
+  <hr>
+
+  <h3>🚀 Da tu siguiente paso</h3>
+  <p>Esta mini guía es solo el inicio. Puedo ayudarte a crear un plan funcional personalizado basado en tus hábitos, síntomas y objetivos.</p>
+
+  <ul>
+    <li>Evaluación completa y revisión de tus hábitos</li>
+    <li>Plan de alimentación y estilo de vida individualizado</li>
+    <li>Suplementación y seguimiento mensual</li>
+  </ul>
+
+  <p><strong>💲 Inversión:</strong> $5/mes — acceso completo a guías, comunidad y acompañamiento funcional.</p>
+
+  <button class="continue" id="suscribirme">Suscribirme al Plan NutriMarvin</button>
+</section>

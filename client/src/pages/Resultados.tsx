@@ -106,6 +106,58 @@ function getSinglePatternKey(axisName: string): string {
   }
 }
 
+interface GuiaContent {
+  titulo: string;
+  blockquote: string;
+}
+
+function getGuiaContent(patronKey: string): GuiaContent {
+  const guiasContent: Record<string, GuiaContent> = {
+    "🩸 Metabólico": {
+      titulo: "Guía Metabólica",
+      blockquote: "💫 Tu cuerpo no puede sanar en estado de alerta."
+    },
+    "💩 Digestivo": {
+      titulo: "Guía Digestiva",
+      blockquote: "💫 Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende."
+    },
+    "🌙 Estrés": {
+      titulo: "Guía del Estrés",
+      blockquote: "💫 No todo lo que te acelera te impulsa; a veces te apaga."
+    },
+    "🔥 Inflamatorio": {
+      titulo: "Guía Inflamatoria",
+      blockquote: "💫 La inflamación no es enemiga; es el lenguaje de tu cuerpo pidiendo equilibrio."
+    },
+    "🩸 Metabólico–Digestivo": {
+      titulo: "Guía Metabólica",
+      blockquote: "💫 Tu cuerpo no puede sanar en estado de alerta."
+    },
+    "🩸 Metabólico–Estrés": {
+      titulo: "Guía Metabólica",
+      blockquote: "💫 Tu cuerpo no puede sanar en estado de alerta."
+    },
+    "🩸 Metabólico–Inflamatorio": {
+      titulo: "Guía Metabólica",
+      blockquote: "💫 Tu cuerpo no puede sanar en estado de alerta."
+    },
+    "💩 Digestivo–Estrés": {
+      titulo: "Guía Digestiva",
+      blockquote: "💫 Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende."
+    },
+    "💩 Digestivo–Inflamatorio": {
+      titulo: "Guía Digestiva",
+      blockquote: "💫 Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende."
+    },
+    "🔥 Estrés–Inflamatorio": {
+      titulo: "Guía del Estrés",
+      blockquote: "💫 No todo lo que te acelera te impulsa; a veces te apaga."
+    }
+  };
+  
+  return guiasContent[patronKey] || guiasContent["🩸 Metabólico"];
+}
+
 function loadPatronContent(patronKey: string): PatronResult {
   const patronesContent: Record<string, PatronResult> = {
     "🩸 Metabólico": {
@@ -236,6 +288,7 @@ function loadPatronContent(patronKey: string): PatronResult {
 export default function Resultados() {
   const { toast } = useToast();
   const [patron, setPatron] = useState<PatronResult | null>(null);
+  const [guiaContent, setGuiaContent] = useState<GuiaContent | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -246,6 +299,7 @@ export default function Resultados() {
         const answers: Answer[] = JSON.parse(answersData);
         const result = interpretarPatronSimple(answers);
         setPatron(result);
+        setGuiaContent(getGuiaContent(result.patron));
       } catch (e) {
         console.error('Error parsing answers:', e);
         toast({
@@ -399,82 +453,73 @@ export default function Resultados() {
               className="text-2xl md:text-3xl font-bold mb-6"
               style={{ color: '#556B2F' }}
             >
-              🌱 Mini Guía Funcional: Revertir la Resistencia a la Insulina
+              🌱 Mini Guía Funcional: {guiaContent?.titulo || "Guía Metabólica"}
             </h2>
 
-            {/* Entendiendo tu metabolismo */}
+            {/* Entendiendo tu cuerpo */}
             <section className="mb-8">
               <h3 
                 className="text-xl md:text-2xl font-bold mb-3"
                 style={{ color: '#3A3A3A' }}
               >
-                🔎 Entendiendo tu metabolismo
+                🔎 Entendiendo tu cuerpo
               </h3>
               <p 
                 className="text-base leading-relaxed"
                 style={{ color: '#6F6E66' }}
               >
-                Tu cuerpo busca equilibrio, no castigo. La resistencia a la insulina no aparece de la nada; es una señal de que tus células están saturadas de energía y necesitan volver a escuchar la señal de la insulina. Este proceso puede revertirse con cambios sostenibles en tu alimentación, descanso y movimiento. El objetivo no es "controlar" la glucosa, sino enseñarle a tu cuerpo a confiar nuevamente en su propio equilibrio.
+                Tu cuerpo busca equilibrio, no control. Cada síntoma o desbalance es una forma de comunicación. Escucharlo es el primer paso hacia la regulación.
               </p>
             </section>
 
             <hr style={{ border: 'none', borderTop: '1px solid #E6E3D9', margin: '2rem 0' }} />
 
-            {/* Lo que bloquea tu metabolismo */}
+            {/* Lo que bloquea el equilibrio */}
             <section className="mb-8">
               <h3 
                 className="text-xl md:text-2xl font-bold mb-3"
                 style={{ color: '#3A3A3A' }}
               >
-                🚫 Lo que bloquea tu metabolismo
+                🚫 Lo que bloquea el equilibrio
               </h3>
               <ul className="space-y-3">
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Azúcar y harinas refinadas:</strong> elevan picos de glucosa y hacen que tu cuerpo libere más insulina.
+                  <strong style={{ color: '#3A3A3A' }}>Hábitos repetitivos:</strong> el cuerpo no puede cambiar si sigue expuesto a los mismos detonantes.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Comer tarde o saltarte comidas:</strong> confunde tu reloj metabólico y altera tus hormonas del apetito.
+                  <strong style={{ color: '#3A3A3A' }}>Estrés sostenido:</strong> activa el eje HPA y mantiene al cuerpo en modo defensa.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Estrés crónico:</strong> el cortisol elevado aumenta la glucosa en sangre y dificulta la pérdida de grasa.
+                  <strong style={{ color: '#3A3A3A' }}>Falta de descanso:</strong> sin sueño profundo, no hay reparación.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Falta de sueño:</strong> reduce tu sensibilidad a la insulina y favorece el aumento de peso.
+                  <strong style={{ color: '#3A3A3A' }}>Alimentación inflamatoria:</strong> azúcares, alcohol y ultraprocesados saturan los sistemas.
                 </li>
               </ul>
             </section>
 
             <hr style={{ border: 'none', borderTop: '1px solid #E6E3D9', margin: '2rem 0' }} />
 
-            {/* Lo que ayuda a revertirla */}
+            {/* Lo que ayuda a restaurarlo */}
             <section className="mb-8">
               <h3 
                 className="text-xl md:text-2xl font-bold mb-3"
                 style={{ color: '#3A3A3A' }}
               >
-                ✅ Lo que ayuda a revertirla
+                ✅ Lo que ayuda a restaurarlo
               </h3>
               <ul className="space-y-3">
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Incluye grasa, fibra y proteína en cada comida:</strong> esta combinación estabiliza la glucosa, reduce antojos y prolonga tu energía.
+                  <strong style={{ color: '#3A3A3A' }}>Alimentos reales:</strong> vegetales, proteínas limpias y grasas buenas.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Desayuna con proteína y fibra:</strong> huevos, aguacate, semillas o yogurt natural sin azúcar.
+                  <strong style={{ color: '#3A3A3A' }}>Digestión consciente:</strong> mastica lento y come con calma.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Evita azúcares ocultos:</strong> revisa etiquetas; el jarabe de maíz, maltosa y dextrosa actúan igual que el azúcar.
+                  <strong style={{ color: '#3A3A3A' }}>Movimiento funcional:</strong> camina, estira, respira profundo.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Camina 10–15 minutos después de comer:</strong> ayuda a tus músculos a usar la glucosa en lugar de almacenarla.
-                </li>
-                <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Prioriza alimentos reales:</strong> vegetales, grasas buenas y proteína limpia son tu mejor "medicina".
-                </li>
-                <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Reduce la cafeína y el alcohol:</strong> permiten que tu hígado recupere su función de equilibrio glucémico.
-                </li>
-                <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Regula el estrés:</strong> la respiración consciente, los descansos breves y el sueño profundo son herramientas metabólicas, no lujos.
+                  <strong style={{ color: '#3A3A3A' }}>Ritmos biológicos:</strong> duerme antes de las 11 p.m. y respeta tus señales.
                 </li>
               </ul>
 
@@ -486,7 +531,7 @@ export default function Resultados() {
                   color: '#6F6E66'
                 }}
               >
-                💫 Tu cuerpo no puede sanar en estado de alerta. Dale permiso para descansar y reparar.
+                {guiaContent?.blockquote || "💫 Tu cuerpo no puede sanar en estado de alerta."}
               </div>
             </section>
 
@@ -502,13 +547,13 @@ export default function Resultados() {
               </h3>
               <ul className="space-y-3">
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Suplementos clave:</strong> magnesio, inositol, cromo y omega-3 pueden apoyar tu sensibilidad a la insulina.
+                  <strong style={{ color: '#3A3A3A' }}>Suplementos clave:</strong> magnesio, omega-3 y adaptógenos según el caso.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Descansa antes de las 11 p.m.:</strong> durante ese horario tu cuerpo regula cortisol y glucosa.
+                  <strong style={{ color: '#3A3A3A' }}>Hidratación:</strong> agua natural o infusiones; evita bebidas con endulzantes artificiales.
                 </li>
                 <li style={{ color: '#6F6E66' }}>
-                  <strong style={{ color: '#3A3A3A' }}>Hidratación inteligente:</strong> agua, infusiones o agua con limón — evita refrescos, incluso "sin azúcar".
+                  <strong style={{ color: '#3A3A3A' }}>Conexión mente–cuerpo:</strong> la respiración y la gratitud activan tu sistema de calma.
                 </li>
               </ul>
 
@@ -520,7 +565,7 @@ export default function Resultados() {
                   color: '#6F6E66'
                 }}
               >
-                "No se trata de controlar tu azúcar, sino de enseñarle a tu cuerpo a confiar otra vez."
+                "No se trata de controlar tu síntoma, sino de entender su mensaje."
               </div>
             </section>
 
