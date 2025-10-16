@@ -411,7 +411,7 @@ export default function Resultados() {
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#8C4E30'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
             >
-              Suscribirme ahora
+              Suscríbete al Plan NutriMarvin ($5/mes)
             </a>
             <p className="mt-4 text-xs sm:text-sm" style={{ color: '#6F6E66' }}>
               Cancela en cualquier momento. Tu información es 100% confidencial.
