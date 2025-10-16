@@ -178,6 +178,7 @@ export default function Guia() {
             </p>
             <ul className="space-y-2 mb-4">
               <li style={{ color: '#6F6E66' }}>✓ Evaluación funcional completa y revisión de tus hábitos</li>
+              <li style={{ color: '#6F6E66' }}>✓ Revisión e interpretación de tus análisis de sangre</li>
               <li style={{ color: '#6F6E66' }}>✓ Plan de alimentación y estilo de vida individualizado</li>
               <li style={{ color: '#6F6E66' }}>✓ Suplementación y seguimiento mensual</li>
             </ul>
