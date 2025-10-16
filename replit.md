@@ -153,6 +153,27 @@ Preferred communication style: Simple, everyday language.
 - Generated images stored in attached_assets directory
 - Design guideline documents for content reference
 
+## Payment Integration
+
+### Stripe Integration (October 2025)
+- **Payment Method:** Direct Stripe Checkout for subscriptions
+- **Backend Endpoint:** `/api/create-checkout-session`
+  - Creates Stripe Checkout Session for $5/month subscription
+  - Uses environment variables: `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`
+  - Success URL: `/bienvenida` with session_id parameter
+  - Cancel URL: `/resultados`
+- **Frontend Integration:**
+  - Stripe.js integration in Resultados page
+  - Uses `VITE_STRIPE_PUBLIC_KEY` for client-side Stripe initialization
+  - Button triggers checkout session and redirects to Stripe-hosted checkout
+  - Loading states and error handling with toast notifications
+- **Welcome Page (`/bienvenida`):**
+  - Confirmation page after successful payment
+  - Shows subscription benefits and next steps
+  - Email confirmation notice
+  - CTAs to return home or view guides
+  - Clears diagnostic answers from localStorage
+
 ## Recent Updates (October 2025)
 
 ### Header Redesign

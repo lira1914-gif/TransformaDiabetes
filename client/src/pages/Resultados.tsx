@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
 
 interface PatronResult {
   patron: string;
@@ -268,6 +269,8 @@ function loadPatronContent(patronKey: string): PatronResult {
 export default function Resultados() {
   const [, setLocation] = useLocation();
   const [resultado, setResultado] = useState<PatronResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     // Get answers from localStorage
@@ -289,6 +292,39 @@ export default function Resultados() {
       setLocation("/diagnostico");
     }
   }, [setLocation]);
+
+  const handleSubscribe = async () => {
+    setIsLoading(true);
+    
+    try {
+      // Create checkout session
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al crear la sesión de pago");
+      }
+
+      const { url } = await response.json();
+      
+      if (!url) {
+        throw new Error("No se recibió la URL de pago");
+      }
+      
+      // Redirect to Stripe Checkout
+      window.location.href = url;
+    } catch (error: any) {
+      console.error("Error al iniciar la sesión de pago:", error);
+      toast({
+        title: "Error al procesar el pago",
+        description: "Ocurrió un error. Por favor, intenta nuevamente.",
+        variant: "destructive",
+      });
+      setIsLoading(false);
+    }
+  };
 
   if (!resultado) {
     return (
@@ -381,18 +417,17 @@ export default function Resultados() {
               Profundiza en tu transformación funcional y recibe acompañamiento mensual con herramientas, 
               seguimiento y soporte personalizado.
             </p>
-            <a
-              href="https://stan.store/nutrimarvin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block w-full sm:w-auto px-7 py-3 rounded-lg text-white font-semibold transition text-sm sm:text-base"
+            <button
+              onClick={handleSubscribe}
+              disabled={isLoading}
+              className="inline-block w-full sm:w-auto px-7 py-3 rounded-lg text-white font-semibold transition text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ backgroundColor: '#A15C38' }}
               data-testid="button-suscribirse"
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#8C4E30'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
+              onMouseEnter={(e) => !isLoading && (e.currentTarget.style.backgroundColor = '#8C4E30')}
+              onMouseLeave={(e) => !isLoading && (e.currentTarget.style.backgroundColor = '#A15C38')}
             >
-              Suscríbete al Plan NutriMarvin ($5/mes)
-            </a>
+              {isLoading ? "Procesando..." : "Suscríbete al Plan NutriMarvin ($5/mes)"}
+            </button>
             <p className="mt-4 text-xs sm:text-sm" style={{ color: '#6F6E66' }}>
               Cancela en cualquier momento. Tu información es 100% confidencial.
             </p>
