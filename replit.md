@@ -31,8 +31,14 @@ Preferred communication style: Simple, everyday language.
 - **Structure**: Monorepo with shared TypeScript types and path aliases.
 
 ### Routing
-- **Client-Side**: Wouter for SPA routing, including smooth scrolling and 404 handling.
-- **Page Flows**: Includes pre-registration, diagnostic assessment, results display with integrated Mini Guía Funcional and subscription CTA, welcome page, health profile form, and blood analysis interpretation.
+- **Client-Side**: Wouter for SPA routing with smooth scrolling (scroll-behavior: smooth in CSS).
+- **Landing Page Architecture**: Single-page scroll design with all educational content in one flow:
+  - Home (/) contains all sections: Hero, QueEs, Pilares, Historias, Suscripción
+  - Sections have IDs for anchor navigation (#que-es, #pilares, #suscripcion)
+  - Header "Inicio" link scrolls to top when already on home page
+  - /suscripcion route redirects to home with scroll to #suscripcion section
+- **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
+- **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
 
 ## External Dependencies
 
