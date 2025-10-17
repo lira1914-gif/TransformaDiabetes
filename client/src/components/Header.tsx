@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import logoImage from "@assets/generated_images/TransformaDiabetes_brand_logo_olive_0bd02491.png";
+import logoImage from "@assets/generated_images/TransformaDiabetes_logo_transformation_symbol_fafb5ba5.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
