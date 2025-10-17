@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import logoImage from "@assets/generated_images/TransformaDiabetes_logo_transformation_symbol_fafb5ba5.png";
+import logoImage from "@assets/generated_images/TransformaDiabetes_complete_logo_with_tagline_2f0190f6.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -36,12 +36,9 @@ export default function Header() {
       <Link href="/" className="flex items-center">
         <img 
           src={logoImage} 
-          alt="TransformaDiabetes Logo" 
-          className="h-10 sm:h-11 mr-2 sm:mr-3"
+          alt="TransformaDiabetes - Nutrición funcional para revertir desde la raíz" 
+          className="h-12 sm:h-14"
         />
-        <h1 className="text-lg sm:text-xl font-semibold m-0" style={{ color: '#4B4B3B' }}>
-          TransformaDiabetes
-        </h1>
       </Link>
 
       {/* Botón Menú Móvil */}
