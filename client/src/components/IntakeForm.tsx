@@ -60,7 +60,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     
     toast({
       title: "✅ Historial guardado",
-      description: "Tu información ha sido registrada. Ahora puedes comenzar tu diario de 5 días.",
+      description: "Tu información ha sido registrada correctamente.",
     });
 
     onComplete();

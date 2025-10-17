@@ -41,7 +41,14 @@ Preferred communication style: Simple, everyday language.
   - 15 comprehensive fields covering: demographics (name, age, sex, email), medical history (diagnoses, medications, supplements, family history), digestive health (bowel frequency, symptoms), lifestyle (sleep hours, energy level, recent diet, physical activity, stress level), and personal goals
   - All data saved to localStorage as JSON (key: "intakeTransformaDiabetes")
   - Motivational copy: "Tu información es confidencial y nos ayuda a personalizar tus recomendaciones"
-  - On completion, automatically reveals 5-day registration form
+  - On completion, shows toast notification and reveals post-intake message
+- **Mensaje Post-Intake**: Motivational transition message between intake and 5-day registration:
+  - Appears after intake form submission with smooth scroll
+  - Heading: "Excelente 🌿"
+  - Thanks user for sharing their functional history
+  - Explains the purpose of the 5-day observation period
+  - Emphasizes consistency over perfection
+  - CTA button: "Comenzar mi registro de 5 días"
 - **Registro de 5 Días**: Multi-day functional registration form:
   - Appears after completing intake form
   - Dynamic form allowing up to 5 days of tracking
@@ -66,7 +73,8 @@ Preferred communication style: Simple, everyday language.
 - **Subscription Flow**: Multi-step inline flow within same page:
   1. Clicking "Unirme por $5 USD/mes" reveals welcome section with fade-in animation
   2. Clicking "Empezar mi registro funcional" reveals intake form (15-field medical history)
-  3. Completing intake form reveals 5-day registration form
+  3. Completing intake form reveals motivational post-intake message
+  4. Clicking "Comenzar mi registro de 5 días" reveals 5-day registration form
   - No route changes, smooth scroll animations between sections
   - All data persists in localStorage (intake + 5-day diary)
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)

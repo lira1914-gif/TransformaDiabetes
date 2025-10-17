@@ -2,14 +2,17 @@ import { useState, useRef, useEffect } from "react";
 import "../styles/suscripcion.css";
 import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.jpg";
 import IntakeForm from "./IntakeForm";
+import MensajePostIntake from "./MensajePostIntake";
 import Registro5Dias from "./Registro5Dias";
 
 export default function SuscripcionSection() {
   const [showBienvenida, setShowBienvenida] = useState(false);
   const [showIntake, setShowIntake] = useState(false);
+  const [showMensajePost, setShowMensajePost] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const bienvenidaRef = useRef<HTMLDivElement>(null);
   const intakeRef = useRef<HTMLDivElement>(null);
+  const mensajePostRef = useRef<HTMLDivElement>(null);
   const registroRef = useRef<HTMLDivElement>(null);
 
   const handleSubscribe = () => {
@@ -36,6 +39,15 @@ export default function SuscripcionSection() {
   }, [showIntake]);
 
   useEffect(() => {
+    if (showMensajePost && mensajePostRef.current) {
+      // Hacer scroll suave al mensaje post-intake
+      setTimeout(() => {
+        mensajePostRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    }
+  }, [showMensajePost]);
+
+  useEffect(() => {
     if (showRegistro && registroRef.current) {
       // Hacer scroll suave al formulario de registro
       setTimeout(() => {
@@ -49,6 +61,10 @@ export default function SuscripcionSection() {
   };
 
   const handleIntakeComplete = () => {
+    setShowMensajePost(true);
+  };
+
+  const handleContinuarRegistro = () => {
     setShowRegistro(true);
   };
 
@@ -239,6 +255,13 @@ export default function SuscripcionSection() {
         {showIntake && (
           <div ref={intakeRef}>
             <IntakeForm onComplete={handleIntakeComplete} />
+          </div>
+        )}
+
+        {/* Mensaje Post-Intake */}
+        {showMensajePost && (
+          <div ref={mensajePostRef}>
+            <MensajePostIntake onContinue={handleContinuarRegistro} />
           </div>
         )}
 
