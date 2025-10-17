@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suscripción | NutriMarvin Funcional</title>
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --card: #ffffff;
+      --text: #3a3a3a;
+      --muted: #6f6e66;
+      --olive: #556b2f;
+      --terra: #a15c38;
+      --border: #e6e3d9;
+    }
+    body {
+      font-family: Poppins, system-ui, sans-serif;
+      background: var(--bg) url('https://www.transparenttextures.com/patterns/white-paper.png');
+      background-size: cover;
+      color: var(--text);
+      margin: 0;
+    }
+    .wrap {
+      max-width: 850px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    }
+    h1, h2, h3 {
+      color: var(--olive);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    p {
+      line-height: 1.6;
+    }
+    ul {
+      line-height: 1.7;
+      margin-left: 1rem;
+    }
+    button {
+      background: var(--terra);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 1rem 2rem;
+      display: block;
+      margin: 2rem auto;
+    }
+    button:hover {
+      background: #8b4728;
+    }
+
+    /* Bloques ocultos */
+    section {
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #bienvenida, #registro5dias {
+      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="bloqueSuscripcion">
+    <h1>🌿 Tu transformación funcional comienza aquí</h1>
+    <p style="text-align:center; color:var(--muted);">
+      Acompañamiento humano + ciencia funcional para recuperar tu energía, estabilizar tu glucosa y reconectar con tu cuerpo.
+    </p>
+    <p style="text-align:center; font-style:italic;">“Tu cuerpo no está roto — solo está protegiéndose.”</p>
+
+    <h3>Qué recibes por $5/mes</h3>
+    <ul>
+      <li>Acceso a 10 mini guías funcionales ampliadas.</li>
+      <li>Recomendaciones prácticas para equilibrar tu glucosa y energía.</li>
+      <li>Revisión opcional de tus análisis de sangre para orientación funcional.</li>
+      <li>Microhábitos semanales para mejorar digestión, descanso y claridad mental.</li>
+      <li>Acceso al diario funcional y seguimiento personalizado.</li>
+    </ul>
+
+    <h3>Cómo funciona</h3>
+    <ol>
+      <li>Suscríbete y obtén acceso a tu área personal.</li>
+      <li>Completa tu historial funcional (médico y hábitos).</li>
+      <li>Registra tus 5 días de comidas, sueño y digestión.</li>
+      <li>Recibe tus primeras recomendaciones basadas en tu propio cuerpo.</li>
+    </ol>
+
+    <button id="btnSuscribirme">Unirme por $5 USD/mes</button>
+
+    <p style="font-size:0.9rem; text-align:center; color:var(--muted);">
+      *El enlace de suscripción se integrará próximamente mediante Paddle. Por ahora, continúa para acceder a tu área funcional.
+    </p>
+  </div>
+
+  <!-- 🌿 BLOQUE DE BIENVENIDA -->
+  <section id="bienvenida" class="wrap">
+    <h2>✨ Bienvenido a NutriMarvin Funcional</h2>
+    <p style="text-align:center;">
+      Tu camino hacia el equilibrio comienza hoy.  
+      Gracias por unirte a la suscripción funcional. Aquí aprenderás a escuchar a tu cuerpo, paso a paso, desde un enfoque humano y basado en fisiología funcional.
+    </p>
+
+    <div style="background:#FDFCF9; border:1px solid var(--border); padding:1rem; border-radius:8px; margin-top:1.5rem;">
+      <strong>📋 Tu primer paso:</strong> Registrar tus primeros 5 días de alimentación, sueño y digestión.
+    </div>
+
+    <h3>¿Qué incluye tu suscripción?</h3>
+    <ul>
+      <li>Análisis funcional de tu historial médico y hábitos.</li>
+      <li>Interpretación personalizada de tus resultados y síntomas.</li>
+      <li>Recomendaciones iniciales de alimentación y estilo de vida.</li>
+      <li>Seguimiento semanal y actualización de tus avances.</li>
+      <li>Evaluación de suplementos según tu caso, con precauciones y disclaimers.</li>
+    </ul>
+
+    <div style="background:#fff7ef; border:1px solid var(--border); padding:1rem; border-radius:8px;">
+      <strong>Antes de iniciar:</strong><br>
+      Durante los próximos 5 días, anota lo que comes, cómo duermes y cómo evacuas.  
+      No cambies nada todavía — queremos conocer cómo responde tu cuerpo tal como está hoy.  
+      Este registro será la base para tus recomendaciones personalizadas.
+    </div>
+
+    <button id="btnRegistro">Empezar mi registro funcional</button>
+  </section>
+
+  <!-- 📔 BLOQUE REGISTRO FUNCIONAL -->
+  <section id="registro5dias" class="wrap">
+    <h2>🗓️ Tu Registro Funcional de 5 Días</h2>
+    <p style="text-align:center; max-width:600px; margin:auto;">
+      Anota con calma lo que comes, cómo duermes y cómo eliminas cada día.  
+      No se trata de perfección, sino de observar cómo responde tu cuerpo.
+    </p>
+
+    <form id="formRegistro" style="margin-top:2rem;">
+      <div class="dias" style="display:grid; gap:1.5rem;">
+        <!-- Día base -->
+        <div class="dia" style="border:1px solid var(--border); border-radius:10px; padding:1rem; background:#FDFCF9;">
+          <h3 style="color:var(--terra);">Día 1</h3>
+          <label>🍽️ ¿Qué comiste hoy (desayuno, comida, cena, snacks)?</label><br>
+          <textarea name="comida1" rows="3" style="width:100%; margin:.5rem 0; border:1px solid var(--border); border-radius:6px; padding:.6rem;"></textarea>
+
+          <label>💩 ¿Cómo fue tu digestión?</label><br>
+          <select name="heces1" style="width:100%; margin:.5rem 0; border:1px solid var(--border); border-radius:6px; padding:.6rem;">
+            <option>Normal (una o más veces al día)</option>
+            <option>Estreñimiento (menos de una vez al día)</option>
+            <option>Diarrea o urgencia</option>
+            <option>Hinchazón o gases</option>
+          </select>
+
+          <label>😴 ¿Cómo dormiste?</label><br>
+          <select name="sueno1" style="width:100%; margin:.5rem 0; border:1px solid var(--border); border-radius:6px; padding:.6rem;">
+            <option>Profundo y reparador</option>
+            <option>Interrumpido o con insomnio</option>
+            <option>Me costó dormir</option>
+            <option>Muy poco descanso</option>
+          </select>
+
+          <label>⚖️ ¿Cómo te sentiste hoy?</label><br>
+          <select name="energia1" style="width:100%; margin:.5rem 0; border:1px solid var(--border); border-radius:6px; padding:.6rem;">
+            <option>Con energía y claridad</option>
+            <option>Cansado o con niebla mental</option>
+            <option>Con altibajos durante el día</option>
+            <option>Sin energía o desmotivado</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" id="agregarDia" style="background:var(--terra);">➕ Agregar siguiente día</button>
+      <button type="submit" style="background:var(--olive);">Guardar mi registro</button>
+    </form>
+
+    <p style="text-align:center; font-style:italic; color:var(--olive); margin-top:2rem;">
+      🌿 “Observar es el primer paso para sanar. Tu cuerpo siempre te está hablando.” 🌿
+    </p>
+  </section>
+
+  <footer style="text-align:center; margin-top:3rem; color:var(--muted); font-size:0.9rem;">
+    <p>
+      El contenido de NutriMarvin es educativo y no sustituye la evaluación médica profesional.  
+      Consulta a tu médico antes de realizar cambios significativos en tu alimentación o suplementación.
+    </p>
+  </footer>
+
+  <script>
+    // Mostrar bienvenida al suscribirse
+    document.getElementById("btnSuscribirme").addEventListener("click", () => {
+      document.getElementById("bloqueSuscripcion").style.display = "none";
+      const bienvenida = document.getElementById("bienvenida");
+      bienvenida.style.display = "block";
+      setTimeout(() => {
+        bienvenida.style.opacity = "1";
+        bienvenida.style.transform = "translateY(0)";
+        bienvenida.scrollIntoView({ behavior: "smooth" });
+      }, 200);
+    });
+
+    // Mostrar registro al presionar "Empezar mi registro funcional"
+    document.getElementById("btnRegistro").addEventListener("click", () => {
+      const registro = document.getElementById("registro5dias");
+      registro.style.display = "block";
+      setTimeout(() => {
+        registro.style.opacity = "1";
+        registro.style.transform = "translateY(0)";
+        registro.scrollIntoView({ behavior: "smooth" });
+      }, 200);
+    });
+
+    // Agregar hasta 5 días de registro
+    let contadorDias = 1;
+    document.getElementById("agregarDia").addEventListener("click", () => {
+      if (contadorDias >= 5) return alert("🌿 El registro máximo es de 5 días.");
+      contadorDias++;
+      const diasDiv = document.querySelector(".dias");
+      const nuevoDia = diasDiv.firstElementChild.cloneNode(true);
+      nuevoDia.querySelector("h3").textContent = `Día ${contadorDias}`;
+      nuevoDia.querySelectorAll("textarea, select").forEach(el => el.value = "");
+      diasDiv.appendChild(nuevoDia);
+    });
+
+    // Guardar el registro
+    document.getElementById("formRegistro").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("✅ Registro guardado. Tus datos serán analizados próximamente por tu IA funcional.");
+    });
+  </script>
+</body>
+</html>
