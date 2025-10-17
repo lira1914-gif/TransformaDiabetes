@@ -16,6 +16,23 @@ export default function SuscripcionSection() {
   const mensajePostRef = useRef<HTMLDivElement>(null);
   const registroRef = useRef<HTMLDivElement>(null);
 
+  // Inicializar Paddle cuando se carga el componente
+  useEffect(() => {
+    const initializePaddle = async () => {
+      if (window.Paddle) {
+        try {
+          // Para Paddle Billing con transacciones, no necesitamos llamar Initialize
+          // El environment ya está configurado en el script tag
+          console.log('Paddle.js cargado correctamente');
+        } catch (error) {
+          console.error('Error inicializando Paddle:', error);
+        }
+      }
+    };
+    
+    initializePaddle();
+  }, []);
+
   const handleSubscribe = async () => {
     try {
       setIsLoading(true);
@@ -38,24 +55,15 @@ export default function SuscripcionSection() {
 
       const data = await response.json();
       
-      if (data.transactionId) {
-        // Inicializar Paddle y abrir checkout overlay
-        if (window.Paddle) {
-          window.Paddle.Checkout.open({
-            transactionId: data.transactionId,
-            settings: {
-              theme: 'light',
-              locale: 'es',
-              displayMode: 'overlay',
-              successUrl: window.location.origin + '/',
-            },
-          });
-          
-          // Mostrar sección de bienvenida después de abrir checkout
+      if (data.checkoutUrl) {
+        // Abrir Paddle checkout en nueva ventana
+        const checkoutWindow = window.open(data.checkoutUrl, '_blank', 'width=600,height=800');
+        
+        if (checkoutWindow) {
+          // Mostrar sección de bienvenida (el usuario puede seguir mientras tanto)
           setShowBienvenida(true);
         } else {
-          console.error('Paddle.js no está cargado');
-          alert('Error al cargar el sistema de pagos. Por favor, recarga la página.');
+          alert('Por favor, permite ventanas emergentes para completar el pago.');
         }
       }
       

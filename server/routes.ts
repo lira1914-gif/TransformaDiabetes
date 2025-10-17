@@ -25,6 +25,21 @@ const paddle = process.env.PADDLE_API_KEY
 console.log('Paddle initialized with environment:', getEnvironment());
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Get Paddle environment info for client initialization
+  app.get("/api/paddle-config", async (req, res) => {
+    try {
+      const environment = getEnvironment();
+      // For now, return environment without client token
+      // Client will initialize Paddle with the transactionId directly
+      res.json({ 
+        environment: environment === Environment.sandbox ? 'sandbox' : 'production'
+      });
+    } catch (error) {
+      console.error("Error getting Paddle config:", error);
+      res.status(500).json({ error: "Could not load payment configuration" });
+    }
+  });
+
   // Paddle Checkout endpoint for subscriptions
   app.post("/api/create-checkout-session", async (req, res) => {
     try {
@@ -61,12 +76,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         })
       });
 
-      // Return the transaction ID for Paddle.js overlay
-      if (!transaction.id) {
-        throw new Error("No transaction ID returned from Paddle");
+      // Return both transaction ID and checkout URL
+      const checkoutUrl = transaction.checkout?.url;
+      
+      if (!transaction.id || !checkoutUrl) {
+        throw new Error("No transaction data returned from Paddle");
       }
 
-      res.json({ transactionId: transaction.id });
+      res.json({ 
+        transactionId: transaction.id,
+        checkoutUrl: checkoutUrl
+      });
     } catch (error: any) {
       console.error("Error creating Paddle checkout:", error);
       
