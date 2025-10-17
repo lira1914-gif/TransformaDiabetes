@@ -63,7 +63,9 @@ Preferred communication style: Simple, everyday language.
   - Congratulates user for learning to listen to their body
   - Blockquote: "Tu cuerpo no puede sanar en estado de alerta. Aprender a escucharlo es la forma más profunda de sanación."
   - Explains next step: receiving functional recommendations
-  - CTA button: "Ver mis recomendaciones iniciales" (placeholder for future feature)
+  - CTA button: "Ver mis recomendaciones iniciales"
+    - If diagnostic completed: navigates to /resultados (shows pattern + 5 recommendations)
+    - If no diagnostic: navigates to /pre-registro (starts diagnostic flow)
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
 ### Backend

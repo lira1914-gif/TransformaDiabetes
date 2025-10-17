@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 
-interface MensajeFinalRegistroProps {
-  onVerRecomendaciones: () => void;
-}
-
-export default function MensajeFinalRegistro({ onVerRecomendaciones }: MensajeFinalRegistroProps) {
+export default function MensajeFinalRegistro() {
+  const [, setLocation] = useLocation();
   return (
     <section
       id="mensajeFinal"
@@ -61,7 +59,17 @@ export default function MensajeFinalRegistro({ onVerRecomendaciones }: MensajeFi
         </p>
 
         <Button
-          onClick={onVerRecomendaciones}
+          onClick={() => {
+            // Verificar si hay resultados del diagnóstico
+            const respuestas = localStorage.getItem('NM_diagnostico_simple');
+            if (respuestas) {
+              // Si ya hizo el diagnóstico, ir a resultados
+              setLocation('/resultados');
+            } else {
+              // Si no ha hecho el diagnóstico, ir al pre-registro
+              setLocation('/pre-registro');
+            }
+          }}
           data-testid="button-ver-recomendaciones"
           style={{
             backgroundColor: '#A15C38',

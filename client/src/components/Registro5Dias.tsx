@@ -83,14 +83,6 @@ export default function Registro5Dias() {
     setShowMensajeFinal(true);
   };
 
-  const handleVerRecomendaciones = () => {
-    // Por ahora solo mostramos un mensaje. En el futuro esto podría navegar a una página de recomendaciones
-    toast({
-      title: "🌿 Próximamente",
-      description: "Las recomendaciones personalizadas estarán disponibles pronto.",
-    });
-  };
-
   return (
     <section 
       id="registro5dias"
@@ -296,7 +288,7 @@ export default function Registro5Dias() {
       {/* Mensaje Final después de completar el registro */}
       {showMensajeFinal && (
         <div ref={mensajeFinalRef}>
-          <MensajeFinalRegistro onVerRecomendaciones={handleVerRecomendaciones} />
+          <MensajeFinalRegistro />
         </div>
       )}
     </section>
