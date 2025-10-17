@@ -20,7 +20,7 @@ export default function Reembolsos() {
             </h1>
 
             <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-              En <strong>NutriMarvin</strong>, queremos que estés completamente satisfecho con nuestro servicio. Por eso, ofrecemos una política de reembolsos clara y justa.
+              En <strong>TransformaDiabetes</strong>, queremos que estés completamente satisfecho con nuestro servicio. Por eso, ofrecemos una política de reembolsos clara y justa.
             </p>
             
             <section>
@@ -28,7 +28,7 @@ export default function Reembolsos() {
                 1. Garantía de satisfacción
               </h2>
               <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                Ofrecemos una <strong>garantía de reembolso de 7 días</strong> desde la fecha de tu primera suscripción. Si durante este período decides que NutriMarvin no es lo que esperabas, te devolvemos el 100% de tu inversión sin preguntas.
+                Ofrecemos una <strong>garantía de reembolso de 7 días</strong> desde la fecha de tu primera suscripción. Si durante este período decides que TransformaDiabetes no es lo que esperabas, te devolvemos el 100% de tu inversión sin preguntas.
               </p>
             </section>
 
@@ -69,7 +69,7 @@ export default function Reembolsos() {
                 Para solicitar tu reembolso:
               </p>
               <ol className="list-decimal pl-6 space-y-2 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                <li>Envía un correo a <a href="mailto:reembolsos@nutrimarvin.com" className="hover:underline" style={{ color: '#A15C38' }}>reembolsos@nutrimarvin.com</a></li>
+                <li>Envía un correo a <a href="mailto:reembolsos@transformadiabetes.com" className="hover:underline" style={{ color: '#A15C38' }}>reembolsos@transformadiabetes.com</a></li>
                 <li>Incluye tu nombre completo, correo de registro y razón de la solicitud (opcional)</li>
                 <li>Procesaremos tu solicitud en un plazo de 2-3 días hábiles</li>
                 <li>El reembolso se reflejará en tu cuenta según los tiempos de tu banco o tarjeta (5-10 días hábiles)</li>
@@ -81,7 +81,7 @@ export default function Reembolsos() {
                 5. Cancelación de suscripción
               </h2>
               <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                Si decides que NutriMarvin no es para ti después de los 7 días, puedes cancelar tu suscripción en cualquier momento desde tu perfil o escribiendo a soporte. No habrá cargos futuros, pero no se reembolsarán períodos ya facturados.
+                Si decides que TransformaDiabetes no es para ti después de los 7 días, puedes cancelar tu suscripción en cualquier momento desde tu perfil o escribiendo a soporte. No habrá cargos futuros, pero no se reembolsarán períodos ya facturados.
               </p>
             </section>
 
@@ -112,11 +112,11 @@ export default function Reembolsos() {
               </p>
               <p className="text-sm sm:text-base">
                 <a 
-                  href="mailto:reembolsos@nutrimarvin.com"
+                  href="mailto:reembolsos@transformadiabetes.com"
                   className="hover:underline"
                   style={{ color: '#A15C38' }}
                 >
-                  reembolsos@nutrimarvin.com
+                  reembolsos@transformadiabetes.com
                 </a>
               </p>
             </section>

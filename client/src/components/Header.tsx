@@ -35,11 +35,11 @@ export default function Header() {
       <Link href="/" className="flex items-center">
         <img 
           src="https://i.ibb.co/XZcPNfw/nutrimarvin-logo-olivo.png" 
-          alt="NutriMarvin Logo" 
+          alt="TransformaDiabetes Logo" 
           className="h-10 sm:h-11 mr-2 sm:mr-3"
         />
         <h1 className="text-lg sm:text-xl font-semibold m-0" style={{ color: '#4B4B3B' }}>
-          NutriMarvin
+          TransformaDiabetes
         </h1>
       </Link>
 

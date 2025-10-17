@@ -6,7 +6,7 @@ export default function HistoriasSection() {
     {
       nombre: "Peter B.",
       edad: 57,
-      quote: "Llegué con una A1c de 11.5% y más de 65 libras de sobrepeso.\nEn menos de 6 meses, mi glucosa se estabilizó, bajé 40 libras y, por primera vez en años, duermo sin dolor.\nLo que aprendí con NutriMarvin cambió mi relación con la comida y conmigo mismo.",
+      quote: "Llegué con una A1c de 11.5% y más de 65 libras de sobrepeso.\nEn menos de 6 meses, mi glucosa se estabilizó, bajé 40 libras y, por primera vez en años, duermo sin dolor.\nLo que aprendí con TransformaDiabetes cambió mi relación con la comida y conmigo mismo.",
       resultado: "HbA1c de 11.5% → 6.5% | -40 lb",
       nota: "Energía, descanso y libertad del miedo al azúcar.",
     },

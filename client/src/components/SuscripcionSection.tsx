@@ -50,7 +50,7 @@ export default function SuscripcionSection() {
           <em>"Tu cuerpo no está roto — solo está protegiéndose."</em>
         </p>
 
-        <h2>Suscripción NutriMarvin Funcional</h2>
+        <h2>Suscripción TransformaDiabetes Funcional</h2>
 
         <div>
           <h3>Qué recibes por $5/mes:</h3>
@@ -86,7 +86,7 @@ export default function SuscripcionSection() {
           <section className="disclaimer">
             <p>
               <strong>🩺 Aviso importante:</strong><br />
-              El contenido presentado en NutriMarvin tiene fines exclusivamente educativos y no sustituye el consejo, diagnóstico ni tratamiento médico profesional. 
+              El contenido presentado en TransformaDiabetes tiene fines exclusivamente educativos y no sustituye el consejo, diagnóstico ni tratamiento médico profesional. 
               La información compartida busca ayudarte a comprender mejor las señales de tu cuerpo desde un enfoque de nutrición funcional y autoconocimiento.
             </p>
             <p>
@@ -99,7 +99,7 @@ export default function SuscripcionSection() {
 
           <footer className="mini-disclaimer">
             <p>
-              © 2025 NutriMarvin. Este contenido es educativo y no sustituye la orientación médica profesional. 
+              © 2025 TransformaDiabetes. Este contenido es educativo y no sustituye la orientación médica profesional. 
               Consulta siempre con tu médico antes de realizar cambios en tu alimentación o tratamiento.
             </p>
           </footer>
@@ -131,7 +131,7 @@ export default function SuscripcionSection() {
               }}
             >
               <h1 style={{ color: '#556B2F', textAlign: 'center' }}>
-                ✨ Bienvenido a NutriMarvin Funcional
+                ✨ Bienvenido a TransformaDiabetes Funcional
               </h1>
               <h2 style={{ color: '#A15C38', textAlign: 'center', fontSize: '1.5rem', marginTop: '0.5rem' }}>
                 Tu camino hacia el equilibrio comienza hoy

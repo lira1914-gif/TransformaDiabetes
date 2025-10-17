@@ -20,7 +20,7 @@ export default function Privacidad() {
             </h1>
 
             <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-              En <strong>NutriMarvin</strong>, tu confianza es nuestra prioridad. Nos comprometemos a proteger tu información personal y a manejarla con total transparencia y respeto.
+              En <strong>TransformaDiabetes</strong>, tu confianza es nuestra prioridad. Nos comprometemos a proteger tu información personal y a manejarla con total transparencia y respeto.
             </p>
             
             <section>
@@ -69,11 +69,11 @@ export default function Privacidad() {
               </p>
               <p className="text-sm sm:text-base">
                 <a 
-                  href="mailto:privacidad@nutrimarvin.com"
+                  href="mailto:privacidad@transformadiabetes.com"
                   className="hover:underline"
                   style={{ color: '#A15C38' }}
                 >
-                  privacidad@nutrimarvin.com
+                  privacidad@transformadiabetes.com
                 </a>
               </p>
             </section>

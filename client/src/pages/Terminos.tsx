@@ -20,7 +20,7 @@ export default function Terminos() {
             </h1>
 
             <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-              Bienvenido a <strong>NutriMarvin</strong>. Al utilizar nuestro sitio web y servicios, aceptas los siguientes términos y condiciones. Por favor léelos con atención.
+              Bienvenido a <strong>TransformaDiabetes</strong>. Al utilizar nuestro sitio web y servicios, aceptas los siguientes términos y condiciones. Por favor léelos con atención.
             </p>
             
             <section>
@@ -28,7 +28,7 @@ export default function Terminos() {
                 1. Aceptación de términos
               </h2>
               <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                Al acceder o utilizar NutriMarvin, confirmas que has leído, comprendido y aceptado estos términos. Si no estás de acuerdo, no utilices nuestros servicios.
+                Al acceder o utilizar TransformaDiabetes, confirmas que has leído, comprendido y aceptado estos términos. Si no estás de acuerdo, no utilices nuestros servicios.
               </p>
             </section>
 
@@ -37,7 +37,7 @@ export default function Terminos() {
                 2. Naturaleza educativa del servicio
               </h2>
               <p className="mb-3 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                NutriMarvin ofrece contenido educativo sobre nutrición funcional y reversión de diabetes tipo 2. Nuestro diagnóstico funcional y recomendaciones:
+                TransformaDiabetes ofrece contenido educativo sobre nutrición funcional y reversión de diabetes tipo 2. Nuestro diagnóstico funcional y recomendaciones:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
                 <li><strong>No constituyen asesoramiento médico</strong></li>
@@ -52,7 +52,7 @@ export default function Terminos() {
                 3. Responsabilidad del usuario
               </h2>
               <p className="mb-3 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                Al utilizar NutriMarvin, tú eres responsable de:
+                Al utilizar TransformaDiabetes, tú eres responsable de:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
                 <li>Consultar a tu médico antes de implementar cambios en tu alimentación o tratamiento</li>
@@ -67,7 +67,7 @@ export default function Terminos() {
                 4. Suscripción y pagos
               </h2>
               <p className="mb-3 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                Al suscribirte a NutriMarvin por $5 USD al mes:
+                Al suscribirte a TransformaDiabetes por $5 USD al mes:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
                 <li>Aceptas el cargo recurrente mensual procesado por Paddle</li>
@@ -82,7 +82,7 @@ export default function Terminos() {
                 5. Propiedad intelectual
               </h2>
               <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                Todo el contenido de NutriMarvin (textos, guías, diagnósticos, diseños) es propiedad exclusiva de NutriMarvin y está protegido por leyes de propiedad intelectual. No puedes reproducir, distribuir o modificar el contenido sin autorización expresa.
+                Todo el contenido de TransformaDiabetes (textos, guías, diagnósticos, diseños) es propiedad exclusiva de TransformaDiabetes y está protegido por leyes de propiedad intelectual. No puedes reproducir, distribuir o modificar el contenido sin autorización expresa.
               </p>
             </section>
 
@@ -91,7 +91,7 @@ export default function Terminos() {
                 6. Limitación de responsabilidad
               </h2>
               <p className="text-sm sm:text-base" style={{ color: '#3A3A3A' }}>
-                NutriMarvin no se hace responsable por decisiones tomadas basándose únicamente en nuestro contenido. No garantizamos resultados específicos de salud ni reemplazo de tratamientos médicos. Cualquier implementación de nuestras recomendaciones es bajo tu propia responsabilidad.
+                TransformaDiabetes no se hace responsable por decisiones tomadas basándose únicamente en nuestro contenido. No garantizamos resultados específicos de salud ni reemplazo de tratamientos médicos. Cualquier implementación de nuestras recomendaciones es bajo tu propia responsabilidad.
               </p>
             </section>
 
@@ -131,11 +131,11 @@ export default function Terminos() {
               </p>
               <p className="text-sm sm:text-base">
                 <a 
-                  href="mailto:soporte@nutrimarvin.com"
+                  href="mailto:soporte@transformadiabetes.com"
                   className="hover:underline"
                   style={{ color: '#A15C38' }}
                 >
-                  soporte@nutrimarvin.com
+                  soporte@transformadiabetes.com
                 </a>
               </p>
             </section>

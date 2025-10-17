@@ -322,7 +322,7 @@ export default function Resultados() {
                   className="w-full sm:w-auto mx-auto block"
                   data-testid="button-subscribe-results"
                 >
-                  Suscribirme al Plan NutriMarvin ($5/mes)
+                  Suscribirme al Plan TransformaDiabetes ($5/mes)
                 </Button>
               </Link>
             </div>

@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 export default function Bienvenida() {
   useEffect(() => {
     // Clear diagnostic answers from localStorage
-    localStorage.removeItem('respuestasNutriMarvin');
+    localStorage.removeItem('respuestasTransformaDiabetes');
   }, []);
 
   return (
@@ -48,7 +48,7 @@ export default function Bienvenida() {
             className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4" 
             style={{ color: '#3E3E2E' }}
           >
-            ¡Bienvenido al Plan NutriMarvin!
+            ¡Bienvenido al Plan TransformaDiabetes!
           </h1>
 
           <p 

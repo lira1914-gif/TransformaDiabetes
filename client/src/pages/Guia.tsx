@@ -198,7 +198,7 @@ export default function Guia() {
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
               data-testid="button-suscribirme"
             >
-              Suscribirme al Plan NutriMarvin
+              Suscribirme al Plan TransformaDiabetes
             </button>
           </section>
         </div>

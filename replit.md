@@ -1,7 +1,12 @@
-# NutriMarvin - Revertir DM2
+# TransformaDiabetes - Revertir DM2
 
 ## Overview
-NutriMarvin is a health and wellness web application dedicated to type 2 diabetes reversal through functional nutrition education. It offers educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform aims to build trust and reduce health anxiety with an empathetic, wellness-focused design.
+TransformaDiabetes is a health and wellness web application dedicated to type 2 diabetes reversal through functional nutrition education. It offers educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform aims to build trust and reduce health anxiety with an empathetic, wellness-focused design.
+
+## Brand Identity
+**Name:** TransformaDiabetes
+**Previous Name:** NutriMarvin (discontinued due to trademark conflict with nutrimarvin.com - Brazilian nutritionist in same industry)
+**Change Date:** October 2025
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

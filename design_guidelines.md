@@ -1,4 +1,4 @@
-# NutriMarvin - Revertir DM2: Design Guidelines
+# TransformaDiabetes - Revertir DM2: Design Guidelines
 
 ## Design Approach: Wellness-Focused Reference Design
 Drawing inspiration from leading health platforms (Headspace, Noom, Calm) that balance educational authority with emotional warmth. This approach creates trust through clean layouts while maintaining an approachable, hopeful aesthetic essential for health transformation narratives.
@@ -90,7 +90,7 @@ Drawing inspiration from leading health platforms (Headspace, Noom, Calm) that b
 - Secondary CTA: "Únete por $5/mes" with value proposition
 
 ### Footer
-- 3-column layout: Acerca de NutriMarvin | Enlaces Rápidos | Newsletter + Social
+- 3-column layout: Acerca de TransformaDiabetes | Enlaces Rápidos | Newsletter + Social
 - Newsletter: Input + submit in verde oliva
 - Background: Verde oliva dark, light text
 - Disclaimer: Small text about educational nature, not medical advice
