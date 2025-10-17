@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import heroImage from "@assets/stock_images/man_looking_at_table_52c21fbb.jpg";
 
 export default function HeroSection() {
   return (
@@ -83,8 +84,8 @@ export default function HeroSection() {
               }}
             >
               <img
-                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
-                alt="Persona aprendiendo sobre salud funcional"
+                src={heroImage}
+                alt="Persona viendo tablet con información de salud"
                 className="w-full h-auto object-cover"
                 style={{
                   aspectRatio: '4/3',
