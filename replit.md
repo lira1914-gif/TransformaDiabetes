@@ -12,7 +12,7 @@ Preferred communication style: Simple, everyday language.
 - **Frameworks & Libraries**: React 18 with TypeScript, Vite, Wouter for routing, TanStack Query for state management.
 - **UI/UX**: Radix UI primitives, shadcn/ui (New York style), Tailwind CSS with custom design tokens. Uses Playfair Display for headings and Inter for body text. Features a wellness-focused color palette (olive green, beige, terracotta) and a responsive, mobile-first design.
 - **Key Features**: 
-  - **Landing Page**: Subscription-focused design with hero section, benefits grid (6 key features for $5/month), 4-step "Cómo funciona" process, and prominent CTA
+  - **Landing Page**: Simplified, conversion-focused design with minimal hero section emphasizing "Tu cuerpo no está roto. Solo está protegiéndose." Direct CTA to diagnostic flow.
   - Multi-step diagnostic wizard (3 questions mapping to 4 health axes and 10 patterns)
   - Personalized results with 5-point recommendations integrated with pattern-specific Mini Guías Funcionales
   - Legal pages: Términos de Servicio, Política de Privacidad, Política de Reembolsos (required for Paddle onboarding)
