@@ -102,25 +102,57 @@ Preferred communication style: Simple, everyday language.
   - Sections have IDs for anchor navigation (#que-es, #pilares, #suscripcion)
   - Header "Inicio" link scrolls to top when already on home page
   - /suscripcion route redirects to home with scroll to #suscripcion section
-- **Subscription Flow**: Multi-step inline flow within same page:
-  1. Clicking "Unirme por $5 USD/mes" reveals welcome section with fade-in animation
-  2. Clicking "Empezar mi registro funcional" reveals bloque motivacional rotatorio (with auto-rotating messages)
-  3. Clicking "Comenzar mi formulario de salud" reveals Mes 1 Tracker dashboard
-  4. Clicking "Ir a mi registro de 5 días" reveals intake form + 5-day registration (both appear together)
-  5. Completing intake form reveals motivational post-intake message (sets tm_intake_done = true)
-  6. Clicking "Comenzar mi registro de 5 días" reveals 5-day registration form
-  7. Completing and saving 5-day registration reveals final completion message (sets tm_registro_dias = 5)
-  8. Clicking "Ver mis recomendaciones iniciales" scrolls to Mes 1 Tracker (if informe not generated) or to Informe (if already generated)
-  9. When 5 days completed, "Generar mi informe inicial" button appears in Mes 1 Tracker
-  10. Clicking "Generar mi informe inicial" shows full functional report (sets tm_informe_ready = true)
-  - No route changes, smooth scroll animations between sections
-  - All data persists in localStorage:
-    - intakeTransformaDiabetes: intake form data (JSON)
-    - registro5dias: 5-day registration data (JSON array)
-    - tm_subscribed_at: subscription timestamp
-    - tm_intake_done: "true" when intake completed
-    - tm_registro_dias: number of days registered (0-5)
-    - tm_informe_ready: "true" when informe generated
+
+- **Subscription Onboarding Flow** (Multi-Page Sequential Architecture):
+  **Design Choice**: Refactored from single-page scroll to multi-page routing to enforce sequential completion and prevent step-skipping
+  
+  **Page Flow**:
+  1. `/` (Home) → User clicks "Unirme por $5 USD/mes" → Payment modal → Sets `tm_subscribed_at`
+  2. `/onboarding/bienvenida` (Welcome) → Explains benefits → CTA sets `tm_bienvenida_done` → Redirects to Motivación
+  3. `/onboarding/motivacion` (Motivation) → Rotating messages → CTA sets `tm_motivacion_done` → Redirects to Mes1
+  4. `/onboarding/mes1` (Month 1 Tracker) → Shows progress dashboard → CTA redirects to Registro
+  5. `/onboarding/registro` (Registration) → Intake form + 5-day tracking → Sets `tm_intake_done` and `tm_registro_dias`
+  6. `/onboarding/mes1` (Return) → "Generar informe" button appears when 5 days complete → Sets `tm_informe_ready`
+  7. `/onboarding/informe` (Functional Report) → Displays complete analysis and recommendations
+
+  **Sequential Validation System** (Prevents Step-Skipping):
+  Each page validates ALL prior prerequisites via localStorage markers before rendering:
+  
+  - **Bienvenida** (`/onboarding/bienvenida`):
+    - Requires: `tm_subscribed_at`
+    - Sets: `tm_bienvenida_done = "true"` on CTA click
+    - Redirects to: `/` if not subscribed
+  
+  - **Motivación** (`/onboarding/motivacion`):
+    - Requires: `tm_bienvenida_done`
+    - Sets: `tm_motivacion_done = "true"` on CTA click
+    - Redirects to: `/onboarding/bienvenida` if bienvenida incomplete, `/` if not subscribed
+  
+  - **Mes1** (`/onboarding/mes1`):
+    - Requires: `tm_motivacion_done`
+    - Redirects to: `/onboarding/motivacion` if motivacion incomplete, `/onboarding/bienvenida` if bienvenida incomplete, `/` if not subscribed
+  
+  - **Registro** (`/onboarding/registro`):
+    - Requires: `tm_motivacion_done`
+    - Same redirect logic as Mes1
+    - Conditionally displays: IntakeForm → MensajePostIntake → Registro5Dias → MensajeFinalRegistro
+  
+  - **Informe** (`/onboarding/informe`):
+    - Requires ALL: `tm_subscribed_at`, `tm_bienvenida_done`, `tm_motivacion_done`, `tm_registro_dias >= 5`, `tm_informe_ready = "true"`
+    - Redirects to: Earliest incomplete step in sequence
+
+  **LocalStorage Progression Markers**:
+  - `tm_subscribed_at`: Subscription timestamp (required for all onboarding pages)
+  - `tm_bienvenida_done`: "true" when Bienvenida completed (required for Motivación+)
+  - `tm_motivacion_done`: "true" when Motivación completed (required for Mes1+)
+  - `tm_intake_done`: "true" when intake form completed
+  - `tm_registro_dias`: "0"-"5" number of days registered (required = 5 for Informe)
+  - `tm_informe_ready`: "true" when report generated (required for Informe)
+  - `intakeTransformaDiabetes`: JSON with intake form data
+  - `registro5dias`: JSON array with 5-day registration data
+
+  **Security**: Direct URL navigation is blocked by validation checks. Users cannot skip steps even with manual localStorage manipulation.
+
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
 - **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
 
