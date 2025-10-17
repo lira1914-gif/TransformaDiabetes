@@ -138,6 +138,7 @@ export default function SuscripcionSection() {
   }, [showRegistro]);
 
   const handleIniciarRegistro = () => {
+    console.log('✅ Botón "Empezar mi registro funcional" clickeado');
     setShowBloqueMotivacional(true);
   };
 
@@ -298,7 +299,10 @@ export default function SuscripcionSection() {
                   Este registro será la base para tus recomendaciones personalizadas.
                 </p>
                 <button 
-                  onClick={handleIniciarRegistro}
+                  onClick={() => {
+                    console.log('🔵 Click detectado en botón');
+                    handleIniciarRegistro();
+                  }}
                   data-testid="button-iniciar-registro"
                   style={{
                     display: 'block',
@@ -311,7 +315,8 @@ export default function SuscripcionSection() {
                     cursor: 'pointer',
                     fontWeight: 600,
                     fontSize: '1rem',
-                    transition: 'background 0.3s'
+                    transition: 'background 0.3s',
+                    pointerEvents: 'auto'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.background = '#4A5C26'}
                   onMouseLeave={(e) => e.currentTarget.style.background = '#556B2F'}
