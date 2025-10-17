@@ -23,6 +23,12 @@ Preferred communication style: Simple, everyday language.
   - 🌙 Estrés → "Guía del Estrés" + "No todo lo que te acelera te impulsa; a veces te apaga."
   - 🔥 Inflamatorio → "Guía Inflamatoria" + "La inflamación no es enemiga; es el lenguaje de tu cuerpo pidiendo equilibrio."
   - Combined patterns inherit guide from their primary pattern.
+- **Welcome Section (Bienvenida)**: Appears inline after clicking subscribe with fade-in animation:
+  - Translucent background with Unsplash nature image overlay
+  - White semi-transparent card (rgba(255,255,255,0.85)) containing welcome content
+  - 6 subscription benefits including blood analysis review
+  - 5-day registration instructions
+  - Motivational closing phrase: "Tu cuerpo no está roto, solo está protegiéndose. Vamos a enseñarle cómo sentirse seguro otra vez." (with light green background)
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
 ### Backend

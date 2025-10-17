@@ -150,6 +150,7 @@ export default function SuscripcionSection() {
                   <li>Recomendaciones iniciales de alimentación y estilo de vida.</li>
                   <li>Seguimiento semanal y actualización de tus avances.</li>
                   <li>Evaluación de suplementos según tu caso, con precauciones y disclaimers.</li>
+                  <li>Revisión de análisis de sangre y contexto clínico general.</li>
                 </ul>
 
                 <h3 style={{ color: '#556B2F' }}>🧠 Antes de iniciar</h3>
@@ -181,6 +182,26 @@ export default function SuscripcionSection() {
                 >
                   Empezar mi registro funcional
                 </button>
+              </div>
+
+              {/* Frase motivacional final */}
+              <div 
+                data-testid="motivational-phrase"
+                style={{ 
+                  marginTop: '2rem', 
+                  padding: '1.2rem', 
+                  background: 'rgba(85,107,47,0.08)', 
+                  borderRadius: '10px', 
+                  textAlign: 'center', 
+                  color: '#556B2F', 
+                  fontStyle: 'italic', 
+                  fontWeight: 500,
+                  lineHeight: 1.6
+                }}
+              >
+                🌿 "Tu cuerpo no está roto, solo está protegiéndose.
+                <br />
+                Vamos a enseñarle cómo sentirse seguro otra vez." 🌿
               </div>
             </div>
           </div>
