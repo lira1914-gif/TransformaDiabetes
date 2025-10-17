@@ -6,15 +6,23 @@ export default function Motivacion() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Verificar que el usuario haya pasado por bienvenida
-    const subscribed = localStorage.getItem('tm_subscribed_at');
-    if (!subscribed) {
-      setLocation('/');
+    // Verificar que el usuario haya completado bienvenida
+    const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
+    if (!bienvenidaDone) {
+      // Si no completó bienvenida, redirigir allí
+      const subscribed = localStorage.getItem('tm_subscribed_at');
+      if (subscribed) {
+        setLocation('/onboarding/bienvenida');
+      } else {
+        setLocation('/');
+      }
       return;
     }
   }, [setLocation]);
 
   const handleContinuar = () => {
+    // Marcar motivación como completada
+    localStorage.setItem('tm_motivacion_done', 'true');
     setLocation('/onboarding/mes1');
   };
 

@@ -8,18 +8,30 @@ export default function Informe() {
   useEffect(() => {
     // Verificar que el usuario haya completado todos los pasos previos
     const subscribed = localStorage.getItem('tm_subscribed_at');
+    const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
+    const motivacionDone = localStorage.getItem('tm_motivacion_done');
     const informeReady = localStorage.getItem('tm_informe_ready') === 'true';
     const diasRegistrados = parseInt(localStorage.getItem('tm_registro_dias') || '0');
     
-    if (!subscribed || !informeReady || diasRegistrados < 5) {
-      // Si no cumple los requisitos, redirigir al paso correspondiente
-      if (!subscribed) {
-        setLocation('/');
-      } else if (diasRegistrados < 5) {
-        setLocation('/onboarding/registro');
-      } else {
-        setLocation('/onboarding/mes1');
-      }
+    // Validar flujo completo
+    if (!subscribed) {
+      setLocation('/');
+      return;
+    }
+    if (!bienvenidaDone) {
+      setLocation('/onboarding/bienvenida');
+      return;
+    }
+    if (!motivacionDone) {
+      setLocation('/onboarding/motivacion');
+      return;
+    }
+    if (diasRegistrados < 5) {
+      setLocation('/onboarding/registro');
+      return;
+    }
+    if (!informeReady) {
+      setLocation('/onboarding/mes1');
       return;
     }
   }, [setLocation]);

@@ -14,6 +14,8 @@ export default function Bienvenida() {
   }, [setLocation]);
 
   const handleContinuar = () => {
+    // Marcar bienvenida como completada
+    localStorage.setItem('tm_bienvenida_done', 'true');
     setLocation('/onboarding/motivacion');
   };
 

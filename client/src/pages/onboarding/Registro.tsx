@@ -12,10 +12,21 @@ export default function Registro() {
   const [showMensajeFinal, setShowMensajeFinal] = useState(false);
 
   useEffect(() => {
-    // Verificar que el usuario haya pasado por los pasos anteriores
-    const subscribed = localStorage.getItem('tm_subscribed_at');
-    if (!subscribed) {
-      setLocation('/');
+    // Verificar que el usuario haya completado motivación (paso anterior)
+    const motivacionDone = localStorage.getItem('tm_motivacion_done');
+    if (!motivacionDone) {
+      // Si no completó motivación, redirigir al flujo correcto
+      const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
+      if (bienvenidaDone) {
+        setLocation('/onboarding/motivacion');
+      } else {
+        const subscribed = localStorage.getItem('tm_subscribed_at');
+        if (subscribed) {
+          setLocation('/onboarding/bienvenida');
+        } else {
+          setLocation('/');
+        }
+      }
       return;
     }
 
