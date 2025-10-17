@@ -125,16 +125,19 @@ Preferred communication style: Simple, everyday language.
 
 ### Payment Integration
 - **Paddle Billing** (for $5/month subscriptions)
-  - Server-side: `@paddle/paddle-node-sdk` for transaction creation
-  - API endpoint: `/api/create-checkout-session` creates Paddle transactions and returns checkout URLs
+  - **Client-side**: Paddle.js loaded from CDN (https://cdn.paddle.com/paddle/v2/paddle.js) with sandbox environment
+  - **Server-side**: `@paddle/paddle-node-sdk` for transaction creation
+  - **API endpoint**: `/api/create-checkout-session` creates Paddle transactions and returns transaction IDs
+  - **Checkout Method**: Paddle Overlay (modal) - opens directly on page, no redirect needed
   - Environment: Auto-detects sandbox vs production based on API key prefix (pdl_sdbx_ = sandbox, pdl_live_ = production)
-  - Current Status: **Configured in Sandbox mode** - fully functional for testing
+  - Current Status: **Configured in Sandbox mode with Overlay** - fully functional for testing
     - Sandbox API Key: pdl_sdbx_... (configured in secrets)
     - Sandbox Price ID: pri_01k7q8k5740qednqg9wepm2g5v
-    - Default Payment Link: Configured in Paddle dashboard
+    - Checkout: Overlay modal with Spanish locale, light theme
   - Production Migration: When Paddle onboarding completes, update secrets with production credentials:
     - Replace PADDLE_API_KEY with live key (pdl_live_...)
     - Replace PADDLE_PRICE_ID with production price ID
+    - Change data-environment="sandbox" to data-environment="production" in client/index.html
     - System will auto-detect and switch to production mode
-  - Flow: User clicks subscribe → Backend creates transaction → Redirect to Paddle hosted checkout
-  - Advantages: Multi-currency support (30+ currencies), automatic tax/VAT compliance, acts as Merchant of Record
+  - Flow: User clicks subscribe → Backend creates transaction → Frontend opens Paddle overlay modal → User completes payment → Welcome section appears
+  - Advantages: Multi-currency support (30+ currencies), automatic tax/VAT compliance, acts as Merchant of Record, seamless overlay experience

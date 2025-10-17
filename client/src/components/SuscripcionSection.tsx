@@ -38,12 +38,25 @@ export default function SuscripcionSection() {
 
       const data = await response.json();
       
-      if (data.url) {
-        // Abrir Paddle checkout en nueva pestaña
-        window.open(data.url, '_blank');
-        
-        // Mostrar sección de bienvenida (el usuario puede completar mientras tanto)
-        setShowBienvenida(true);
+      if (data.transactionId) {
+        // Inicializar Paddle y abrir checkout overlay
+        if (window.Paddle) {
+          window.Paddle.Checkout.open({
+            transactionId: data.transactionId,
+            settings: {
+              theme: 'light',
+              locale: 'es',
+              displayMode: 'overlay',
+              successUrl: window.location.origin + '/',
+            },
+          });
+          
+          // Mostrar sección de bienvenida después de abrir checkout
+          setShowBienvenida(true);
+        } else {
+          console.error('Paddle.js no está cargado');
+          alert('Error al cargar el sistema de pagos. Por favor, recarga la página.');
+        }
       }
       
       setIsLoading(false);

@@ -61,14 +61,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         })
       });
 
-      // Return the checkout URL from the transaction
-      const checkoutUrl = transaction.checkout?.url;
-      
-      if (!checkoutUrl) {
-        throw new Error("No checkout URL returned from Paddle");
+      // Return the transaction ID for Paddle.js overlay
+      if (!transaction.id) {
+        throw new Error("No transaction ID returned from Paddle");
       }
 
-      res.json({ url: checkoutUrl });
+      res.json({ transactionId: transaction.id });
     } catch (error: any) {
       console.error("Error creating Paddle checkout:", error);
       
