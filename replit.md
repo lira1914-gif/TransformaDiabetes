@@ -50,7 +50,13 @@ Preferred communication style: Simple, everyday language.
   - Rotating daily tips (5 functional suggestions)
   - CTA: "Ir a mi registro de 5 días" to jump to intake + 5-day form
   - Shows "Generar mi informe inicial" button when 5 days completed
-  - Placeholder section for initial functional report (hidden until 5 days completed)
+- **Informe Funcional - Semana 1**: Complete functional report that appears after clicking "Generar mi informe inicial":
+  - Reveals detected functional pattern (e.g., "metabólico adaptativo")
+  - 6 primary functional steps: balance meals, eliminate inflammatory foods, prioritize digestion, regulate stress, sleep optimization, gentle movement
+  - 4 complementary recommendations: liver support, lymphatic stimulation, avoid microplastics, eat natural foods
+  - Motivational quote: "Sanar no es controlar, es comprender el mensaje de tu cuerpo"
+  - CTA: "Continuar al Mes 2 — Ajusta y experimenta" (placeholder for future development)
+  - Smooth fade-in animation on appearance
 - **Formulario de Historial Funcional (Intake)**: Medical history form for functional assessment:
   - Appears after clicking "Ir a mi registro de 5 días" in Mes 1 Tracker
   - 15 comprehensive fields covering: demographics (name, age, sex, email), medical history (diagnoses, medications, supplements, family history), digestive health (bowel frequency, symptoms), lifestyle (sleep hours, energy level, recent diet, physical activity, stress level), and personal goals
