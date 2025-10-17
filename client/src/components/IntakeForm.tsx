@@ -57,6 +57,8 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     e.preventDefault();
     
     localStorage.setItem('intakeTransformaDiabetes', JSON.stringify(formData));
+    // Marcar que el intake está completado
+    localStorage.setItem('tm_intake_done', 'true');
     
     toast({
       title: "✅ Historial guardado",

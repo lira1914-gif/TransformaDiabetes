@@ -85,8 +85,9 @@ Preferred communication style: Simple, everyday language.
   - Blockquote: "Tu cuerpo no puede sanar en estado de alerta. Aprender a escucharlo es la forma más profunda de sanación."
   - Explains next step: receiving functional recommendations
   - CTA button: "Ver mis recomendaciones iniciales"
-    - If diagnostic completed: navigates to /resultados (shows pattern + 5 recommendations)
-    - If no diagnostic: navigates to /pre-registro (starts diagnostic flow)
+    - If tm_informe_ready = true: scrolls to #informe-inicial (shows full functional report)
+    - If tm_informe_ready = false: scrolls to #mes1 (Mes 1 Tracker to see "Generar informe" button)
+    - **IMPORTANT**: Does NOT navigate to /resultados (diagnostic flow is separate from subscription flow)
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
 ### Backend
@@ -106,11 +107,20 @@ Preferred communication style: Simple, everyday language.
   2. Clicking "Empezar mi registro funcional" reveals bloque motivacional rotatorio (with auto-rotating messages)
   3. Clicking "Comenzar mi formulario de salud" reveals Mes 1 Tracker dashboard
   4. Clicking "Ir a mi registro de 5 días" reveals intake form + 5-day registration (both appear together)
-  5. Completing intake form reveals motivational post-intake message
+  5. Completing intake form reveals motivational post-intake message (sets tm_intake_done = true)
   6. Clicking "Comenzar mi registro de 5 días" reveals 5-day registration form
-  7. Completing and saving 5-day registration reveals final completion message
+  7. Completing and saving 5-day registration reveals final completion message (sets tm_registro_dias = 5)
+  8. Clicking "Ver mis recomendaciones iniciales" scrolls to Mes 1 Tracker (if informe not generated) or to Informe (if already generated)
+  9. When 5 days completed, "Generar mi informe inicial" button appears in Mes 1 Tracker
+  10. Clicking "Generar mi informe inicial" shows full functional report (sets tm_informe_ready = true)
   - No route changes, smooth scroll animations between sections
-  - All data persists in localStorage (intakeTransformaDiabetes + registro5dias + tm_subscribed_at + tm_registro_dias)
+  - All data persists in localStorage:
+    - intakeTransformaDiabetes: intake form data (JSON)
+    - registro5dias: 5-day registration data (JSON array)
+    - tm_subscribed_at: subscription timestamp
+    - tm_intake_done: "true" when intake completed
+    - tm_registro_dias: number of days registered (0-5)
+    - tm_informe_ready: "true" when informe generated
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
 - **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
 

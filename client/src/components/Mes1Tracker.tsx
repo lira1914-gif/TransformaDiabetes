@@ -35,6 +35,13 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
       const randomTip = tips[Math.floor(Math.random() * tips.length)];
       setTipDelDia(randomTip);
 
+      // Verificar si el informe ya fue generado
+      const informeReady = localStorage.getItem('tm_informe_ready') === 'true';
+      if (informeReady) {
+        setMostrarInforme(true);
+        setInformeVisible(true);
+      }
+
       // Chequear progreso del registro
       const checkProgreso = () => {
         const registroData = localStorage.getItem('registro5dias');
@@ -57,6 +64,8 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
     }, []);
 
     const handleGenerarInforme = () => {
+      // Marcar que el informe está listo
+      localStorage.setItem('tm_informe_ready', 'true');
       setMostrarInforme(true);
       setTimeout(() => {
         setInformeVisible(true);

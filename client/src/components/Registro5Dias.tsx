@@ -75,6 +75,8 @@ export default function Registro5Dias() {
     e.preventDefault();
     // Guardar en localStorage
     localStorage.setItem('registro5dias', JSON.stringify(dias));
+    // Actualizar número de días registrados
+    localStorage.setItem('tm_registro_dias', String(dias.length));
     toast({
       title: "✅ Registro guardado",
       description: "Tu registro funcional ha sido completado correctamente.",
