@@ -37,8 +37,14 @@ Preferred communication style: Simple, everyday language.
   - 6 subscription benefits including blood analysis review
   - CTA: "Empezar mi registro funcional" to begin intake process
   - Motivational closing phrase: "Tu cuerpo no está roto, solo está protegiéndose. Vamos a enseñarle cómo sentirse seguro otra vez." (with light green background)
+- **Bloque Motivacional Rotatorio**: Appears after clicking "Empezar mi registro funcional":
+  - Displays rotating motivational messages (10 different messages)
+  - Random message selected on each page load
+  - Includes explanation of the registration process (health form + 5-day tracking)
+  - Confidentiality disclaimer
+  - CTA: "Comenzar mi formulario de salud" to start intake form
 - **Formulario de Historial Funcional (Intake)**: Medical history form for functional assessment:
-  - Appears after clicking "Empezar mi registro funcional" in welcome section
+  - Appears after clicking "Comenzar mi formulario de salud" in bloque motivacional
   - 15 comprehensive fields covering: demographics (name, age, sex, email), medical history (diagnoses, medications, supplements, family history), digestive health (bowel frequency, symptoms), lifestyle (sleep hours, energy level, recent diet, physical activity, stress level), and personal goals
   - All data saved to localStorage as JSON (key: "intakeTransformaDiabetes")
   - Motivational copy: "Tu información es confidencial y nos ayuda a personalizar tus recomendaciones"
@@ -83,10 +89,11 @@ Preferred communication style: Simple, everyday language.
   - /suscripcion route redirects to home with scroll to #suscripcion section
 - **Subscription Flow**: Multi-step inline flow within same page:
   1. Clicking "Unirme por $5 USD/mes" reveals welcome section with fade-in animation
-  2. Clicking "Empezar mi registro funcional" reveals intake form (15-field medical history)
-  3. Completing intake form reveals motivational post-intake message
-  4. Clicking "Comenzar mi registro de 5 días" reveals 5-day registration form
-  5. Completing and saving 5-day registration reveals final completion message
+  2. Clicking "Empezar mi registro funcional" reveals bloque motivacional rotatorio (with random daily message)
+  3. Clicking "Comenzar mi formulario de salud" reveals intake form (15-field medical history)
+  4. Completing intake form reveals motivational post-intake message
+  5. Clicking "Comenzar mi registro de 5 días" reveals 5-day registration form
+  6. Completing and saving 5-day registration reveals final completion message
   - No route changes, smooth scroll animations between sections
   - All data persists in localStorage (intakeTransformaDiabetes + registro5dias)
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)

@@ -4,6 +4,7 @@ import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.
 import IntakeForm from "./IntakeForm";
 import MensajePostIntake from "./MensajePostIntake";
 import Registro5Dias from "./Registro5Dias";
+import BloqueMotivacionalRotatorio from "./BloqueMotivacionalRotatorio";
 
 export default function SuscripcionSection() {
   const [showBienvenida, setShowBienvenida] = useState(false);
@@ -327,63 +328,10 @@ export default function SuscripcionSection() {
 
         {/* Bloque Motivacional Diario */}
         {showBloqueMotivacional && (
-          <section 
+          <BloqueMotivacionalRotatorio 
             ref={bloqueMotivacionalRef}
-            id="bloque-motivacional-diario" 
-            style={{
-              textAlign: 'center',
-              padding: '2.5rem 1rem',
-              background: '#FAF8F4',
-              borderRadius: '12px',
-              marginTop: '3rem',
-              animation: 'fadeInUp 1.2s ease forwards'
-            }}
-            data-testid="bloque-motivacional"
-          >
-            <h2 style={{ color: '#556B2F' }}>🌿 ¡Bienvenido a tu espacio funcional!</h2>
-            <p style={{ 
-              maxWidth: '680px', 
-              margin: '1rem auto', 
-              color: '#3A3A3A', 
-              lineHeight: 1.6 
-            }}>
-              Gracias por unirte a <strong>TransformaDiabetes</strong>.  
-              <br />
-              A partir de hoy, empezamos a conocer cómo se comporta tu cuerpo desde la raíz.  
-              <br /><br />
-              🩺 Primero completaremos tu <strong>formulario personal de salud</strong> — esto nos ayudará a entender tu historia, síntomas y hábitos actuales.  
-              <br /><br />
-              Luego pasaremos al <strong>registro funcional de 5 días</strong>, donde podrás anotar lo que comes, cómo duermes y cómo responde tu cuerpo.
-            </p>
-            <p style={{ 
-              fontSize: '0.9rem', 
-              color: '#6F6E66', 
-              marginTop: '1rem' 
-            }}>
-              Este proceso es 100% confidencial y educativo. No reemplaza la atención médica profesional.
-            </p>
-            <button 
-              onClick={handleComenzarFormulario}
-              data-testid="button-comenzar-formulario"
-              style={{
-                display: 'block',
-                margin: '2rem auto',
-                background: '#556B2F',
-                color: '#fff',
-                padding: '1rem 2rem',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 600,
-                fontSize: '1rem',
-                transition: 'background 0.3s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.background = '#4A5C26'}
-              onMouseLeave={(e) => e.currentTarget.style.background = '#556B2F'}
-            >
-              Comenzar mi formulario de salud
-            </button>
-          </section>
+            onComenzar={handleComenzarFormulario}
+          />
         )}
 
         {/* Formulario de Historial Funcional (Intake) */}
