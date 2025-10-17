@@ -34,14 +34,20 @@ Preferred communication style: Simple, everyday language.
   - Translucent background with Unsplash nature image overlay
   - White semi-transparent card (rgba(255,255,255,0.85)) containing welcome content
   - 6 subscription benefits including blood analysis review
-  - 5-day registration instructions
+  - CTA: "Empezar mi registro funcional" to begin intake process
   - Motivational closing phrase: "Tu cuerpo no está roto, solo está protegiéndose. Vamos a enseñarle cómo sentirse seguro otra vez." (with light green background)
-- **Registro de 5 Días**: Multi-day functional registration form:
+- **Formulario de Historial Funcional (Intake)**: Medical history form for functional assessment:
   - Appears after clicking "Empezar mi registro funcional" in welcome section
+  - 15 comprehensive fields covering: demographics (name, age, sex, email), medical history (diagnoses, medications, supplements, family history), digestive health (bowel frequency, symptoms), lifestyle (sleep hours, energy level, recent diet, physical activity, stress level), and personal goals
+  - All data saved to localStorage as JSON (key: "intakeTransformaDiabetes")
+  - Motivational copy: "Tu información es confidencial y nos ayuda a personalizar tus recomendaciones"
+  - On completion, automatically reveals 5-day registration form
+- **Registro de 5 Días**: Multi-day functional registration form:
+  - Appears after completing intake form
   - Dynamic form allowing up to 5 days of tracking
   - Each day captures: food intake (textarea), digestion/elimination (select), sleep quality (select), energy levels (select)
   - "Agregar siguiente día" button to add days incrementally (max 5)
-  - Data saved to localStorage as JSON
+  - Data saved to localStorage as JSON (key: "respuestasTransformaDiabetes")
   - Motivational closing phrase: "Observar es el primer paso para sanar. Tu cuerpo siempre te está hablando."
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
@@ -57,10 +63,12 @@ Preferred communication style: Simple, everyday language.
   - Sections have IDs for anchor navigation (#que-es, #pilares, #suscripcion)
   - Header "Inicio" link scrolls to top when already on home page
   - /suscripcion route redirects to home with scroll to #suscripcion section
-- **Subscription Flow**: Integrated welcome section within same page:
-  - Clicking "Unirme por $5 USD/mes" reveals welcome section with fade-in animation
-  - No route change, smooth scroll to welcome content
-  - Welcome section includes subscription benefits and "Empezar mi registro funcional" CTA
+- **Subscription Flow**: Multi-step inline flow within same page:
+  1. Clicking "Unirme por $5 USD/mes" reveals welcome section with fade-in animation
+  2. Clicking "Empezar mi registro funcional" reveals intake form (15-field medical history)
+  3. Completing intake form reveals 5-day registration form
+  - No route changes, smooth scroll animations between sections
+  - All data persists in localStorage (intake + 5-day diary)
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
 - **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
 

@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import "../styles/suscripcion.css";
 import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.jpg";
+import IntakeForm from "./IntakeForm";
 import Registro5Dias from "./Registro5Dias";
 
 export default function SuscripcionSection() {
   const [showBienvenida, setShowBienvenida] = useState(false);
+  const [showIntake, setShowIntake] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const bienvenidaRef = useRef<HTMLDivElement>(null);
+  const intakeRef = useRef<HTMLDivElement>(null);
   const registroRef = useRef<HTMLDivElement>(null);
 
   const handleSubscribe = () => {
@@ -24,6 +27,15 @@ export default function SuscripcionSection() {
   }, [showBienvenida]);
 
   useEffect(() => {
+    if (showIntake && intakeRef.current) {
+      // Hacer scroll suave al formulario de intake
+      setTimeout(() => {
+        intakeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    }
+  }, [showIntake]);
+
+  useEffect(() => {
     if (showRegistro && registroRef.current) {
       // Hacer scroll suave al formulario de registro
       setTimeout(() => {
@@ -33,6 +45,10 @@ export default function SuscripcionSection() {
   }, [showRegistro]);
 
   const handleIniciarRegistro = () => {
+    setShowIntake(true);
+  };
+
+  const handleIntakeComplete = () => {
     setShowRegistro(true);
   };
 
@@ -216,6 +232,13 @@ export default function SuscripcionSection() {
                 Vamos a enseñarle cómo sentirse seguro otra vez." 🌿
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Formulario de Historial Funcional (Intake) */}
+        {showIntake && (
+          <div ref={intakeRef}>
+            <IntakeForm onComplete={handleIntakeComplete} />
           </div>
         )}
 

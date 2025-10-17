@@ -1,0 +1,101 @@
+<!-- 🌿 FORMULARIO DE INTAKE NUTRIMARVIN -->
+<section id="intake" style="background-color:#FAF8F4;padding:3rem 1.5rem;border-top:1px solid #E6E3D9;">
+  <div style="max-width:700px;margin:auto;background:#FFFFFF;padding:2rem;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.05);">
+    
+    <h2 style="color:#556B2F;text-align:center;margin-bottom:1rem;">🌿 Tu Historia Funcional</h2>
+    <p style="color:#6F6E66;text-align:center;margin-bottom:2rem;">
+      Antes de comenzar tu diario funcional, cuéntame un poco sobre ti.  
+      Tu información es confidencial y nos ayuda a personalizar tus recomendaciones.
+    </p>
+
+    <form id="intakeForm" style="display:grid;gap:1.5rem;">
+      <div>
+        <label>Nombre completo:</label><br>
+        <input type="text" name="nombre" required style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+        <div>
+          <label>Edad:</label><br>
+          <input type="number" name="edad" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+        </div>
+        <div>
+          <label>Sexo:</label><br>
+          <select name="sexo" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+            <option>Femenino</option>
+            <option>Masculino</option>
+            <option>Prefiero no decir</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label>Correo electrónico:</label><br>
+        <input type="email" name="email" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+      </div>
+      <div>
+        <label>Diagnósticos médicos conocidos:</label><br>
+        <textarea name="diagnosticos" rows="2" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+      <div>
+        <label>Medicamentos actuales:</label><br>
+        <textarea name="medicamentos" rows="2" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+      <div>
+        <label>Suplementos que toma:</label><br>
+        <textarea name="suplementos" rows="2" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+      <div>
+        <label>Historial familiar (diabetes, tiroides, autoinmunes, etc.):</label><br>
+        <textarea name="historial_familiar" rows="2" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+      <div>
+        <label>Frecuencia de evacuaciones:</label><br>
+        <select name="evacuaciones" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+          <option>Una vez al día</option>
+          <option>Dos veces al día</option>
+          <option>Cada dos días</option>
+          <option>Menos de tres veces por semana</option>
+        </select>
+      </div>
+      <div>
+        <label>¿Presentas síntomas digestivos?</label><br>
+        <textarea name="digestivos" rows="2" placeholder="Ejemplo: hinchazón, reflujo, estreñimiento..." style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+      <div>
+        <label>Horas promedio de sueño:</label><br>
+        <input type="number" name="sueno" placeholder="Ej. 7" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+      </div>
+      <div>
+        <label>Nivel de energía (1–10):</label><br>
+        <input type="range" min="1" max="10" name="energia" style="width:100%;">
+      </div>
+      <div>
+        <label>Describe lo que comiste en los últimos 3–5 días:</label><br>
+        <textarea name="alimentacion" rows="4" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+      <div>
+        <label>Nivel de actividad física:</label><br>
+        <select name="actividad" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+          <option>Bajo</option>
+          <option>Moderado</option>
+          <option>Alto</option>
+        </select>
+      </div>
+      <div>
+        <label>Nivel de estrés:</label><br>
+        <select name="estres" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;">
+          <option>Bajo</option>
+          <option>Medio</option>
+          <option>Alto</option>
+        </select>
+      </div>
+      <div>
+        <label>Comentarios o metas personales:</label><br>
+        <textarea name="comentarios" rows="2" style="width:100%;padding:.7rem;border:1px solid #E6E3D9;border-radius:6px;"></textarea>
+      </div>
+
+      <button type="submit" style="background-color:#A15C38;color:white;padding:.9rem 1.5rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Guardar mi historial
+      </button>
+    </form>
+  </div>
+</section>

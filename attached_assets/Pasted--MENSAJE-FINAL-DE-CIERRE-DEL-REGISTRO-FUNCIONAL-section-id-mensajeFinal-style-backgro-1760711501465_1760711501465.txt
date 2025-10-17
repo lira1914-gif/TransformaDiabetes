@@ -1,0 +1,45 @@
+<!-- 🌿 MENSAJE FINAL DE CIERRE DEL REGISTRO FUNCIONAL -->
+<section id="mensajeFinal" style="background:#FFFFFF;padding:3rem 1.5rem;text-align:center;border-top:1px solid #E6E3D9;">
+  <div style="max-width:700px;margin:auto;">
+    <h2 style="color:#556B2F;margin-bottom:1rem;">🌿 Has completado tu Registro Funcional</h2>
+    <p style="color:#3A3A3A;font-size:1.1rem;margin-bottom:1.2rem;">
+      Tu cuerpo se comunica contigo todos los días — y ahora estás aprendiendo a escucharlo.
+    </p>
+    <p style="color:#6F6E66;margin-bottom:2rem;">
+      Este registro es el primer paso para entender cómo tus hábitos, emociones y alimentos  
+      influyen en tu energía, digestión y bienestar general.
+    </p>
+
+    <blockquote style="font-style:italic;color:#A15C38;border-left:4px solid #A15C38;padding-left:1rem;margin:1.5rem 0;">
+      “Tu cuerpo no puede sanar en estado de alerta.  
+      Aprender a escucharlo es la forma más profunda de sanación.”
+    </blockquote>
+
+    <p style="color:#3A3A3A;margin-top:2rem;">
+      A continuación, recibirás tus <strong>recomendaciones funcionales iniciales</strong>  
+      basadas en tu historial y tus 5 días de registro.  
+      Estas te ayudarán a comenzar con ajustes simples y sostenibles.
+    </p>
+
+    <p style="color:#6F6E66;margin-top:1rem;">
+      Recuerda: este proceso no se trata de control, sino de confianza.  
+      Estás creando una relación nueva con tu cuerpo. 🌱
+    </p>
+
+    <button id="verRecomendaciones" style="background-color:#A15C38;color:white;padding:.9rem 1.5rem;border:none;border-radius:8px;font-weight:600;margin-top:2rem;cursor:pointer;">
+      Ver mis recomendaciones iniciales
+    </button>
+  </div>
+</section>
+
+<script>
+// 🌿 Cuando el usuario hace clic en el botón, se desplaza al bloque de resultados
+document.getElementById('verRecomendaciones').addEventListener('click', () => {
+  const bloqueResultados = document.getElementById('resultados');
+  if(bloqueResultados){
+    bloqueResultados.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    alert("El bloque de recomendaciones aún no está disponible.");
+  }
+});
+</script>
