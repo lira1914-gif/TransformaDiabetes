@@ -54,17 +54,24 @@ export default function SuscripcionSection() {
       }
 
       const data = await response.json();
+      console.log('Respuesta del servidor:', data);
       
       if (data.checkoutUrl) {
+        console.log('Intentando abrir checkout en:', data.checkoutUrl);
+        
         // Abrir Paddle checkout en nueva ventana
         const checkoutWindow = window.open(data.checkoutUrl, '_blank', 'width=600,height=800');
+        console.log('Ventana abierta:', checkoutWindow);
         
         if (checkoutWindow) {
           // Mostrar sección de bienvenida (el usuario puede seguir mientras tanto)
           setShowBienvenida(true);
         } else {
-          alert('Por favor, permite ventanas emergentes para completar el pago.');
+          alert('⚠️ Tu navegador bloqueó la ventana emergente.\n\nPor favor:\n1. Haz clic en el ícono de bloqueo en la barra de direcciones\n2. Permite ventanas emergentes para este sitio\n3. Intenta de nuevo');
         }
+      } else {
+        console.error('No se recibió checkout URL:', data);
+        alert('Error: No se pudo crear la sesión de pago. Por favor, intenta nuevamente.');
       }
       
       setIsLoading(false);
