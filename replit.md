@@ -54,8 +54,16 @@ Preferred communication style: Simple, everyday language.
   - Dynamic form allowing up to 5 days of tracking
   - Each day captures: food intake (textarea), digestion/elimination (select), sleep quality (select), energy levels (select)
   - "Agregar siguiente día" button to add days incrementally (max 5)
-  - Data saved to localStorage as JSON (key: "respuestasTransformaDiabetes")
+  - Data saved to localStorage as JSON (key: "registro5dias")
   - Motivational closing phrase: "Observar es el primer paso para sanar. Tu cuerpo siempre te está hablando."
+  - On completion, shows toast notification and reveals final message
+- **Mensaje Final de Registro**: Completion message after submitting 5-day diary:
+  - Appears after saving 5-day registration with smooth scroll
+  - Heading: "Has completado tu Registro Funcional"
+  - Congratulates user for learning to listen to their body
+  - Blockquote: "Tu cuerpo no puede sanar en estado de alerta. Aprender a escucharlo es la forma más profunda de sanación."
+  - Explains next step: receiving functional recommendations
+  - CTA button: "Ver mis recomendaciones iniciales" (placeholder for future feature)
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
 ### Backend
@@ -75,8 +83,9 @@ Preferred communication style: Simple, everyday language.
   2. Clicking "Empezar mi registro funcional" reveals intake form (15-field medical history)
   3. Completing intake form reveals motivational post-intake message
   4. Clicking "Comenzar mi registro de 5 días" reveals 5-day registration form
+  5. Completing and saving 5-day registration reveals final completion message
   - No route changes, smooth scroll animations between sections
-  - All data persists in localStorage (intake + 5-day diary)
+  - All data persists in localStorage (intakeTransformaDiabetes + registro5dias)
 - **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
 - **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
 

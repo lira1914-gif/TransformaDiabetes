@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
+import MensajeFinalRegistro from "./MensajeFinalRegistro";
 
 interface DiaRegistro {
   dia: number;
@@ -11,6 +12,8 @@ interface DiaRegistro {
 
 export default function Registro5Dias() {
   const { toast } = useToast();
+  const [showMensajeFinal, setShowMensajeFinal] = useState(false);
+  const mensajeFinalRef = useRef<HTMLDivElement>(null);
   const [dias, setDias] = useState<DiaRegistro[]>([
     {
       dia: 1,
@@ -60,13 +63,31 @@ export default function Registro5Dias() {
     setDias(nuevosDias);
   };
 
+  useEffect(() => {
+    if (showMensajeFinal && mensajeFinalRef.current) {
+      setTimeout(() => {
+        mensajeFinalRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    }
+  }, [showMensajeFinal]);
+
   const guardarRegistro = (e: React.FormEvent) => {
     e.preventDefault();
     // Guardar en localStorage
     localStorage.setItem('registro5dias', JSON.stringify(dias));
     toast({
       title: "✅ Registro guardado",
-      description: "Los datos serán analizados próximamente por tu IA funcional.",
+      description: "Tu registro funcional ha sido completado correctamente.",
+    });
+    // Mostrar mensaje final
+    setShowMensajeFinal(true);
+  };
+
+  const handleVerRecomendaciones = () => {
+    // Por ahora solo mostramos un mensaje. En el futuro esto podría navegar a una página de recomendaciones
+    toast({
+      title: "🌿 Próximamente",
+      description: "Las recomendaciones personalizadas estarán disponibles pronto.",
     });
   };
 
@@ -271,6 +292,13 @@ export default function Registro5Dias() {
           Tu cuerpo siempre te está hablando." 🌿
         </div>
       </div>
+
+      {/* Mensaje Final después de completar el registro */}
+      {showMensajeFinal && (
+        <div ref={mensajeFinalRef}>
+          <MensajeFinalRegistro onVerRecomendaciones={handleVerRecomendaciones} />
+        </div>
+      )}
     </section>
   );
 }
