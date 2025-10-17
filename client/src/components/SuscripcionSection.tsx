@@ -5,16 +5,19 @@ import IntakeForm from "./IntakeForm";
 import MensajePostIntake from "./MensajePostIntake";
 import Registro5Dias from "./Registro5Dias";
 import BloqueMotivacionalRotatorio from "./BloqueMotivacionalRotatorio";
+import Mes1Tracker from "./Mes1Tracker";
 
 export default function SuscripcionSection() {
   const [showBienvenida, setShowBienvenida] = useState(false);
   const [showBloqueMotivacional, setShowBloqueMotivacional] = useState(false);
+  const [showMes1Tracker, setShowMes1Tracker] = useState(false);
   const [showIntake, setShowIntake] = useState(false);
   const [showMensajePost, setShowMensajePost] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const bienvenidaRef = useRef<HTMLDivElement>(null);
   const bloqueMotivacionalRef = useRef<HTMLDivElement>(null);
+  const mes1TrackerRef = useRef<HTMLDivElement>(null);
   const intakeRef = useRef<HTMLDivElement>(null);
   const mensajePostRef = useRef<HTMLDivElement>(null);
   const registroRef = useRef<HTMLDivElement>(null);
@@ -117,6 +120,15 @@ export default function SuscripcionSection() {
   }, [showBloqueMotivacional]);
 
   useEffect(() => {
+    if (showMes1Tracker && mes1TrackerRef.current) {
+      // Hacer scroll suave al tracker de mes 1
+      setTimeout(() => {
+        mes1TrackerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    }
+  }, [showMes1Tracker]);
+
+  useEffect(() => {
     if (showRegistro && registroRef.current) {
       // Hacer scroll suave al formulario de registro
       setTimeout(() => {
@@ -130,7 +142,12 @@ export default function SuscripcionSection() {
   };
 
   const handleComenzarFormulario = () => {
+    setShowMes1Tracker(true);
+  };
+
+  const handleIrRegistroDesdeM1 = () => {
     setShowIntake(true);
+    setShowRegistro(true);
   };
 
   const handleIntakeComplete = () => {
@@ -331,6 +348,14 @@ export default function SuscripcionSection() {
           <BloqueMotivacionalRotatorio 
             ref={bloqueMotivacionalRef}
             onComenzar={handleComenzarFormulario}
+          />
+        )}
+
+        {/* Mes 1 Tracker - Observa y Comprende */}
+        {showMes1Tracker && (
+          <Mes1Tracker 
+            ref={mes1TrackerRef}
+            onIrRegistro={handleIrRegistroDesdeM1}
           />
         )}
 

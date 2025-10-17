@@ -1,0 +1,116 @@
+<!-- 🌿 MES 1 — OBSERVA Y COMPRENDE (TransformaDiabetes) -->
+<section id="mes1" style="background:#FAF8F4;padding:2.5rem 1.25rem;border:1px solid #E6E3D9;border-radius:12px;margin:28px auto;max-width:850px;">
+  <h2 style="color:#556B2F;text-align:center;margin:0 0 .5rem;">Mes 1 — Observa y comprende tu cuerpo</h2>
+  <p style="color:#6F6E66;text-align:center;margin:.25rem 0 1.25rem;">
+    Establece tu línea base: registra 5 días de <strong>comidas, sueño y evacuación</strong>. No busques perfección — busca patrones.
+  </p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:12px;">
+    <span style="background:#fff;border:1px solid #E6E3D9;border-radius:999px;padding:.4rem .8rem;color:#3A3A3A;" id="mes1-progreso">
+      Progreso diario: 0/5 días
+    </span>
+    <span style="background:#fff;border:1px solid #E6E3D9;border-radius:999px;padding:.4rem .8rem;color:#3A3A3A;" id="mes1-dias-suscripcion">
+      Día 0 desde tu suscripción
+    </span>
+  </div>
+
+  <div style="display:grid;gap:.75rem;max-width:720px;margin:0 auto 1rem;">
+    <div style="background:#FFFFFF;border:1px solid #E6E3D9;border-radius:10px;padding:1rem;">
+      <strong style="color:#A15C38;">Objetivo del mes:</strong>
+      <ul style="margin:.5rem 0 0 1rem;line-height:1.7;">
+        <li>Observar tu energía y digestión sin juzgarte.</li>
+        <li>Identificar alimentos y horarios que te estabilizan.</li>
+        <li>Priorizar descanso: <em>“tu cuerpo no puede sanar en estado de alerta”</em>.</li>
+      </ul>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E6E3D9;border-radius:10px;padding:1rem;">
+      <strong style="color:#A15C38;">Sugerencia diaria:</strong>
+      <div id="mes1-tip" style="margin-top:.5rem;color:#3A3A3A;">
+        Incluye <strong>grasa + fibra + proteína</strong> en cada comida para estabilizar el azúcar.
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:1rem;flex-wrap:wrap;">
+    <button id="btnIrRegistroMes1" style="background:#A15C38;color:#fff;padding:.9rem 1.2rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+      Ir a mi registro de 5 días
+    </button>
+    <button id="btnGenerarInforme" style="display:none;background:#556B2F;color:#fff;padding:.9rem 1.2rem;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+      Generar mi informe inicial
+    </button>
+  </div>
+</section>
+
+<!-- Placeholder del informe (lo llenamos en el siguiente paso) -->
+<section id="informe-inicial" style="display:none;opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease;max-width:850px;margin:24px auto;padding:1.25rem;background:#FFFFFF;border:1px solid #E6E3D9;border-radius:12px;">
+  <h3 style="color:#556B2F;margin-top:0;">Informe inicial — en preparación</h3>
+  <p style="color:#6F6E66;">
+    Cuando completes tus 5 días, aquí verás tu <strong>resumen funcional</strong> y tus <strong>primeros pasos</strong>.
+  </p>
+</section>
+
+<script>
+// 🌿 Guardar fecha de suscripción si no existe (marcador simple)
+(function initSuscripcion(){
+  if(!localStorage.getItem('tm_subscribed_at')){
+    localStorage.setItem('tm_subscribed_at', String(Date.now()));
+  }
+})();
+
+// 🌿 Actualizar etiqueta “Día X desde tu suscripción”
+(function pintarDiasSuscripcion(){
+  const el = document.getElementById('mes1-dias-suscripcion');
+  if(!el) return;
+  const t0 = Number(localStorage.getItem('tm_subscribed_at') || Date.now());
+  const dias = Math.max(0, Math.floor((Date.now() - t0) / (1000*60*60*24)));
+  el.textContent = `Día ${dias} desde tu suscripción`;
+})();
+
+// 🌿 Sugerencias rotatorias del Mes 1
+(function tipsMes1(){
+  const tips = [
+    "Incluye grasa + fibra + proteína en cada comida para estabilizar el azúcar.",
+    "Respira 5 veces lento antes de comer: baja el cortisol y mejora tu digestión.",
+    "Muévete 10 minutos después de comer: ayuda a tu glucosa a mantenerse estable.",
+    "Hidrátate: tu hígado y tu intestino trabajan mejor con agua suficiente.",
+    "Duerme 7–8h: el descanso es tu medicina nocturna."
+  ];
+  const el = document.getElementById('mes1-tip');
+  if(!el) return;
+  let i = Math.floor(Math.random()*tips.length);
+  el.textContent = tips[i];
+})();
+
+// 🌿 Botón: ir al registro de 5 días
+document.getElementById('btnIrRegistroMes1')?.addEventListener('click', () => {
+  const reg = document.getElementById('registro5dias');
+  if(reg){ reg.scrollIntoView({behavior:'smooth'}); }
+});
+
+// 🌿 Progreso: cuenta cuantos “días” de registro existen en pantalla (bloques .dia)
+function actualizarProgresoMes1(){
+  const pill = document.getElementById('mes1-progreso');
+  if(!pill) return;
+  const totalDias = Math.min(5, document.querySelectorAll('.dias .dia').length || 0);
+  pill.textContent = `Progreso diario: ${totalDias}/5 días`;
+  localStorage.setItem('tm_registro_dias', String(totalDias));
+  // Mostrar botón de informe al llegar a 5
+  const btnInforme = document.getElementById('btnGenerarInforme');
+  if(btnInforme){
+    btnInforme.style.display = (totalDias >= 5) ? 'inline-block' : 'none';
+  }
+}
+setInterval(actualizarProgresoMes1, 1500); // chequeo ligero
+
+// 🌿 Generar informe inicial (placeholder): mostrar sección y hacer scroll
+document.getElementById('btnGenerarInforme')?.addEventListener('click', () => {
+  const target = document.getElementById('informe-inicial');
+  if(!target) return;
+  target.style.display = 'block';
+  setTimeout(() => {
+    target.style.opacity = '1';
+    target.style.transform = 'translateY(0)';
+    target.scrollIntoView({behavior:'smooth'});
+  }, 50);
+});
+</script>
