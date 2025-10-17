@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import "../styles/suscripcion.css";
 import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.jpg";
+import Registro5Dias from "./Registro5Dias";
 
 export default function SuscripcionSection() {
   const [showBienvenida, setShowBienvenida] = useState(false);
+  const [showRegistro, setShowRegistro] = useState(false);
   const bienvenidaRef = useRef<HTMLDivElement>(null);
+  const registroRef = useRef<HTMLDivElement>(null);
 
   const handleSubscribe = () => {
     // Mostrar sección de bienvenida
@@ -20,8 +23,17 @@ export default function SuscripcionSection() {
     }
   }, [showBienvenida]);
 
+  useEffect(() => {
+    if (showRegistro && registroRef.current) {
+      // Hacer scroll suave al formulario de registro
+      setTimeout(() => {
+        registroRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    }
+  }, [showRegistro]);
+
   const handleIniciarRegistro = () => {
-    alert("Aquí se mostrará el formulario de registro de 5 días.");
+    setShowRegistro(true);
   };
 
   return (
@@ -204,6 +216,13 @@ export default function SuscripcionSection() {
                 Vamos a enseñarle cómo sentirse seguro otra vez." 🌿
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Formulario de Registro de 5 Días */}
+        {showRegistro && (
+          <div ref={registroRef}>
+            <Registro5Dias />
           </div>
         )}
       </div>

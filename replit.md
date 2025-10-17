@@ -29,6 +29,13 @@ Preferred communication style: Simple, everyday language.
   - 6 subscription benefits including blood analysis review
   - 5-day registration instructions
   - Motivational closing phrase: "Tu cuerpo no está roto, solo está protegiéndose. Vamos a enseñarle cómo sentirse seguro otra vez." (with light green background)
+- **Registro de 5 Días**: Multi-day functional registration form:
+  - Appears after clicking "Empezar mi registro funcional" in welcome section
+  - Dynamic form allowing up to 5 days of tracking
+  - Each day captures: food intake (textarea), digestion/elimination (select), sleep quality (select), energy levels (select)
+  - "Agregar siguiente día" button to add days incrementally (max 5)
+  - Data saved to localStorage as JSON
+  - Motivational closing phrase: "Observar es el primer paso para sanar. Tu cuerpo siempre te está hablando."
 - **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
 
 ### Backend
