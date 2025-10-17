@@ -1,4 +1,5 @@
 import { useState, useEffect, forwardRef } from "react";
+import { useLocation } from "wouter";
 
 const tips = [
   "Incluye grasa + fibra + proteína en cada comida para estabilizar el azúcar.",
@@ -14,6 +15,7 @@ interface Mes1TrackerProps {
 
 const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
   ({ onIrRegistro }, ref) => {
+    const [, setLocation] = useLocation();
     const [diasRegistro, setDiasRegistro] = useState(0);
     const [diasSuscripcion, setDiasSuscripcion] = useState(0);
     const [tipDelDia, setTipDelDia] = useState("");
@@ -66,14 +68,8 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
     const handleGenerarInforme = () => {
       // Marcar que el informe está listo
       localStorage.setItem('tm_informe_ready', 'true');
-      setMostrarInforme(true);
-      setTimeout(() => {
-        setInformeVisible(true);
-        const target = document.getElementById('informe-inicial');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 50);
+      // Redirigir a la página del informe
+      setLocation('/onboarding/informe');
     };
 
     return (

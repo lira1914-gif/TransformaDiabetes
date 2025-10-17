@@ -17,6 +17,12 @@ import Terminos from "@/pages/Terminos";
 import Reembolsos from "@/pages/Reembolsos";
 import NotFound from "@/pages/not-found";
 
+import OnboardingBienvenida from "@/pages/onboarding/Bienvenida";
+import OnboardingMotivacion from "@/pages/onboarding/Motivacion";
+import OnboardingMes1 from "@/pages/onboarding/Mes1";
+import OnboardingRegistro from "@/pages/onboarding/Registro";
+import OnboardingInforme from "@/pages/onboarding/Informe";
+
 function Router() {
   return (
     <Switch>
@@ -32,6 +38,13 @@ function Router() {
       <Route path="/privacidad" component={Privacidad} />
       <Route path="/terminos" component={Terminos} />
       <Route path="/reembolsos" component={Reembolsos} />
+      
+      <Route path="/onboarding/bienvenida" component={OnboardingBienvenida} />
+      <Route path="/onboarding/motivacion" component={OnboardingMotivacion} />
+      <Route path="/onboarding/mes1" component={OnboardingMes1} />
+      <Route path="/onboarding/registro" component={OnboardingRegistro} />
+      <Route path="/onboarding/informe" component={OnboardingInforme} />
+      
       <Route component={NotFound} />
     </Switch>
   );
