@@ -10,14 +10,48 @@ export default function SuscripcionSection() {
   const [showIntake, setShowIntake] = useState(false);
   const [showMensajePost, setShowMensajePost] = useState(false);
   const [showRegistro, setShowRegistro] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const bienvenidaRef = useRef<HTMLDivElement>(null);
   const intakeRef = useRef<HTMLDivElement>(null);
   const mensajePostRef = useRef<HTMLDivElement>(null);
   const registroRef = useRef<HTMLDivElement>(null);
 
-  const handleSubscribe = () => {
-    // Mostrar sección de bienvenida
-    setShowBienvenida(true);
+  const handleSubscribe = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Llamar al endpoint de Paddle para crear checkout
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.error('Error creando checkout:', error);
+        alert(error.error || 'Error al procesar el pago. Por favor, intenta nuevamente.');
+        setIsLoading(false);
+        return;
+      }
+
+      const data = await response.json();
+      
+      if (data.url) {
+        // Abrir Paddle checkout en nueva pestaña
+        window.open(data.url, '_blank');
+        
+        // Mostrar sección de bienvenida (el usuario puede completar mientras tanto)
+        setShowBienvenida(true);
+      }
+      
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al conectar con el servicio de pagos. Por favor, intenta nuevamente.');
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -106,8 +140,10 @@ export default function SuscripcionSection() {
             <button 
               onClick={handleSubscribe}
               data-testid="button-subscribe-page"
+              disabled={isLoading}
+              style={{ opacity: isLoading ? 0.6 : 1, cursor: isLoading ? 'wait' : 'pointer' }}
             >
-              Unirme por $5 USD/mes
+              {isLoading ? 'Procesando...' : 'Unirme por $5 USD/mes'}
             </button>
           </div>
 
