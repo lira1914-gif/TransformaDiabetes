@@ -56,21 +56,16 @@ export default function SuscripcionSection() {
       const data = await response.json();
       console.log('Respuesta del servidor:', data);
       
-      if (data.checkoutUrl) {
-        console.log('Intentando abrir checkout en:', data.checkoutUrl);
+      if (data.transactionId) {
+        console.log('Transaction ID recibido:', data.transactionId);
         
-        // Abrir Paddle checkout en nueva ventana
-        const checkoutWindow = window.open(data.checkoutUrl, '_blank', 'width=600,height=800');
-        console.log('Ventana abierta:', checkoutWindow);
+        // Por ahora, mostrar el transaction ID al usuario con instrucciones
+        alert(`✅ Transacción creada correctamente!\n\nID: ${data.transactionId}\n\n⚠️ NOTA: El checkout de Paddle está en proceso de configuración.\n\nUna vez completado el onboarding de Paddle, este botón abrirá el formulario de pago automáticamente.`);
         
-        if (checkoutWindow) {
-          // Mostrar sección de bienvenida (el usuario puede seguir mientras tanto)
-          setShowBienvenida(true);
-        } else {
-          alert('⚠️ Tu navegador bloqueó la ventana emergente.\n\nPor favor:\n1. Haz clic en el ícono de bloqueo en la barra de direcciones\n2. Permite ventanas emergentes para este sitio\n3. Intenta de nuevo');
-        }
+        // Mostrar sección de bienvenida de todos modos
+        setShowBienvenida(true);
       } else {
-        console.error('No se recibió checkout URL:', data);
+        console.error('No se recibió transaction ID:', data);
         alert('Error: No se pudo crear la sesión de pago. Por favor, intenta nuevamente.');
       }
       
