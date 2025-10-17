@@ -2,16 +2,16 @@ import { useState, useEffect, forwardRef } from "react";
 
 // Lista de mensajes motivacionales funcionales
 const mensajes = [
-  "Tu cuerpo está empezando a liberar patrones antiguos. Obsérvalo sin juicio, con calma.",
-  "No se trata de perfección, sino de conexión. Escucha cómo responde tu cuerpo hoy.",
-  "Tu sistema necesita seguridad para sanar. Permítete descansar sin culpa.",
-  "Respira profundo. El equilibrio no se fuerza, se permite.",
-  "Hidrátate con conciencia. El agua limpia más que tu cuerpo: aclara tu mente.",
-  "La inflamación es comunicación. Agradece el mensaje antes de corregirlo.",
-  "Tu digestión refleja cómo procesas la vida. Mastica lento, vive despacio.",
-  "No estás roto, estás adaptándose. Cada síntoma es una forma de protección.",
-  "Dormir bien no es un lujo, es tu medicina nocturna. Regálate ese descanso.",
-  "Cada elección alimenta una dirección. Hoy eliges sanar."
+  "Tu cuerpo está aprendiendo a confiar nuevamente en ti. Acompáñalo con calma.",
+  "No se trata de controlar tus síntomas, sino de entender su mensaje.",
+  "Cada célula responde mejor a la calma que al miedo. Respira profundo.",
+  "El descanso también es productividad metabólica. Permítete pausar.",
+  "La inflamación no es enemiga, es un mensaje. Escúchalo antes de corregirlo.",
+  "El equilibrio no se impone, se recupera con paciencia.",
+  "Tu digestión refleja tu relación con el tiempo. Mastica lento, vive despacio.",
+  "Cada decisión que tomas hoy enseña a tu cuerpo que puede sentirse seguro.",
+  "No estás roto, estás en proceso de regulación. Sé paciente contigo.",
+  "Dormir bien no es flojera, es fisiología funcional. Cuida tus noches."
 ];
 
 interface BloqueMotivacionalRotatorioProps {
@@ -20,12 +20,23 @@ interface BloqueMotivacionalRotatorioProps {
 
 const BloqueMotivacionalRotatorio = forwardRef<HTMLElement, BloqueMotivacionalRotatorioProps>(
   ({ onComenzar }, ref) => {
-    const [mensajeDelDia, setMensajeDelDia] = useState("");
+    const [indice, setIndice] = useState(0);
+    const [opacity, setOpacity] = useState(1);
 
     useEffect(() => {
-      // Seleccionar un mensaje aleatorio al cargar el componente
-      const mensajeAleatorio = mensajes[Math.floor(Math.random() * mensajes.length)];
-      setMensajeDelDia(mensajeAleatorio);
+      // Cambiar mensaje automáticamente cada 30 segundos
+      const intervalo = setInterval(() => {
+        // Fade out
+        setOpacity(0);
+        
+        // Después de 1.5 segundos, cambiar mensaje y fade in
+        setTimeout(() => {
+          setIndice((prevIndice) => (prevIndice + 1) % mensajes.length);
+          setOpacity(1);
+        }, 1500);
+      }, 30000); // 30 segundos
+
+      return () => clearInterval(intervalo);
     }, []);
 
     return (
@@ -34,44 +45,53 @@ const BloqueMotivacionalRotatorio = forwardRef<HTMLElement, BloqueMotivacionalRo
         id="bloque-motivacional-diario" 
         className="motivacional-section"
         style={{
-          padding: '40px 20px',
+          padding: '50px 25px',
           textAlign: 'center',
-          background: '#f7f9f6',
+          background: '#f8faf7',
           borderRadius: '12px',
-          marginTop: '30px',
+          marginTop: '40px',
+          maxWidth: '800px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+          transition: 'all 0.5s ease',
           animation: 'fadeInUp 1.2s ease forwards'
         }}
         data-testid="bloque-motivacional"
       >
         <h2 style={{ 
-          color: '#5b7053', 
+          color: '#587250', 
           fontWeight: 700, 
-          marginBottom: '15px' 
+          marginBottom: '20px',
+          fontSize: '1.6em'
         }}>
-          🌿 Mensaje Funcional del Día
+          🌱 Mensaje Funcional del Día
         </h2>
         
         <p 
           id="mensaje-rotatorio" 
           data-testid="mensaje-rotatorio"
           style={{ 
-            fontSize: '1.2em', 
-            color: '#3c3c3c', 
-            lineHeight: 1.6,
+            fontSize: '1.25em', 
+            color: '#3b3b3b', 
+            lineHeight: 1.7,
             maxWidth: '680px',
-            margin: '1rem auto'
+            margin: '1rem auto',
+            opacity: opacity,
+            transition: 'opacity 1.5s ease'
           }}
         >
-          {mensajeDelDia}
+          {mensajes[indice]}
         </p>
         
         <p style={{ 
-          marginTop: '10px', 
+          marginTop: '15px', 
           fontStyle: 'italic', 
-          color: '#7a7a7a',
+          color: '#7d7d7d',
+          fontSize: '0.95em',
           marginBottom: '2rem'
         }}>
-          Cada día recibirás un recordatorio diferente para mantenerte enfocado en tu proceso de equilibrio.
+          Cada día es una oportunidad de escuchar a tu cuerpo con compasión.
         </p>
 
         <div style={{

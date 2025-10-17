@@ -1,0 +1,54 @@
+<!-- 🌿 BLOQUE MOTIVACIONAL ANIMADO - TRANSFORMADIABETES -->
+<section id="bloque-motivacional-diario" class="motivacional-section" 
+         style="padding: 50px 25px; text-align: center; background-color: #f8faf7; border-radius: 12px; margin-top: 40px; max-width: 800px; margin-left: auto; margin-right: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: all 0.5s ease;">
+  <h2 style="color: #587250; font-weight: 700; margin-bottom: 20px; font-size: 1.6em;">
+    🌱 Mensaje Funcional del Día
+  </h2>
+
+  <p id="mensaje-rotatorio" 
+     style="font-size: 1.25em; color: #3b3b3b; line-height: 1.7; opacity: 1; transition: opacity 1.5s ease;">
+    Tu cuerpo está aprendiendo a confiar nuevamente en ti. Acompáñalo con calma.
+  </p>
+
+  <p style="margin-top: 15px; font-style: italic; color: #7d7d7d; font-size: 0.95em;">
+    Cada día es una oportunidad de escuchar a tu cuerpo con compasión.
+  </p>
+</section>
+
+<script>
+// 🌿 Lista de mensajes motivacionales (editable)
+const mensajes = [
+  "Tu cuerpo está aprendiendo a confiar nuevamente en ti. Acompáñalo con calma.",
+  "No se trata de controlar tus síntomas, sino de entender su mensaje.",
+  "Cada célula responde mejor a la calma que al miedo. Respira profundo.",
+  "El descanso también es productividad metabólica. Permítete pausar.",
+  "La inflamación no es enemiga, es un mensaje. Escúchalo antes de corregirlo.",
+  "El equilibrio no se impone, se recupera con paciencia.",
+  "Tu digestión refleja tu relación con el tiempo. Mastica lento, vive despacio.",
+  "Cada decisión que tomas hoy enseña a tu cuerpo que puede sentirse seguro.",
+  "No estás roto, estás en proceso de regulación. Sé paciente contigo.",
+  "Dormir bien no es flojera, es fisiología funcional. Cuida tus noches."
+];
+
+let indice = 0;
+const mensajeEl = document.getElementById("mensaje-rotatorio");
+
+function cambiarMensaje() {
+  // Transición suave (fade out)
+  mensajeEl.style.opacity = 0;
+  setTimeout(() => {
+    indice = (indice + 1) % mensajes.length;
+    mensajeEl.textContent = mensajes[indice];
+    // Transición fade in
+    mensajeEl.style.opacity = 1;
+  }, 1500); // coincide con la duración del fade
+}
+
+// Cambiar mensaje automáticamente cada 30 segundos
+setInterval(cambiarMensaje, 30000);
+
+// Mostrar primer mensaje al cargar la página
+window.onload = () => {
+  mensajeEl.textContent = mensajes[indice];
+};
+</script>
