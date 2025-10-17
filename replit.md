@@ -7,6 +7,7 @@ TransformaDiabetes is a health and wellness web application dedicated to type 2 
 **Name:** TransformaDiabetes
 **Previous Name:** NutriMarvin (discontinued due to trademark conflict with nutrimarvin.com - Brazilian nutritionist in same industry)
 **Change Date:** October 2025
+**Logo:** AI-generated olive green logo (attached_assets/generated_images/TransformaDiabetes_brand_logo_olive_0bd02491.png)
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

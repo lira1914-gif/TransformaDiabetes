@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
+import logoImage from "@assets/generated_images/TransformaDiabetes_brand_logo_olive_0bd02491.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ export default function Header() {
       {/* Logo / Nombre */}
       <Link href="/" className="flex items-center">
         <img 
-          src="https://i.ibb.co/XZcPNfw/nutrimarvin-logo-olivo.png" 
+          src={logoImage} 
           alt="TransformaDiabetes Logo" 
           className="h-10 sm:h-11 mr-2 sm:mr-3"
         />
