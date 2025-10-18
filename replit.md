@@ -68,4 +68,34 @@ Wouter is used for client-side routing with smooth scrolling. The landing page i
   - Checkout flow: User clicks subscribe → `/onboarding/checkout` page → Stripe Payment Element → Confirmation → `/onboarding/bienvenida`.
   - Environment secrets: `STRIPE_SECRET_KEY`, `VITE_STRIPE_PUBLIC_KEY`, `STRIPE_PRICE_ID`.
   - Supports recurring billing, automatic card updates, and PCI-compliant payment processing.
+
+### AI Integration & Functional Knowledge Base
+- **OpenAI GPT-5**: Integrated via Replit AI Integrations service (no API key required, charged to Replit credits).
+  - Model: `gpt-5` (released August 7, 2025) configured in `server/openai.ts`.
+  - Endpoint: `/api/generate-report` generates personalized functional medicine reports.
+  - Response time: ~19 seconds for complete report generation.
+  - Uses `response_format: { type: "json_object" }` for structured output.
+
+- **Clinical Knowledge Base**: 
+  - Source: "Nutrición Funcional Referencias.docx" (138,792 characters) extracted via mammoth library.
+  - Full knowledge: `server/conocimiento-funcional.txt` (2,929 lines covering 10+ modules on digestive system, immune system, urinary system, detoxification, inflammation, autoimmunity, biomarcadores funcionales).
+  - Condensed version: `server/conocimiento-funcional-condensado.txt` contains key functional medicine concepts structured for AI prompt integration.
+  
+- **AI Report Generation Framework**:
+  - System message includes complete condensed functional knowledge base.
+  - Applies "Tres Raíces, Muchas Ramas" model (Genética, Digestión, Inflamación).
+  - Identifies functional patterns: resistencia a insulina, permeabilidad intestinal, disbiosis, disfunción adrenal.
+  - Prioritizes interventions: No negociables → Digestión → Soporte nutricional → Hierbas/adaptógenos.
+  - Generates 4-section reports: Resumen, Hallazgos, Recomendaciones, Frase Final.
+  - Focuses on root-cause analysis vs. symptom management.
+
+### Database Schema - Reports
+- `reports`: Stores AI-generated functional medicine reports
+  - `id` (serial): Auto-incrementing primary key
+  - `userId` (integer): Foreign key to users table
+  - `resumen` (text): Brief functional state summary
+  - `hallazgos` (text): 3-5 key findings connecting systems
+  - `recomendaciones` (text): 4-6 prioritized functional recommendations
+  - `fraseFinal` (text): Motivational closing message
+  - `createdAt` (timestamp): Report generation timestamp
 ```
