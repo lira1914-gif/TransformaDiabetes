@@ -1,0 +1,74 @@
+import React from "react";
+
+function InformeInicial() {
+  return (
+    <section id="informe-inicial" className="informe-funcional">
+      <div className="container" style={{ maxWidth: "800px", margin: "0 auto", padding: "2rem" }}>
+        <h1 style={{ color: "#3E5E36", fontSize: "2rem", textAlign: "center", marginBottom: "1rem" }}>
+          🌿 Tu Guía Funcional Personalizada – Semana 1
+        </h1>
+
+        <p style={{ textAlign: "center", fontStyle: "italic", color: "#6a6a6a" }}>
+          “Tu cuerpo no está roto, solo se está protegiendo.  
+          Aprende a escuchar su mensaje con calma y curiosidad.”
+        </p>
+
+        <hr style={{ margin: "2rem 0" }} />
+
+        <h3 style={{ color: "#4B6043" }}>Resumen de tus primeros 5 días</h3>
+        <p>
+          Este resumen está basado en tus registros de alimentación, sueño y digestión.  
+          Tu cuerpo muestra señales de adaptación, buscando equilibrio entre energía, descanso y glucosa.  
+          No se trata de control, sino de comprensión.
+        </p>
+
+        <ul style={{ lineHeight: "1.8" }}>
+          <li>🍽️ <strong>Equilibra tus comidas:</strong> incluye fibra, grasa y proteína en cada plato.</li>
+          <li>🧘 <strong>Prioriza la calma digestiva:</strong> mastica despacio, respira antes de comer.</li>
+          <li>🌙 <strong>Duerme y repara:</strong> evita pantallas 1 hora antes de dormir.</li>
+          <li>🚶 <strong>Muévete suave:</strong> 10-15 minutos de caminata después de comer ayudan a estabilizar la glucosa.</li>
+          <li>💧 <strong>Apoya tu hígado y linfa:</strong> hidrátate bien y realiza respiraciones profundas al despertar.</li>
+        </ul>
+
+        <hr style={{ margin: "2rem 0" }} />
+
+        <h3 style={{ color: "#4B6043" }}>Tu Enfoque para los Próximos Días</h3>
+        <p>
+          Observa cómo responde tu cuerpo cuando aplicas estos pequeños ajustes.  
+          No busques perfección: busca señales.  
+          Cada sensación (energía, digestión, sueño) te enseña cómo tu cuerpo intenta protegerte.
+        </p>
+
+        <div style={{ background: "#f9f9f9", padding: "1rem 1.5rem", borderRadius: "10px", margin: "1.5rem 0" }}>
+          <p style={{ fontStyle: "italic", color: "#555" }}>
+            “Sanar no es controlar — es comprender el mensaje de tu cuerpo.”
+          </p>
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+          <button
+            className="btn btn-primary"
+            style={{
+              backgroundColor: "#8C593B",
+              color: "#fff",
+              padding: "0.8rem 1.5rem",
+              borderRadius: "8px",
+              fontSize: "1rem",
+              border: "none",
+              cursor: "pointer",
+            }}
+            onClick={() => alert("Gracias por completar tu primera semana. Pronto podrás continuar al Mes 2 con IA.")}
+          >
+            Finalizar
+          </button>
+        </div>
+
+        <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.9rem", color: "#777" }}>
+          *Este contenido es educativo y no reemplaza la atención médica profesional.*
+        </p>
+      </div>
+    </section>
+  );
+}
+
+export default InformeInicial;
