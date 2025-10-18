@@ -388,8 +388,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Preparar el informe generado por IA
       const { openai } = await import("./openai");
       
+      // Cargar conocimiento funcional
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      const conocimientoFuncional = await fs.readFile(
+        path.join(process.cwd(), 'server', 'conocimiento-funcional-condensado.txt'),
+        'utf-8'
+      );
+      
+      // Construir el mensaje del sistema con el conocimiento funcional
+      const systemMessage = `Eres un médico funcional experto especializado en reversión de diabetes tipo 2.
+
+CONOCIMIENTO CLÍNICO BASE:
+${conocimientoFuncional}
+
+Tu tarea es analizar los datos del paciente usando este marco de nutrición funcional y generar informes personalizados que:
+1. Identifiquen patrones funcionales (no solo síntomas aislados)
+2. Conecten sistemas (digestivo, hormonal, inmune, inflamación)
+3. Busquen causas raíz, no solo traten síntomas
+4. Apliquen el modelo "Tres Raíces, Muchas Ramas"
+5. Prioricen intervenciones según: No negociables → Digestión → Soporte nutricional → Hierbas/adaptógenos
+
+Respondes siempre en español y en formato JSON estructurado.`;
+      
       // Construir el prompt con los datos del usuario
-      const prompt = `Eres un médico funcional especializado en reversión de diabetes tipo 2. Analiza los siguientes datos de un paciente y genera un informe funcional personalizado.
+      const userPrompt = `Analiza los siguientes datos de un paciente y genera un informe funcional personalizado.
 
 DATOS DEL PACIENTE:
 Nombre: ${intakeForm.nombre || 'No especificado'}
@@ -408,7 +431,7 @@ ALIMENTACIÓN:
 - Dieta especial: ${intakeForm.dietaEspecial || 'No especificada'}
 - Síntomas después de comer: ${intakeForm.sintomasDespuesComer || 'No especificado'}
 
-REGISTRO DE 5 DÍAS:
+REGISTRO DE 5 DÍAS (FOOD-MOOD-POOP):
 ${logsWithMoments.map((log, idx) => `
 Día ${log.dia} (${log.fecha}):
   Sueño: Durmió a las ${log.horaDormir || 'N/A'}, despertó a las ${log.horaDespertar || 'N/A'}, despertó ${log.vecesDesperto || '0'} veces.
@@ -417,18 +440,32 @@ ${log.moments.map(m => `    - ${m.momento}: Comida: ${m.comida || 'N/A'}, Estado
 `).join('\n')}
 
 INSTRUCCIONES:
-Genera un informe funcional en español con las siguientes 4 secciones. Responde ÚNICAMENTE en formato JSON con esta estructura exacta:
+Aplica tu conocimiento de nutrición funcional para generar un informe en español con las siguientes 4 secciones:
 
+1. RESUMEN: Síntesis del estado funcional del paciente identificando las "raíces" principales de disfunción (2-3 líneas)
+
+2. HALLAZGOS: Lista de 3-5 hallazgos clave conectando sistemas y patrones observados en los datos. Usa lenguaje funcional (ejemplo: "resistencia a insulina", "permeabilidad intestinal", "disbiosis", "inflamación crónica", "disfunción adrenal"). Máximo 300 palabras.
+
+3. RECOMENDACIONES: Lista de 4-6 recomendaciones funcionales específicas priorizadas:
+   - Comienza con "No Negociables" (sueño, estrés, glucosa)
+   - Continúa con optimización digestiva
+   - Incluye soporte nutricional específico
+   - Termina con hierbas/adaptógenos si es apropiado
+   Máximo 400 palabras.
+
+4. FRASE FINAL: Una frase motivacional breve y empática que transmita esperanza y humanidad (1-2 líneas)
+
+FORMATO DE RESPUESTA - Responde ÚNICAMENTE en formato JSON con esta estructura exacta:
 {
-  "resumen": "Un resumen breve (2-3 líneas) del estado funcional del paciente",
-  "hallazgos": "Lista de 3-5 hallazgos clave identificados en los datos (máximo 300 palabras)",
-  "recomendaciones": "Lista de 4-6 recomendaciones funcionales específicas basadas en medicina funcional para reversión de diabetes (máximo 400 palabras)",
-  "fraseFinal": "Una frase motivacional breve y empática (1-2 líneas)"
+  "resumen": "...",
+  "hallazgos": "...",
+  "recomendaciones": "...",
+  "fraseFinal": "..."
 }
 
 IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
 
-      console.log('Generando informe con OpenAI...');
+      console.log('Generando informe con OpenAI usando conocimiento funcional...');
       
       // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
       const completion = await openai.chat.completions.create({
@@ -436,11 +473,11 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
         messages: [
           {
             role: "system",
-            content: "Eres un médico funcional experto en reversión de diabetes tipo 2. Respondes siempre en español y en formato JSON estructurado."
+            content: systemMessage
           },
           {
             role: "user",
-            content: prompt
+            content: userPrompt
           }
         ],
         response_format: { type: "json_object" },
