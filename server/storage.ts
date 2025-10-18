@@ -7,10 +7,13 @@ import {
   type InsertDailyLog,
   type DailyLogMoment,
   type InsertDailyLogMoment,
+  type Report,
+  type InsertReport,
   users,
   intakeForms,
   dailyLogs,
-  dailyLogMoments
+  dailyLogMoments,
+  reports
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -35,6 +38,10 @@ export interface IStorage {
   // Daily Log Moments
   createDailyLogMoment(moment: InsertDailyLogMoment): Promise<DailyLogMoment>;
   getDailyLogMomentsByLogId(dailyLogId: string): Promise<DailyLogMoment[]>;
+  
+  // Reports
+  createReport(report: InsertReport): Promise<Report>;
+  getReportByUserId(userId: string): Promise<Report | undefined>;
 }
 
 export class PostgreSQLStorage implements IStorage {
@@ -98,6 +105,17 @@ export class PostgreSQLStorage implements IStorage {
 
   async getDailyLogMomentsByLogId(dailyLogId: string): Promise<DailyLogMoment[]> {
     return await db.select().from(dailyLogMoments).where(eq(dailyLogMoments.dailyLogId, dailyLogId));
+  }
+
+  // Reports
+  async createReport(insertReport: InsertReport): Promise<Report> {
+    const result = await db.insert(reports).values(insertReport).returning();
+    return result[0];
+  }
+
+  async getReportByUserId(userId: string): Promise<Report | undefined> {
+    const result = await db.select().from(reports).where(eq(reports.userId, userId)).limit(1);
+    return result[0];
   }
 }
 

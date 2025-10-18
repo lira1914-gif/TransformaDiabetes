@@ -346,6 +346,134 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Generate AI Report endpoint
+  app.post("/api/generate-report", async (req, res) => {
+    try {
+      const { userId } = req.body;
+
+      if (!userId) {
+        return res.status(400).json({ error: "userId es requerido" });
+      }
+
+      // Obtener datos del usuario
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Obtener intake form
+      const intakeForm = await storage.getIntakeFormByUserId(userId);
+      if (!intakeForm) {
+        return res.status(404).json({ error: "Formulario de intake no encontrado" });
+      }
+
+      // Obtener todos los daily logs del usuario
+      const dailyLogs = await storage.getDailyLogsByUserId(userId);
+      if (dailyLogs.length === 0) {
+        return res.status(404).json({ error: "No hay registros de 5 días disponibles" });
+      }
+
+      // Obtener los momentos de cada día
+      const logsWithMoments = await Promise.all(
+        dailyLogs.map(async (log) => {
+          const moments = await storage.getDailyLogMomentsByLogId(log.id);
+          return { ...log, moments };
+        })
+      );
+
+      // Preparar el informe generado por IA
+      const { openai } = await import("./openai");
+      
+      // Construir el prompt con los datos del usuario
+      const prompt = `Eres un médico funcional especializado en reversión de diabetes tipo 2. Analiza los siguientes datos de un paciente y genera un informe funcional personalizado.
+
+DATOS DEL PACIENTE:
+Nombre: ${intakeForm.nombre || 'No especificado'}
+Edad: ${intakeForm.edad || 'No especificada'}
+Peso actual: ${intakeForm.pesoActual || 'No especificado'}
+A1C: ${intakeForm.a1c || 'No especificada'}
+
+SISTEMAS PRINCIPALES:
+- Gastrointestinal: ${intakeForm.sistemaGastrointestinal || 'No especificado'}
+- Cardiovascular: ${intakeForm.sistemaCardiovascular || 'No especificado'}
+- Hormonal: ${intakeForm.sistemaHormonal || 'No especificado'}
+- Inmunológico: ${intakeForm.sistemaInmunologico || 'No especificado'}
+
+ALIMENTACIÓN:
+- Alimentos regulares: ${intakeForm.alimentosRegulares || 'No especificado'}
+- Dieta especial: ${intakeForm.dietaEspecial || 'No especificada'}
+- Síntomas después de comer: ${intakeForm.sintomasDespuesComer || 'No especificado'}
+
+REGISTRO DE 5 DÍAS:
+${logsWithMoments.map((log, idx) => `
+Día ${log.dia} (${log.fecha}):
+  Sueño: Durmió a las ${log.horaDormir || 'N/A'}, despertó a las ${log.horaDespertar || 'N/A'}, despertó ${log.vecesDesperto || '0'} veces.
+  Momentos del día:
+${log.moments.map(m => `    - ${m.momento}: Comida: ${m.comida || 'N/A'}, Estado de ánimo: ${m.estadoAnimo || 'N/A'}, Evacuaciones: ${m.evacuaciones || 'N/A'}`).join('\n')}
+`).join('\n')}
+
+INSTRUCCIONES:
+Genera un informe funcional en español con las siguientes 4 secciones. Responde ÚNICAMENTE en formato JSON con esta estructura exacta:
+
+{
+  "resumen": "Un resumen breve (2-3 líneas) del estado funcional del paciente",
+  "hallazgos": "Lista de 3-5 hallazgos clave identificados en los datos (máximo 300 palabras)",
+  "recomendaciones": "Lista de 4-6 recomendaciones funcionales específicas basadas en medicina funcional para reversión de diabetes (máximo 400 palabras)",
+  "fraseFinal": "Una frase motivacional breve y empática (1-2 líneas)"
+}
+
+IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
+
+      console.log('Generando informe con OpenAI...');
+      
+      // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+      const completion = await openai.chat.completions.create({
+        model: "gpt-5",
+        messages: [
+          {
+            role: "system",
+            content: "Eres un médico funcional experto en reversión de diabetes tipo 2. Respondes siempre en español y en formato JSON estructurado."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        max_completion_tokens: 8192
+      });
+
+      const aiResponse = completion.choices[0]?.message?.content;
+      if (!aiResponse) {
+        throw new Error("No se recibió respuesta de OpenAI");
+      }
+
+      console.log('Respuesta de OpenAI recibida');
+
+      // Parsear la respuesta JSON
+      const reportData = JSON.parse(aiResponse);
+
+      // Guardar el informe en la base de datos
+      const report = await storage.createReport({
+        userId,
+        resumen: reportData.resumen,
+        hallazgos: reportData.hallazgos,
+        recomendaciones: reportData.recomendaciones,
+        fraseFinal: reportData.fraseFinal
+      });
+
+      console.log('Informe guardado en BD:', report.id);
+
+      res.json(report);
+    } catch (error: any) {
+      console.error("Error generando informe:", error);
+      res.status(500).json({ 
+        error: "Error al generar el informe",
+        details: error.message 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
