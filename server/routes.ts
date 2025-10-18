@@ -52,30 +52,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
         expand: ['latest_invoice.payment_intent'],
       });
 
+      console.log('Suscripción creada:', subscription.id);
+      console.log('Latest invoice type:', typeof subscription.latest_invoice);
+      console.log('Latest invoice:', JSON.stringify(subscription.latest_invoice, null, 2).substring(0, 500));
+
       // Obtener el invoice y payment_intent
       const latestInvoice = subscription.latest_invoice;
       
       if (!latestInvoice || typeof latestInvoice === 'string') {
-        console.error('Invoice no disponible:', latestInvoice);
+        console.error('Invoice no disponible o es string ID:', latestInvoice);
         throw new Error("No se pudo crear la factura de suscripción");
       }
 
       // Acceder al payment_intent (está expandido, pero TypeScript no lo reconoce en los tipos)
-      const paymentIntent = (latestInvoice as any).payment_intent;
+      const invoiceObj = latestInvoice as any;
+      console.log('Invoice object keys:', Object.keys(invoiceObj));
+      console.log('Payment intent en invoice:', invoiceObj.payment_intent);
+      
+      const paymentIntent = invoiceObj.payment_intent;
       
       if (!paymentIntent || typeof paymentIntent === 'string') {
-        console.error('PaymentIntent no expandido:', paymentIntent);
+        console.error('PaymentIntent no expandido o es string:', paymentIntent);
+        console.error('Subscription status:', subscription.status);
+        console.error('Invoice status:', invoiceObj.status);
         throw new Error("No se pudo obtener el PaymentIntent");
       }
 
       const clientSecret = paymentIntent.client_secret;
       
       if (!clientSecret) {
-        console.error('ClientSecret no disponible');
+        console.error('ClientSecret no disponible en PaymentIntent');
         throw new Error("No se pudo obtener el client_secret");
       }
 
-      console.log('Suscripción creada exitosamente:', subscription.id);
+      console.log('Suscripción creada exitosamente con PaymentIntent');
       
       res.json({ 
         subscriptionId: subscription.id,
