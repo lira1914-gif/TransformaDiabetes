@@ -73,16 +73,36 @@ export default function Registro5Dias() {
 
   const guardarRegistro = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validar que todos los días tengan el campo de comida lleno
+    const todosCompletos = dias.every(dia => dia.comida.trim() !== '');
+    if (!todosCompletos) {
+      toast({
+        title: "Campos incompletos",
+        description: "Por favor completa el campo de comida en todos los días antes de guardar.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     // Guardar en localStorage
     localStorage.setItem('registro5dias', JSON.stringify(dias));
     // Actualizar número de días registrados
     localStorage.setItem('tm_registro_dias', String(dias.length));
-    toast({
-      title: "✅ Registro guardado",
-      description: "Tu registro funcional ha sido completado correctamente.",
-    });
-    // Mostrar mensaje final
-    setShowMensajeFinal(true);
+    
+    // Solo mostrar mensaje final si se completaron los 5 días
+    if (dias.length === 5) {
+      toast({
+        title: "✅ Registro completo",
+        description: "Has completado tus 5 días de registro funcional.",
+      });
+      setShowMensajeFinal(true);
+    } else {
+      toast({
+        title: "✅ Registro guardado",
+        description: `Has completado ${dias.length} de 5 días. Continúa registrando los días restantes.`,
+      });
+    }
   };
 
   return (
@@ -105,6 +125,47 @@ export default function Registro5Dias() {
         <h1 style={{ color: '#556B2F', textAlign: 'center' }}>
           🗓️ Tu Registro Funcional de 5 Días
         </h1>
+        
+        {/* Contador de progreso */}
+        <div style={{
+          textAlign: 'center',
+          margin: '1.5rem auto',
+          padding: '1rem',
+          background: '#F8F6F1',
+          borderRadius: '8px',
+          maxWidth: '400px'
+        }}>
+          <p style={{ 
+            color: '#556B2F', 
+            fontWeight: 600,
+            fontSize: '1.1rem',
+            marginBottom: '.5rem'
+          }}>
+            Día {dias.length} de 5
+          </p>
+          <div style={{
+            width: '100%',
+            height: '12px',
+            background: '#E6E3D9',
+            borderRadius: '6px',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              width: `${(dias.length / 5) * 100}%`,
+              height: '100%',
+              background: '#556B2F',
+              transition: 'width 0.3s ease'
+            }}></div>
+          </div>
+          <p style={{ 
+            color: '#6F6E66', 
+            fontSize: '.9rem',
+            marginTop: '.5rem'
+          }}>
+            {dias.length === 5 ? '¡Registro completo! 🎉' : `${5 - dias.length} ${5 - dias.length === 1 ? 'día restante' : 'días restantes'}`}
+          </p>
+        </div>
+        
         <p style={{ 
           color: '#3A3A3A', 
           textAlign: 'center', 

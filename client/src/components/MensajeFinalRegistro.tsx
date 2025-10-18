@@ -1,26 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 
 export default function MensajeFinalRegistro() {
+  const [, setLocation] = useLocation();
+
   const handleVerRecomendaciones = () => {
-    // Verificar si el informe ya está generado
-    const informeReady = localStorage.getItem('tm_informe_ready') === 'true';
-    
-    if (informeReady) {
-      // Si ya generó el informe, hacer scroll al informe
-      const informe = document.getElementById('informe-inicial');
-      if (informe) {
-        informe.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      // Si no ha generado el informe, hacer scroll al Mes 1 Tracker
-      // para que vea el botón "Generar mi informe inicial"
-      const mes1 = document.getElementById('mes1');
-      if (mes1) {
-        mes1.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        alert('Completa tus 5 días y genera tu informe inicial desde el tablero del Mes 1.');
-      }
-    }
+    // Navegar a /onboarding/mes1 para ver el tablero y generar el informe
+    setLocation('/onboarding/mes1');
   };
 
   return (
