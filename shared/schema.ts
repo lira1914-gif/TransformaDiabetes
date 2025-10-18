@@ -126,3 +126,21 @@ export const insertDailyLogMomentSchema = createInsertSchema(dailyLogMoments).om
 
 export type InsertDailyLogMoment = z.infer<typeof insertDailyLogMomentSchema>;
 export type DailyLogMoment = typeof dailyLogMoments.$inferSelect;
+
+export const reports = pgTable("reports", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  resumen: text("resumen"),
+  hallazgos: text("hallazgos"),
+  recomendaciones: text("recomendaciones"),
+  fraseFinal: text("frase_final"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertReportSchema = createInsertSchema(reports).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertReport = z.infer<typeof insertReportSchema>;
+export type Report = typeof reports.$inferSelect;
