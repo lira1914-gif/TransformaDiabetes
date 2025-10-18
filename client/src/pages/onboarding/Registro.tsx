@@ -12,34 +12,21 @@ export default function Registro() {
   const [showMensajeFinal, setShowMensajeFinal] = useState(false);
 
   useEffect(() => {
-    // Verificar que el usuario haya completado motivación (paso anterior)
-    const motivacionDone = localStorage.getItem('tm_motivacion_done');
-    if (!motivacionDone) {
-      // Si no completó motivación, redirigir al flujo correcto
-      const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
-      if (bienvenidaDone) {
-        setLocation('/onboarding/motivacion');
-      } else {
-        const subscribed = localStorage.getItem('tm_subscribed_at');
-        if (subscribed) {
-          setLocation('/onboarding/bienvenida');
-        } else {
-          setLocation('/');
-        }
-      }
+    // Verificar que el usuario esté suscrito
+    const subscribed = localStorage.getItem('tm_subscribed_at');
+    if (!subscribed) {
+      setLocation('/');
       return;
     }
 
-    // Verificar si ya completó el intake
-    const intakeDone = localStorage.getItem('tm_intake_done') === 'true';
-    if (intakeDone) {
-      setShowMensajePost(true);
-      
-      // Verificar si ya completó el registro de 5 días
-      const diasRegistrados = parseInt(localStorage.getItem('tm_registro_dias') || '0');
-      if (diasRegistrados >= 5) {
-        setShowMensajeFinal(true);
-      }
+    // Mostrar directamente el registro de 5 días
+    setShowMensajePost(true);
+    setShowRegistro5Dias(true);
+    
+    // Verificar si ya completó el registro de 5 días
+    const diasRegistrados = parseInt(localStorage.getItem('tm_registro_dias') || '0');
+    if (diasRegistrados >= 5) {
+      setShowMensajeFinal(true);
     }
   }, [setLocation]);
 
