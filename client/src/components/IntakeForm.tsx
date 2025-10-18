@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 interface IntakeData {
   nombre: string;
@@ -126,6 +128,28 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     otros_analisis: ""
   });
 
+  const saveIntakeMutation = useMutation({
+    mutationFn: async (data: IntakeData & { userId: string }) => {
+      return await apiRequest('/api/intake-form', 'POST', data);
+    },
+    onSuccess: () => {
+      localStorage.setItem('tm_intake_done', 'true');
+      toast({
+        title: "✅ Historial guardado",
+        description: "Tu información ha sido registrada correctamente en nuestra base de datos.",
+      });
+      onComplete();
+    },
+    onError: (error: any) => {
+      console.error('Error guardando intake form:', error);
+      toast({
+        title: "❌ Error al guardar",
+        description: "Hubo un problema guardando tu información. Por favor intenta nuevamente.",
+        variant: "destructive",
+      });
+    }
+  });
+
   useEffect(() => {
     const saved = localStorage.getItem('intakeTransformaDiabetes');
     if (saved) {
@@ -136,15 +160,23 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    localStorage.setItem('intakeTransformaDiabetes', JSON.stringify(formData));
-    localStorage.setItem('tm_intake_done', 'true');
+    // Obtener userId de localStorage
+    const userId = localStorage.getItem('tm_user_id');
     
-    toast({
-      title: "✅ Historial guardado",
-      description: "Tu información ha sido registrada correctamente.",
-    });
+    if (!userId) {
+      toast({
+        title: "❌ Error",
+        description: "No se pudo identificar tu cuenta. Por favor vuelve a iniciar sesión.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    onComplete();
+    // Guardar en localStorage como backup
+    localStorage.setItem('intakeTransformaDiabetes', JSON.stringify(formData));
+    
+    // Enviar a PostgreSQL
+    saveIntakeMutation.mutate({ ...formData, userId });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -1015,15 +1047,17 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
           <Button
             type="submit"
             data-testid="button-guardar-historial"
+            disabled={saveIntakeMutation.isPending}
             style={{
-              backgroundColor: '#A15C38',
+              backgroundColor: saveIntakeMutation.isPending ? '#ccc' : '#A15C38',
               color: 'white',
               padding: '.9rem 1.5rem',
               fontWeight: 600,
-              marginTop: '1rem'
+              marginTop: '1rem',
+              cursor: saveIntakeMutation.isPending ? 'not-allowed' : 'pointer'
             }}
           >
-            Guardar mi historial funcional
+            {saveIntakeMutation.isPending ? 'Guardando...' : 'Guardar mi historial funcional'}
           </Button>
 
           <p style={{ fontSize: '0.85rem', color: '#6F6E66', textAlign: 'center', marginTop: '1rem' }}>

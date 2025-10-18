@@ -107,6 +107,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log('Creando suscripción para customer:', customerId);
       console.log('Con payment_method:', paymentMethodId);
 
+      // Obtener el payment method para extraer el email
+      const paymentMethod = await stripe.paymentMethods.retrieve(paymentMethodId);
+      const email = paymentMethod.billing_details.email;
+
+      if (!email) {
+        return res.status(400).json({ 
+          error: "No se pudo obtener el email del método de pago" 
+        });
+      }
+
+      console.log('Email del usuario:', email);
+
       // Adjuntar el payment_method al customer
       await stripe.paymentMethods.attach(paymentMethodId, {
         customer: customerId,
@@ -133,7 +145,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log('Suscripción creada exitosamente:', subscription.id);
       console.log('Estado de la suscripción:', subscription.status);
 
+      // Crear o actualizar el usuario en PostgreSQL
+      let user = await storage.getUserByEmail(email);
+
+      if (user) {
+        // Actualizar con datos de Stripe
+        user = await storage.updateUser(user.id, {
+          stripeCustomerId: customerId,
+          stripeSubscriptionId: subscription.id,
+          subscriptionStatus: subscription.status
+        });
+      } else {
+        // Crear nuevo usuario
+        user = await storage.createUser({
+          email,
+          stripeCustomerId: customerId,
+          stripeSubscriptionId: subscription.id,
+          subscriptionStatus: subscription.status
+        });
+      }
+
+      console.log('Usuario guardado en BD:', user.id);
+
       res.json({ 
+        userId: user.id,
+        customerId: customerId,
         subscriptionId: subscription.id,
         status: subscription.status
       });

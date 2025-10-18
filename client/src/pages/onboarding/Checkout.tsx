@@ -62,8 +62,14 @@ function CheckoutForm({ customerId }: { customerId: string }) {
         throw new Error('Error al crear la suscripción');
       }
 
-      // Guardar marca de suscripción
+      const subscriptionData = await subscriptionResponse.json();
+
+      // Guardar marca de suscripción y userId
       localStorage.setItem('tm_subscribed_at', String(Date.now()));
+      localStorage.setItem('tm_user_id', subscriptionData.userId);
+      localStorage.setItem('tm_user_email', subscriptionData.email || '');
+      
+      console.log('Usuario creado en BD:', subscriptionData.userId);
       
       toast({
         title: "¡Suscripción exitosa!",
@@ -234,7 +240,17 @@ export default function Checkout() {
           Completa tu pago para comenzar tu transformación funcional
         </p>
 
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
+        <Elements 
+          stripe={stripePromise} 
+          options={{ 
+            clientSecret,
+            fields: {
+              billingDetails: {
+                email: 'always'
+              }
+            }
+          }}
+        >
           <CheckoutForm customerId={customerId} />
         </Elements>
 
