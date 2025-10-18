@@ -179,9 +179,32 @@ export default function Registro5DiasDetallado() {
   };
 
   const reiniciarRegistro = () => {
-    if (confirm('¿Seguro que deseas borrar todos los datos de registro?')) {
+    if (confirm('¿Seguro que deseas borrar TODOS los datos (intake + registro) y empezar completamente de nuevo?')) {
+      // Borrar TODO lo relacionado con onboarding
+      localStorage.removeItem('registro5dias');
       localStorage.removeItem('registro5dias_detallado');
       localStorage.removeItem('tm_registro_dias');
+      localStorage.removeItem('tm_registro_completado');
+      localStorage.removeItem('tm_intake_done');
+      localStorage.removeItem('tm_intake_data');
+      localStorage.removeItem('tm_mensaje_done');
+      localStorage.removeItem('tm_informe_ready');
+      localStorage.removeItem('tm_motivacion_done');
+      
+      alert('✅ Todos los datos borrados. Serás redirigido al inicio del onboarding.');
+      
+      // Redirigir al inicio del onboarding
+      window.location.href = '/onboarding/bienvenida';
+    }
+  };
+  
+  const reiniciarRegistroSolo = () => {
+    if (confirm('¿Seguro que deseas borrar solo el registro de 5 días (manteniendo el intake)?')) {
+      localStorage.removeItem('registro5dias');
+      localStorage.removeItem('registro5dias_detallado');
+      localStorage.removeItem('tm_registro_dias');
+      localStorage.removeItem('tm_registro_completado');
+      
       setDiasCompletados([]);
       setDiaActual(1);
       setFormData({

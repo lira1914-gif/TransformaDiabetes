@@ -51,12 +51,22 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
     };
 
     const limpiarDatosPrueba = () => {
-      if (confirm('¿Seguro que deseas borrar todos los datos de registro y empezar de nuevo?')) {
+      if (confirm('¿Seguro que deseas borrar TODOS los datos (intake + registro) y empezar completamente de nuevo?')) {
+        // Borrar TODO lo relacionado con onboarding
         localStorage.removeItem('registro5dias');
         localStorage.removeItem('tm_registro_dias');
+        localStorage.removeItem('tm_registro_completado');
+        localStorage.removeItem('tm_intake_done');
+        localStorage.removeItem('tm_intake_data');
+        localStorage.removeItem('tm_mensaje_done');
+        localStorage.removeItem('tm_informe_ready');
+        localStorage.removeItem('tm_motivacion_done');
+        
         setDiasRegistro(0);
-        alert('Datos borrados. Ahora puedes empezar tu registro desde el Día 1.');
-        window.location.reload();
+        alert('✅ Todos los datos borrados. Serás redirigido al inicio del onboarding.');
+        
+        // Redirigir al inicio del onboarding
+        window.location.href = '/onboarding/bienvenida';
       }
     };
 
