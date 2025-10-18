@@ -200,9 +200,21 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
         <h2 style={{ color: '#556B2F', textAlign: 'center', marginBottom: '1rem' }}>
           🌿 Formulario de Ingreso
         </h2>
-        <p style={{ color: '#6F6E66', textAlign: 'center', marginBottom: '2rem' }}>
+        <p style={{ color: '#6F6E66', textAlign: 'center', marginBottom: '1rem' }}>
           Esta información es estrictamente confidencial y será utilizada únicamente para fines de evaluación nutricional funcional.
         </p>
+        <div style={{
+          background: '#FFF9E6',
+          border: '1px solid #F0C75E',
+          borderRadius: '8px',
+          padding: '1rem',
+          marginBottom: '2rem',
+          textAlign: 'center'
+        }}>
+          <p style={{ color: '#8B6914', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>
+            ℹ️ <strong>Nota:</strong> No estás obligado/a a llenar todos los campos, pero <strong>entre más información tengamos, mejor</strong> podremos crear un cuadro completo de tu salud para personalizar tus recomendaciones.
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
           

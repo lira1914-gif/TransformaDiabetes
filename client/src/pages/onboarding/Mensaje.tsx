@@ -5,10 +5,10 @@ export default function Mensaje() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Verificar que el usuario haya completado los pasos previos
-    const formularioDone = localStorage.getItem('tm_formulario_done');
+    // Verificar que el usuario haya completado el intake
+    const intakeDone = localStorage.getItem('tm_intake_done');
     
-    if (!formularioDone) {
+    if (!intakeDone) {
       setLocation('/onboarding/bienvenida');
       return;
     }

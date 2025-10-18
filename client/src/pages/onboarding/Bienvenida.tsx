@@ -16,7 +16,7 @@ export default function Bienvenida() {
   const handleContinuar = () => {
     // Marcar bienvenida como completada
     localStorage.setItem('tm_bienvenida_done', 'true');
-    setLocation('/onboarding/registro');
+    setLocation('/onboarding/intake');
   };
 
   return (
@@ -63,7 +63,7 @@ export default function Bienvenida() {
           textAlign: 'center',
           fontSize: '1.05rem'
         }}>
-          💡 Tu primer paso: Registrar tus primeros 5 días de alimentación, sueño y digestión.
+          💡 Tu primer paso: Completar tu historial médico y luego registrar tus primeros 5 días de alimentación, sueño y digestión.
         </div>
 
         <div style={{ textAlign: 'left', maxWidth: '700px', margin: '0 auto' }}>
@@ -79,11 +79,14 @@ export default function Bienvenida() {
 
           <h3 style={{ color: '#556B2F', fontSize: '1.3rem', marginTop: '2rem' }}>🧠 Antes de iniciar</h3>
           <p style={{ color: '#3A3A3A', lineHeight: 1.6, fontSize: '1.05rem' }}>
-            Durante los próximos 5 días, anota lo que comes, cómo duermes y cómo evacúas.  
+            Primero, completarás un formulario de historial médico para que podamos conocer tu contexto de salud.
+          </p>
+          <p style={{ color: '#3A3A3A', lineHeight: 1.6, fontSize: '1.05rem' }}>
+            Luego, durante los próximos 5 días, anotarás lo que comes, cómo duermes y cómo evacúas.  
             No cambies nada aún — queremos conocer cómo responde tu cuerpo tal como está hoy.
           </p>
           <p style={{ color: '#3A3A3A', lineHeight: 1.6, fontSize: '1.05rem' }}>
-            Este registro será la base para tus recomendaciones personalizadas.
+            Este historial + registro será la base para tus recomendaciones personalizadas.
           </p>
           
           <button 
@@ -112,7 +115,7 @@ export default function Bienvenida() {
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
-            Empezar mi registro funcional →
+            Completar mi historial médico →
           </button>
         </div>
 

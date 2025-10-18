@@ -307,9 +307,21 @@ export default function Registro5DiasDetallado() {
         <h2 style={{ color: '#556B2F', textAlign: 'center', marginBottom: '0.5rem' }}>
           📝 Diario Funcional - Día {diaActual} de 5
         </h2>
-        <p style={{ color: '#6F6E66', textAlign: 'center', marginBottom: '2rem', fontSize: '0.9rem' }}>
+        <p style={{ color: '#6F6E66', textAlign: 'center', marginBottom: '1rem', fontSize: '0.9rem' }}>
           Registra tu comida, estado de ánimo y evacuaciones para cada momento del día
         </p>
+        <div style={{
+          background: '#FFF9E6',
+          border: '1px solid #F0C75E',
+          borderRadius: '8px',
+          padding: '1rem',
+          marginBottom: '2rem',
+          textAlign: 'center'
+        }}>
+          <p style={{ color: '#8B6914', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
+            ℹ️ <strong>Nota:</strong> No es necesario llenar todos los momentos del día. Entre más detalle registres, mejor podremos identificar patrones en tu salud.
+          </p>
+        </div>
 
         <form onSubmit={guardarDia} style={{ display: 'grid', gap: '1.5rem' }}>
           
