@@ -15,6 +15,7 @@ Key frontend features include:
 - **Simplified Landing Page**: Conversion-focused with a direct CTA to a multi-step diagnostic wizard.
 - **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns (4 individual, 6 combined), each linked to pattern-specific "Mini Guías Funcionales".
 - **Subscription Onboarding Flow**: A multi-page sequential process (Bienvenida, Motivación, Mes 1 Tracker, Registro, Informe) with robust client-side validation using localStorage markers to ensure sequential completion and prevent step-skipping. This flow includes a comprehensive functional history intake form and a 5-day dietary/lifestyle tracking diary, culminating in a personalized functional report.
+- **Informe Funcional**: Dedicated page at `/onboarding/informe-inicial` with clean CSS-based design, fadeInUp animation, and 5 key functional recommendations. Uses simplified styling with #fffdf8 background, max-width 700px, and semantic CSS classes.
 - **Dynamic Content**: Welcome section with subscription benefits, rotating motivational messages, and daily tips.
 - **Legal Pages**: Términos de Servicio, Política de Privacidad, Política de Reembolsos.
 
