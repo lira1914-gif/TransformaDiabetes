@@ -32,7 +32,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Primero crear un customer (por ahora anónimo, luego puede asociarse a un usuario)
+      // Crear un customer (por ahora anónimo, luego puede asociarse a un usuario)
       const customer = await stripe.customers.create({
         metadata: {
           source: 'TransformaDiabetes'
@@ -52,23 +52,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
         expand: ['latest_invoice.payment_intent'],
       });
 
-      // Acceder al payment_intent del invoice
-      const invoice = subscription.latest_invoice;
-      if (typeof invoice === 'string') {
-        throw new Error("Invoice no expandido correctamente");
+      // Obtener el invoice y payment_intent
+      const latestInvoice = subscription.latest_invoice;
+      
+      if (!latestInvoice || typeof latestInvoice === 'string') {
+        console.error('Invoice no disponible:', latestInvoice);
+        throw new Error("No se pudo crear la factura de suscripción");
       }
 
-      // TypeScript no reconoce payment_intent automáticamente, pero existe cuando se expande
-      const paymentIntent = (invoice as any)?.payment_intent;
+      // Acceder al payment_intent (está expandido, pero TypeScript no lo reconoce en los tipos)
+      const paymentIntent = (latestInvoice as any).payment_intent;
+      
       if (!paymentIntent || typeof paymentIntent === 'string') {
-        throw new Error("PaymentIntent no disponible");
+        console.error('PaymentIntent no expandido:', paymentIntent);
+        throw new Error("No se pudo obtener el PaymentIntent");
       }
 
       const clientSecret = paymentIntent.client_secret;
+      
       if (!clientSecret) {
+        console.error('ClientSecret no disponible');
         throw new Error("No se pudo obtener el client_secret");
       }
 
+      console.log('Suscripción creada exitosamente:', subscription.id);
+      
       res.json({ 
         subscriptionId: subscription.id,
         clientSecret: clientSecret
