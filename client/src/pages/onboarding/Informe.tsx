@@ -15,14 +15,17 @@ export default function Informe() {
     
     // Validar flujo completo
     if (!subscribed) {
+      alert('Necesitas suscribirte primero para acceder al informe funcional.');
       setLocation('/');
       return;
     }
     if (!bienvenidaDone) {
+      alert('Debes completar la bienvenida antes de ver tu informe.');
       setLocation('/onboarding/bienvenida');
       return;
     }
     if (!motivacionDone) {
+      alert('Debes completar la motivación antes de ver tu informe.');
       setLocation('/onboarding/motivacion');
       return;
     }
