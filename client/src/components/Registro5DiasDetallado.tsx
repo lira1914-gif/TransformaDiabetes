@@ -227,7 +227,7 @@ export default function Registro5DiasDetallado() {
       }}>
         <h2 style={{ color: '#556B2F' }}>✅ Registro Completado</h2>
         <p>Has completado tus 5 días de registro funcional.</p>
-        <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem' }}>
           <button
             onClick={() => setLocation('/onboarding/mes1')}
             style={{
@@ -241,6 +241,20 @@ export default function Registro5DiasDetallado() {
             }}
           >
             Ver mi progreso
+          </button>
+          <button
+            onClick={reiniciarRegistro}
+            style={{
+              background: '#dc2626',
+              color: '#fff',
+              padding: '12px 24px',
+              border: 'none',
+              borderRadius: '8px',
+              fontWeight: 600,
+              cursor: 'pointer'
+            }}
+          >
+            Reiniciar registro
           </button>
         </div>
       </div>
@@ -648,6 +662,29 @@ export default function Registro5DiasDetallado() {
           >
             Guardar Día {diaActual}
           </button>
+
+          {/* Botón de desarrollo para reiniciar */}
+          {diasCompletados.length > 0 && (
+            <div style={{ textAlign: 'center', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed #E6E3D9' }}>
+              <button
+                type="button"
+                onClick={reiniciarRegistro}
+                data-testid="button-reiniciar-registro"
+                style={{
+                  background: '#dc2626',
+                  color: '#fff',
+                  padding: '.6rem 1rem',
+                  border: 'none',
+                  borderRadius: '6px',
+                  fontWeight: 500,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}
+              >
+                🗑️ Reiniciar registro (desarrollo)
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </section>
