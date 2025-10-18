@@ -16,7 +16,6 @@ export default function InformeFuncional() {
         backgroundColor: "#FAF8F4",
         minHeight: "100vh",
         padding: "3rem 1.5rem",
-        opacity: visible ? undefined : 0,
       }}
       data-testid="informe-inicial"
     >

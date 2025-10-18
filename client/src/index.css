@@ -358,6 +358,11 @@ progress::-moz-progress-bar {
 }
 
 /* Informe Funcional Fade-in Animation */
+.informe-funcional {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
 .informe-funcional.fade-in {
   animation: fadeInUp 1.2s ease forwards;
 }
