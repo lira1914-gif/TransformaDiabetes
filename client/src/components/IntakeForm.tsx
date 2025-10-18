@@ -129,8 +129,8 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
   });
 
   const saveIntakeMutation = useMutation({
-    mutationFn: async (data: IntakeData & { userId: string }) => {
-      return await apiRequest('/api/intake-form', 'POST', data);
+    mutationFn: async (data: any) => {
+      return await apiRequest('POST', '/api/intake-form', data);
     },
     onSuccess: () => {
       localStorage.setItem('tm_intake_done', 'true');

@@ -53,7 +53,7 @@ export default function Registro5DiasDetallado() {
 
   const saveDailyLogMutation = useMutation({
     mutationFn: async (data: any) => {
-      return await apiRequest('/api/daily-log', 'POST', data);
+      return await apiRequest('POST', '/api/daily-log', data);
     },
     onSuccess: (data, variables) => {
       const nuevosDias = [...diasCompletados, variables.diaData];
