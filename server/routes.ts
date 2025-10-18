@@ -499,30 +499,69 @@ En cada informe, debes incluir y comentar brevemente estas tres áreas esenciale
 ya que son los tres pilares del equilibrio metabólico y emocional según la metodología de Marvin Lira:
 
 🔹 FECAR — Digestión y eliminación
-- Evalúa cómo está el sistema digestivo: hinchazón, estreñimiento, gases, digestión lenta.
-- Explica que una digestión ineficiente produce inflamación, disbiosis y fatiga.
-- Recomienda hábitos simples: masticar bien, no comer con estrés, incluir fibra y vegetales.
-- Si el usuario come rápido o tiene constipación, sugiere "reactivar su fuego digestivo" con alimentos simples y caldos.
-${moduleNumber === 1 
-  ? ''
-  : `- SI HAY ESTREÑIMIENTO/TRÁNSITO LENTO: Incluir alimentos funcionales (linaza molida, chía hidratada) CON precauciones.
-  Ejemplo: "Puedes apoyar tu sistema con chía hidratada o linaza molida, que ayudan a lubricar el intestino. Precaución: evitar si tomas anticoagulantes o tienes diarrea activa."`}
+Estructura obligatoria:
 
-🔹 SUEÑO — Ritmo circadiano y restauración
-- Evalúa la calidad y horario del sueño.
-- Explica que dormir tarde altera el cortisol y eleva la glucosa.
-- Recomienda: acostarse antes de las 11 pm, respiración lenta antes de dormir, evitar pantallas, y rutinas nocturnas calmadas.
+1️⃣ Observaciones:
+"Se nota tránsito intestinal lento y sensación de pesadez después de comer."
+
+2️⃣ Hábito funcional:
+"Come despacio, mastica al menos 20 veces por bocado y evita pantallas al comer."
+
 ${moduleNumber === 1 
   ? ''
-  : `- SI HAY ESTRÉS/INSOMNIO: Incluir adaptógenos (Ashwagandha, GABA) CON precauciones.
-  Ejemplo: "El Ashwagandha ayuda a regular el cortisol y calmar el cuerpo. Precaución: evitar en hipertiroidismo o embarazo."
-- Incluir la frase: "Mientras el cuerpo esté en alerta, no puede sanar."`}
+  : `3️⃣ Alimentos funcionales (solo si hay estreñimiento/tránsito lento):
+"Puedes apoyar tu sistema con chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación."
+
+4️⃣ Precauciones:
+• Linaza molida: evitar si tomas anticoagulantes o tienes diarrea. Asegura buena hidratación.
+• Chía hidratada: evitar si tomas anticoagulantes o tienes diverticulitis activa.
+`}
+5️⃣ Frase de consciencia:
+"Una digestión tranquila apaga la inflamación y enciende tu energía."
+
+🔹 SUEÑO — Ritmo circadiano y sistema nervioso
+Estructura obligatoria:
+
+1️⃣ Observaciones:
+"Tu cuerpo muestra signos de estrés prolongado: dificultad para conciliar el sueño o sensación de alerta constante."
+
+2️⃣ Hábito funcional:
+"Apaga pantallas una hora antes de dormir y realiza respiraciones 4-7-8 antes de acostarte."
+
+${moduleNumber === 1 
+  ? ''
+  : `3️⃣ Apoyo natural (solo si hay estrés/insomnio):
+• Ashwagandha → ayuda a regular el cortisol y calmar el cuerpo.
+• GABA → calma el sistema nervioso y favorece el descanso.
+
+4️⃣ Precauciones:
+• Ashwagandha: evitar en hipertiroidismo o embarazo.
+• GABA: evitar con fármacos sedantes o ansiolíticos.
+`}
+5️⃣ Frase de consciencia:
+"Mientras el cuerpo esté en alerta, no puede sanar."
 
 🔹 AZÚCAR — Glucosa y energía estable
-- Explica cómo los picos y bajones de glucosa alteran el estado emocional y hormonal.
-- Recomienda reducir (o eliminar) azúcar refinada y endulzantes artificiales.
-- Enseña a reemplazarlas por opciones naturales: miel cruda, dátiles, stevia pura o fruta entera.
-- Menciona la importancia de combinar proteína, fibra y grasa saludable en cada comida para estabilizar energía y reducir antojos.
+Estructura obligatoria:
+
+1️⃣ Observaciones:
+"Se detectan altibajos de energía y antojos frecuentes por dulce."
+
+2️⃣ Hábito funcional:
+"Desayuna con proteína, fibra y grasa saludable (por ejemplo: huevo, aguacate y frijoles). Evita azúcares líquidos como jugos o refrescos."
+
+${moduleNumber === 1 
+  ? ''
+  : `3️⃣ Apoyo natural (solo si hay antojos intensos):
+• Cromo → ayuda a regular el deseo de azúcar.
+• Canela o Gymnema → equilibran la glucosa y reducen antojos.
+
+4️⃣ Precauciones:
+• Precaución en uso de medicamentos para diabetes.
+• Siempre consultar antes con tu médico o nutricionista.
+`}
+5️⃣ Frase de consciencia:
+"El azúcar promete energía rápida, pero te la cobra con intereses; el equilibrio te sostiene todo el día."
 
 Estas tres áreas deben aparecer en todos los informes, incluso si el usuario no las mencionó directamente, porque son la base de todo proceso funcional.
 
@@ -579,24 +618,58 @@ Explica el patrón funcional principal en lenguaje claro y empático.
 Hazlo sentir comprendido y con esperanza. (3-4 líneas)
 
 2. 🧠 LA TRIFECTA FUNCIONAL (bloque obligatorio)
-Incluir las tres áreas: FECAR (digestión), Sueño, Azúcar.
-Cada una con observaciones breves, recomendaciones y una frase de consciencia.
-Usa subtítulos como:
-- 🔹 Digestión (FECAR)
-- 🔹 Sueño y ritmo circadiano
-- 🔹 Azúcar y energía estable
+Incluir las tres áreas con subtítulos visuales usando estos emojis EXACTOS:
 
-3. 🥦 QUÉ PUEDES MEJORAR
-Lista de 5–7 ajustes simples (hábitos, alimentos, descanso, hidratación, movimiento).
+🥦 Digestión (FECAR)
+🌙 Sueño y Sistema Nervioso
+🍯 Azúcar y Energía Estable
+
+IMPORTANTE - Mantener este ORDEN EDUCATIVO dentro de cada bloque:
+1️⃣ Observaciones (qué muestra el cuerpo)
+2️⃣ Hábito funcional (acción concreta)
+3️⃣ Apoyo natural/suplemento educativo (solo Módulo 2+, cuando aplique)
+4️⃣ Precauciones específicas (si mencionaste apoyo natural)
+5️⃣ Frase de consciencia (mensaje inspirador)
+
+Principio clave: "Primero hábitos, luego apoyo."
+
+EJEMPLO DE ESTRUCTURA VISUAL:
+⸻
+🥦 Digestión (FECAR)
+
+Observaciones:
+"Se nota tránsito intestinal lento..."
+
+Hábito funcional:
+"Come despacio, mastica al menos 20 veces..."
+
+${moduleNumber === 1 ? '' : `Alimentos funcionales:
+"Puedes apoyar tu sistema con chía hidratada..."
+
+Precauciones:
+• Linaza molida: evitar si...
+• Chía hidratada: evitar si...
+`}
+Frase de consciencia:
+"Una digestión tranquila apaga la inflamación y enciende tu energía."
+⸻
+
+3. 🌼 QUÉ PUEDES MEJORAR
+Subtítulo visual: "🌼 7 Hábitos funcionales que marcan la diferencia"
+Lista numerada de 7 ajustes simples (hábitos, alimentos, descanso, hidratación, movimiento).
 Ejemplos:
-- Hidrátate con 8–10 vasos de agua diarios
-- Añade proteína, fibra y grasa saludable en cada comida (escribe completo, NO uses "P+F+F")
-- Come sin pantallas, masticando despacio
-- Camina 10–15 minutos después de comer
+1. Dormir antes de las 11 p.m.
+2. Masticar con calma y sin pantallas
+3. Beber agua durante el día (no solo al comer)
+4. Caminar 10–15 min después de cada comida
+5. Practicar respiración 4-7-8 antes de dormir
+6. Eliminar bebidas con azúcar y endulzantes artificiales
+7. Comer tres comidas completas (evitar picoteo constante)
 
 ${moduleNumber === 1 
   ? `RECUERDA: NO mencionar suplementos en este módulo.`
   : `4. 🌿 APOYO NUTRICIONAL Y FITOTERAPIA
+Subtítulo visual: "💊 Complementa tus hábitos, no los reemplaza."
 Incluye solo los elementos que NO se mencionaron ya en la Trifecta.
 Formato educativo con precauciones:
 - Magnesio glicinato → Relaja músculos, mejora sueño y glucosa. Precaución: evitar en insuficiencia renal.
@@ -613,8 +686,11 @@ IMPORTANTE:
 - Recordatorio final: "Consulta con tu médico antes de implementar cualquier suplemento."`}
 
 ${moduleNumber === 1 ? '4' : '5'}. 💬 FRASE FINAL
-"Esta guía es educativa y busca ayudarte a entender lo que tu cuerpo comunica.
-Tu cuerpo no está roto, está protegiéndose y aprendiendo a equilibrarse otra vez."
+Usar esta versión completa (4 líneas):
+"Esta guía es educativa y no reemplaza orientación médica.
+Tu cuerpo no está roto, está buscando equilibrio.
+Mientras el cuerpo esté en alerta, no puede sanar.
+Sanar no es controlar un síntoma, es entender la raíz."
 
 EXTENSIÓN: 400–700 palabras.
 FORMATO VISUAL: Usa subtítulos y emojis para hacerlo más visual y amigable.

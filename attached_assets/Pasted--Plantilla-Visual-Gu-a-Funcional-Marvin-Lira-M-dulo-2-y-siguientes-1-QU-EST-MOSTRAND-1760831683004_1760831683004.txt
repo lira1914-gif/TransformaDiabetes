@@ -1,0 +1,146 @@
+🌿 Plantilla Visual — Guía Funcional Marvin Lira (Módulo 2 y siguientes)
+
+⸻
+
+🩺 1. QUÉ ESTÁ MOSTRANDO TU CUERPO
+
+💬 Ejemplo de redacción:
+
+“Juan, tu cuerpo no está roto: está buscando equilibrio.
+Los datos muestran digestión lenta, energía variable y sueño interrumpido.
+Estas son señales de que tu cuerpo necesita más calma, descanso y regularidad.”
+
+📘 Objetivo:
+Introducir al usuario con empatía, mostrando que su cuerpo no está fallando, solo está adaptándose.
+
+⸻
+
+🧠 2. LA TRIFECTA FUNCIONAL
+
+⸻
+
+🥦 Digestión (FECAR)
+
+Observaciones:
+
+“Se nota tránsito intestinal lento y sensación de pesadez después de comer.”
+
+Hábito funcional:
+
+“Come despacio, mastica al menos 20 veces por bocado y evita pantallas al comer.”
+
+Alimentos funcionales:
+
+“Puedes apoyar tu sistema con chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación.”
+
+Precauciones:
+
+• Linaza molida: evitar si tomas anticoagulantes o tienes diarrea.
+• Chía hidratada: evitar si tomas anticoagulantes o tienes diverticulitis activa.
+• Asegura buena hidratación diaria.
+
+📖 Frase de consciencia:
+
+“Una digestión tranquila apaga la inflamación y enciende tu energía.”
+
+⸻
+
+🌙 Sueño y Sistema Nervioso
+
+Observaciones:
+
+“Tu cuerpo muestra signos de estrés prolongado: dificultad para conciliar el sueño o sensación de alerta constante.”
+
+Hábito funcional:
+
+“Apaga pantallas una hora antes de dormir y realiza respiraciones 4-7-8 antes de acostarte.”
+
+Apoyo natural (educativo):
+
+• Ashwagandha → ayuda a regular el cortisol y calmar el cuerpo.
+• GABA → calma el sistema nervioso y favorece el descanso.
+
+Precauciones:
+
+• Ashwagandha: evitar en hipertiroidismo o embarazo.
+• GABA: evitar con fármacos sedantes o ansiolíticos.
+
+📖 Frase de consciencia:
+
+“Mientras el cuerpo esté en alerta, no puede sanar.”
+
+⸻
+
+🍯 Azúcar y Energía Estable
+
+Observaciones:
+
+“Se detectan altibajos de energía y antojos frecuentes por dulce.”
+
+Hábito funcional:
+
+“Desayuna con proteína, fibra y grasa saludable (por ejemplo: huevo, aguacate y frijoles).
+Evita azúcares líquidos como jugos o refrescos.”
+
+Apoyo natural (educativo):
+
+• Cromo → ayuda a regular el deseo de azúcar.
+• Canela o Gymnema → equilibran la glucosa y reducen antojos.
+
+Precauciones:
+
+• Precaución en uso de medicamentos para diabetes.
+• Siempre consultar antes con tu médico o nutricionista.
+
+📖 Frase de consciencia:
+
+“El azúcar promete energía rápida, pero te la cobra con intereses; el equilibrio te sostiene todo el día.”
+
+⸻
+
+🥦 3. QUÉ PUEDES MEJORAR
+
+🌼 7 Hábitos funcionales que marcan la diferencia
+	1.	Dormir antes de las 11 p.m.
+	2.	Masticar con calma y sin pantallas.
+	3.	Beber agua durante el día (no solo al comer).
+	4.	Caminar 10–15 min después de cada comida.
+	5.	Practicar respiración 4-7-8 antes de dormir.
+	6.	Eliminar bebidas con azúcar y endulzantes artificiales.
+	7.	Comer tres comidas completas (evitar picoteo constante).
+
+⸻
+
+🌿 4. APOYO NUTRICIONAL Y FITOTERAPIA
+
+💊 Complementa tus hábitos, no los reemplaza.
+
+Suplementos educativos:
+	•	Magnesio glicinato → relaja músculos, mejora sueño y glucosa.
+	•	Omega 3 (EPA/DHA) → reduce inflamación, mejora ánimo.
+	•	Berberina → apoya microbiota y glucosa.
+	•	Probiótico multicepa → equilibra microbiota, mejora digestión.
+	•	Cardo mariano → protege el hígado y apoya detoxificación.
+	•	Diente de león → favorece flujo biliar y digestión.
+
+⚠️ Precauciones:
+
+Evitar dosis sin guía profesional.
+Consultar con médico si se usan anticoagulantes, hipoglucemiantes o si hay embarazo.
+
+⸻
+
+💬 5. FRASE FINAL
+
+“Esta guía es educativa y no reemplaza orientación médica.
+Tu cuerpo no está roto, está buscando equilibrio.
+Mientras el cuerpo esté en alerta, no puede sanar.
+Sanar no es controlar un síntoma, es entender la raíz.”
+
+⸻
+
+✳️ NOTAS PARA REPLIT (instrucción de diseño)
+	•	Usar subtítulos con íconos (🥦 🌙 🍯 🌿) como separadores visuales.
+	•	Usar espaciado generoso entre secciones.
+	•	Formato de texto plano con resaltado por emojis o subtítulos.
+	•	No incluir links ni botones en esta fase; solo texto educativo limpio.
