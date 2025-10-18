@@ -354,10 +354,11 @@ export default function Registro5DiasDetallado() {
                 <div>
                   <label style={labelStyle}>Hora de dormir (noche anterior):</label>
                   <input
-                    type="time"
+                    type="text"
                     name="hora_dormir"
                     value={formData.hora_dormir}
                     onChange={handleChange}
+                    placeholder="Ej. 10:30 PM"
                     data-testid="input-hora-dormir"
                     style={inputStyle}
                   />
@@ -365,10 +366,11 @@ export default function Registro5DiasDetallado() {
                 <div>
                   <label style={labelStyle}>Hora de despertar:</label>
                   <input
-                    type="time"
+                    type="text"
                     name="hora_despertar"
                     value={formData.hora_despertar}
                     onChange={handleChange}
+                    placeholder="Ej. 6:30 AM"
                     data-testid="input-hora-despertar"
                     style={inputStyle}
                   />
