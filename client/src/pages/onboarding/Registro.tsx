@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'wouter';
-import IntakeForm from '@/components/IntakeForm';
-import MensajePostIntake from '@/components/MensajePostIntake';
 import Registro5Dias from '@/components/Registro5Dias';
-import MensajeFinalRegistro from '@/components/MensajeFinalRegistro';
 
 export default function Registro() {
   const [, setLocation] = useLocation();
-  const [showMensajePost, setShowMensajePost] = useState(false);
-  const [showRegistro5Dias, setShowRegistro5Dias] = useState(false);
-  const [showMensajeFinal, setShowMensajeFinal] = useState(false);
 
   useEffect(() => {
     // Verificar que el usuario esté suscrito
@@ -18,42 +12,12 @@ export default function Registro() {
       setLocation('/');
       return;
     }
-
-    // Mostrar directamente el registro de 5 días
-    setShowMensajePost(true);
-    setShowRegistro5Dias(true);
-    
-    // Verificar si ya completó el registro de 5 días
-    const diasRegistrados = parseInt(localStorage.getItem('tm_registro_dias') || '0');
-    if (diasRegistrados >= 5) {
-      setShowMensajeFinal(true);
-    }
   }, [setLocation]);
 
-  const handleIntakeComplete = () => {
-    setShowMensajePost(true);
-  };
-
-  const handleContinuarRegistro = () => {
-    setShowRegistro5Dias(true);
-  };
-
-  const handleRegistroComplete = () => {
-    setShowMensajeFinal(true);
-  };
-
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem 0' }}>
+    <div style={{ minHeight: '100vh', padding: '2rem 0', background: '#FAF8F4' }}>
       <div className="wrap" style={{ maxWidth: '900px', margin: '0 auto' }}>
-        {!showMensajePost ? (
-          <IntakeForm onComplete={handleIntakeComplete} />
-        ) : !showRegistro5Dias ? (
-          <MensajePostIntake onContinue={handleContinuarRegistro} />
-        ) : !showMensajeFinal ? (
-          <Registro5Dias />
-        ) : (
-          <MensajeFinalRegistro />
-        )}
+        <Registro5Dias />
       </div>
     </div>
   );
