@@ -165,6 +165,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
+      if (!user) {
+        throw new Error("No se pudo crear o actualizar el usuario");
+      }
+
       console.log('Usuario guardado en BD:', user.id);
 
       res.json({ 
