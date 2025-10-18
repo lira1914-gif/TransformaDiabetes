@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "wouter";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 interface MomentoDia {
   momento: string;
@@ -49,6 +51,70 @@ export default function Registro5DiasDetallado() {
     noche_evacuaciones: ""
   });
 
+  const saveDailyLogMutation = useMutation({
+    mutationFn: async (data: any) => {
+      return await apiRequest('/api/daily-log', 'POST', data);
+    },
+    onSuccess: (data, variables) => {
+      const nuevosDias = [...diasCompletados, variables.diaData];
+      setDiasCompletados(nuevosDias);
+      
+      // Guardar también en localStorage como backup
+      localStorage.setItem('registro5dias_detallado', JSON.stringify(nuevosDias));
+      localStorage.setItem('tm_registro_dias', String(nuevosDias.length));
+      
+      if (nuevosDias.length >= 5) {
+        localStorage.setItem('tm_registro_done', 'true');
+        toast({
+          title: "✅ Registro completo",
+          description: "Has completado tus 5 días de registro funcional.",
+        });
+        setTimeout(() => {
+          setLocation('/onboarding/mes1');
+        }, 1500);
+      } else {
+        toast({
+          title: "✅ Día guardado",
+          description: `Día ${variables.diaData.dia} registrado correctamente en la base de datos.`,
+        });
+        setDiaActual(diaActual + 1);
+        // Resetear formulario para el próximo día
+        setFormData({
+          fecha: new Date().toISOString().split('T')[0],
+          hora_dormir: "",
+          hora_despertar: "",
+          veces_desperto: "0",
+          manana_comida: "",
+          manana_animo: "",
+          manana_evacuaciones: "",
+          media_manana_comida: "",
+          media_manana_animo: "",
+          media_manana_evacuaciones: "",
+          almuerzo_comida: "",
+          almuerzo_animo: "",
+          almuerzo_evacuaciones: "",
+          media_tarde_comida: "",
+          media_tarde_animo: "",
+          media_tarde_evacuaciones: "",
+          cena_comida: "",
+          cena_animo: "",
+          cena_evacuaciones: "",
+          noche_comida: "",
+          noche_animo: "",
+          noche_evacuaciones: ""
+        });
+      }
+    },
+    onError: (error: any) => {
+      console.error('Error guardando daily log:', error);
+      toast({
+        title: "❌ Error al guardar",
+        description: "Hubo un problema guardando el registro. Por favor intenta nuevamente.",
+        variant: "destructive",
+      });
+    }
+  });
+
   useEffect(() => {
     console.log('🟢 Registro5DiasDetallado montado');
     const datosGuardados = localStorage.getItem('registro5dias_detallado');
@@ -79,6 +145,18 @@ export default function Registro5DiasDetallado() {
 
   const guardarDia = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Obtener userId de localStorage
+    const userId = localStorage.getItem('tm_user_id');
+    
+    if (!userId) {
+      toast({
+        title: "❌ Error",
+        description: "No se pudo identificar tu cuenta. Por favor vuelve a iniciar sesión.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     // No requerimos validación estricta - el disclaimer indica que no es obligatorio llenar todo
     // La persona puede guardar el día aunque esté vacío si así lo desea
@@ -129,53 +207,25 @@ export default function Registro5DiasDetallado() {
       ]
     };
     
-    const nuevosDias = [...diasCompletados, nuevoDia];
+    // Preparar datos para la API (mapear nombres de campos)
+    const apiData = {
+      userId,
+      dia: diaActual,
+      fecha: formData.fecha,
+      horaDormir: formData.hora_dormir,
+      horaDespertar: formData.hora_despertar,
+      vecesDesperto: formData.veces_desperto,
+      momentos: nuevoDia.momentos.map(m => ({
+        momento: m.momento,
+        comida: m.comida,
+        estadoAnimo: m.estado_animo,
+        evacuaciones: m.evacuaciones
+      })),
+      diaData: nuevoDia // Para usar en onSuccess
+    };
     
-    localStorage.setItem('registro5dias_detallado', JSON.stringify(nuevosDias));
-    localStorage.setItem('tm_registro_dias', String(nuevosDias.length));
-    
-    setDiasCompletados(nuevosDias);
-    
-    if (nuevosDias.length >= 5) {
-      toast({
-        title: "✅ Registro completo",
-        description: "Has completado tus 5 días de registro funcional.",
-      });
-      setTimeout(() => {
-        setLocation('/onboarding/mes1');
-      }, 1500);
-    } else {
-      toast({
-        title: "✅ Día guardado",
-        description: `Día ${diaActual} registrado correctamente. Continúa con el día ${diaActual + 1}.`,
-      });
-      setDiaActual(diaActual + 1);
-      // Resetear formulario para el próximo día
-      setFormData({
-        fecha: new Date().toISOString().split('T')[0],
-        hora_dormir: "",
-        hora_despertar: "",
-        veces_desperto: "0",
-        manana_comida: "",
-        manana_animo: "",
-        manana_evacuaciones: "",
-        media_manana_comida: "",
-        media_manana_animo: "",
-        media_manana_evacuaciones: "",
-        almuerzo_comida: "",
-        almuerzo_animo: "",
-        almuerzo_evacuaciones: "",
-        media_tarde_comida: "",
-        media_tarde_animo: "",
-        media_tarde_evacuaciones: "",
-        cena_comida: "",
-        cena_animo: "",
-        cena_evacuaciones: "",
-        noche_comida: "",
-        noche_animo: "",
-        noche_evacuaciones: ""
-      });
-    }
+    // Enviar a PostgreSQL
+    saveDailyLogMutation.mutate(apiData);
   };
 
   const reiniciarRegistro = () => {
@@ -669,21 +719,30 @@ export default function Registro5DiasDetallado() {
           <button
             type="submit"
             data-testid="button-guardar-dia"
+            disabled={saveDailyLogMutation.isPending}
             style={{
-              background: '#A15C38',
+              background: saveDailyLogMutation.isPending ? '#ccc' : '#A15C38',
               color: '#fff',
               padding: '1rem 1.5rem',
               border: 'none',
               borderRadius: '8px',
               fontWeight: 600,
-              cursor: 'pointer',
+              cursor: saveDailyLogMutation.isPending ? 'not-allowed' : 'pointer',
               fontSize: '1rem',
               transition: 'background 0.3s'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.background = '#8A4D2F'}
-            onMouseLeave={(e) => e.currentTarget.style.background = '#A15C38'}
+            onMouseEnter={(e) => {
+              if (!saveDailyLogMutation.isPending) {
+                e.currentTarget.style.background = '#8A4D2F';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!saveDailyLogMutation.isPending) {
+                e.currentTarget.style.background = '#A15C38';
+              }
+            }}
           >
-            Guardar Día {diaActual}
+            {saveDailyLogMutation.isPending ? 'Guardando...' : `Guardar Día ${diaActual}`}
           </button>
 
           {/* Botón de desarrollo para reiniciar */}
