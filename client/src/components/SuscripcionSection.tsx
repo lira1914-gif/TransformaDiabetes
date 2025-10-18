@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
 import "../styles/suscripcion.css";
 import backgroundImage from "@assets/stock_images/soft_translucent_gre_3ac61690.jpg";
@@ -7,68 +7,10 @@ export default function SuscripcionSection() {
   const [, setLocation] = useLocation();
   const [isLoading, setIsLoading] = useState(false);
 
-  // Inicializar Paddle cuando se carga el componente
-  useEffect(() => {
-    const initializePaddle = async () => {
-      if (window.Paddle) {
-        try {
-          // Para Paddle Billing con transacciones, no necesitamos llamar Initialize
-          // El environment ya está configurado en el script tag
-          console.log('Paddle.js cargado correctamente');
-        } catch (error) {
-          console.error('Error inicializando Paddle:', error);
-        }
-      }
-    };
-    
-    initializePaddle();
-  }, []);
-
   const handleSubscribe = async () => {
-    try {
-      setIsLoading(true);
-      
-      // Llamar al endpoint de Paddle para crear checkout
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        console.error('Error creando checkout:', error);
-        alert(error.error || 'Error al procesar el pago. Por favor, intenta nuevamente.');
-        setIsLoading(false);
-        return;
-      }
-
-      const data = await response.json();
-      console.log('Respuesta del servidor:', data);
-      
-      if (data.transactionId) {
-        console.log('Transaction ID recibido:', data.transactionId);
-        
-        // Guardar marca de suscripción y redirigir a bienvenida
-        localStorage.setItem('tm_subscribed_at', String(Date.now()));
-        
-        // Por ahora, mostrar el transaction ID al usuario con instrucciones
-        alert(`✅ Transacción creada correctamente!\n\nID: ${data.transactionId}\n\n⚠️ NOTA: El checkout de Paddle está en proceso de configuración.\n\nUna vez completado el onboarding de Paddle, este botón abrirá el formulario de pago automáticamente.`);
-        
-        // Redirigir a la página de bienvenida del onboarding
-        setLocation('/onboarding/bienvenida');
-      } else {
-        console.error('No se recibió transaction ID:', data);
-        alert('Error: No se pudo crear la sesión de pago. Por favor, intenta nuevamente.');
-      }
-      
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error al conectar con el servicio de pagos. Por favor, intenta nuevamente.');
-      setIsLoading(false);
-    }
+    setIsLoading(true);
+    // Redirigir a la página de checkout de Stripe
+    setLocation('/onboarding/checkout');
   };
 
   return (
@@ -117,7 +59,7 @@ export default function SuscripcionSection() {
           </div>
 
           <div className="footer-note">
-            *El enlace de suscripción se habilitará pronto. Al registrarte, accederás a tu formulario de inicio funcional y diario de 5 días.
+            🔒 Pago seguro procesado por Stripe. Cancela cuando quieras.
           </div>
 
           <section className="disclaimer">

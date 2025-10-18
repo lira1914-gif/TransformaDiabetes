@@ -1,101 +1,76 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { Paddle, Environment } from "@paddle/paddle-node-sdk";
+import Stripe from "stripe";
 
-// Initialize Paddle with API key from environment
-// Auto-detect environment based on API key prefix
-const getEnvironment = () => {
-  const apiKey = process.env.PADDLE_API_KEY || '';
-  if (apiKey.includes('_sdbx_')) {
-    return Environment.sandbox;
-  } else if (apiKey.includes('_live_')) {
-    return Environment.production;
-  }
-  // Fallback to sandbox for development
-  return process.env.NODE_ENV === 'production' ? Environment.production : Environment.sandbox;
-};
+// Initialize Stripe with API key from environment
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+}
 
-const paddle = process.env.PADDLE_API_KEY 
-  ? new Paddle(process.env.PADDLE_API_KEY, {
-      environment: getEnvironment()
-    })
-  : null;
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-console.log('Paddle initialized with environment:', getEnvironment());
+console.log('Stripe initialized successfully');
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Get Paddle environment info for client initialization
-  app.get("/api/paddle-config", async (req, res) => {
+  // Stripe subscription endpoint
+  app.post("/api/create-subscription", async (req, res) => {
     try {
-      const environment = getEnvironment();
-      // For now, return environment without client token
-      // Client will initialize Paddle with the transactionId directly
-      res.json({ 
-        environment: environment === Environment.sandbox ? 'sandbox' : 'production'
+      if (!process.env.STRIPE_PRICE_ID) {
+        console.error("Stripe PRICE_ID not configured");
+        return res.status(500).json({ 
+          error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
+        });
+      }
+
+      // Primero crear un customer (por ahora anónimo, luego puede asociarse a un usuario)
+      const customer = await stripe.customers.create({
+        metadata: {
+          source: 'TransformaDiabetes'
+        }
       });
-    } catch (error) {
-      console.error("Error getting Paddle config:", error);
-      res.status(500).json({ error: "Could not load payment configuration" });
-    }
-  });
 
-  // Paddle Checkout endpoint for subscriptions
-  app.post("/api/create-checkout-session", async (req, res) => {
-    try {
-      if (!paddle) {
-        console.error("Paddle not configured: PADDLE_API_KEY is missing");
-        return res.status(500).json({ 
-          error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
-        });
-      }
-
-      if (!process.env.PADDLE_PRICE_ID) {
-        console.error("Paddle PRICE_ID not configured");
-        return res.status(500).json({ 
-          error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
-        });
-      }
-
-      // Get the origin for success/cancel URLs
-      const origin = req.headers.origin || `${req.protocol}://${req.get('host')}`;
-
-      // Create a transaction with Paddle
-      const transaction = await paddle.transactions.create({
+      // Crear una suscripción asociada al customer
+      const subscription = await stripe.subscriptions.create({
+        customer: customer.id,
         items: [
           {
-            priceId: process.env.PADDLE_PRICE_ID,
-            quantity: 1,
+            price: process.env.STRIPE_PRICE_ID,
           },
         ],
-        // Optional: include customer email if provided
-        ...(req.body.email && {
-          customData: {
-            email: req.body.email
-          }
-        })
+        payment_behavior: 'default_incomplete',
+        payment_settings: { save_default_payment_method: 'on_subscription' },
+        expand: ['latest_invoice.payment_intent'],
       });
 
-      // Return both transaction ID and checkout URL
-      const checkoutUrl = transaction.checkout?.url;
-      
-      if (!transaction.id || !checkoutUrl) {
-        throw new Error("No transaction data returned from Paddle");
+      // Acceder al payment_intent del invoice
+      const invoice = subscription.latest_invoice;
+      if (typeof invoice === 'string') {
+        throw new Error("Invoice no expandido correctamente");
+      }
+
+      const paymentIntent = invoice?.payment_intent;
+      if (!paymentIntent || typeof paymentIntent === 'string') {
+        throw new Error("PaymentIntent no disponible");
+      }
+
+      const clientSecret = paymentIntent.client_secret;
+      if (!clientSecret) {
+        throw new Error("No se pudo obtener el client_secret");
       }
 
       res.json({ 
-        transactionId: transaction.id,
-        checkoutUrl: checkoutUrl
+        subscriptionId: subscription.id,
+        clientSecret: clientSecret
       });
     } catch (error: any) {
-      console.error("Error creating Paddle checkout:", error);
+      console.error("Error creating Stripe subscription:", error);
       
-      // Provide more specific error messages based on Paddle error codes
       let errorMessage = "No se pudo procesar la solicitud de pago. Por favor, intenta nuevamente.";
       
-      if (error.code === 'transaction_checkout_not_enabled') {
-        errorMessage = "El sistema de pagos está en proceso de configuración. Por favor, intenta más tarde.";
-      } else if (error.code === 'forbidden') {
+      if (error.type === 'StripeCardError') {
+        errorMessage = "Error con la tarjeta. Verifica los datos e intenta nuevamente.";
+      } else if (error.type === 'StripeInvalidRequestError') {
         errorMessage = "Error de configuración del servicio de pagos. Contacta al soporte.";
       }
       
