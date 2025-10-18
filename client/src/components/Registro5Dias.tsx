@@ -25,16 +25,23 @@ export default function Registro5Dias() {
 
   // Cargar datos guardados al montar
   useEffect(() => {
+    console.log('🟢 Registro5Dias.tsx montado');
     const datosGuardados = localStorage.getItem('registro5dias');
+    console.log('Datos guardados:', datosGuardados);
+    
     if (datosGuardados) {
       try {
         const diasGuardados = JSON.parse(datosGuardados);
+        console.log('Días guardados parseados:', diasGuardados);
+        
         if (Array.isArray(diasGuardados) && diasGuardados.length > 0) {
           setDiasCompletados(diasGuardados);
           setDiaActual(diasGuardados.length + 1);
+          console.log('Día actual:', diasGuardados.length + 1);
           
           // Si ya completó los 5 días, redirigir a Mes1
           if (diasGuardados.length >= 5) {
+            console.log('🔴 Ya completó 5 días, redirigiendo a Mes1');
             localStorage.setItem('tm_registro_dias', '5');
             setLocation('/onboarding/mes1');
           }
@@ -42,6 +49,8 @@ export default function Registro5Dias() {
       } catch (error) {
         console.error('Error al cargar datos guardados:', error);
       }
+    } else {
+      console.log('✅ No hay datos guardados, mostrando Día 1');
     }
   }, [setLocation]);
 
