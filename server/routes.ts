@@ -4,18 +4,27 @@ import { storage } from "./storage";
 import Stripe from "stripe";
 
 // Initialize Stripe with API key from environment
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY)
+  : null;
+
+if (stripe) {
+  console.log('Stripe initialized successfully');
+} else {
+  console.warn('⚠️ Stripe not configured: STRIPE_SECRET_KEY is missing');
 }
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-console.log('Stripe initialized successfully');
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Stripe subscription endpoint
   app.post("/api/create-subscription", async (req, res) => {
     try {
+      if (!stripe) {
+        console.error("Stripe not configured: STRIPE_SECRET_KEY is missing");
+        return res.status(500).json({ 
+          error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
+        });
+      }
+
       if (!process.env.STRIPE_PRICE_ID) {
         console.error("Stripe PRICE_ID not configured");
         return res.status(500).json({ 

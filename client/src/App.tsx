@@ -17,6 +17,7 @@ import Terminos from "@/pages/Terminos";
 import Reembolsos from "@/pages/Reembolsos";
 import NotFound from "@/pages/not-found";
 
+import OnboardingCheckout from "@/pages/onboarding/Checkout";
 import OnboardingBienvenida from "@/pages/onboarding/Bienvenida";
 import OnboardingMotivacion from "@/pages/onboarding/Motivacion";
 import OnboardingFormularioSalud from "@/pages/onboarding/FormularioSalud";
@@ -42,6 +43,7 @@ function Router() {
       <Route path="/terminos" component={Terminos} />
       <Route path="/reembolsos" component={Reembolsos} />
       
+      <Route path="/onboarding/checkout" component={OnboardingCheckout} />
       <Route path="/onboarding/bienvenida" component={OnboardingBienvenida} />
       <Route path="/onboarding/motivacion" component={OnboardingMotivacion} />
       <Route path="/onboarding/formulario-salud" component={OnboardingFormularioSalud} />
