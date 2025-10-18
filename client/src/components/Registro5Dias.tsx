@@ -36,14 +36,14 @@ export default function Registro5Dias() {
         
         if (Array.isArray(diasGuardados) && diasGuardados.length > 0) {
           setDiasCompletados(diasGuardados);
-          setDiaActual(diasGuardados.length + 1);
-          console.log('Día actual:', diasGuardados.length + 1);
           
-          // Si ya completó los 5 días, redirigir a Mes1
+          // Si ya completó los 5 días, mostrar día 6 (que mostrará el mensaje de completado)
           if (diasGuardados.length >= 5) {
-            console.log('🔴 Ya completó 5 días, redirigiendo a Mes1');
-            localStorage.setItem('tm_registro_dias', '5');
-            setLocation('/onboarding/mes1');
+            console.log('✅ Ya completó 5 días, mostrando pantalla de completado');
+            setDiaActual(6);
+          } else {
+            setDiaActual(diasGuardados.length + 1);
+            console.log('Día actual:', diasGuardados.length + 1);
           }
         }
       } catch (error) {
