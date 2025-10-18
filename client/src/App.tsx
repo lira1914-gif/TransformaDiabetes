@@ -19,6 +19,7 @@ import NotFound from "@/pages/not-found";
 
 import OnboardingBienvenida from "@/pages/onboarding/Bienvenida";
 import OnboardingMotivacion from "@/pages/onboarding/Motivacion";
+import OnboardingFormularioSalud from "@/pages/onboarding/FormularioSalud";
 import OnboardingMensaje from "@/pages/onboarding/Mensaje";
 import OnboardingMes1 from "@/pages/onboarding/Mes1";
 import OnboardingRegistro from "@/pages/onboarding/Registro";
@@ -42,6 +43,7 @@ function Router() {
       
       <Route path="/onboarding/bienvenida" component={OnboardingBienvenida} />
       <Route path="/onboarding/motivacion" component={OnboardingMotivacion} />
+      <Route path="/onboarding/formulario-salud" component={OnboardingFormularioSalud} />
       <Route path="/onboarding/mensaje" component={OnboardingMensaje} />
       <Route path="/onboarding/mes1" component={OnboardingMes1} />
       <Route path="/onboarding/registro" component={OnboardingRegistro} />

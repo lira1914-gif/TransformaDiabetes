@@ -23,7 +23,7 @@ export default function Motivacion() {
   const handleContinuar = () => {
     // Marcar motivación como completada
     localStorage.setItem('tm_motivacion_done', 'true');
-    setLocation('/onboarding/mensaje');
+    setLocation('/onboarding/formulario-salud');
   };
 
   return (

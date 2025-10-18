@@ -6,10 +6,9 @@ export default function Mensaje() {
 
   useEffect(() => {
     // Verificar que el usuario haya completado los pasos previos
-    const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
-    const motivacionDone = localStorage.getItem('tm_motivacion_done');
+    const formularioDone = localStorage.getItem('tm_formulario_done');
     
-    if (!bienvenidaDone || !motivacionDone) {
+    if (!formularioDone) {
       setLocation('/onboarding/bienvenida');
       return;
     }
