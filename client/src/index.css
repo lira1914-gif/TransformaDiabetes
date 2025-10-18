@@ -331,3 +331,28 @@ html {
     inset: -1px;
   }
 }
+
+/* Progress Bar Styling */
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #E6E3D9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-value {
+  background-color: #556B2F;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+progress::-moz-progress-bar {
+  background-color: #556B2F;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}

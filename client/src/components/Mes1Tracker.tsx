@@ -69,7 +69,7 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
       // Marcar que el informe está listo
       localStorage.setItem('tm_informe_ready', 'true');
       // Redirigir a la página del informe
-      setLocation('/onboarding/informe');
+      setLocation('/onboarding/informe-inicial');
     };
 
     return (

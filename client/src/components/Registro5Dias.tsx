@@ -143,20 +143,16 @@ export default function Registro5Dias() {
           }}>
             Día {dias.length} de 5
           </p>
-          <div style={{
-            width: '100%',
-            height: '12px',
-            background: '#E6E3D9',
-            borderRadius: '6px',
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              width: `${(dias.length / 5) * 100}%`,
-              height: '100%',
-              background: '#556B2F',
-              transition: 'width 0.3s ease'
-            }}></div>
-          </div>
+          <progress 
+            value={dias.length} 
+            max={5}
+            style={{
+              width: '100%',
+              height: '20px',
+              borderRadius: '6px',
+              overflow: 'hidden'
+            }}
+          />
           <p style={{ 
             color: '#6F6E66', 
             fontSize: '.9rem',
