@@ -1,14 +1,6 @@
 import { useState, useEffect, forwardRef } from "react";
 import { useLocation } from "wouter";
 
-const tips = [
-  "Incluye grasa + fibra + proteína en cada comida para estabilizar el azúcar.",
-  "Respira 5 veces lento antes de comer: baja el cortisol y mejora tu digestión.",
-  "Muévete 10 minutos después de comer: ayuda a tu glucosa a mantenerse estable.",
-  "Hidrátate: tu hígado y tu intestino trabajan mejor con agua suficiente.",
-  "Duerme 7–8h: el descanso es tu medicina nocturna."
-];
-
 interface Mes1TrackerProps {
   onIrRegistro: () => void;
 }
@@ -18,7 +10,6 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
     const [, setLocation] = useLocation();
     const [diasRegistro, setDiasRegistro] = useState(0);
     const [diasSuscripcion, setDiasSuscripcion] = useState(0);
-    const [tipDelDia, setTipDelDia] = useState("");
 
     useEffect(() => {
       // Inicializar fecha de suscripción si no existe
@@ -30,10 +21,6 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
       const t0 = Number(localStorage.getItem('tm_subscribed_at') || Date.now());
       const dias = Math.max(0, Math.floor((Date.now() - t0) / (1000 * 60 * 60 * 24)));
       setDiasSuscripcion(dias);
-
-      // Seleccionar tip aleatorio
-      const randomTip = tips[Math.floor(Math.random() * tips.length)];
-      setTipDelDia(randomTip);
 
       // Chequear progreso del registro
       const checkProgreso = () => {
@@ -94,14 +81,17 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
             textAlign: 'center', 
             margin: '0 0 .5rem' 
           }}>
-            Mes 1 — Observa y comprende tu cuerpo
+            Mes 1 — Observa a tu cuerpo con curiosidad
           </h2>
           <p style={{ 
             color: '#6F6E66', 
             textAlign: 'center', 
-            margin: '.25rem 0 1.25rem' 
+            margin: '.25rem 0 1.25rem',
+            lineHeight: 1.7
           }}>
-            Establece tu línea base: registra 5 días de <strong>comidas, sueño y evacuación</strong>. No busques perfección — busca patrones.
+            Durante estos primeros días, solo queremos conocerte mejor.<br/>
+            Registra tus comidas, descanso y hábitos sin intentar cambiarlos.<br/>
+            Tu cuerpo no está roto: solo está adaptándose, y observarlo es el primer paso para acompañarlo.
           </p>
 
           <div style={{
@@ -154,9 +144,10 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
                 margin: '.5rem 0 0 1rem', 
                 lineHeight: 1.7 
               }}>
-                <li>Observar tu energía y digestión sin juzgarte.</li>
-                <li>Identificar alimentos y horarios que te estabilizan.</li>
-                <li>Priorizar descanso: <em>"tu cuerpo no puede sanar en estado de alerta"</em>.</li>
+                <li>Escuchar las señales de tu energía, digestión y descanso.</li>
+                <li>Reconocer qué alimentos y ritmos te estabilizan.</li>
+                <li>Recordar que sanar no es controlar: es comprender.</li>
+                <li>Dar espacio al descanso: tu cuerpo solo puede sanar cuando se siente seguro.</li>
               </ul>
             </div>
             <div style={{
@@ -165,55 +156,53 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
               borderRadius: '10px',
               padding: '1rem'
             }}>
-              <strong style={{ color: '#A15C38' }}>Sugerencia diaria:</strong>
+              <strong style={{ color: '#A15C38' }}>Sugerencia funcional diaria:</strong>
               <div 
                 style={{ 
                   marginTop: '.5rem', 
-                  color: '#3A3A3A' 
+                  color: '#3A3A3A',
+                  lineHeight: 1.7
                 }}
                 data-testid="mes1-tip"
               >
-                {tipDelDia}
+                Después de comer, camina o muévete suavemente unos minutos.<br/>
+                No es ejercicio: es una forma de decirle a tu cuerpo "estás a salvo".
               </div>
             </div>
           </div>
 
-          <div style={{
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'center',
-            marginTop: '1rem',
-            flexWrap: 'wrap'
-          }}>
-            <button 
-              onClick={onIrRegistro}
-              data-testid="button-ir-registro-mes1"
-              style={{
-                background: '#A15C38',
-                color: '#fff',
-                padding: '.9rem 1.2rem',
-                border: 'none',
-                borderRadius: '8px',
+          {diasRegistro >= 5 ? (
+            <div style={{
+              textAlign: 'center',
+              marginTop: '1.5rem'
+            }}>
+              <p style={{
+                color: '#556B2F',
                 fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'background 0.3s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.background = '#8A4D2F'}
-              onMouseLeave={(e) => e.currentTarget.style.background = '#A15C38'}
-            >
-              Ir a mi registro de 5 días
-            </button>
-            {diasRegistro >= 5 && (
+                marginBottom: '1rem',
+                fontSize: '1rem'
+              }}>
+                ✨ ¡Excelente! Has completado tu evaluación inicial.
+              </p>
+              <p style={{
+                color: '#6F6E66',
+                marginBottom: '1.5rem',
+                lineHeight: 1.6
+              }}>
+                Ahora vamos a analizar toda esta información (formulario + registro de 5 días)<br/>
+                para crear tu plan personalizado de la primera semana.
+              </p>
               <button 
                 onClick={handleGenerarInforme}
                 data-testid="button-generar-informe"
                 style={{
                   background: '#556B2F',
                   color: '#fff',
-                  padding: '.9rem 1.2rem',
+                  padding: '1rem 2rem',
                   border: 'none',
                   borderRadius: '8px',
                   fontWeight: 600,
+                  fontSize: '1rem',
                   cursor: 'pointer',
                   transition: 'background 0.3s'
                 }}
@@ -222,8 +211,33 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
               >
                 Generar mi informe inicial
               </button>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div style={{
+              textAlign: 'center',
+              marginTop: '1.5rem'
+            }}>
+              <button 
+                onClick={onIrRegistro}
+                data-testid="button-ir-registro-mes1"
+                style={{
+                  background: '#A15C38',
+                  color: '#fff',
+                  padding: '1rem 2rem',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  transition: 'background 0.3s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#8A4D2F'}
+                onMouseLeave={(e) => e.currentTarget.style.background = '#A15C38'}
+              >
+                Continuar mi registro de 5 días
+              </button>
+            </div>
+          )}
 
           {/* Botón temporal para limpiar datos de prueba */}
           <div style={{ textAlign: 'center', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px dashed #E6E3D9' }}>
