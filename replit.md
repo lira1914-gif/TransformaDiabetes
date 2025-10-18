@@ -14,7 +14,15 @@ The application uses React 18 with TypeScript, Vite, Wouter for routing, and Tan
 Key frontend features include:
 - **Simplified Landing Page**: Conversion-focused with a direct CTA to a multi-step diagnostic wizard.
 - **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns (4 individual, 6 combined), each linked to pattern-specific "Mini Guías Funcionales".
-- **Subscription Onboarding Flow**: A multi-page sequential process (Bienvenida → Motivación → Formulario de Salud → Mensaje → Registro → Mes 1 Tracker → Informe) with robust client-side validation using localStorage markers to ensure sequential completion and prevent step-skipping. The flow includes a comprehensive health intake form, daily functional guidance, and a 5-day dietary/lifestyle tracking diary, culminating in a personalized functional report.
+- **Subscription Onboarding Flow**: Multi-page sequential process:
+  1. Checkout (Stripe payment)
+  2. Bienvenida
+  3. Intake Form (10-section medical questionnaire)
+  4. Mensaje
+  5. Registro (5-day functional tracking: food, mood, bowel movements across 6 daily moments)
+  6. Mes 1 Tracker
+  7. Informe Inicial (AI-generated personalized functional report)
+  - Uses localStorage markers for sequential validation and step-skipping prevention.
 - **Informe Funcional**: Dedicated page at `/onboarding/informe-inicial` with clean CSS-based design, fadeInUp animation, and 5 key functional recommendations. Uses simplified styling with #fffdf8 background, max-width 700px, and semantic CSS classes.
 - **Dynamic Content**: Welcome section with subscription benefits, rotating motivational messages, and daily tips.
 - **Legal Pages**: Términos de Servicio, Política de Privacidad, Política de Reembolsos.
@@ -38,9 +46,10 @@ Wouter is used for client-side routing with smooth scrolling. The landing page i
 - date-fns
 
 ### Payment Integration
-- **Paddle Billing**: Integrated for $5/month subscriptions.
-  - Utilizes Paddle.js for client-side interaction and `@paddle/paddle-node-sdk` for server-side transaction creation via `/api/create-checkout-session`.
-  - Employs the Paddle Overlay modal for a seamless checkout experience.
-  - Configured for sandbox environment testing with automatic detection for production switch.
-  - Supports multi-currency, automatic tax/VAT compliance, and acts as Merchant of Record.
+- **Stripe**: Integrated for $5/month subscriptions.
+  - Uses Stripe.js with React Stripe Elements (`@stripe/stripe-js`, `@stripe/react-stripe-js`) for secure client-side payment collection.
+  - Backend utilizes Stripe Node SDK (`stripe`) for server-side subscription creation via `/api/create-subscription`.
+  - Checkout flow: User clicks subscribe → `/onboarding/checkout` page → Stripe Payment Element → Confirmation → `/onboarding/bienvenida`.
+  - Environment secrets: `STRIPE_SECRET_KEY`, `VITE_STRIPE_PUBLIC_KEY`, `STRIPE_PRICE_ID`.
+  - Supports recurring billing, automatic card updates, and PCI-compliant payment processing.
 ```
