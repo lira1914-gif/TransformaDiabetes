@@ -111,6 +111,23 @@ export default function Registro5Dias() {
     }
   };
 
+  const reiniciarRegistro = () => {
+    localStorage.removeItem('registro5dias');
+    localStorage.removeItem('tm_registro_dias');
+    setDiasCompletados([]);
+    setDiaActual(1);
+    setFormData({
+      comida: "",
+      heces: "Normal (una o más veces al día)",
+      sueno: "Profundo y reparador",
+      energia: "Con energía y claridad"
+    });
+    toast({
+      title: "✅ Registro reiniciado",
+      description: "Empezando desde el día 1",
+    });
+  };
+
   if (diaActual > 5) {
     return (
       <div style={{
@@ -123,21 +140,37 @@ export default function Registro5Dias() {
       }}>
         <h2 style={{ color: '#556B2F' }}>✅ Registro Completado</h2>
         <p>Has completado tus 5 días de registro funcional.</p>
-        <button
-          onClick={() => setLocation('/onboarding/mes1')}
-          style={{
-            marginTop: '1.5rem',
-            background: '#556B2F',
-            color: '#fff',
-            padding: '12px 24px',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontWeight: 600
-          }}
-        >
-          Continuar al Mes 1 →
-        </button>
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem' }}>
+          <button
+            onClick={() => setLocation('/onboarding/mes1')}
+            style={{
+              background: '#556B2F',
+              color: '#fff',
+              padding: '12px 24px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            Continuar al Mes 1 →
+          </button>
+          <button
+            onClick={reiniciarRegistro}
+            data-testid="button-reiniciar-registro"
+            style={{
+              background: '#A15C38',
+              color: '#fff',
+              padding: '12px 24px',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            🔄 Reiniciar Registro
+          </button>
+        </div>
       </div>
     );
   }
