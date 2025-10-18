@@ -353,11 +353,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Generate AI Report endpoint
   app.post("/api/generate-report", async (req, res) => {
     try {
-      const { userId } = req.body;
+      const { userId, moduleNumber = 1 } = req.body;
 
       if (!userId) {
         return res.status(400).json({ error: "userId es requerido" });
       }
+
+      console.log(`Generando informe para userId: ${userId}, Módulo: ${moduleNumber}`);
 
       // Obtener datos del usuario
       const user = await storage.getUser(userId);
@@ -396,18 +398,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
         'utf-8'
       );
       
+      // Construir instrucciones específicas según el módulo
+      let moduleInstructions = '';
+      
+      if (moduleNumber === 1) {
+        moduleInstructions = `
+🔹 MÓDULO 1 — "Empieza desde la raíz"
+
+Enfoque: Identificar causas raíz y patrones funcionales sin usar suplementos.
+Objetivo: Que el usuario comprenda las conexiones entre digestión, inflamación, sueño, estrés y glucosa.
+
+Instrucciones específicas:
+• NO recomendar suplementos, vitaminas, hierbas ni fitoterapia.
+• Enfocarte SOLO en educación, hábitos, alimentación funcional, descanso, hidratación, ritmo circadiano y consciencia corporal.
+• Usa frases empáticas y simples: "Tu cuerpo no está roto, está protegiéndose."
+• Si notas carencias o desequilibrios (por ejemplo, inflamación, disbiosis, fatiga), menciónalos como observaciones educativas, no como indicaciones clínicas.
+
+Ejemplo de cierre:
+"Este primer paso es para que entiendas qué te está diciendo tu cuerpo. Aún no trabajamos con suplementos; solo observamos, comprendemos y ayudamos a tu cuerpo a sentirse seguro."`;
+      } else {
+        moduleInstructions = `
+🔹 MÓDULO ${moduleNumber} — "Suplementos Esenciales"
+
+Enfoque: Introducir recomendaciones de apoyo nutricional o fitoterapia educativa.
+Objetivo: Sugerir nutrientes o hierbas de manera general y sin dosis.
+
+Instrucciones específicas:
+• Puedes mencionar suplementos funcionales (ej. magnesio, omega-3, cromo, berberina) solo si el patrón clínico lo amerita.
+• NO incluyas dosis ni marcas.
+• Recuérdale al usuario que consulte con su médico o nutricionista antes de implementar cambios.
+• Termina siempre con un recordatorio educativo:
+"Esta guía es educativa y no reemplaza la orientación médica profesional."`;
+      }
+      
       // Construir el mensaje del sistema con el conocimiento funcional
-      const systemMessage = `Eres un médico funcional experto especializado en reversión de diabetes tipo 2.
+      const systemMessage = `ROL Y CONTEXTO:
+Actúas como un analista de nutrición funcional basado en la metodología de Marvin Lira | Nutrición Funcional.
+Tu objetivo es interpretar los datos del usuario (intake + registro de 5 días) desde la raíz funcional,
+usando un lenguaje claro, humano y educativo.
+
+Tu tarea no es diagnosticar, sino ayudar al usuario a entender lo que su cuerpo intenta comunicar.
 
 CONOCIMIENTO CLÍNICO BASE:
 ${conocimientoFuncional}
 
-Tu tarea es analizar los datos del paciente usando este marco de nutrición funcional y generar informes personalizados que:
-1. Identifiquen patrones funcionales (no solo síntomas aislados)
-2. Conecten sistemas (digestivo, hormonal, inmune, inflamación)
-3. Busquen causas raíz, no solo traten síntomas
-4. Apliquen el modelo "Tres Raíces, Muchas Ramas"
-5. Prioricen intervenciones según: No negociables → Digestión → Soporte nutricional → Hierbas/adaptógenos
+${moduleInstructions}
+
+LÍMITES Y ÉTICA (PARA TODOS LOS MÓDULOS):
+• No des diagnósticos médicos ni trates enfermedades.
+• No hables de suspender o ajustar medicación.
+• Enfócate en educación, prevención y comprensión funcional.
+
+TONO:
+• Cálido, claro y empático.
+• Sin tecnicismos innecesarios.
+• Usa metáforas simples: raíz, ramas, fuego digestivo, equilibrio.
+• Sé esperanzador, no alarmista.
+
+RECORDATORIO FINAL (OBLIGATORIO):
+Al final de cada informe, incluye una frase educativa como:
+"Esta guía es educativa y no reemplaza orientación médica. Tu cuerpo no está roto, está buscando equilibrio."
 
 Respondes siempre en español y en formato JSON estructurado.`;
       
@@ -439,21 +489,30 @@ Día ${log.dia} (${log.fecha}):
 ${log.moments.map(m => `    - ${m.momento}: Comida: ${m.comida || 'N/A'}, Estado de ánimo: ${m.estadoAnimo || 'N/A'}, Evacuaciones: ${m.evacuaciones || 'N/A'}`).join('\n')}
 `).join('\n')}
 
+MÓDULO ACTUAL: ${moduleNumber}
+
 INSTRUCCIONES:
 Aplica tu conocimiento de nutrición funcional para generar un informe en español con las siguientes 4 secciones:
 
-1. RESUMEN: Síntesis del estado funcional del paciente identificando las "raíces" principales de disfunción (2-3 líneas)
+1. RESUMEN: Síntesis del estado funcional identificando las "raíces" principales de disfunción. Usa lenguaje empático y educativo. (2-3 líneas)
 
-2. HALLAZGOS: Lista de 3-5 hallazgos clave conectando sistemas y patrones observados en los datos. Usa lenguaje funcional (ejemplo: "resistencia a insulina", "permeabilidad intestinal", "disbiosis", "inflamación crónica", "disfunción adrenal"). Máximo 300 palabras.
+2. HALLAZGOS: Lista de 3-5 hallazgos clave conectando sistemas y patrones. Usa metáforas simples y lenguaje funcional claro (ejemplo: "fuego digestivo", "raíz", "equilibrio", "resistencia a insulina", "inflamación"). Máximo 300 palabras.
 
-3. RECOMENDACIONES: Lista de 4-6 recomendaciones funcionales específicas priorizadas:
-   - Comienza con "No Negociables" (sueño, estrés, glucosa)
-   - Continúa con optimización digestiva
-   - Incluye soporte nutricional específico
-   - Termina con hierbas/adaptógenos si es apropiado
+3. RECOMENDACIONES: ${moduleNumber === 1 
+  ? `Lista de 4-6 recomendaciones SOLO EDUCATIVAS (sin suplementos):
+   - Empieza con hábitos esenciales (sueño, hidratación, respiración)
+   - Continúa con alimentación funcional y educación sobre digestión
+   - Incluye prácticas de consciencia corporal y ritmo circadiano
+   - Termina con educación sobre por qué estos cambios importan
+   RECUERDA: NO mencionar suplementos, vitaminas, hierbas ni fitoterapia en este módulo.`
+  : `Lista de 4-6 recomendaciones funcionales:
+   - Comienza con hábitos esenciales
+   - Continúa con alimentación funcional
+   - Puedes mencionar suplementos de forma educativa SIN dosis ni marcas (ej: "considera magnesio para...")
+   - Recuerda al usuario consultar con su médico`}
    Máximo 400 palabras.
 
-4. FRASE FINAL: Una frase motivacional breve y empática que transmita esperanza y humanidad (1-2 líneas)
+4. FRASE FINAL: Una frase educativa y empática que incluya el recordatorio obligatorio sobre que esta guía es educativa. (1-2 líneas)
 
 FORMATO DE RESPUESTA - Responde ÚNICAMENTE en formato JSON con esta estructura exacta:
 {
