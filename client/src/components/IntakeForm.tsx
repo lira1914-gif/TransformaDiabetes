@@ -175,8 +175,69 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     // Guardar en localStorage como backup
     localStorage.setItem('intakeTransformaDiabetes', JSON.stringify(formData));
     
+    // Mapear snake_case a camelCase para el backend
+    const apiData = {
+      userId,
+      nombre: formData.nombre,
+      direccion: formData.direccion,
+      ciudad: formData.ciudad,
+      estado: formData.estado,
+      pais: formData.pais,
+      codigoPostal: formData.codigo_postal,
+      telefonoDia: formData.telefono_dia,
+      telefonoCelular: formData.telefono_celular,
+      telefonoNoche: formData.telefono_noche,
+      email: formData.email,
+      referidoPor: formData.referido_por,
+      edad: formData.edad,
+      fechaNacimiento: formData.fecha_nacimiento,
+      pesoActual: formData.peso_actual,
+      pesoHaceAno: formData.peso_hace_ano,
+      altura: formData.altura,
+      tipoSangre: formData.tipo_sangre,
+      pesoNacer: formData.peso_nacer,
+      ordenNacimiento: formData.orden_nacimiento,
+      estadoCivil: formData.estado_civil,
+      ocupacion: formData.ocupacion,
+      viajesFuera: formData.viajes_fuera,
+      cambiosRecientes: formData.cambios_recientes,
+      sistemaGastrointestinal: formData.sistema_gastrointestinal,
+      sistemaCardiovascular: formData.sistema_cardiovascular,
+      sistemaHormonal: formData.sistema_hormonal,
+      sistemaInmunologico: formData.sistema_inmunologico,
+      alimentosRegulares: formData.alimentos_regulares,
+      dietaEspecial: formData.dieta_especial,
+      porcentajeComidasCaseras: formData.porcentaje_comidas_caseras,
+      alimentosEvitados: formData.alimentos_evitados,
+      sintomasDespuesComer: formData.sintomas_despues_comer,
+      frecuenciaEvacuaciones: formData.frecuencia_evacuaciones,
+      consistenciaEvacuaciones: formData.consistencia_evacuaciones,
+      colorEvacuaciones: formData.color_evacuaciones,
+      historialIntoxicaciones: formData.historial_intoxicaciones,
+      exposicionQuimicos: formData.exposicion_quimicos,
+      ultimaVisitaDental: formData.ultima_visita_dental,
+      amalgamasMercurio: formData.amalgamas_mercurio,
+      problemasEncias: formData.problemas_encias,
+      satisfechoSueno: formData.satisfecho_sueno,
+      horasSueno: formData.horas_sueno,
+      tiempoConciliarSueno: formData.tiempo_conciliar_sueno,
+      estadoAnimo: formData.estado_animo,
+      nivelEnergia: formData.nivel_energia,
+      momentoMejorBienestar: formData.momento_mejor_bienestar,
+      apoyoFamiliar: formData.apoyo_familiar,
+      rolEspiritualidad: formData.rol_espiritualidad,
+      informacionAdicional: formData.informacion_adicional,
+      a1c: formData.a1c,
+      colesterolTotal: formData.colesterol_total,
+      hdl: formData.hdl,
+      ldl: formData.ldl,
+      trigliceridos: formData.trigliceridos,
+      hemoglobina: formData.hemoglobina,
+      otrosAnalisis: formData.otros_analisis
+    };
+    
     // Enviar a PostgreSQL
-    saveIntakeMutation.mutate({ ...formData, userId });
+    saveIntakeMutation.mutate(apiData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

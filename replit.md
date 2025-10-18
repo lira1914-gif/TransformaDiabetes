@@ -27,8 +27,24 @@ Key frontend features include:
 - **Dynamic Content**: Welcome section with subscription benefits, rotating motivational messages, and daily tips.
 - **Legal Pages**: Términos de Servicio, Política de Privacidad, Política de Reembolsos.
 
-### Backend
+### Backend & Database
 The backend is built with Express.js and TypeScript, utilizing Drizzle ORM for PostgreSQL (Neon Database) and Zod for schema validation. The project is structured as a monorepo with shared TypeScript types.
+
+**PostgreSQL Database Schema:**
+- `users`: Stores user accounts with email, Stripe customer/subscription IDs, and subscription status
+- `intake_forms`: 62-field medical intake questionnaire (demographics, health history, lab results)
+- `daily_logs`: 5-day functional tracking (sleep data, dates)
+- `daily_log_moments`: 6 moments per day (Mañana, Media mañana, Almuerzo, Media tarde, Cena, Noche) tracking food, mood, and bowel movements
+
+**Data Flow:**
+1. **Checkout → User Creation**: Stripe Payment Element captures email → Backend creates/updates user in PostgreSQL → Returns `userId` to frontend → Stored in `localStorage('tm_user_id')`
+2. **Intake Form**: Frontend sends camelCase payload to POST `/api/intake-form` with `userId` → Stored in `intake_forms` table
+3. **5-Day Registry**: Frontend sends each day's data to POST `/api/daily-log` with `userId` → Creates `daily_logs` entry + 6 `daily_log_moments` entries
+
+**Known Security Issue (To be addressed in Phase 3):**
+- Currently, `userId` is pulled from `localStorage` and trusted by the backend without verification
+- This allows potential impersonation if a malicious user modifies their `localStorage`
+- **Future fix**: Implement session-based authentication or verify userId against Stripe customer email on each request
 
 ### Routing
 Wouter is used for client-side routing with smooth scrolling. The landing page is a single-page scroll design, while the subscription onboarding process is a multi-page sequential flow to enforce completion of each step.
