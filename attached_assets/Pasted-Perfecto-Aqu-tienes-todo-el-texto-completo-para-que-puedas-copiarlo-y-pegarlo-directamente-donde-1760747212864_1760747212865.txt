@@ -1,0 +1,142 @@
+Perfecto 👍 Aquí tienes todo el texto completo para que puedas copiarlo y pegarlo directamente donde necesites (por ejemplo, en un correo o mensaje al desarrollador).
+
+⸻
+
+Documento: Instrucciones de corrección del flujo funcional
+
+⸻
+
+🧩 1. Problema principal
+
+El botón “Ver mis recomendaciones iniciales” se muestra y se activa aunque el usuario no haya completado los 5 días del registro,
+y además, no hace nada al presionarlo (no redirige ni carga la siguiente pantalla).
+
+⸻
+
+🛠️ 2. Qué debe hacer el desarrollador
+
+🔹 A. Validar que se hayan completado los 5 días antes de mostrar el mensaje final
+
+El sistema debe verificar que todas las entradas de los 5 días estén completas (día 1 al 5) antes de mostrar el mensaje final o el botón de recomendaciones.
+
+Ejemplo de código (React):
+
+const handleSaveRecord = async () => {
+  await saveRecord();
+
+  // Verificar progreso antes de mostrar mensaje final
+  if (userRecords.length === 5 && userRecords.every(day => day.completed)) {
+    setShowCompletionMessage(true);
+  } else {
+    alert("Aún no has completado los 5 días de registro funcional.");
+    setShowCompletionMessage(false);
+  }
+};
+
+✅ Resultado esperado:
+	•	Si el usuario solo ha llenado 1–4 días → aparece un mensaje indicando que todavía faltan días.
+	•	Solo cuando los 5 días están completos se muestra el botón “Ver mis recomendaciones iniciales”.
+
+⸻
+
+🔹 B. Conectar correctamente el botón “Ver mis recomendaciones iniciales”
+
+El botón debe estar funcional y redirigir a la siguiente pantalla del flujo, que puede ser:
+
+/onboarding/mes1
+o
+/onboarding/informe-inicial
+
+Ejemplo de código:
+
+const handleRecommendations = () => {
+  // Limpia el estado anterior si es necesario
+  clearFunctionalState();
+
+  // Redirige a la siguiente vista (ajustar ruta según estructura del proyecto)
+  navigate('/onboarding/mes1');
+};
+
+return (
+  <button 
+    className="btn btn-primary"
+    onClick={handleRecommendations}
+    disabled={!recordCompleted} // opcional
+  >
+    Ver mis recomendaciones iniciales
+  </button>
+);
+
+
+⸻
+
+🔹 C. Asegurarse de que exista la ruta de destino
+
+En el archivo donde esté configurado el router (por ejemplo, App.js o Routes.jsx), debe haber una ruta activa para la página de informe.
+
+Ejemplo:
+
+<Route path="/onboarding/mes1" element={<Mes1 />} />
+
+o
+
+<Route path="/onboarding/informe-inicial" element={<InformeInicial />} />
+
+Sin esa ruta, el botón no podrá navegar correctamente.
+
+⸻
+
+🔹 D. Limpiar los datos del formulario al iniciar un nuevo registro
+
+Cada vez que el usuario comience un nuevo registro funcional (por ejemplo, al iniciar un nuevo mes), el formulario debe abrirse vacío.
+
+Ejemplo de código:
+
+const startNewRecord = () => {
+  // Eliminar datos anteriores del store o localStorage
+  clearFunctionalRecord();
+  localStorage.removeItem('functionalRecord');
+
+  // Inicializar nuevo registro vacío
+  dispatch({ type: 'RESET_FUNCTIONAL_RECORD' });
+
+  navigate('/onboarding/mes1');
+};
+
+Esto evita que aparezcan datos antiguos o precargados en un nuevo ciclo.
+
+⸻
+
+🧭 3. Flujo correcto esperado
+	1.	Pago exitoso → /onboarding/motivacion
+	2.	Motivación → /onboarding/formulario-salud
+	3.	Guardar formulario → /onboarding/bienvenida
+	4.	Bienvenida → /onboarding/mes1 (registro funcional 5 días)
+	5.	Completados 5 días → mostrar botón “Ver mis recomendaciones iniciales”
+	6.	Presionar botón → /onboarding/informe-inicial (o “Mes 1 – Informe funcional”)
+
+⸻
+
+✅ 4. Bonus: validación visual (UX sugerida)
+
+Agregar un contador de progreso visible en la parte superior del formulario de registro funcional:
+
+<p>Día {currentDay} de 5</p>
+<progress value={currentDay} max="5"></progress>
+
+Así el usuario sabe visualmente cuántos días faltan antes de recibir el informe.
+
+⸻
+
+🔧 En resumen
+
+Tareas para el desarrollador:
+	1.	Agregar validación antes de mostrar el mensaje final.
+	2.	Conectar correctamente el botón “Ver mis recomendaciones iniciales”.
+	3.	Asegurar que la ruta de destino exista en el router.
+	4.	Limpiar el estado o formulario al iniciar un nuevo ciclo.
+	5.	(Opcional) Agregar barra de progreso para mejor UX.
+
+⸻
+
+Ya con esto el desarrollador puede implementar la lógica correcta y asegurar que el flujo sea coherente, guiado y sin errores.
