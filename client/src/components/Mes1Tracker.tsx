@@ -24,7 +24,11 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
 
       // Chequear progreso del registro
       const checkProgreso = () => {
-        const registroData = localStorage.getItem('registro5dias');
+        // Intentar leer de ambas ubicaciones por compatibilidad
+        const registroDetallado = localStorage.getItem('registro5dias_detallado');
+        const registroSimple = localStorage.getItem('registro5dias');
+        const registroData = registroDetallado || registroSimple;
+        
         if (registroData) {
           try {
             const data = JSON.parse(registroData);
@@ -34,6 +38,8 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
           } catch (e) {
             setDiasRegistro(0);
           }
+        } else {
+          setDiasRegistro(0);
         }
       };
 
