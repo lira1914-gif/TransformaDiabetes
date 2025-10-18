@@ -63,6 +63,16 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
       setLocation('/onboarding/informe-inicial');
     };
 
+    const limpiarDatosPrueba = () => {
+      if (confirm('¿Seguro que deseas borrar todos los datos de registro y empezar de nuevo?')) {
+        localStorage.removeItem('registro5dias');
+        localStorage.removeItem('tm_registro_dias');
+        setDiasRegistro(0);
+        alert('Datos borrados. Ahora puedes empezar tu registro desde el Día 1.');
+        window.location.reload();
+      }
+    };
+
     return (
       <>
         <section 
@@ -213,6 +223,32 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
                 Generar mi informe inicial
               </button>
             )}
+          </div>
+
+          {/* Botón temporal para limpiar datos de prueba */}
+          <div style={{ textAlign: 'center', marginTop: '2rem', paddingTop: '1rem', borderTop: '1px dashed #E6E3D9' }}>
+            <button 
+              onClick={limpiarDatosPrueba}
+              data-testid="button-limpiar-datos"
+              style={{
+                background: '#dc2626',
+                color: '#fff',
+                padding: '.6rem 1rem',
+                border: 'none',
+                borderRadius: '6px',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                transition: 'background 0.3s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = '#b91c1c'}
+              onMouseLeave={(e) => e.currentTarget.style.background = '#dc2626'}
+            >
+              🗑️ Borrar datos de prueba
+            </button>
+            <p style={{ fontSize: '0.8rem', color: '#6F6E66', marginTop: '0.5rem' }}>
+              (Solo para desarrollo - Limpia el registro y permite empezar de nuevo)
+            </p>
           </div>
         </section>
       </>
