@@ -58,7 +58,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         throw new Error("Invoice no expandido correctamente");
       }
 
-      const paymentIntent = invoice?.payment_intent;
+      // TypeScript no reconoce payment_intent automáticamente, pero existe cuando se expande
+      const paymentIntent = (invoice as any)?.payment_intent;
       if (!paymentIntent || typeof paymentIntent === 'string') {
         throw new Error("PaymentIntent no disponible");
       }
