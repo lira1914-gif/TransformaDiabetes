@@ -94,38 +94,28 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
             Tu cuerpo no está roto: solo está adaptándose, y observarlo es el primer paso para acompañarlo.
           </p>
 
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '12px',
-            justifyContent: 'center',
-            marginBottom: '12px'
-          }}>
-            <span 
-              style={{
-                background: '#fff',
-                border: '1px solid #E6E3D9',
-                borderRadius: '999px',
-                padding: '.4rem .8rem',
-                color: '#3A3A3A'
-              }}
-              data-testid="mes1-progreso"
-            >
-              Progreso diario: {diasRegistro}/5 días
-            </span>
-            <span 
-              style={{
-                background: '#fff',
-                border: '1px solid #E6E3D9',
-                borderRadius: '999px',
-                padding: '.4rem .8rem',
-                color: '#3A3A3A'
-              }}
-              data-testid="mes1-dias-suscripcion"
-            >
-              Día {diasSuscripcion} desde tu suscripción
-            </span>
-          </div>
+          {diasRegistro < 5 && (
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '12px',
+              justifyContent: 'center',
+              marginBottom: '12px'
+            }}>
+              <span 
+                style={{
+                  background: '#fff',
+                  border: '1px solid #E6E3D9',
+                  borderRadius: '999px',
+                  padding: '.4rem .8rem',
+                  color: '#3A3A3A'
+                }}
+                data-testid="mes1-progreso"
+              >
+                Progreso diario: {diasRegistro}/5 días
+              </span>
+            </div>
+          )}
 
           <div style={{
             display: 'grid',
