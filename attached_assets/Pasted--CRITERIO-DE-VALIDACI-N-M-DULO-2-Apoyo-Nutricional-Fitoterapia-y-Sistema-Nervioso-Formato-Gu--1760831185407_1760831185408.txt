@@ -1,0 +1,58 @@
+✅ CRITERIO DE VALIDACIÓN — MÓDULO 2
+“Apoyo Nutricional, Fitoterapia y Sistema Nervioso”
+(Formato Guía Funcional Marvin Lira | v3 Trifecta Actualizada)
+
+🎯 PROPÓSITO DEL MÓDULO 2
+Educar al usuario sobre cómo ciertos suplementos, adaptógenos y alimentos funcionales
+pueden apoyar la digestión, el metabolismo y el sistema nervioso.
+
+👉 Enfoque 100% educativo.
+👉 No prescribir, sino enseñar a entender el cuerpo y sus señales.
+👉 Incluir beneficios, precauciones y advertencias claras.
+
+🧩 ESTRUCTURA GENERAL
+1️⃣ Formato: “Guía Funcional Marvin Lira” (visual, cálido, educativo, 450–700 palabras).
+2️⃣ Mantiene la Trifecta funcional (FECAR, Sueño, Azúcar) como bloque obligatorio.
+3️⃣ Agrega una sección adicional:
+🌿 “Apoyo Nutricional, Fitoterapia y Sistema Nervioso”
+con adaptógenos, nutrientes y alimentos funcionales.
+
+🧠 CATEGORÍAS DE APOYO Y DESCRIPCIÓN EDUCATIVA
+| Categoría | Elemento | Beneficio educativo | Precaución / Nota |
+|------------|-----------|--------------------|------------------|
+| Alimentos funcionales (digestivos) | Linaza (molida) | Favorece el tránsito intestinal, aporta fibra soluble y ácidos grasos antiinflamatorios. | Evitar en uso de anticoagulantes o diarrea activa. Asegurar hidratación suficiente. |
+| Alimentos funcionales (digestivos) | Chía (hidratada) | Mejora la motilidad intestinal, ayuda a eliminar desechos y reduce picos de glucosa. | Evitar si hay anticoagulantes o diverticulitis activa. |
+| Minerales | Magnesio glicinato | Relaja músculos, mejora sueño y glucosa. | Evitar en insuficiencia renal. |
+| Grasas esenciales | Omega 3 (EPA/DHA) | Reduce inflamación y mejora ánimo. | Precaución en anticoagulantes. |
+| Fitonutrientes | Berberina | Apoya microbiota y glucosa. | Evitar en embarazo/lactancia. |
+| Micronutrientes | Cromo | Regula antojos y metabolismo glucémico. | Precaución con fármacos para diabetes. |
+| Probióticos | Multicepa | Equilibra microbiota, mejora digestión y ánimo. | Suspender si hay fiebre o diarrea persistente. |
+| Fitoterapia hepática | Cardo mariano | Protege el hígado y mejora detoxificación. | Evitar en alergia a Asteraceae. |
+| Fitoterapia hepática | Diente de león | Apoya flujo biliar y digestión. | Evitar si hay cálculos o obstrucción biliar. |
+| Adaptógenos | Ashwagandha | Regula cortisol, calma cuerpo y mente. | Evitar en hipertiroidismo o embarazo. |
+| Aminoácido calmante | GABA | Calma sistema nervioso, mejora descanso. | Evitar con fármacos sedantes o ansiolíticos. |
+| Fitoterapia glucémica | Canela / Gymnema | Equilibran glucosa y reducen antojos. | Precaución en uso de medicamentos para diabetes. |
+
+⚙️ APLICACIÓN FUNCIONAL
+En los reportes donde el usuario muestre estreñimiento o tránsito lento,
+la IA debe incluir en la sección “Digestión (FECAR)” frases tipo:
+
+“Tu cuerpo muestra lentitud digestiva; puedes apoyar tu sistema con alimentos naturales como chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación.”
+
+“Recuerda acompañar siempre con buena hidratación, calma al comer y movimiento suave diario.”
+
+⚠️ NORMAS DE SEGURIDAD
+❌ No incluir dosis ni frecuencia.
+❌ No usar frases tipo “debes tomar”.
+✅ Siempre incluir precauciones específicas cuando se mencione linaza, chía, GABA o adaptógenos.
+✅ Recordar que los suplementos no reemplazan los hábitos.
+✅ Repetir la frase clave:
+“Mientras el cuerpo esté en alerta, no puede sanar.”
+
+💬 MENSAJE PARA REPLIT (versión conversacional)
+Quiero actualizar el Módulo 2 con esta versión final, que incluye alimentos funcionales como linaza y chía dentro de la sección FECAR, y suplementos calmantes como GABA y Ashwagandha dentro del apoyo nervioso.
+La idea es que el sistema enseñe al usuario cómo estos elementos pueden apoyar su digestión, sueño y metabolismo, pero siempre de forma educativa y con precauciones.
+Ejemplo:
+“La linaza molida apoya la eliminación, pero debe evitarse si estás tomando anticoagulantes o tienes diarrea.”
+Mantén el mismo tono empático y visual del Módulo 1, con la Trifecta funcional y el recordatorio final:
+“Esta guía es educativa y no reemplaza orientación médica.”

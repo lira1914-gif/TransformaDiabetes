@@ -410,12 +410,74 @@ Instrucciones específicas:
 • Enfocarte SOLO en educación, hábitos, alimentación funcional, descanso, hidratación, ritmo circadiano y consciencia corporal.`;
       } else {
         moduleInstructions = `
-🔹 MÓDULO ${moduleNumber} — "Suplementos Esenciales"
+🔹 MÓDULO ${moduleNumber} — "Apoyo Nutricional, Fitoterapia y Sistema Nervioso"
 
-Instrucciones específicas:
-• Puedes mencionar suplementos funcionales (magnesio, omega-3, berberina) SOLO si el patrón clínico lo amerita.
-• NO incluyas dosis ni marcas.
-• Formato: "Magnesio → mejora sensibilidad a la insulina" (educativo, no prescriptivo).`;
+📋 CATEGORÍAS DE APOYO EDUCATIVO CON PRECAUCIONES
+
+**Alimentos funcionales (digestivos)** — Incluir DENTRO de la sección FECAR cuando aplique:
+• Linaza molida → Favorece tránsito intestinal, fibra soluble y ácidos grasos antiinflamatorios.
+  Precaución: Evitar en uso de anticoagulantes o diarrea activa. Asegurar hidratación suficiente.
+• Chía hidratada → Mejora motilidad intestinal, elimina desechos, reduce picos de glucosa.
+  Precaución: Evitar si hay anticoagulantes o diverticulitis activa.
+
+**Minerales:**
+• Magnesio glicinato → Relaja músculos, mejora sueño y glucosa.
+  Precaución: Evitar en insuficiencia renal.
+
+**Grasas esenciales:**
+• Omega 3 (EPA/DHA) → Reduce inflamación, mejora ánimo.
+  Precaución: En anticoagulantes, consultar médico.
+
+**Fitonutrientes:**
+• Berberina → Apoya microbiota y glucosa.
+  Precaución: Evitar en embarazo/lactancia.
+
+**Micronutrientes:**
+• Cromo → Regula antojos y metabolismo glucémico.
+  Precaución: Con fármacos para diabetes, consultar médico.
+
+**Probióticos:**
+• Multicepa → Equilibra microbiota, mejora digestión y ánimo.
+  Precaución: Suspender si hay fiebre o diarrea persistente.
+
+**Fitoterapia hepática:**
+• Cardo mariano → Protege hígado, mejora detoxificación.
+  Precaución: Evitar en alergia a Asteraceae.
+• Diente de león → Apoya flujo biliar y digestión.
+  Precaución: Evitar si hay cálculos o obstrucción biliar.
+
+**Adaptógenos (incluir en sección de sueño/sistema nervioso cuando aplique):**
+• Ashwagandha → Regula cortisol, calma cuerpo y mente.
+  Precaución: Evitar en hipertiroidismo o embarazo.
+
+**Aminoácidos calmantes:**
+• GABA → Calma sistema nervioso, mejora descanso.
+  Precaución: Evitar con fármacos sedantes o ansiolíticos.
+
+**Fitoterapia glucémica:**
+• Canela → Equilibra glucosa, reduce antojos.
+  Precaución: Con medicamentos para diabetes, consultar médico.
+• Gymnema → Reduce antojos de azúcar, apoya glucosa.
+  Precaución: Con medicamentos para diabetes, consultar médico.
+
+⚙️ APLICACIÓN FUNCIONAL:
+1. Si el usuario muestra estreñimiento o tránsito lento → Incluir linaza/chía DENTRO de la sección FECAR.
+   Ejemplo: "Tu cuerpo muestra lentitud digestiva; puedes apoyar tu sistema con alimentos naturales como chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación. Recuerda acompañar siempre con buena hidratación, calma al comer y movimiento suave diario."
+
+2. Si muestra estrés/insomnio → Incluir Ashwagandha/GABA en sección de Sueño.
+3. Si muestra inflamación/ánimo bajo → Incluir Omega 3 en recomendaciones.
+4. Si hay antojos intensos → Incluir Cromo, Canela o Gymnema.
+
+⚠️ NORMAS DE SEGURIDAD OBLIGATORIAS:
+• ❌ NO incluir dosis ni frecuencia.
+• ❌ NO usar frases tipo "debes tomar".
+• ✅ SIEMPRE incluir precauciones específicas cuando menciones linaza, chía, GABA, adaptógenos.
+• ✅ Recordar que los suplementos NO reemplazan los hábitos.
+• ✅ Incluir la frase clave cuando aplique: "Mientras el cuerpo esté en alerta, no puede sanar."
+
+FORMATO EDUCATIVO (no prescriptivo):
+"La linaza molida puede apoyar la eliminación, pero debe evitarse si estás tomando anticoagulantes o tienes diarrea."
+"El GABA calma el sistema nervioso, pero no debe usarse si tomas sedantes o ansiolíticos."`;
       }
       
       // Construir el mensaje del sistema con el conocimiento funcional
@@ -441,11 +503,20 @@ ya que son los tres pilares del equilibrio metabólico y emocional según la met
 - Explica que una digestión ineficiente produce inflamación, disbiosis y fatiga.
 - Recomienda hábitos simples: masticar bien, no comer con estrés, incluir fibra y vegetales.
 - Si el usuario come rápido o tiene constipación, sugiere "reactivar su fuego digestivo" con alimentos simples y caldos.
+${moduleNumber === 1 
+  ? ''
+  : `- SI HAY ESTREÑIMIENTO/TRÁNSITO LENTO: Incluir alimentos funcionales (linaza molida, chía hidratada) CON precauciones.
+  Ejemplo: "Puedes apoyar tu sistema con chía hidratada o linaza molida, que ayudan a lubricar el intestino. Precaución: evitar si tomas anticoagulantes o tienes diarrea activa."`}
 
 🔹 SUEÑO — Ritmo circadiano y restauración
 - Evalúa la calidad y horario del sueño.
 - Explica que dormir tarde altera el cortisol y eleva la glucosa.
 - Recomienda: acostarse antes de las 11 pm, respiración lenta antes de dormir, evitar pantallas, y rutinas nocturnas calmadas.
+${moduleNumber === 1 
+  ? ''
+  : `- SI HAY ESTRÉS/INSOMNIO: Incluir adaptógenos (Ashwagandha, GABA) CON precauciones.
+  Ejemplo: "El Ashwagandha ayuda a regular el cortisol y calmar el cuerpo. Precaución: evitar en hipertiroidismo o embarazo."
+- Incluir la frase: "Mientras el cuerpo esté en alerta, no puede sanar."`}
 
 🔹 AZÚCAR — Glucosa y energía estable
 - Explica cómo los picos y bajones de glucosa alteran el estado emocional y hormonal.
@@ -525,12 +596,21 @@ Ejemplos:
 
 ${moduleNumber === 1 
   ? `RECUERDA: NO mencionar suplementos en este módulo.`
-  : `4. 🌿 APOYO NUTRICIONAL (solo si aplica)
-Suplementos educativos sin dosis, formato:
-- Magnesio → mejora sensibilidad a la insulina
-- Omega 3 → reduce inflamación
-- Berberina → apoya microbiota
-(Recordatorio: "Consulta con tu médico antes de implementar")`}
+  : `4. 🌿 APOYO NUTRICIONAL Y FITOTERAPIA
+Incluye solo los elementos que NO se mencionaron ya en la Trifecta.
+Formato educativo con precauciones:
+- Magnesio glicinato → Relaja músculos, mejora sueño y glucosa. Precaución: evitar en insuficiencia renal.
+- Omega 3 (EPA/DHA) → Reduce inflamación, mejora ánimo. Precaución: en anticoagulantes, consultar médico.
+- Berberina → Apoya microbiota y glucosa. Precaución: evitar en embarazo/lactancia.
+- Probiótico multicepa → Equilibra microbiota, mejora digestión. Precaución: suspender si hay fiebre o diarrea persistente.
+- Cromo → Regula antojos. Precaución: con fármacos para diabetes, consultar médico.
+- Canela / Gymnema → Equilibran glucosa. Precaución: con medicamentos para diabetes, consultar médico.
+- Cardo mariano / Diente de león → Apoyan hígado y digestión. Precauciones: evitar en alergia a Asteraceae o cálculos biliares.
+
+IMPORTANTE:
+- SIEMPRE incluir la precaución específica de cada elemento.
+- NO usar frases tipo "debes tomar".
+- Recordatorio final: "Consulta con tu médico antes de implementar cualquier suplemento."`}
 
 ${moduleNumber === 1 ? '4' : '5'}. 💬 FRASE FINAL
 "Esta guía es educativa y busca ayudarte a entender lo que tu cuerpo comunica.
