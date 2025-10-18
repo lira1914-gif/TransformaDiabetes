@@ -312,7 +312,7 @@ export default function Registro5DiasDetallado() {
           textAlign: 'center'
         }}>
           <p style={{ color: '#8B6914', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
-            ℹ️ <strong>Nota:</strong> No es necesario llenar todos los momentos del día. Entre más detalle registres, mejor podremos identificar patrones en tu salud.
+            🌿 Entre más observes, más fácil será reconocer las señales de tu cuerpo y lo que necesita para equilibrarse.
           </p>
         </div>
 
