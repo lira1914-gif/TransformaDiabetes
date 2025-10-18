@@ -152,6 +152,164 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Intake Form routes
+  app.post("/api/intake-form", async (req, res) => {
+    try {
+      const { userId, ...formData } = req.body;
+
+      if (!userId) {
+        return res.status(400).json({ error: "userId es requerido" });
+      }
+
+      // Verificar si ya existe un intake form para este usuario
+      const existing = await storage.getIntakeFormByUserId(userId);
+
+      if (existing) {
+        // Actualizar el existente
+        const updated = await storage.updateIntakeForm(existing.id, formData);
+        return res.json(updated);
+      }
+
+      // Crear uno nuevo
+      const intakeForm = await storage.createIntakeForm({ userId, ...formData });
+      res.json(intakeForm);
+    } catch (error: any) {
+      console.error("Error guardando intake form:", error);
+      res.status(500).json({ error: "Error al guardar el formulario" });
+    }
+  });
+
+  app.get("/api/intake-form/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const intakeForm = await storage.getIntakeFormByUserId(userId);
+
+      if (!intakeForm) {
+        return res.status(404).json({ error: "Formulario no encontrado" });
+      }
+
+      res.json(intakeForm);
+    } catch (error: any) {
+      console.error("Error obteniendo intake form:", error);
+      res.status(500).json({ error: "Error al obtener el formulario" });
+    }
+  });
+
+  // Daily Log routes
+  app.post("/api/daily-log", async (req, res) => {
+    try {
+      const { userId, dia, fecha, horaDormir, horaDespertar, vecesDesperto, momentos } = req.body;
+
+      if (!userId || !dia || !fecha) {
+        return res.status(400).json({ error: "userId, dia y fecha son requeridos" });
+      }
+
+      // Crear el daily log
+      const dailyLog = await storage.createDailyLog({
+        userId,
+        dia,
+        fecha,
+        horaDormir,
+        horaDespertar,
+        vecesDesperto,
+      });
+
+      // Crear los momentos asociados
+      if (momentos && Array.isArray(momentos)) {
+        for (const momento of momentos) {
+          await storage.createDailyLogMoment({
+            dailyLogId: dailyLog.id,
+            momento: momento.momento,
+            comida: momento.comida,
+            estadoAnimo: momento.estadoAnimo,
+            evacuaciones: momento.evacuaciones,
+          });
+        }
+      }
+
+      res.json(dailyLog);
+    } catch (error: any) {
+      console.error("Error guardando daily log:", error);
+      res.status(500).json({ error: "Error al guardar el registro diario" });
+    }
+  });
+
+  app.get("/api/daily-logs/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const logs = await storage.getDailyLogsByUserId(userId);
+
+      // Obtener los momentos de cada log
+      const logsWithMoments = await Promise.all(
+        logs.map(async (log) => {
+          const moments = await storage.getDailyLogMomentsByLogId(log.id);
+          return { ...log, momentos: moments };
+        })
+      );
+
+      res.json(logsWithMoments);
+    } catch (error: any) {
+      console.error("Error obteniendo daily logs:", error);
+      res.status(500).json({ error: "Error al obtener los registros" });
+    }
+  });
+
+  // User routes
+  app.post("/api/users", async (req, res) => {
+    try {
+      const { email, stripeCustomerId, stripeSubscriptionId } = req.body;
+
+      if (!email) {
+        return res.status(400).json({ error: "email es requerido" });
+      }
+
+      // Verificar si ya existe
+      const existing = await storage.getUserByEmail(email);
+
+      if (existing) {
+        // Actualizar con datos de Stripe si se proporcionan
+        if (stripeCustomerId || stripeSubscriptionId) {
+          const updated = await storage.updateUser(existing.id, {
+            stripeCustomerId,
+            stripeSubscriptionId,
+            subscriptionStatus: 'active'
+          });
+          return res.json(updated);
+        }
+        return res.json(existing);
+      }
+
+      // Crear nuevo usuario
+      const user = await storage.createUser({
+        email,
+        stripeCustomerId,
+        stripeSubscriptionId,
+        subscriptionStatus: stripeSubscriptionId ? 'active' : undefined
+      });
+
+      res.json(user);
+    } catch (error: any) {
+      console.error("Error creando usuario:", error);
+      res.status(500).json({ error: "Error al crear el usuario" });
+    }
+  });
+
+  app.get("/api/users/:email", async (req, res) => {
+    try {
+      const { email } = req.params;
+      const user = await storage.getUserByEmail(email);
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      res.json(user);
+    } catch (error: any) {
+      console.error("Error obteniendo usuario:", error);
+      res.status(500).json({ error: "Error al obtener el usuario" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
