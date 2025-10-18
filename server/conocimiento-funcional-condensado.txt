@@ -80,6 +80,43 @@ EJE ADRENAL Y GLUCOSA:
 - "El primer dominó es la salud adrenal. El dedo que lo empuja: glucosa + estrés + curva de cortisol"
 
 ═══════════════════════════════════════════════════════════════════
+SISTEMA NERVIOSO Y NEUROPATÍA DIABÉTICA
+═══════════════════════════════════════════════════════════════════
+
+SISTEMA NERVIOSO AUTÓNOMO Y DIABETES:
+- Simpático ("lucha o huida"): activa respuestas al estrés, aumenta frecuencia cardíaca, libera glucosa, activa glándulas suprarrenales
+- Parasimpático ("descansar y digerir"): promueve digestión, absorción, relajación, baja frecuencia cardíaca
+- Estrés crónico → dominancia simpática → cortisol elevado → glucosa elevada → resistencia insulínica
+- Objetivo funcional: promover dominancia parasimpática
+
+NEUROPATÍA DIABÉTICA:
+- Daño en nervios periféricos (SNP) causado por glucosa elevada crónica
+- Tipo más común: neuropatía diabética (afectación axonal)
+- Síntomas: hormigueo, entumecimiento, dolor en pies/manos, pérdida de sensibilidad
+- Causas funcionales: 
+  * Hiperglucemia crónica → estrés oxidativo → daño neuronal
+  * Inflamación de bajo grado
+  * Deficiencias nutricionales (B12, ácido alfa-lipoico, magnesio)
+  * Disfunción mitocondrial
+
+PROTECCIÓN NEUROLÓGICA EN DIABETES:
+- Control de glucosa sanguínea (evitar hipoglucemia Y resistencia)
+- Reducir estrés oxidativo (antioxidantes, fitonutrientes)
+- Disminuir inflamación (salud intestinal, curcumina, resveratrol)
+- Optimizar ácidos grasos esenciales (DHA/EPA)
+- Mejorar flujo de oxígeno (movimiento, hierro adecuado)
+- Cofactores mitocondriales (CoQ10, NAD, carnitina)
+
+PRÁCTICAS PARA FAVORECER PARASIMPÁTICO:
+- Respiración profunda (4-7-8, coherencia cardíaca)
+- Meditación, estiramientos suaves
+- Alimentación consciente, masticación tranquila
+- Sueño reparador 7-9 horas
+- Hidratación adecuada
+- Manejo del estrés crónico
+- "Detox digital", gratitud, actividades lúdicas
+
+═══════════════════════════════════════════════════════════════════
 INFLAMACIÓN Y AUTOINMUNIDAD
 ═══════════════════════════════════════════════════════════════════
 
@@ -181,6 +218,7 @@ PRIORIDAD 1 - NO NEGOCIABLES:
 3. Estabilización de glucosa (comidas regulares, bajo índice glucémico)
 4. Hidratación adecuada
 5. Movimiento regular (no solo ejercicio intenso)
+6. Prácticas parasimpáticas (respiración 4-7-8, coherencia cardíaca)
 
 PRIORIDAD 2 - OPTIMIZACIÓN DIGESTIVA:
 1. Masticación consciente
@@ -195,7 +233,9 @@ PRIORIDAD 3 - SOPORTE NUTRICIONAL:
 3. Vitamina D (2000-5000 IU) → modulación inmune
 4. Omega-3 (1-2 g EPA/DHA) → antiinflamatorio
 5. Cromo (200 mcg) → metabolismo de glucosa
-6. Ácido alfa-lipoico → antioxidante, sensibilidad insulínica
+6. Ácido alfa-lipoico (300-600 mg) → antioxidante, sensibilidad insulínica, neuroprotección
+7. Vitamina B12 (metilcobalamina) → protección neurológica
+8. CoQ10 (100-200 mg) → función mitocondrial
 
 PRIORIDAD 4 - HIERBAS Y ADAPTÓGENOS:
 1. Canela → mejora sensibilidad a insulina
@@ -203,6 +243,23 @@ PRIORIDAD 4 - HIERBAS Y ADAPTÓGENOS:
 3. Gymnema sylvestre → reduce antojos de azúcar
 4. Fenogreco → regula glucosa
 5. Hongos medicinales (reishi, maitake) → inmunomoduladores
+6. Ashwagandha → manejo del estrés, regula cortisol
+
+═══════════════════════════════════════════════════════════════════
+SISTEMA REPRODUCTIVO Y DIABETES (BREVE)
+═══════════════════════════════════════════════════════════════════
+
+CONEXIÓN METABÓLICA-REPRODUCTIVA:
+- Resistencia a insulina → síndrome de ovario poliquístico (SOP)
+- Glucosa elevada → disfunción eréctil en hombres
+- Obesidad → desequilibrios hormonales (estrógeno, testosterona)
+- Inflamación crónica → reduce fertilidad
+
+ESTRATEGIA FUNCIONAL:
+- Regular estrés y sueño
+- Apoyar hígado e intestino (depuración hormonal)
+- Optimizar metabolismo (glucosa estable = equilibrio hormonal)
+- Restaurar micronutrientes clave (zinc, magnesio, B6, selenio, omega-3)
 
 ═══════════════════════════════════════════════════════════════════
 ENFOQUE CLÍNICO FUNCIONAL
@@ -218,7 +275,7 @@ EVALUACIÓN INTEGRAL:
 INTERPRETACIÓN FUNCIONAL:
 - Valores "normales" NO siempre son óptimos
 - Contexto del paciente es fundamental
-- Buscar patrones entre sistemas (digestivo + hormonal + inmune)
+- Buscar patrones entre sistemas (digestivo + hormonal + inmune + neurológico)
 - Ajustes progresivos e individualizados
 
 RESOLUCIÓN vs. SOLUCIÓN:
