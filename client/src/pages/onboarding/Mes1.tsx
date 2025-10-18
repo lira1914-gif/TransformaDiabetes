@@ -6,20 +6,15 @@ export default function Mes1() {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    // Verificar que el usuario haya completado motivación
-    const motivacionDone = localStorage.getItem('tm_motivacion_done');
-    if (!motivacionDone) {
-      // Si no completó motivación, redirigir allí
-      const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
-      if (bienvenidaDone) {
-        setLocation('/onboarding/motivacion');
+    // Verificar que el usuario haya completado el mensaje
+    const mensajeDone = localStorage.getItem('tm_mensaje_done');
+    if (!mensajeDone) {
+      // Si no completó el mensaje, redirigir al inicio del flujo
+      const intakeDone = localStorage.getItem('tm_intake_done');
+      if (intakeDone) {
+        setLocation('/onboarding/mensaje');
       } else {
-        const subscribed = localStorage.getItem('tm_subscribed_at');
-        if (subscribed) {
-          setLocation('/onboarding/bienvenida');
-        } else {
-          setLocation('/');
-        }
+        setLocation('/onboarding/bienvenida');
       }
       return;
     }
