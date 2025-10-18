@@ -80,15 +80,8 @@ export default function Registro5DiasDetallado() {
   const guardarDia = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validar que al menos las comidas principales estén llenas
-    if (!formData.almuerzo_comida.trim() && !formData.cena_comida.trim()) {
-      toast({
-        title: "Campos incompletos",
-        description: "Por favor completa al menos el almuerzo o la cena.",
-        variant: "destructive"
-      });
-      return;
-    }
+    // No requerimos validación estricta - el disclaimer indica que no es obligatorio llenar todo
+    // La persona puede guardar el día aunque esté vacío si así lo desea
     
     const nuevoDia: DiaRegistroDetallado = {
       dia: diaActual,
@@ -483,7 +476,7 @@ export default function Registro5DiasDetallado() {
             <h4 style={{ color: '#A15C38', marginBottom: '1rem' }}>🍽️ Almuerzo</h4>
             <div style={{ display: 'grid', gap: '1rem' }}>
               <div>
-                <label style={labelStyle}>Comida: *</label>
+                <label style={labelStyle}>Comida:</label>
                 <textarea
                   name="almuerzo_comida"
                   value={formData.almuerzo_comida}
@@ -569,7 +562,7 @@ export default function Registro5DiasDetallado() {
             <h4 style={{ color: '#A15C38', marginBottom: '1rem' }}>🌙 Cena</h4>
             <div style={{ display: 'grid', gap: '1rem' }}>
               <div>
-                <label style={labelStyle}>Comida: *</label>
+                <label style={labelStyle}>Comida:</label>
                 <textarea
                   name="cena_comida"
                   value={formData.cena_comida}
