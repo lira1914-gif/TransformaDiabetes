@@ -4,7 +4,8 @@ export default function InformeFuncional() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setVisible(true), 200);
+    const timer = setTimeout(() => setVisible(true), 200);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

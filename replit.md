@@ -1,207 +1,45 @@
 # TransformaDiabetes - Revertir DM2
 
 ## Overview
-TransformaDiabetes is a health and wellness web application dedicated to type 2 diabetes reversal through functional nutrition education. It offers educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform aims to build trust and reduce health anxiety with an empathetic, wellness-focused design.
-
-## Brand Identity
-**Name:** TransformaDiabetes
-**Previous Name:** NutriMarvin (discontinued due to trademark conflict with nutrimarvin.com - Brazilian nutritionist in same industry)
-**Change Date:** October 2025
-**Domain:** transformadiabetes.com (registered at Chespirito domain)
-**Logo:** AI-generated complete logo with organic root/transformation symbol, brand colors (olive green #556B2F, beige, terracotta), includes tagline "Nutrición funcional para revertir desde la raíz" (attached_assets/generated_images/TransformaDiabetes_complete_logo_with_tagline_2f0190f6.png)
-**Hero Image:** AI-generated image of Latino man with fuller build viewing tablet with "Metabolismo" text (attached_assets/generated_images/Latino_man_tablet_metabolismo_f95a9523.png)
+TransformaDiabetes is a health and wellness web application focused on reversing type 2 diabetes through functional nutrition education. It provides educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform aims to foster trust and reduce health anxiety with an empathetic, wellness-focused design, offering a clear pathway to health transformation.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-### Frontend
-- **Frameworks & Libraries**: React 18 with TypeScript, Vite, Wouter for routing, TanStack Query for state management.
-- **UI/UX**: Radix UI primitives, shadcn/ui (New York style), Tailwind CSS with custom design tokens. Uses Playfair Display for headings and Inter for body text. Features a wellness-focused color palette (olive green, beige, terracotta) and a responsive, mobile-first design.
-- **Key Features**: 
-  - **Landing Page**: Simplified, conversion-focused design with minimal hero section emphasizing "Tu cuerpo no está roto. Solo está protegiéndose." Direct CTA to diagnostic flow.
-  - Multi-step diagnostic wizard (3 questions mapping to 4 health axes and 10 patterns)
-  - Personalized results with 5-point recommendations integrated with pattern-specific Mini Guías Funcionales
-  - Legal pages: Términos de Servicio, Política de Privacidad, Política de Reembolsos (required for Paddle onboarding)
-- **Diagnostic System**: Simplified 3-question diagnostic leading to 10 possible functional patterns (4 individual, 6 combined).
-- **Mini Guías Funcionales**: Pattern-specific educational guides that display unique title and blockquote based on detected pattern:
-  - 🩸 Metabólico → "Guía Metabólica" + "Tu cuerpo no puede sanar en estado de alerta."
-  - 💩 Digestivo → "Guía Digestiva" + "Si no fluyes, acumulas; y si acumulas, el cuerpo se defiende."
-  - 🌙 Estrés → "Guía del Estrés" + "No todo lo que te acelera te impulsa; a veces te apaga."
-  - 🔥 Inflamatorio → "Guía Inflamatoria" + "La inflamación no es enemiga; es el lenguaje de tu cuerpo pidiendo equilibrio."
-  - Combined patterns inherit guide from their primary pattern.
-- **Welcome Section (Bienvenida)**: Appears inline after clicking subscribe with fade-in animation:
-  - Translucent background with Unsplash nature image overlay
-  - White semi-transparent card (rgba(255,255,255,0.85)) containing welcome content
-  - 6 subscription benefits including blood analysis review
-  - CTA: "Empezar mi registro funcional" to begin intake process
-  - Motivational closing phrase: "Tu cuerpo no está roto, solo está protegiéndose. Vamos a enseñarle cómo sentirse seguro otra vez." (with light green background)
-- **Bloque Motivacional Rotatorio**: Appears after clicking "Empezar mi registro funcional":
-  - Displays rotating motivational messages (10 different messages)
-  - Auto-rotates every 30 seconds with fade in/out animation
-  - Includes explanation of the registration process (health form + 5-day tracking)
-  - Confidentiality disclaimer
-  - CTA: "Comenzar mi formulario de salud" to reveal Mes 1 Tracker
-- **Mes 1 Tracker (Observa y Comprende)**: Appears after clicking "Comenzar mi formulario de salud":
-  - Dashboard showing progress: "X/5 días" and "Día X desde tu suscripción"
-  - Subscription date stored in localStorage (tm_subscribed_at)
-  - Monthly objectives: observe energy/digestion, identify stabilizing foods/times, prioritize rest
-  - Rotating daily tips (5 functional suggestions)
-  - CTA: "Ir a mi registro de 5 días" to jump to intake + 5-day form
-  - Shows "Generar mi informe inicial" button when 5 days completed
-- **Informe Funcional - Semana 1**: Complete functional report that appears after clicking "Generar mi informe inicial":
-  - Reveals detected functional pattern (e.g., "metabólico adaptativo")
-  - 6 primary functional steps: balance meals, eliminate inflammatory foods, prioritize digestion, regulate stress, sleep optimization, gentle movement
-  - 4 complementary recommendations: liver support, lymphatic stimulation, avoid microplastics, eat natural foods
-  - Motivational quote: "Sanar no es controlar, es comprender el mensaje de tu cuerpo"
-  - CTA: "Continuar al Mes 2 — Ajusta y experimenta" (placeholder for future development)
-  - Smooth fade-in animation on appearance
-- **Formulario de Historial Funcional (Intake)**: Medical history form for functional assessment:
-  - Appears after clicking "Ir a mi registro de 5 días" in Mes 1 Tracker
-  - 15 comprehensive fields covering: demographics (name, age, sex, email), medical history (diagnoses, medications, supplements, family history), digestive health (bowel frequency, symptoms), lifestyle (sleep hours, energy level, recent diet, physical activity, stress level), and personal goals
-  - All data saved to localStorage as JSON (key: "intakeTransformaDiabetes")
-  - Motivational copy: "Tu información es confidencial y nos ayuda a personalizar tus recomendaciones"
-  - On completion, shows toast notification and reveals post-intake message
-- **Mensaje Post-Intake**: Motivational transition message between intake and 5-day registration:
-  - Appears after intake form submission with smooth scroll
-  - Heading: "Excelente 🌿"
-  - Thanks user for sharing their functional history
-  - Explains the purpose of the 5-day observation period
-  - Emphasizes consistency over perfection
-  - CTA button: "Comenzar mi registro de 5 días"
-- **Registro de 5 Días**: Multi-day functional registration form:
-  - Appears after completing intake form
-  - Dynamic form allowing up to 5 days of tracking
-  - Each day captures: food intake (textarea), digestion/elimination (select), sleep quality (select), energy levels (select)
-  - "Agregar siguiente día" button to add days incrementally (max 5)
-  - Data saved to localStorage as JSON (key: "registro5dias")
-  - Motivational closing phrase: "Observar es el primer paso para sanar. Tu cuerpo siempre te está hablando."
-  - On completion, shows toast notification and reveals final message
-- **Mensaje Final de Registro**: Completion message after submitting 5-day diary:
-  - Appears after saving 5-day registration with smooth scroll
-  - Heading: "Has completado tu Registro Funcional"
-  - Congratulates user for learning to listen to their body
-  - Blockquote: "Tu cuerpo no puede sanar en estado de alerta. Aprender a escucharlo es la forma más profunda de sanación."
-  - Explains next step: receiving functional recommendations
-  - CTA button: "Ver mis recomendaciones iniciales"
-    - If tm_informe_ready = true: scrolls to #informe-inicial (shows full functional report)
-    - If tm_informe_ready = false: scrolls to #mes1 (Mes 1 Tracker to see "Generar informe" button)
-    - **IMPORTANT**: Does NOT navigate to /resultados (diagnostic flow is separate from subscription flow)
-- **Design System**: HSL-based color system, consistent spacing, max-width containers, hover effects, and accessible focus states.
+### UI/UX & Frontend
+The application uses React 18 with TypeScript, Vite, Wouter for routing, and TanStack Query for state management. The UI is built with Radix UI primitives and shadcn/ui (New York style) using Tailwind CSS with custom design tokens. It features a wellness-focused color palette (olive green, beige, terracotta), Playfair Display for headings, Inter for body text, and a responsive, mobile-first design.
+
+Key frontend features include:
+- **Simplified Landing Page**: Conversion-focused with a direct CTA to a multi-step diagnostic wizard.
+- **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns (4 individual, 6 combined), each linked to pattern-specific "Mini Guías Funcionales".
+- **Subscription Onboarding Flow**: A multi-page sequential process (Bienvenida, Motivación, Mes 1 Tracker, Registro, Informe) with robust client-side validation using localStorage markers to ensure sequential completion and prevent step-skipping. This flow includes a comprehensive functional history intake form and a 5-day dietary/lifestyle tracking diary, culminating in a personalized functional report.
+- **Dynamic Content**: Welcome section with subscription benefits, rotating motivational messages, and daily tips.
+- **Legal Pages**: Términos de Servicio, Política de Privacidad, Política de Reembolsos.
 
 ### Backend
-- **Framework**: Express.js with TypeScript, custom middleware.
-- **Data Layer**: Drizzle ORM for PostgreSQL (Neon Database), Drizzle Kit for migrations, Zod for schema validation.
-- **Structure**: Monorepo with shared TypeScript types and path aliases.
+The backend is built with Express.js and TypeScript, utilizing Drizzle ORM for PostgreSQL (Neon Database) and Zod for schema validation. The project is structured as a monorepo with shared TypeScript types.
 
 ### Routing
-- **Client-Side**: Wouter for SPA routing with smooth scrolling (scroll-behavior: smooth in CSS).
-- **Landing Page Architecture**: Single-page scroll design with all educational content in one flow:
-  - Home (/) contains all sections: Hero, QueEs, Pilares, Historias, Suscripción
-  - Sections have IDs for anchor navigation (#que-es, #pilares, #suscripcion)
-  - Header "Inicio" link scrolls to top when already on home page
-  - /suscripcion route redirects to home with scroll to #suscripcion section
-
-- **Subscription Onboarding Flow** (Multi-Page Sequential Architecture):
-  **Design Choice**: Refactored from single-page scroll to multi-page routing to enforce sequential completion and prevent step-skipping
-  
-  **Page Flow**:
-  1. `/` (Home) → User clicks "Unirme por $5 USD/mes" → Payment modal → Sets `tm_subscribed_at`
-  2. `/onboarding/bienvenida` (Welcome) → Explains benefits → CTA sets `tm_bienvenida_done` → Redirects to Motivación
-  3. `/onboarding/motivacion` (Motivation) → Rotating messages → CTA sets `tm_motivacion_done` → Redirects to Mes1
-  4. `/onboarding/mes1` (Month 1 Tracker) → Shows progress dashboard → CTA redirects to Registro
-  5. `/onboarding/registro` (Registration) → Intake form + 5-day tracking → Sets `tm_intake_done` and `tm_registro_dias`
-  6. `/onboarding/mes1` (Return) → "Generar informe" button appears when 5 days complete → Sets `tm_informe_ready`
-  7. `/onboarding/informe` (Functional Report) → Displays complete analysis and recommendations
-
-  **Sequential Validation System** (Prevents Step-Skipping):
-  Each page validates ALL prior prerequisites via localStorage markers before rendering:
-  
-  - **Bienvenida** (`/onboarding/bienvenida`):
-    - Requires: `tm_subscribed_at`
-    - Sets: `tm_bienvenida_done = "true"` on CTA click
-    - Redirects to: `/` if not subscribed
-  
-  - **Motivación** (`/onboarding/motivacion`):
-    - Requires: `tm_bienvenida_done`
-    - Sets: `tm_motivacion_done = "true"` on CTA click
-    - Redirects to: `/onboarding/bienvenida` if bienvenida incomplete, `/` if not subscribed
-  
-  - **Mes1** (`/onboarding/mes1`):
-    - Requires: `tm_motivacion_done`
-    - Redirects to: `/onboarding/motivacion` if motivacion incomplete, `/onboarding/bienvenida` if bienvenida incomplete, `/` if not subscribed
-  
-  - **Registro** (`/onboarding/registro`):
-    - Requires: `tm_motivacion_done`
-    - Same redirect logic as Mes1
-    - Conditionally displays: IntakeForm → MensajePostIntake → Registro5Dias → MensajeFinalRegistro
-  
-  - **Informe** (`/onboarding/informe`):
-    - Requires ALL: `tm_subscribed_at`, `tm_bienvenida_done`, `tm_motivacion_done`, `tm_registro_dias >= 5`, `tm_informe_ready = "true"`
-    - Redirects to: Earliest incomplete step in sequence
-
-  **LocalStorage Progression Markers**:
-  - `tm_subscribed_at`: Subscription timestamp (required for all onboarding pages)
-  - `tm_bienvenida_done`: "true" when Bienvenida completed (required for Motivación+)
-  - `tm_motivacion_done`: "true" when Motivación completed (required for Mes1+)
-  - `tm_intake_done`: "true" when intake form completed
-  - `tm_registro_dias`: "0"-"5" number of days registered (required = 5 for Informe)
-  - `tm_informe_ready`: "true" when report generated (required for Informe)
-  - `intakeTransformaDiabetes`: JSON with intake form data
-  - `registro5dias`: JSON array with 5-day registration data
-
-  **Security**: Direct URL navigation is blocked by validation checks. Users cannot skip steps even with manual localStorage manipulation.
-
-- **Diagnostic Flow**: Separate pages for interactive flows (pre-registration, diagnostic assessment, results)
-- **Additional Pages**: Welcome page, health profile form, blood analysis interpretation, legal pages
+Wouter is used for client-side routing with smooth scrolling. The landing page is a single-page scroll design, while the subscription onboarding process is a multi-page sequential flow to enforce completion of each step.
 
 ## External Dependencies
 
-### UI Libraries
-- Radix UI
-- Lucide React (icons)
-- class-variance-authority
-- cmdk
-- embla-carousel-react
+### UI & Development
+- Radix UI, Lucide React, class-variance-authority, cmdk, embla-carousel-react
+- TypeScript, PostCSS, Autoprefixer, Vite, esbuild, tsx
+- clsx & tailwind-merge, nanoid
 
-### Database & ORM
-- Drizzle ORM
-- @neondatabase/serverless
-- drizzle-zod
-
-### Form Management & Validation
-- react-hook-form
-- @hookform/resolvers
-- zod
-
-### Utilities
+### Data & Forms
+- Drizzle ORM, @neondatabase/serverless, drizzle-zod
+- react-hook-form, @hookform/resolvers, zod
 - date-fns
-- clsx & tailwind-merge
-- nanoid
-
-### Development Tools
-- TypeScript
-- PostCSS & Autoprefixer
-- Vite
-- esbuild
-- tsx
 
 ### Payment Integration
-- **Paddle Billing** (for $5/month subscriptions)
-  - **Client-side**: Paddle.js loaded from CDN (https://cdn.paddle.com/paddle/v2/paddle.js) with sandbox environment
-  - **Server-side**: `@paddle/paddle-node-sdk` for transaction creation
-  - **API endpoint**: `/api/create-checkout-session` creates Paddle transactions and returns transaction IDs
-  - **Checkout Method**: Paddle Overlay (modal) - opens directly on page, no redirect needed
-  - Environment: Auto-detects sandbox vs production based on API key prefix (pdl_sdbx_ = sandbox, pdl_live_ = production)
-  - Current Status: **Configured in Sandbox mode with Overlay** - fully functional for testing
-    - Sandbox API Key: pdl_sdbx_... (configured in secrets)
-    - Sandbox Price ID: pri_01k7q8k5740qednqg9wepm2g5v
-    - Checkout: Overlay modal with Spanish locale, light theme
-  - Production Migration: When Paddle onboarding completes, update secrets with production credentials:
-    - Replace PADDLE_API_KEY with live key (pdl_live_...)
-    - Replace PADDLE_PRICE_ID with production price ID
-    - Change data-environment="sandbox" to data-environment="production" in client/index.html
-    - System will auto-detect and switch to production mode
-  - Flow: User clicks subscribe → Backend creates transaction → Frontend opens Paddle overlay modal → User completes payment → Welcome section appears
-  - Advantages: Multi-currency support (30+ currencies), automatic tax/VAT compliance, acts as Merchant of Record, seamless overlay experience
+- **Paddle Billing**: Integrated for $5/month subscriptions.
+  - Utilizes Paddle.js for client-side interaction and `@paddle/paddle-node-sdk` for server-side transaction creation via `/api/create-checkout-session`.
+  - Employs the Paddle Overlay modal for a seamless checkout experience.
+  - Configured for sandbox environment testing with automatic detection for production switch.
+  - Supports multi-currency, automatic tax/VAT compliance, and acts as Merchant of Record.
+```
