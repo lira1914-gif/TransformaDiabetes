@@ -13,11 +13,10 @@ export default function InformeFuncional() {
       id="informe-inicial"
       className={`informe-funcional ${visible ? "fade-in" : ""}`}
       style={{
-        opacity: visible ? 1 : 0,
-        transition: "opacity 1.2s ease-in-out",
         backgroundColor: "#FAF8F4",
         minHeight: "100vh",
         padding: "3rem 1.5rem",
+        opacity: visible ? undefined : 0,
       }}
       data-testid="informe-inicial"
     >
