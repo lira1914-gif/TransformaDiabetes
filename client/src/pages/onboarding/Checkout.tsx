@@ -10,7 +10,7 @@ if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
 }
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
-function CheckoutForm() {
+function CheckoutForm({ customerId }: { customerId: string }) {
   const stripe = useStripe();
   const elements = useElements();
   const { toast } = useToast();
@@ -27,37 +27,56 @@ function CheckoutForm() {
     setIsProcessing(true);
 
     try {
-      const { error } = await stripe.confirmPayment({
+      // Confirmar el SetupIntent (guardar método de pago)
+      const { error: setupError, setupIntent } = await stripe.confirmSetup({
         elements,
         confirmParams: {
           return_url: `${window.location.origin}/onboarding/bienvenida`,
         },
+        redirect: 'if_required'
       });
 
-      if (error) {
+      if (setupError) {
         toast({
-          title: "Error en el pago",
-          description: error.message,
+          title: "Error al guardar método de pago",
+          description: setupError.message,
           variant: "destructive",
         });
-      } else {
-        // Guardar marca de suscripción
-        localStorage.setItem('tm_subscribed_at', String(Date.now()));
-        
-        toast({
-          title: "¡Pago exitoso!",
-          description: "Bienvenido a TransformaDiabetes",
-        });
-        
-        setLocation('/onboarding/bienvenida');
+        setIsProcessing(false);
+        return;
       }
+
+      // Crear la suscripción con el payment_method guardado
+      const subscriptionResponse = await fetch('/api/create-subscription-with-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerId: customerId,
+          paymentMethodId: setupIntent.payment_method
+        })
+      });
+
+      if (!subscriptionResponse.ok) {
+        throw new Error('Error al crear la suscripción');
+      }
+
+      // Guardar marca de suscripción
+      localStorage.setItem('tm_subscribed_at', String(Date.now()));
+      
+      toast({
+        title: "¡Suscripción exitosa!",
+        description: "Bienvenido a TransformaDiabetes",
+      });
+      
+      setLocation('/onboarding/bienvenida');
     } catch (err: any) {
       toast({
         title: "Error",
         description: err.message || "Error al procesar el pago",
         variant: "destructive",
       });
-    } finally {
       setIsProcessing(false);
     }
   };
@@ -90,6 +109,7 @@ function CheckoutForm() {
 
 export default function Checkout() {
   const [clientSecret, setClientSecret] = useState("");
+  const [customerId, setCustomerId] = useState("");
   const [, setLocation] = useLocation();
   const [error, setError] = useState<string | null>(null);
 
@@ -108,8 +128,9 @@ export default function Checkout() {
         return res.json();
       })
       .then((data) => {
-        if (data.clientSecret) {
+        if (data.clientSecret && data.customerId) {
           setClientSecret(data.clientSecret);
+          setCustomerId(data.customerId);
         } else {
           setError('No se recibió la información de pago');
         }
@@ -214,7 +235,7 @@ export default function Checkout() {
         </p>
 
         <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
+          <CheckoutForm customerId={customerId} />
         </Elements>
 
         <p style={{
