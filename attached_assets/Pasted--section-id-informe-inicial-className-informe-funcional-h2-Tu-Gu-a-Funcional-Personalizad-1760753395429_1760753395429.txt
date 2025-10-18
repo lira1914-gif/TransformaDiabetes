@@ -1,0 +1,55 @@
+<section id="informe-inicial" className="informe-funcional">
+  <h2>🌿 Tu Guía Funcional Personalizada — Semana 1</h2>
+  <p className="subtitulo">
+    “Tu cuerpo no está roto, solo se está protegiendo. Aprende a escuchar su
+    mensaje con calma y curiosidad.”
+  </p>
+
+  <div className="bloque-texto">
+    <h3>Resumen de tus primeros 5 días</h3>
+    <p>
+      Basado en tus registros de alimentación, sueño y digestión, tu cuerpo está
+      ajustando su equilibrio interno. No busca fallar, está aprendiendo a
+      responder de otra forma. 🧠💪
+    </p>
+  </div>
+
+  <ul className="lista-funcional">
+    <li>⚖️ <strong>Equilibra tus comidas:</strong> combina grasa, fibra y proteína en cada plato. Esto ayuda a estabilizar tu glucosa y energía.</li>
+    <li>🔥 <strong>Reduce la carga inflamatoria:</strong> evita ultraprocesados, aceites refinados y azúcares añadidos.</li>
+    <li>💤 <strong>Repara con descanso:</strong> duerme 7–8 h, evita pantallas antes de dormir y realiza respiraciones profundas cada noche.</li>
+    <li>🫀 <strong>Apoya tu hígado y linfa:</strong> masaje suave con aceite de ricino (si la piel está sana), infusión de diente de león o cepillado seco antes de la ducha.</li>
+    <li>🌸 <strong>Calma tu sistema nervioso:</strong> 4–8 respiraciones pausadas antes de comer o cuando sientas ansiedad.</li>
+  </ul>
+
+  <div className="bloque-extra">
+    <h4>Tu enfoque para los próximos días</h4>
+    <p>
+      Observa cómo responde tu cuerpo con estos ajustes. No busques perfección,
+      busca señales: energía más estable, digestión más ligera, sueño más
+      profundo.
+    </p>
+  </div>
+
+  <blockquote className="frase-funcional">
+    “Sanar no es controlar — es comprender el mensaje de tu cuerpo.”
+  </blockquote>
+
+  <div className="nota-final">
+    <p>
+      Este contenido es educativo y no reemplaza la atención médica profesional.
+      La próxima etapa incluirá ajustes más específicos y la activación del
+      diario funcional guiado por IA. 🤖
+    </p>
+  </div>
+
+  <button
+    className="btn-finalizar"
+    onClick={() => {
+      alert("Has completado tu primera semana. Pronto podrás continuar al Mes 2.");
+      navigate('/onboarding/final');
+    }}
+  >
+    Finalizar
+  </button>
+</section>
