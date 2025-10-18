@@ -73,21 +73,39 @@ Wouter is used for client-side routing with smooth scrolling. The landing page i
 - **OpenAI GPT-5**: Integrated via Replit AI Integrations service (no API key required, charged to Replit credits).
   - Model: `gpt-5` (released August 7, 2025) configured in `server/openai.ts`.
   - Endpoint: `/api/generate-report` generates personalized functional medicine reports.
-  - Response time: ~19 seconds for complete report generation.
+  - Response time: ~40-45 seconds for complete report generation.
   - Uses `response_format: { type: "json_object" }` for structured output.
+  - Accepts `moduleNumber` parameter (default: 1) to control recommendation content.
 
 - **Clinical Knowledge Base**: 
-  - Source: "Nutrición Funcional Referencias.docx" (138,792 characters) extracted via mammoth library.
-  - Full knowledge: `server/conocimiento-funcional.txt` (2,929 lines covering 10+ modules on digestive system, immune system, urinary system, detoxification, inflammation, autoimmunity, biomarcadores funcionales).
+  - Source: "Nutrición Funcional Referencias.docx" (143,493 characters) extracted via mammoth library.
+  - Full knowledge: `server/conocimiento-funcional.txt` (3,082 lines covering 10+ modules: digestive, immune, urinary, endocrine, neurological, reproductive systems).
   - Condensed version: `server/conocimiento-funcional-condensado.txt` contains key functional medicine concepts structured for AI prompt integration.
+  - Includes: Three Roots/Many Branches framework, 6R protocol, functional biomarkers, inflammation/autoimmunity, therapeutic nutrition, herb/supplement protocols.
   
+- **Modular AI System** (Phase 3C):
+  - **Module 1 "Empieza desde la raíz"**: Education and habits ONLY (no supplements, vitamins, herbs, or phytotherapy).
+    - Focus: Identify root causes and functional patterns through lifestyle changes.
+    - Content: Sleep hygiene, hydration, functional nutrition, circadian rhythm, stress management, body awareness.
+    - Tone: Empathetic, simple language ("Your body isn't broken, it's protecting itself").
+    - Closing reminder: "This first step helps you understand what your body is telling you. We don't use supplements yet; we only observe, understand, and help your body feel safe."
+  
+  - **Module 2+ "Suplementos Esenciales"**: Educational supplement suggestions without doses or brands.
+    - Focus: Introduce functional nutritional support and educational phytotherapy.
+    - Content: Can mention supplements (e.g., magnesium, omega-3, chromium, berberine) ONLY if clinically warranted.
+    - Format: General suggestions without specific dosages or brand names.
+    - Safety reminder: "Always consult your doctor or nutritionist before implementing changes."
+    - Closing: "This guide is educational and does not replace professional medical guidance."
+
 - **AI Report Generation Framework**:
-  - System message includes complete condensed functional knowledge base.
+  - System message includes complete condensed functional knowledge base + module-specific instructions.
   - Applies "Tres Raíces, Muchas Ramas" model (Genética, Digestión, Inflamación).
-  - Identifies functional patterns: resistencia a insulina, permeabilidad intestinal, disbiosis, disfunción adrenal.
-  - Prioritizes interventions: No negociables → Digestión → Soporte nutricional → Hierbas/adaptógenos.
+  - Identifies functional patterns: insulin resistance, intestinal permeability, dysbiosis, adrenal dysfunction.
+  - Module 1 prioritizes: Essential habits → Functional nutrition → Education about body systems.
+  - Module 2+ prioritizes: Essential habits → Functional nutrition → Educational supplement support → Herbs/adaptogens.
   - Generates 4-section reports: Resumen, Hallazgos, Recomendaciones, Frase Final.
   - Focuses on root-cause analysis vs. symptom management.
+  - Uses empathetic tone with simple metaphors: "digestive fire," "roots," "balance."
 
 ### Database Schema - Reports
 - `reports`: Stores AI-generated functional medicine reports
