@@ -9,14 +9,17 @@ import {
   type InsertDailyLogMoment,
   type Report,
   type InsertReport,
+  type WeeklyCheckin,
+  type InsertWeeklyCheckin,
   users,
   intakeForms,
   dailyLogs,
   dailyLogMoments,
-  reports
+  reports,
+  weeklyCheckins
 } from "@shared/schema";
 import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   // Users
@@ -42,6 +45,11 @@ export interface IStorage {
   // Reports
   createReport(report: InsertReport): Promise<Report>;
   getReportByUserId(userId: string): Promise<Report | undefined>;
+  
+  // Weekly Checkins
+  createWeeklyCheckin(checkin: InsertWeeklyCheckin): Promise<WeeklyCheckin>;
+  getWeeklyCheckinsByUserId(userId: string): Promise<WeeklyCheckin[]>;
+  getLatestWeeklyCheckin(userId: string): Promise<WeeklyCheckin | undefined>;
 }
 
 export class PostgreSQLStorage implements IStorage {
@@ -115,6 +123,24 @@ export class PostgreSQLStorage implements IStorage {
 
   async getReportByUserId(userId: string): Promise<Report | undefined> {
     const result = await db.select().from(reports).where(eq(reports.userId, userId)).limit(1);
+    return result[0];
+  }
+
+  // Weekly Checkins
+  async createWeeklyCheckin(insertCheckin: InsertWeeklyCheckin): Promise<WeeklyCheckin> {
+    const result = await db.insert(weeklyCheckins).values(insertCheckin).returning();
+    return result[0];
+  }
+
+  async getWeeklyCheckinsByUserId(userId: string): Promise<WeeklyCheckin[]> {
+    return await db.select().from(weeklyCheckins).where(eq(weeklyCheckins.userId, userId)).orderBy(desc(weeklyCheckins.createdAt));
+  }
+
+  async getLatestWeeklyCheckin(userId: string): Promise<WeeklyCheckin | undefined> {
+    const result = await db.select().from(weeklyCheckins)
+      .where(eq(weeklyCheckins.userId, userId))
+      .orderBy(desc(weeklyCheckins.createdAt))
+      .limit(1);
     return result[0];
   }
 }

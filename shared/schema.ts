@@ -146,3 +146,21 @@ export const insertReportSchema = createInsertSchema(reports).omit({
 
 export type InsertReport = z.infer<typeof insertReportSchema>;
 export type Report = typeof reports.$inferSelect;
+
+export const weeklyCheckins = pgTable("weekly_checkins", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  inputText: text("input_text").notNull(),
+  responseText: text("response_text").notNull(),
+  emotionTags: jsonb("emotion_tags").$type<string[]>().default(sql`'[]'::jsonb`),
+  systemsDetected: jsonb("systems_detected").$type<string[]>().default(sql`'[]'::jsonb`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertWeeklyCheckinSchema = createInsertSchema(weeklyCheckins).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertWeeklyCheckin = z.infer<typeof insertWeeklyCheckinSchema>;
+export type WeeklyCheckin = typeof weeklyCheckins.$inferSelect;

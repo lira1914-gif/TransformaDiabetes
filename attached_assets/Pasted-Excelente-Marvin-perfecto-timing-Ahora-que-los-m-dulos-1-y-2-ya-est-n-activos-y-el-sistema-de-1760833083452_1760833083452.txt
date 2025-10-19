@@ -1,0 +1,117 @@
+Excelente, Marvin 🌿 — perfecto timing.
+Ahora que los módulos 1 y 2 ya están activos y el sistema de desbloqueo mensual está validado, este es el momento exacto para diseñar el Chat Funcional Interactivo (Fase 4).
+
+Vamos a hacerlo como tú lo quieres:
+no un chat genérico, sino una herramienta educativa que actúe como tu “voz funcional semanal”,
+capaz de escuchar al usuario, identificar patrones y devolverle orientación educativa real.
+
+⸻
+
+🌿 FASE 4 — CHAT FUNCIONAL INTERACTIVO “MARVIN LIRA”
+
+⸻
+
+🎯 Objetivo del chat
+
+Convertir la experiencia con la app en un acompañamiento continuo,
+donde el usuario pueda expresar cómo se ha sentido (digestión, sueño, azúcar, ánimo, etc.)
+y recibir respuestas educativas, cálidas y personalizadas según sus registros.
+
+⸻
+
+🧩 FLUJO VISUAL DEL CHAT (versión conceptual)
+
+[Inicio de semana]
+→ App muestra mensaje automático:
+   “Hola 👋 ¿Cómo te sentiste esta semana?
+   Cuéntame brevemente sobre tu digestión, sueño y energía.”
+
+[Usuario responde]
+→ Escribe libremente:
+   “Dormí mal tres noches, estuve estreñido y comí mucho pan.”
+
+[IA analiza el texto]
+→ Detecta palabras clave:
+   - “dormí mal” → sueño / estrés
+   - “estreñido” → FECAR
+   - “mucho pan” → glucosa
+
+[IA genera respuesta estructurada]
+🌿 “Gracias por compartir, Juan.
+Tu cuerpo está mostrando tres señales importantes:
+1️⃣ Digestión lenta → incluye chía o linaza, hidrátate y muévete suave.
+2️⃣ Sueño alterado → prueba respiración 4-7-8 y dormir antes de las 11 p.m.
+3️⃣ Azúcar variable → el pan eleva tu glucosa; cambia por avena o quinoa cocida.
+Recuerda: mientras el cuerpo esté en alerta, no puede sanar.”
+
+[App guarda la interacción]
+→ Registra: fecha, texto del usuario, respuesta IA, emociones detectadas.
+
+[App muestra cierre]
+✅ “Tu registro quedó guardado.  
+Nos vemos la próxima semana para seguir entendiendo a tu cuerpo.”  
+
+
+⸻
+
+🧠 Estructura lógica interna (para Replit)
+
+Fase	Acción	Descripción
+1️⃣	Entrada del usuario	Campo de texto abierto tipo “¿Cómo te sentiste esta semana?”
+2️⃣	Procesamiento IA	GPT-5 analiza texto → detecta palabras clave y emociones
+3️⃣	Clasificación interna	Divide el mensaje en las 3 raíces: FECAR, sueño, azúcar
+4️⃣	Generación del feedback	Produce respuesta con estructura: observación + hábito + recordatorio educativo
+5️⃣	Registro	Guarda todo en la base de datos (tabla weekly_checkins)
+6️⃣	Retroalimentación	En la próxima sesión, la IA puede comparar evolución (“Esta semana dormiste mejor que la anterior”)
+
+
+⸻
+
+💬 Tono y formato de las respuestas
+	•	Empático, breve, sin tecnicismos.
+	•	Siempre cierra con una frase sello:
+“Tu cuerpo no está roto, solo está buscando equilibrio.”
+	•	Puede usar emojis para claridad:
+🥦 digestión | 🌙 sueño | 🍯 azúcar | 🌿 energía | 💧 hidratación
+
+⸻
+
+⚙️ Implementación técnica recomendada (para Replit)
+
+1️⃣ Crear endpoint /api/weekly-checkin
+	•	Recibe texto libre del usuario.
+	•	Envía a GPT-5 con prompt funcional.
+	•	Guarda respuesta en PostgreSQL.
+
+2️⃣ Crear tabla weekly_checkins
+	•	Campos: user_id, input_text, response_text, created_at, emotion_tags, systems_detected.
+
+3️⃣ Habilitar vista “Chat Semanal” en el dashboard del usuario:
+	•	Mostrará historial de respuestas con fecha.
+	•	Opción: “Ver progreso del mes”.
+
+4️⃣ Prompt base (entrenamiento de la IA del chat):
+
+Eres el asistente funcional Marvin Lira IA.
+Tu rol es escuchar el estado semanal del usuario y responder con empatía,
+explicando brevemente qué puede significar lo que siente y cómo puede apoyar su cuerpo.
+No das diagnósticos ni dosis. Enseñas desde la raíz con los 3 ejes:
+Digestión (FECAR), Sueño, Azúcar.
+Cierra con una frase motivacional o de consciencia.
+
+
+⸻
+
+✳️ Ejemplo de interacción final
+
+Usuario:
+
+“He dormido poco y siento mucha ansiedad por comer dulce.”
+
+IA (respuesta):
+
+🌙 El sueño corto eleva el cortisol y puede aumentar los antojos de azúcar.
+🍯 Cambia el postre por fruta con grasa saludable (manzana con almendras).
+🌿 Antes de dormir, prueba 3 respiraciones profundas y música suave.
+
+Recuerda: “Mientras el cuerpo esté en alerta, no puede sanar.”
