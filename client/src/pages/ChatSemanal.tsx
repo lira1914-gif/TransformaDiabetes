@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Send, MessageCircle } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import Header from "@/components/Header";
 
 interface WeeklyCheckin {
   id: string;
@@ -59,6 +60,7 @@ export default function ChatSemanal() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       <div className="container max-w-4xl mx-auto py-8 px-4">
         <div className="mb-8">
           <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
