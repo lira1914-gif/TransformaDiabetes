@@ -12,6 +12,7 @@ import Bienvenida from "@/pages/Bienvenida";
 import Perfil from "@/pages/Perfil";
 import Analisis from "@/pages/Analisis";
 import Guia from "@/pages/Guia";
+import ChatSemanal from "@/pages/ChatSemanal";
 import Privacidad from "@/pages/Privacidad";
 import Terminos from "@/pages/Terminos";
 import Reembolsos from "@/pages/Reembolsos";
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/perfil" component={Perfil} />
       <Route path="/analisis" component={Analisis} />
       <Route path="/guia" component={Guia} />
+      <Route path="/chat-semanal" component={ChatSemanal} />
       <Route path="/privacidad" component={Privacidad} />
       <Route path="/terminos" component={Terminos} />
       <Route path="/reembolsos" component={Reembolsos} />
