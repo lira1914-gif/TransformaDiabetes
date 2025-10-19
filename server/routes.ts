@@ -207,7 +207,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      const { userId } = req.body;
+      const { userId, currentStatus } = req.body;
 
       if (!userId) {
         return res.status(400).json({ 
@@ -237,9 +237,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ? `https://${process.env.REPLIT_DEV_DOMAIN}` 
         : 'http://localhost:5000';
 
+      // Incluir el estado previo en la URL de retorno para detectar cambios
+      const returnUrl = `${baseUrl}/perfil?from=portal&prevStatus=${currentStatus || 'unknown'}`;
+
       const session = await stripe.billingPortal.sessions.create({
         customer: user.stripeCustomerId,
-        return_url: `${baseUrl}/perfil?from=portal`,
+        return_url: returnUrl,
       });
 
       console.log('Sesión del portal creada:', session.id);

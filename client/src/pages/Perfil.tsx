@@ -20,6 +20,7 @@ export default function Perfil() {
     const checkPortalReturn = async () => {
       const urlParams = new URLSearchParams(window.location.search);
       const fromPortal = urlParams.get('from');
+      const previousStatus = urlParams.get('prevStatus'); // Estado previo antes de ir al portal
       
       if (fromPortal === 'portal') {
         // Usuario regresó del portal de Stripe
@@ -28,9 +29,27 @@ export default function Perfil() {
           const response = await fetch(`/api/users/id/${userId}`);
           const user = await response.json();
           
-          // Si la suscripción fue cancelada, redirigir a la página de confirmación
-          if (user.subscriptionStatus === 'canceled' || user.subscriptionStatus === 'cancelled') {
+          const currentStatus = user.subscriptionStatus;
+          
+          // Detectar cancelación
+          if (currentStatus === 'canceled' || currentStatus === 'cancelled') {
+            // Limpiar query params y redirigir
+            window.history.replaceState({}, '', '/perfil');
             setLocation('/cancelacion-confirmada');
+            return;
+          }
+          
+          // Detectar reactivación: si el estado previo era cancelado y ahora es activo
+          if (previousStatus === 'canceled' && currentStatus === 'active') {
+            // Limpiar query params y redirigir
+            window.history.replaceState({}, '', '/perfil');
+            setLocation('/reactivacion-confirmada');
+            return;
+          }
+          
+          // Si regresó del portal pero no hubo cambios, limpiar query params
+          if (fromPortal === 'portal') {
+            window.history.replaceState({}, '', '/perfil');
           }
         } catch (error) {
           console.error('Error verificando estado de suscripción:', error);
@@ -76,7 +95,12 @@ export default function Perfil() {
     setIsLoadingPortal(true);
     
     try {
-      const response = await apiRequest('POST', '/api/create-portal-session', { userId });
+      // Obtener el estado actual de la suscripción antes de ir al portal
+      const userResponse = await fetch(`/api/users/id/${userId}`);
+      const userData = await userResponse.json();
+      const currentStatus = userData.subscriptionStatus || 'unknown';
+      
+      const response = await apiRequest('POST', '/api/create-portal-session', { userId, currentStatus });
       const data = await response.json();
       
       if (data.url) {
