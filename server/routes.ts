@@ -1003,8 +1003,14 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     }
   });
 
-  // Test email endpoint
+  // Test email endpoint (development only)
   app.post("/api/test-email", async (req, res) => {
+    if (process.env.NODE_ENV !== 'development') {
+      return res.status(403).json({ 
+        error: "Este endpoint solo está disponible en modo desarrollo" 
+      });
+    }
+
     try {
       const { sendWelcomeEmail, sendReportReadyEmail, sendEmail } = await import("./email");
       const { type, to, name, moduleNumber } = req.body;

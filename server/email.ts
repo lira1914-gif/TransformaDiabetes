@@ -1,5 +1,9 @@
 import nodemailer from 'nodemailer';
 
+if (!process.env.SMTP_PASSWORD) {
+  throw new Error('SMTP_PASSWORD environment variable is not configured. Email functionality will not work.');
+}
+
 const transporter = nodemailer.createTransport({
   host: 'mail.privateemail.com',
   port: 465,
@@ -111,7 +115,6 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
     <body>
       <div class="container">
         <div class="header">
-          <div class="emoji">🌿</div>
           <h1>¡Bienvenido a TransformaDiabetes!</h1>
         </div>
         
@@ -126,9 +129,9 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
           
           <p>En las próximas semanas, aprenderás a:</p>
           <ul>
-            <li>🥦 Fortalecer tu digestión y eliminación</li>
-            <li>🌙 Regular tu sueño y sistema nervioso</li>
-            <li>🍯 Estabilizar tu azúcar y energía</li>
+            <li><strong>Digestión y Eliminación:</strong> Fortalecer tu sistema digestivo desde la raíz</li>
+            <li><strong>Sueño:</strong> Regular tu ritmo circadiano y sistema nervioso</li>
+            <li><strong>Azúcar:</strong> Estabilizar tu glucosa y energía durante todo el día</li>
           </ul>
           
           <p>Recuerda: este es un proceso de transformación, no una carrera. Cada pequeño cambio cuenta.</p>
@@ -140,7 +143,7 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
         
         <div class="footer">
           <p>Con consciencia y esperanza,<br>
-          <strong>Equipo TransformaDiabetes</strong> 🌿</p>
+          <strong>Equipo TransformaDiabetes</strong></p>
           <p style="margin-top: 20px; font-size: 12px;">
             Si tienes preguntas, responde a este correo o escríbenos a contacto@transformadiabetes.com
           </p>
@@ -152,7 +155,7 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
   
   await sendEmail({
     to,
-    subject: '🌿 Bienvenido a TransformaDiabetes - Tu transformación comienza hoy',
+    subject: 'Bienvenido a TransformaDiabetes - Tu transformación comienza hoy',
     html
   });
 }
@@ -233,7 +236,6 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
     <body>
       <div class="container">
         <div class="header">
-          <div class="emoji">📋</div>
           <h1>Tu Informe Funcional está listo</h1>
         </div>
         
@@ -248,10 +250,10 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
           
           <p>En tu guía encontrarás:</p>
           <ul>
-            <li>🩺 Qué está mostrando tu cuerpo</li>
-            <li>🧠 La Trifecta Funcional (Digestión, Sueño, Azúcar)</li>
-            <li>🌼 Hábitos funcionales personalizados</li>
-            <li>💡 Recomendaciones específicas para tu caso</li>
+            <li><strong>Análisis:</strong> Qué está mostrando tu cuerpo</li>
+            <li><strong>Trifecta Funcional:</strong> Digestión, Sueño, Azúcar</li>
+            <li><strong>Hábitos:</strong> Acciones funcionales personalizadas</li>
+            <li><strong>Recomendaciones:</strong> Orientación específica para tu caso</li>
           </ul>
         </div>
         
@@ -261,7 +263,7 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
         
         <div class="footer">
           <p>Con consciencia y esperanza,<br>
-          <strong>Equipo TransformaDiabetes</strong> 🌿</p>
+          <strong>Equipo TransformaDiabetes</strong></p>
           <p style="margin-top: 20px; font-size: 12px;">
             Si tienes preguntas sobre tu informe, escríbenos a contacto@transformadiabetes.com
           </p>
@@ -273,7 +275,7 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
   
   await sendEmail({
     to,
-    subject: `📋 Tu Informe Funcional - Módulo ${moduleNumber} está listo`,
+    subject: `Tu Informe Funcional - Módulo ${moduleNumber} está listo`,
     html
   });
 }
