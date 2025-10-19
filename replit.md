@@ -32,5 +32,5 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 - **UI & Development**: Radix UI, Lucide React, class-variance-authority, cmdk, embla-carousel-react, TypeScript, PostCSS, Autoprefixer, Vite, esbuild, tsx, clsx, tailwind-merge, nanoid.
 - **Data & Forms**: Drizzle ORM, @neondatabase/serverless, drizzle-zod, react-hook-form, @hookform/resolvers, zod, date-fns.
 - **Payment Integration**: **Stripe** for $5/month subscriptions, utilizing Stripe.js with React Stripe Elements for client-side and Stripe Node SDK for server-side subscription management.
-- **Email System**: **Nodemailer** configured with Namecheap PrivateEmail for automated transactional emails (Welcome, Report Ready, Module Unlocked) using SMTP.
+- **Email System**: **Nodemailer** configured with Namecheap PrivateEmail for automated transactional emails (Welcome, Report Ready, Module Unlocked, Reactivation) using SMTP (mail.privateemail.com:465).
 - **AI Integration**: **OpenAI GPT-4o** (via Replit AI Integrations) for generating personalized functional medicine reports and powering the "Marvin Lira IA" weekly check-in chat system. The AI uses a condensed clinical knowledge base for functional medicine guidance and is structured to provide module-specific recommendations.

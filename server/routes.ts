@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import Stripe from "stripe";
+import { sendReactivationEmail } from "./email";
 
 // Initialize Stripe with API key from environment
 const stripe = process.env.STRIPE_SECRET_KEY 
@@ -260,6 +261,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       res.status(500).json({ error: errorMessage });
+    }
+  });
+
+  // Reactivation notification endpoint
+  app.post("/api/notify-reactivation", async (req, res) => {
+    try {
+      const { userId } = req.body;
+
+      if (!userId) {
+        return res.status(400).json({ 
+          error: "userId es requerido" 
+        });
+      }
+
+      // Obtener el usuario de la base de datos
+      const user = await storage.getUser(userId);
+      
+      if (!user) {
+        return res.status(404).json({ 
+          error: "Usuario no encontrado" 
+        });
+      }
+
+      if (!user.email) {
+        return res.status(400).json({ 
+          error: "El usuario no tiene email registrado" 
+        });
+      }
+
+      console.log('Enviando email de reactivación a:', user.email);
+
+      // Enviar email de reactivación
+      await sendReactivationEmail(user.email);
+
+      console.log('✅ Email de reactivación enviado exitosamente');
+
+      res.json({ 
+        success: true,
+        message: "Email de reactivación enviado correctamente" 
+      });
+    } catch (error: any) {
+      console.error("Error enviando email de reactivación:", error);
+      
+      // No fallar la request si el email falla, solo registrar el error
+      res.json({ 
+        success: false,
+        message: "Error al enviar el email, pero la reactivación fue exitosa" 
+      });
     }
   });
 

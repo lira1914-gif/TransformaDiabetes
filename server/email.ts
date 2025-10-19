@@ -752,6 +752,146 @@ export async function sendModuleUnlockedEmail(to: string, name?: string, moduleN
   });
 }
 
+export async function sendReactivationEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 30px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 25px;
+        }
+        h1 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 24px;
+          margin-bottom: 15px;
+          line-height: 1.3;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+        .intro {
+          margin-bottom: 25px;
+        }
+        .highlight {
+          background-color: #f0f7f0;
+          border-left: 4px solid #4a5d23;
+          padding: 15px;
+          margin: 20px 0;
+          border-radius: 4px;
+        }
+        .quote {
+          font-style: italic;
+          color: #4a5d23;
+          font-size: 17px;
+          text-align: center;
+          margin: 25px 0;
+          padding: 15px;
+          background-color: #fafaf8;
+          border-radius: 6px;
+        }
+        .button {
+          display: inline-block;
+          background-color: #6b7041;
+          color: #ffffff;
+          padding: 14px 28px;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 600;
+          margin: 20px 0;
+          text-align: center;
+        }
+        .button-container {
+          text-align: center;
+          margin: 25px 0;
+        }
+        .footer {
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 1px solid #e5e5e5;
+          font-size: 14px;
+          color: #666;
+          text-align: center;
+        }
+        .signature {
+          margin-top: 20px;
+          color: #4a5d23;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>🌿 ${userName}</h1>
+        </div>
+        
+        <div class="content intro">
+          <p>Tu cuenta en TransformaDiabetes vuelve a estar activa.<br>
+          Mantendrás tus módulos, informes y todo tu progreso anterior.</p>
+        </div>
+        
+        <div class="highlight">
+          <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+            Tu cuerpo no se rindió — solo necesitaba una pausa.<br>
+            Hoy estás eligiendo continuar desde la raíz. 🌱
+          </p>
+        </div>
+        
+        <div class="button-container">
+          <a href="${baseUrl}/perfil" class="button">👉 Entrar a mi panel</a>
+        </div>
+        
+        <div class="quote">
+          "Mientras el cuerpo esté en alerta, no puede sanar."
+        </div>
+        
+        <div class="content">
+          <p>Hoy estás volviendo a escucharlo con conciencia.</p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>Con gratitud,<br>
+            <strong>Marvin Lira</strong><br>
+            Nutrición Funcional & Salud desde la raíz<br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '💚 Tu suscripción ha sido reactivada — ¡Nos alegra tenerte de vuelta!',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     await transporter.verify();

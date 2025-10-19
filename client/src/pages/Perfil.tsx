@@ -41,6 +41,15 @@ export default function Perfil() {
           
           // Detectar reactivación: si el estado previo era cancelado y ahora es activo
           if (previousStatus === 'canceled' && currentStatus === 'active') {
+            // Enviar email de reactivación
+            try {
+              await apiRequest('POST', '/api/notify-reactivation', { userId });
+              console.log('✅ Email de reactivación enviado');
+            } catch (error) {
+              console.error('Error enviando email de reactivación:', error);
+              // Continuar aunque falle el email
+            }
+            
             // Limpiar query params y redirigir
             window.history.replaceState({}, '', '/perfil');
             setLocation('/reactivacion-confirmada');
