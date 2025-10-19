@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 import InformeFuncional from '@/components/InformeFuncional';
+import Header from '@/components/Header';
 
 export default function Informe() {
   const [, setLocation] = useLocation();
@@ -42,8 +43,11 @@ export default function Informe() {
   }, [setLocation]);
 
   return (
-    <div style={{ minHeight: '100vh', padding: '2rem 0' }}>
-      <InformeFuncional />
+    <div style={{ minHeight: '100vh' }}>
+      <Header />
+      <div style={{ padding: '2rem 0' }}>
+        <InformeFuncional />
+      </div>
     </div>
   );
 }
