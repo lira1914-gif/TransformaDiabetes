@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import { User, Calendar, Activity, Weight, Ruler, ClipboardList } from "lucide-react";
+import { User, Calendar, Activity, Weight, Ruler, ClipboardList, CreditCard } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function Perfil() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoadingPortal, setIsLoadingPortal] = useState(false);
+  
+  // TODO: Obtener el userId real del usuario logueado
+  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
   
   const [formData, setFormData] = useState({
     edad: "",
@@ -39,6 +44,30 @@ export default function Perfil() {
         ? prev.sintomas.filter(s => s !== sintoma)
         : [...prev.sintomas, sintoma]
     }));
+  };
+
+  const handleManageSubscription = async () => {
+    setIsLoadingPortal(true);
+    
+    try {
+      const response = await apiRequest('POST', '/api/create-portal-session', { userId });
+      const data = await response.json();
+      
+      if (data.url) {
+        // Redirigir al portal de Stripe
+        window.location.href = data.url;
+      } else {
+        throw new Error("No se recibió URL del portal");
+      }
+    } catch (error: any) {
+      console.error("Error abriendo portal:", error);
+      toast({
+        title: "Error",
+        description: error.message || "No se pudo abrir el portal de gestión. Intenta nuevamente.",
+        variant: "destructive",
+      });
+      setIsLoadingPortal(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,13 +118,52 @@ export default function Perfil() {
             
             {/* Educational Disclaimer */}
             <div 
-              className="max-w-2xl mx-auto rounded-lg p-4 text-left text-sm"
+              className="max-w-2xl mx-auto rounded-lg p-4 text-left text-sm mb-8"
               style={{ backgroundColor: '#FFF9E6', border: '1px solid #FFE082' }}
             >
               <p style={{ color: '#6F6E66' }}>
                 <strong>Aviso importante:</strong> Esta herramienta es únicamente educativa y no almacena datos médicos. 
                 No sustituye la consulta con un profesional de salud. Para un seguimiento médico real, consulta a tu médico.
               </p>
+            </div>
+
+            {/* Subscription Management Section */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div 
+                className="rounded-xl p-6"
+                style={{ 
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #E6E3D9',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+                }}
+              >
+                <h2 
+                  className="text-xl font-bold mb-3 flex items-center gap-2" 
+                  style={{ color: '#3E3E2E' }}
+                >
+                  <CreditCard className="w-5 h-5" style={{ color: '#6B7041' }} />
+                  Gestión de Suscripción
+                </h2>
+                <p className="text-sm mb-4" style={{ color: '#6F6E66' }}>
+                  Administra tu método de pago, actualiza tu tarjeta o cancela tu suscripción de forma segura a través del portal de Stripe.
+                </p>
+                <button
+                  onClick={handleManageSubscription}
+                  disabled={isLoadingPortal}
+                  className="px-6 py-3 rounded-lg font-semibold transition text-sm disabled:opacity-50 flex items-center gap-2"
+                  style={{ 
+                    backgroundColor: '#6B7041',
+                    color: '#FFFFFF',
+                    border: 'none'
+                  }}
+                  data-testid="button-manage-subscription"
+                  onMouseEnter={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#5A5E35')}
+                  onMouseLeave={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#6B7041')}
+                >
+                  <CreditCard className="w-4 h-4" />
+                  {isLoadingPortal ? "Abriendo portal..." : "Gestionar mi suscripción"}
+                </button>
+              </div>
             </div>
           </div>
 
