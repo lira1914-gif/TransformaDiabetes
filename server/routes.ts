@@ -839,6 +839,152 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
     }
   });
 
+  // Weekly Checkin - Chat Funcional Interactivo
+  app.post("/api/weekly-checkin", async (req, res) => {
+    try {
+      const { userId, message } = req.body;
+
+      if (!userId || !message) {
+        return res.status(400).json({ error: "userId y message son requeridos" });
+      }
+
+      console.log(`Procesando check-in semanal para userId: ${userId}`);
+
+      // Obtener datos del usuario para contexto
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Obtener historial previo para comparación
+      const previousCheckins = await storage.getWeeklyCheckinsByUserId(userId);
+      const hasHistory = previousCheckins.length > 0;
+
+      // Preparar el prompt para "Marvin Lira IA"
+      const { openai } = await import("./openai");
+
+      const systemMessage = `Eres el asistente funcional "Marvin Lira IA" 🌿
+Tu rol es escuchar el estado semanal del usuario y responder con empatía y claridad,
+explicando brevemente qué puede significar lo que siente y cómo puede apoyar su cuerpo desde la raíz.
+
+PRINCIPIOS EDUCATIVOS:
+• No das diagnósticos ni dosis específicas
+• Enseñas desde la medicina funcional con los 3 ejes: Digestión (FECAR), Sueño, Azúcar
+• Usas lenguaje simple, sin tecnicismos
+• Eres breve y directo (150-250 palabras)
+• Siempre cierras con una frase motivacional de consciencia
+
+EMOJIS EDUCATIVOS:
+🥦 digestión / FECAR
+🌙 sueño / descanso
+🍯 azúcar / glucosa / antojos
+🌿 energía / vitalidad
+💧 hidratación
+🧘 estrés / sistema nervioso
+
+ESTRUCTURA DE RESPUESTA:
+1. Identifica los sistemas afectados (digestión, sueño, azúcar)
+2. Para cada sistema detectado:
+   - Emoji del sistema
+   - Explicación breve de qué está pasando
+   - 1-2 ajustes funcionales simples
+3. Frase final motivacional (1 línea)
+
+FRASES DE CIERRE (elige una o crea similar):
+• "Tu cuerpo no está roto, solo está buscando equilibrio."
+• "Mientras el cuerpo esté en alerta, no puede sanar."
+• "Sanar no es controlar un síntoma, es entender la raíz."
+• "La digestión tranquila apaga la inflamación y enciende tu energía."
+
+IMPORTANTE:
+- NO uses frases técnicas como "resistencia a la insulina" o "disbiosis"
+- SÍ usa metáforas: "fuego digestivo", "raíz", "equilibrio", "alerta"
+- Siempre menciona: "Si los síntomas persisten, consulta con tu médico."`;
+
+      const userPrompt = `El usuario te comparte cómo se sintió esta semana:
+
+"${message}"
+
+${hasHistory ? `(El usuario ha compartido ${previousCheckins.length} veces anteriores. Puedes mencionar progreso si es evidente.)` : '(Esta es la primera vez que el usuario comparte contigo.)'}
+
+Responde con empatía, identifica sistemas afectados y ofrece orientación funcional simple.
+
+IMPORTANTE: Responde en formato JSON con esta estructura exacta:
+{
+  "responseText": "Tu respuesta empática completa con emojis y estructura (150-250 palabras)",
+  "systemsDetected": ["array de sistemas detectados: fecar, sueño, azúcar, estrés, energía, etc."],
+  "emotionTags": ["array de emociones detectadas: ansiedad, cansancio, frustración, esperanza, etc."]
+}
+
+Responde SOLO con el JSON, sin texto adicional.`;
+
+      console.log('Generando respuesta del chat con Marvin Lira IA...');
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-5",
+        messages: [
+          {
+            role: "system",
+            content: systemMessage
+          },
+          {
+            role: "user",
+            content: userPrompt
+          }
+        ],
+        response_format: { type: "json_object" },
+        max_completion_tokens: 1024
+      });
+
+      const aiResponse = completion.choices[0]?.message?.content;
+      if (!aiResponse) {
+        throw new Error("No se recibió respuesta de OpenAI");
+      }
+
+      console.log('Respuesta de Marvin Lira IA recibida');
+
+      // Parsear la respuesta JSON
+      const chatData = JSON.parse(aiResponse);
+
+      // Guardar el check-in en la base de datos
+      const checkin = await storage.createWeeklyCheckin({
+        userId,
+        inputText: message,
+        responseText: chatData.responseText,
+        systemsDetected: chatData.systemsDetected || [],
+        emotionTags: chatData.emotionTags || []
+      });
+
+      console.log('Check-in guardado en BD:', checkin.id);
+
+      res.json({
+        id: checkin.id,
+        responseText: chatData.responseText,
+        systemsDetected: chatData.systemsDetected,
+        emotionTags: chatData.emotionTags,
+        createdAt: checkin.createdAt
+      });
+    } catch (error: any) {
+      console.error("Error procesando check-in semanal:", error);
+      res.status(500).json({ 
+        error: "Error al procesar el mensaje",
+        details: error.message 
+      });
+    }
+  });
+
+  // Get Weekly Checkin History
+  app.get("/api/weekly-checkins/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const checkins = await storage.getWeeklyCheckinsByUserId(userId);
+      res.json(checkins);
+    } catch (error: any) {
+      console.error("Error obteniendo check-ins:", error);
+      res.status(500).json({ error: "Error al obtener el historial" });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
