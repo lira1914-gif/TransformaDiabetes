@@ -130,7 +130,7 @@ export default function Perfil() {
             {/* Subscription Management Section */}
             <div className="max-w-2xl mx-auto mb-8">
               <div 
-                className="rounded-xl p-6"
+                className="rounded-xl p-8 text-left"
                 style={{ 
                   backgroundColor: '#FFFFFF',
                   border: '1px solid #E6E3D9',
@@ -138,31 +138,68 @@ export default function Perfil() {
                 }}
               >
                 <h2 
-                  className="text-xl font-bold mb-3 flex items-center gap-2" 
+                  className="text-2xl font-bold mb-4" 
                   style={{ color: '#3E3E2E' }}
                 >
-                  <CreditCard className="w-5 h-5" style={{ color: '#6B7041' }} />
-                  Gestión de Suscripción
+                  Gestiona tu suscripción
                 </h2>
-                <p className="text-sm mb-4" style={{ color: '#6F6E66' }}>
-                  Administra tu método de pago, actualiza tu tarjeta o cancela tu suscripción de forma segura a través del portal de Stripe.
+                
+                <p className="text-base mb-6 leading-relaxed" style={{ color: '#6F6E66' }}>
+                  Tu proceso con TransformaDiabetes está diseñado para acompañarte paso a paso, sin compromisos ni presiones.
+                  Puedes actualizar tu método de pago o cancelar tu suscripción en cualquier momento, de forma segura, a través de nuestro portal de Stripe.
                 </p>
-                <button
-                  onClick={handleManageSubscription}
-                  disabled={isLoadingPortal}
-                  className="px-6 py-3 rounded-lg font-semibold transition text-sm disabled:opacity-50 flex items-center gap-2"
-                  style={{ 
-                    backgroundColor: '#6B7041',
-                    color: '#FFFFFF',
-                    border: 'none'
-                  }}
-                  data-testid="button-manage-subscription"
-                  onMouseEnter={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#5A5E35')}
-                  onMouseLeave={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#6B7041')}
+
+                {/* Security Section */}
+                <div className="mb-6 pl-4 border-l-2" style={{ borderColor: '#6B7041' }}>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#3E3E2E' }}>
+                    🔒 Seguridad y transparencia:
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: '#6F6E66' }}>
+                    El manejo de tus pagos y cancelaciones se realiza directamente con Stripe, una de las plataformas más seguras del mundo.
+                    Nosotros no almacenamos datos de tus tarjetas ni realizamos cargos fuera de tu control.
+                  </p>
+                </div>
+
+                {/* CTA Button */}
+                <div className="mb-6">
+                  <button
+                    onClick={handleManageSubscription}
+                    disabled={isLoadingPortal}
+                    className="w-full px-6 py-3 rounded-lg font-semibold transition text-base disabled:opacity-50"
+                    style={{ 
+                      backgroundColor: '#6B7041',
+                      color: '#FFFFFF',
+                      border: 'none'
+                    }}
+                    data-testid="button-manage-subscription"
+                    onMouseEnter={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#5A5E35')}
+                    onMouseLeave={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#6B7041')}
+                  >
+                    {isLoadingPortal ? "Abriendo portal seguro..." : "👉 Gestionar mi suscripción"}
+                  </button>
+                  <p className="text-xs mt-2 text-center" style={{ color: '#9A998C' }}>
+                    (Este botón abrirá una nueva ventana segura de Stripe.)
+                  </p>
+                </div>
+
+                {/* Important Note */}
+                <div 
+                  className="rounded-lg p-4 mb-4"
+                  style={{ backgroundColor: '#F9F7F2', border: '1px solid #E6E3D9' }}
                 >
-                  <CreditCard className="w-4 h-4" />
-                  {isLoadingPortal ? "Abriendo portal..." : "Gestionar mi suscripción"}
-                </button>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#3E3E2E' }}>
+                    Nota importante:
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: '#6F6E66' }}>
+                    Al cancelar, conservarás el acceso a tu módulo actual hasta el final del periodo que ya pagaste.
+                    Podrás reactivar tu suscripción en cualquier momento si deseas continuar con tu proceso funcional.
+                  </p>
+                </div>
+
+                {/* Closing Message */}
+                <p className="text-base text-center italic font-medium" style={{ color: '#6B7041' }}>
+                  Tu cuerpo no está roto, está buscando equilibrio.
+                </p>
               </div>
             </div>
           </div>
