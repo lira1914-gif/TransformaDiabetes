@@ -908,7 +908,14 @@ FRASES DE CIERRE (elige una o crea similar):
 IMPORTANTE:
 - NO uses frases técnicas como "resistencia a la insulina" o "disbiosis"
 - SÍ usa metáforas: "fuego digestivo", "raíz", "equilibrio", "alerta"
-- Siempre menciona: "Si los síntomas persisten, consulta con tu médico."`;
+- Siempre menciona: "Si los síntomas persisten, consulta con tu médico."
+
+Responde en JSON con esta estructura exacta:
+{
+  "responseText": "Tu respuesta empática completa (150-250 palabras)",
+  "systemsDetected": ["array de sistemas: fecar, sueño, azúcar, estrés, energía"],
+  "emotionTags": ["array de emociones: ansiedad, cansancio, frustración, esperanza, alegría"]
+}`;
 
       const userPrompt = `El usuario te comparte cómo se sintió esta semana:
 
@@ -917,22 +924,14 @@ IMPORTANTE:
 ${hasHistory ? `(El usuario ha compartido ${previousCheckins.length} veces anteriores. Puedes mencionar progreso si es evidente.)` : '(Esta es la primera vez que el usuario comparte contigo.)'}
 
 Responde con empatía, identifica sistemas afectados y ofrece orientación funcional simple.
-
-IMPORTANTE: Responde en formato JSON con esta estructura exacta:
-{
-  "responseText": "Tu respuesta empática completa con emojis y estructura (150-250 palabras)",
-  "systemsDetected": ["array de sistemas detectados: fecar, sueño, azúcar, estrés, energía, etc."],
-  "emotionTags": ["array de emociones detectadas: ansiedad, cansancio, frustración, esperanza, etc."]
-}
-
-Responde SOLO con el JSON, sin texto adicional.`;
+Devuelve SOLO el JSON, sin texto adicional.`;
 
       console.log('Generando respuesta del chat con Marvin Lira IA...');
 
       let completion;
       try {
         completion = await openai.chat.completions.create({
-          model: "gpt-5",
+          model: "gpt-4o",
           messages: [
             {
               role: "system",
@@ -944,7 +943,7 @@ Responde SOLO con el JSON, sin texto adicional.`;
             }
           ],
           response_format: { type: "json_object" },
-          max_completion_tokens: 1024
+          max_completion_tokens: 800
         });
       } catch (openaiError: any) {
         console.error('Error llamando a OpenAI:', openaiError.message);

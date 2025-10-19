@@ -36,6 +36,7 @@ The backend is built with Express.js and TypeScript, utilizing Drizzle ORM for P
 - `daily_logs`: 5-day functional tracking (sleep data, dates)
 - `daily_log_moments`: 6 moments per day (Mañana, Media mañana, Almuerzo, Media tarde, Cena, Noche) tracking food, mood, and bowel movements
 - `reports`: Stores AI-generated functional medicine reports with `userId` foreign key, `resumen`, `hallazgos`, `recomendaciones`, `fraseFinal`, and `createdAt`
+- `weekly_checkins`: Stores weekly chat messages between users and "Marvin Lira IA" with `userId` foreign key, `inputText` (user message), `responseText` (AI response), `emotionTags` (detected emotions array), `systemsDetected` (affected functional systems array), and `createdAt`
 
 **Data Flow:**
 1. **Checkout → User Creation**: Stripe Payment Element captures email → Backend creates/updates user in PostgreSQL → Returns `userId` to frontend → Stored in `localStorage('tm_user_id')`
@@ -71,8 +72,9 @@ Wouter is used for client-side routing with smooth scrolling. The landing page i
   - Supports recurring billing, automatic card updates, and PCI-compliant payment processing.
 
 ### AI Integration & Functional Knowledge Base
-- **OpenAI GPT-5**: Integrated via Replit AI Integrations service (no API key required, charged to Replit credits).
-  - Model: `gpt-5` (released August 7, 2025) configured in `server/openai.ts`.
+- **OpenAI GPT-4o**: Integrated via Replit AI Integrations service (no API key required, charged to Replit credits).
+  - Model: `gpt-4o` configured in `server/openai.ts` (switched from `gpt-5` due to reasoning token bug).
+  - **Note on GPT-5**: Initially tested but encountered critical bug where model consumes entire completion token budget in `reasoning_tokens`, leaving response `content` empty. Reverted to GPT-4o which works reliably.
   - Endpoint: `/api/generate-report` generates personalized functional medicine reports.
   - Response time: ~40-45 seconds for complete report generation.
   - Uses `response_format: { type: "json_object" }` for structured output.
@@ -141,4 +143,37 @@ The platform follows a progressive educational approach where modules unlock aut
 - Module access is enforced server-side during report generation
 - Frontend localStorage does NOT control access; only displays current state
 - Backend validates every report request against `unlockedModules` in database
+
+### Weekly Check-in Chat System ("Marvin Lira IA")
+The platform includes an interactive weekly chat where users can share how they felt during the week and receive personalized functional medicine guidance from "Marvin Lira IA".
+
+**Chat Features:**
+- **Empathetic AI Responses**: GPT-4o powered assistant responds with functional medicine education using simple language and emojis
+- **System Detection**: Automatically identifies affected functional systems (FECAR/digestión 🥦, Sueño 🌙, Azúcar 🍯, energía 🌿, hidratación 💧, estrés 🧘)
+- **Emotion Tagging**: Detects emotional states (cansancio, ansiedad, frustración, esperanza, alegría, etc.)
+- **Conversation History**: Tracks all check-ins with timestamps for longitudinal health monitoring
+
+**API Endpoints:**
+- `POST /api/weekly-checkin` - Submit weekly message and receive AI response
+  - Request: `{ userId, message }`
+  - Response: `{ id, responseText, systemsDetected[], emotionTags[], createdAt }`
+  - Uses GPT-4o with 800 token limit and JSON mode
+  - Response time: ~2-7 seconds
+
+- `GET /api/weekly-checkins/:userId` - Retrieve conversation history
+  - Returns array of all check-ins with full details (inputText, responseText, systemsDetected, emotionTags, createdAt)
+  - Ordered by creation date (newest first)
+
+**AI Prompt Structure:**
+- **System Role**: "Marvin Lira IA" functional medicine assistant
+- **Educational Principles**: No diagnoses/doses, teaches 3 functional axes (Digestión/Sueño/Azúcar), simple language, 150-250 words
+- **Response Format**: JSON with responseText, systemsDetected array, emotionTags array
+- **Closing Phrases**: Motivational consciousness statements ("Tu cuerpo no está roto, solo está buscando equilibrio.")
+- **Safety Disclaimer**: Always mentions "Si los síntomas persisten, consulta con tu médico."
+
+**Technical Notes:**
+- Model: GPT-4o (switched from GPT-5 due to reasoning token consumption bug)
+- Max tokens: 800 completion tokens
+- Response format: Structured JSON output
+- Database: `weekly_checkins` table stores full conversation history
 ```
