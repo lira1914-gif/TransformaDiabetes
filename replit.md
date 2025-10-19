@@ -149,7 +149,7 @@ The platform includes an interactive weekly chat where users can share how they 
 
 **Chat Features:**
 - **Empathetic AI Responses**: GPT-4o powered assistant responds with functional medicine education using simple language and emojis
-- **System Detection**: Automatically identifies affected functional systems (FECAR/digestión 🥦, Sueño 🌙, Azúcar 🍯, energía 🌿, hidratación 💧, estrés 🧘)
+- **System Detection**: Automatically identifies affected functional systems (Digestión y Eliminación (FECAR) 🥦, Sueño 🌙, Azúcar 🍯, energía 🌿, hidratación 💧, estrés 🧘)
 - **Emotion Tagging**: Detects emotional states (cansancio, ansiedad, frustración, esperanza, alegría, etc.)
 - **Conversation History**: Tracks all check-ins with timestamps for longitudinal health monitoring
 
@@ -166,7 +166,7 @@ The platform includes an interactive weekly chat where users can share how they 
 
 **AI Prompt Structure:**
 - **System Role**: "Marvin Lira IA" functional medicine assistant
-- **Educational Principles**: No diagnoses/doses, teaches 3 functional axes (Digestión/Sueño/Azúcar), simple language, 150-250 words
+- **Educational Principles**: No diagnoses/doses, teaches 3 functional axes (Digestión y Eliminación (FECAR)/Sueño/Azúcar), simple language, 150-250 words
 - **Response Format**: JSON with responseText, systemsDetected array, emotionTags array
 - **Closing Phrases**: Motivational consciousness statements ("Tu cuerpo no está roto, solo está buscando equilibrio.")
 - **Safety Disclaimer**: Always mentions "Si los síntomas persisten, consulta con tu médico."

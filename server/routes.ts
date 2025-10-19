@@ -497,7 +497,7 @@ Instrucciones específicas:
 
 📋 CATEGORÍAS DE APOYO EDUCATIVO CON PRECAUCIONES
 
-**Alimentos funcionales (digestivos)** — Incluir DENTRO de la sección FECAR cuando aplique:
+**Alimentos funcionales (digestivos)** — Incluir DENTRO de la sección Digestión y Eliminación (FECAR) cuando aplique:
 • Linaza molida → Favorece tránsito intestinal, fibra soluble y ácidos grasos antiinflamatorios.
   Precaución: Evitar en uso de anticoagulantes o diarrea activa. Asegurar hidratación suficiente.
 • Chía hidratada → Mejora motilidad intestinal, elimina desechos, reduce picos de glucosa.
@@ -544,7 +544,7 @@ Instrucciones específicas:
   Precaución: Con medicamentos para diabetes, consultar médico.
 
 ⚙️ APLICACIÓN FUNCIONAL:
-1. Si el usuario muestra estreñimiento o tránsito lento → Incluir linaza/chía DENTRO de la sección FECAR.
+1. Si el usuario muestra estreñimiento o tránsito lento → Incluir linaza/chía DENTRO de la sección Digestión y Eliminación (FECAR).
    Ejemplo: "Tu cuerpo muestra lentitud digestiva; puedes apoyar tu sistema con alimentos naturales como chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación. Recuerda acompañar siempre con buena hidratación, calma al comer y movimiento suave diario."
 
 2. Si muestra estrés/insomnio → Incluir Ashwagandha/GABA en sección de Sueño.
@@ -581,7 +581,7 @@ ${moduleInstructions}
 En cada informe, debes incluir y comentar brevemente estas tres áreas esenciales,
 ya que son los tres pilares del equilibrio metabólico y emocional según la metodología de Marvin Lira:
 
-🔹 FECAR — Digestión y eliminación
+🔹 Digestión y Eliminación (FECAR)
 Estructura obligatoria:
 
 1️⃣ Observaciones:
@@ -703,7 +703,7 @@ Hazlo sentir comprendido y con esperanza. (3-4 líneas)
 2. 🧠 LA TRIFECTA FUNCIONAL (bloque obligatorio)
 Incluir las tres áreas con subtítulos visuales usando estos emojis EXACTOS:
 
-🥦 Digestión (FECAR)
+🥦 Digestión y Eliminación (FECAR)
 🌙 Sueño y Sistema Nervioso
 🍯 Azúcar y Energía Estable
 
@@ -718,7 +718,7 @@ Principio clave: "Primero hábitos, luego apoyo."
 
 EJEMPLO DE ESTRUCTURA VISUAL:
 ⸻
-🥦 Digestión (FECAR)
+🥦 Digestión y Eliminación (FECAR)
 
 Observaciones:
 "Se nota tránsito intestinal lento..."
@@ -878,13 +878,13 @@ explicando brevemente qué puede significar lo que siente y cómo puede apoyar s
 
 PRINCIPIOS EDUCATIVOS:
 • No das diagnósticos ni dosis específicas
-• Enseñas desde la medicina funcional con los 3 ejes: Digestión (FECAR), Sueño, Azúcar
+• Enseñas desde la medicina funcional con los 3 ejes: Digestión y Eliminación (FECAR), Sueño, Azúcar
 • Usas lenguaje simple, sin tecnicismos
 • Eres breve y directo (150-250 palabras)
 • Siempre cierras con una frase motivacional de consciencia
 
 EMOJIS EDUCATIVOS:
-🥦 digestión / FECAR
+🥦 Digestión y Eliminación (FECAR)
 🌙 sueño / descanso
 🍯 azúcar / glucosa / antojos
 🌿 energía / vitalidad
