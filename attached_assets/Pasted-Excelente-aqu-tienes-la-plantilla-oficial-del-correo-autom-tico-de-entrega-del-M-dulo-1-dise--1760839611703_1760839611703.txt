@@ -1,0 +1,84 @@
+Excelente 🌿 — aquí tienes la plantilla oficial del correo automático de entrega del Módulo 1,
+diseñada para mantener coherencia total con tu tono de marca: clara, empática, educativa y con ese equilibrio entre ciencia y consciencia que te distingue.
+
+Esta plantilla es la que Replit debe enviar automáticamente cuando el sistema detecta que el usuario completó:
+	•	su intake inicial ✅
+	•	y los 5 días del registro funcional ✅
+
+⸻
+
+💌 Plantilla de Entrega del Primer Informe Funcional – Módulo 1
+
+Asunto: 🌿 Tu primera Guía Funcional está lista — Aprende lo que tu cuerpo te está diciendo
+
+⸻
+
+Cuerpo del mensaje (texto plano o HTML):
+
+⸻
+
+🌿 ¡Hola {{nombre}}!
+
+Tu primera Guía Funcional Personalizada ya está lista.
+Este es el inicio de tu proceso educativo con TransformaDiabetes,
+donde aprenderás a escuchar y entender lo que tu cuerpo comunica cada día.
+
+⸻
+
+🩺 Módulo 1: “Empieza desde la raíz”
+
+Este primer informe no busca que cambies todo de golpe,
+sino que comprendas las tres raíces funcionales que sostienen tu bienestar:
+
+1️⃣ Digestión y Eliminación (FECAR)
+Aprende a observar tus hábitos digestivos y cómo influyen en tu energía, inflamación y ánimo.
+
+2️⃣ Sueño y Ritmo Circadiano
+Descubre cómo tu descanso repara, regula y estabiliza tu metabolismo.
+
+3️⃣ Azúcar y Energía Estable
+Entiende cómo tus comidas y tus emociones influyen en tus niveles de glucosa y claridad mental.
+
+⸻
+
+📘 Accede a tu Guía Funcional completa aquí:
+👉 Ver mi informe funcional
+
+El informe incluye tus observaciones, hábitos clave y recomendaciones educativas
+creadas con el método Marvin Lira | Nutrición Funcional,
+basado en fisiología, empatía y consciencia del cuerpo.
+
+⸻
+
+💚 Recuerda
+
+“Tu cuerpo no está roto, solo está buscando equilibrio.”
+
+“Sanar no es controlar un síntoma, es entender la raíz.”
+
+Cada pequeño cambio que hagas desde hoy es una señal de que tu cuerpo ya está respondiendo.
+Empieza con calma, con intención, y celebra cada mejora.
+
+⸻
+
+Con gratitud,
+Marvin Lira
+Nutrición Funcional & Salud desde la raíz
+📩 contacto@transformadiabetes.com
+🌐 https://transformadiabetes.com
+
+⸻
+
+🛡️ Nota importante
+
+Esta guía tiene fines educativos y no sustituye orientación médica.
+No incluye prescripción de suplementos ni dosis, solo pautas educativas basadas en fisiología funcional.
+
+⸻
+
+✅ Indicaciones para Replit
+	•	Este correo se envía automáticamente cuando el usuario completa los 5 días del registro.
+	•	Reemplazar {{nombre}} con el nombre del usuario.
+	•	Incluir el link directo al panel donde se visualiza su informe.
+	•	Remitente: contacto@transformadiabetes.com
+	•	Asunto: “🌿 Tu primera Guía Funcional está lista — Aprende lo que tu cuerpo te está diciendo.”
