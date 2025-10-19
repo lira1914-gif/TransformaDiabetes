@@ -839,12 +839,21 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
     }
   });
 
+  // TEST ENDPOINT
+  app.post("/api/test-checkin", async (req, res) => {
+    console.log('🧪 TEST ENDPOINT LLAMADO - Body:', req.body);
+    res.json({ status: 'ok', message: 'test funcionando' });
+  });
+
   // Weekly Checkin - Chat Funcional Interactivo
   app.post("/api/weekly-checkin", async (req, res) => {
+    console.log('🌿 ENDPOINT /api/weekly-checkin LLAMADO');
     try {
+      console.log('POST /api/weekly-checkin - Body recibido:', JSON.stringify(req.body));
       const { userId, message } = req.body;
 
       if (!userId || !message) {
+        console.log('Error: Faltan parámetros requeridos', { userId: !!userId, message: !!message });
         return res.status(400).json({ error: "userId y message son requeridos" });
       }
 
@@ -920,28 +929,38 @@ Responde SOLO con el JSON, sin texto adicional.`;
 
       console.log('Generando respuesta del chat con Marvin Lira IA...');
 
-      const completion = await openai.chat.completions.create({
-        model: "gpt-5",
-        messages: [
-          {
-            role: "system",
-            content: systemMessage
-          },
-          {
-            role: "user",
-            content: userPrompt
-          }
-        ],
-        response_format: { type: "json_object" },
-        max_completion_tokens: 1024
-      });
+      let completion;
+      try {
+        completion = await openai.chat.completions.create({
+          model: "gpt-5",
+          messages: [
+            {
+              role: "system",
+              content: systemMessage
+            },
+            {
+              role: "user",
+              content: userPrompt
+            }
+          ],
+          response_format: { type: "json_object" },
+          max_completion_tokens: 1024
+        });
+      } catch (openaiError: any) {
+        console.error('Error llamando a OpenAI:', openaiError.message);
+        console.error('Stack:', openaiError.stack);
+        throw new Error(`Error de OpenAI: ${openaiError.message}`);
+      }
+
+      console.log('OpenAI completion recibida - choices length:', completion.choices?.length);
 
       const aiResponse = completion.choices[0]?.message?.content;
       if (!aiResponse) {
+        console.error('No hay contenido en la respuesta. Completion:', JSON.stringify(completion));
         throw new Error("No se recibió respuesta de OpenAI");
       }
 
-      console.log('Respuesta de Marvin Lira IA recibida');
+      console.log('Respuesta de Marvin Lira IA recibida - length:', aiResponse.length);
 
       // Parsear la respuesta JSON
       const chatData = JSON.parse(aiResponse);
