@@ -31,10 +31,11 @@ Key frontend features include:
 The backend is built with Express.js and TypeScript, utilizing Drizzle ORM for PostgreSQL (Neon Database) and Zod for schema validation. The project is structured as a monorepo with shared TypeScript types.
 
 **PostgreSQL Database Schema:**
-- `users`: Stores user accounts with email, Stripe customer/subscription IDs, and subscription status
+- `users`: Stores user accounts with email, Stripe customer/subscription IDs, subscription status, `unlockedModules` (integer array tracking accessible modules), and `subscriptionStartDate` (timestamp for calculating module unlock eligibility)
 - `intake_forms`: 62-field medical intake questionnaire (demographics, health history, lab results)
 - `daily_logs`: 5-day functional tracking (sleep data, dates)
 - `daily_log_moments`: 6 moments per day (Mañana, Media mañana, Almuerzo, Media tarde, Cena, Noche) tracking food, mood, and bowel movements
+- `reports`: Stores AI-generated functional medicine reports with `userId` foreign key, `resumen`, `hallazgos`, `recomendaciones`, `fraseFinal`, and `createdAt`
 
 **Data Flow:**
 1. **Checkout → User Creation**: Stripe Payment Element captures email → Backend creates/updates user in PostgreSQL → Returns `userId` to frontend → Stored in `localStorage('tm_user_id')`
@@ -107,13 +108,37 @@ Wouter is used for client-side routing with smooth scrolling. The landing page i
   - Focuses on root-cause analysis vs. symptom management.
   - Uses empathetic tone with simple metaphors: "digestive fire," "roots," "balance."
 
-### Database Schema - Reports
-- `reports`: Stores AI-generated functional medicine reports
-  - `id` (serial): Auto-incrementing primary key
-  - `userId` (integer): Foreign key to users table
-  - `resumen` (text): Brief functional state summary
-  - `hallazgos` (text): 3-5 key findings connecting systems
-  - `recomendaciones` (text): 4-6 prioritized functional recommendations
-  - `fraseFinal` (text): Motivational closing message
-  - `createdAt` (timestamp): Report generation timestamp
+### Module Unlock System
+The platform follows a progressive educational approach where modules unlock automatically based on subscription duration:
+
+**Module Unlock Schedule:**
+- **Module 1**: Unlocks immediately upon subscription payment (education and habits only)
+- **Module 2**: Unlocks automatically 30 days after subscription start (adds educational supplement suggestions)
+- **Modules 3-12**: Currently inactive, pending review for future releases
+
+**Technical Implementation:**
+- `/api/modules/check/:userId` - GET endpoint that:
+  - Calculates days since `subscriptionStartDate`
+  - Determines which modules should be unlocked based on time elapsed
+  - Automatically updates `unlockedModules` array in database if new modules are eligible
+  - Returns `{ unlockedModules, newlyUnlocked, message }` with celebratory message when new modules unlock
+  
+- `/api/generate-report` - Enhanced with module access validation:
+  - Verifies user has access to requested `moduleNumber` before generating report
+  - Returns 403 Forbidden if module not yet unlocked
+  - Prevents unauthorized access to future module content
+
+**Database Fields (users table):**
+- `unlockedModules`: Integer array (e.g., `[1]`, `[1, 2]`) tracking accessible modules
+- `subscriptionStartDate`: Timestamp used to calculate unlock eligibility
+
+**Frontend Integration:**
+- Call `/api/modules/check/:userId` on login or dashboard load to sync unlocked modules
+- Display celebratory message: "🎉 Tu cuerpo avanza en su proceso. Ya puedes acceder a tu nuevo módulo educativo."
+- Show locked/unlocked states in module navigation based on returned `unlockedModules` array
+
+**Security:**
+- Module access is enforced server-side during report generation
+- Frontend localStorage does NOT control access; only displays current state
+- Backend validates every report request against `unlockedModules` in database
 ```
