@@ -197,6 +197,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Stripe Customer Portal Session
+  app.post("/api/create-portal-session", async (req, res) => {
+    try {
+      if (!stripe) {
+        console.error("Stripe not configured: STRIPE_SECRET_KEY is missing");
+        return res.status(500).json({ 
+          error: "El servicio de pagos no está disponible. Por favor, contacta al soporte." 
+        });
+      }
+
+      const { userId } = req.body;
+
+      if (!userId) {
+        return res.status(400).json({ 
+          error: "userId es requerido" 
+        });
+      }
+
+      // Obtener el usuario de la base de datos
+      const user = await storage.getUser(userId);
+      
+      if (!user) {
+        return res.status(404).json({ 
+          error: "Usuario no encontrado" 
+        });
+      }
+
+      if (!user.stripeCustomerId) {
+        return res.status(400).json({ 
+          error: "Este usuario no tiene una suscripción activa" 
+        });
+      }
+
+      console.log('Creando sesión del portal para customer:', user.stripeCustomerId);
+
+      // Crear la sesión del portal de facturación
+      const baseUrl = process.env.REPLIT_DEV_DOMAIN 
+        ? `https://${process.env.REPLIT_DEV_DOMAIN}` 
+        : 'http://localhost:5000';
+
+      const session = await stripe.billingPortal.sessions.create({
+        customer: user.stripeCustomerId,
+        return_url: `${baseUrl}/perfil`,
+      });
+
+      console.log('Sesión del portal creada:', session.id);
+
+      res.json({ 
+        url: session.url 
+      });
+    } catch (error: any) {
+      console.error("Error creating portal session:", error);
+      
+      let errorMessage = "No se pudo crear la sesión del portal. Por favor, intenta nuevamente.";
+      
+      if (error.type === 'StripeInvalidRequestError') {
+        errorMessage = "Error de configuración. Por favor, contacta al soporte.";
+      }
+      
+      res.status(500).json({ error: errorMessage });
+    }
+  });
+
   // Intake Form routes
   app.post("/api/intake-form", async (req, res) => {
     try {
