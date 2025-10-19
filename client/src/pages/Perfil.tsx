@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { User, Calendar, Activity, Weight, Ruler, ClipboardList, CreditCard } from "lucide-react";
 import Header from "@/components/Header";
@@ -14,6 +14,32 @@ export default function Perfil() {
   
   // TODO: Obtener el userId real del usuario logueado
   const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+
+  // Detectar retorno desde Stripe Portal
+  useEffect(() => {
+    const checkPortalReturn = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const fromPortal = urlParams.get('from');
+      
+      if (fromPortal === 'portal') {
+        // Usuario regresó del portal de Stripe
+        // Verificar el estado de la suscripción
+        try {
+          const response = await fetch(`/api/users/id/${userId}`);
+          const user = await response.json();
+          
+          // Si la suscripción fue cancelada, redirigir a la página de confirmación
+          if (user.subscriptionStatus === 'canceled' || user.subscriptionStatus === 'cancelled') {
+            setLocation('/cancelacion-confirmada');
+          }
+        } catch (error) {
+          console.error('Error verificando estado de suscripción:', error);
+        }
+      }
+    };
+    
+    checkPortalReturn();
+  }, [userId, setLocation]);
   
   const [formData, setFormData] = useState({
     edad: "",

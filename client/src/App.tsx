@@ -16,6 +16,7 @@ import ChatSemanal from "@/pages/ChatSemanal";
 import Privacidad from "@/pages/Privacidad";
 import Terminos from "@/pages/Terminos";
 import Reembolsos from "@/pages/Reembolsos";
+import CancelacionConfirmada from "@/pages/CancelacionConfirmada";
 import NotFound from "@/pages/not-found";
 
 import OnboardingCheckout from "@/pages/onboarding/Checkout";
@@ -44,6 +45,7 @@ function Router() {
       <Route path="/privacidad" component={Privacidad} />
       <Route path="/terminos" component={Terminos} />
       <Route path="/reembolsos" component={Reembolsos} />
+      <Route path="/cancelacion-confirmada" component={CancelacionConfirmada} />
       
       <Route path="/onboarding/checkout" component={OnboardingCheckout} />
       <Route path="/onboarding/bienvenida" component={OnboardingBienvenida} />

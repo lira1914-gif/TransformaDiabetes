@@ -23,6 +23,8 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 - **Informe Funcional**: Dedicated page for AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Progressive educational content where modules unlock automatically based on subscription duration (e.g., Module 1 immediately, Module 2 after 30 days). Access is controlled server-side.
 - **Weekly Check-in Chat System ("Marvin Lira IA")**: GPT-4o powered interactive chat for users to share weekly progress and receive personalized functional medicine guidance, including system detection and emotion tagging.
+- **Stripe Customer Portal Integration**: Self-service subscription management allowing users to update payment methods, view billing history, and cancel subscriptions securely through Stripe's hosted portal. Accessed via "Gestionar mi suscripción" button on the Perfil page. Return URL includes query parameter to detect portal return.
+- **Cancellation Confirmation Page**: Empathetic post-cancellation message displayed when users cancel their subscription through the Stripe portal. Includes emotional support messaging, contact information for assistance, and option to return to homepage. Route: `/cancelacion-confirmada`.
 
 ## External Dependencies
 

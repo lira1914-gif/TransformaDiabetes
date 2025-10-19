@@ -239,7 +239,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const session = await stripe.billingPortal.sessions.create({
         customer: user.stripeCustomerId,
-        return_url: `${baseUrl}/perfil`,
+        return_url: `${baseUrl}/perfil?from=portal`,
       });
 
       console.log('Sesión del portal creada:', session.id);
@@ -470,10 +470,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/users/:email", async (req, res) => {
+  app.get("/api/users/email/:email", async (req, res) => {
     try {
       const { email } = req.params;
       const user = await storage.getUserByEmail(email);
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      res.json(user);
+    } catch (error: any) {
+      console.error("Error obteniendo usuario:", error);
+      res.status(500).json({ error: "Error al obtener el usuario" });
+    }
+  });
+
+  app.get("/api/users/id/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const user = await storage.getUser(userId);
 
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado" });
