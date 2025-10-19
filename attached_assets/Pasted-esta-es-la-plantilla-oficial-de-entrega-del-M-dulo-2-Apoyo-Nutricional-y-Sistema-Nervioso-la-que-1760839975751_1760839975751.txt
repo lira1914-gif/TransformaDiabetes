@@ -1,0 +1,81 @@
+esta es la plantilla oficial de entrega del Módulo 2: “Apoyo Nutricional y Sistema Nervioso”,
+la que los usuarios recibirán automáticamente al cumplirse 30 días desde su suscripción, cuando el sistema desbloquee el nuevo módulo.
+
+El objetivo aquí es reforzar continuidad, reconocimiento del progreso y acompañamiento funcional (no médico).
+La redacción mantiene el tono de esperanza, ciencia y serenidad que define tu estilo.
+
+⸻
+
+💌 Plantilla Automática — Módulo 2: “Apoyo Nutricional y Sistema Nervioso”
+
+Asunto: 🌿 Nuevo módulo desbloqueado — Fortalece tu energía y calma desde la raíz
+
+⸻
+
+🌿 ¡Hola {{nombre}}!
+
+✨ Felicidades por completar tu primer mes con TransformaDiabetes.
+Tu compromiso ya está creando cambios reales: más conciencia, más equilibrio y más calma.
+
+Hoy se desbloquea tu Módulo 2: Apoyo Nutricional y Sistema Nervioso,
+donde aprenderás cómo nutrir tu cuerpo para regular el estrés, estabilizar la glucosa y sostener tu energía sin agotarte.
+
+⸻
+
+🧠 En este módulo descubrirás:
+
+1️⃣ Cómo el sistema nervioso influye en tu metabolismo
+→ El estrés constante mantiene tu cuerpo en “modo alerta”.
+Aprenderás hábitos que apagan esa alarma y activan el modo reparación.
+
+2️⃣ Nutrientes que calman y equilibran
+→ Magnesio, omega 3 y zinc: cofactores esenciales para energía estable y sueño profundo.
+
+3️⃣ Fitoterapia funcional educativa
+→ Plantas como ashwagandha o GABA natural que ayudan a regular cortisol,
+siempre presentadas con precauciones y fines educativos.
+
+4️⃣ Tu digestión como espejo del sistema nervioso
+→ Cuando la mente se calma, el intestino responde.
+Practicarás rutinas sencillas de respiración y masticación consciente.
+
+⸻
+
+📘 Accede ahora a tu nuevo módulo:
+👉 Ver mi módulo 2 en TransformaDiabetes
+
+Este contenido se adapta automáticamente a tu progreso y tus registros anteriores,
+para que cada recomendación te hable a ti y a tu cuerpo, no a una teoría.
+
+⸻
+
+💚 Recuerda
+
+“Mientras el cuerpo esté en alerta, no puede sanar.”
+
+“Tu paz interna es la señal que tu metabolismo estaba esperando.”
+
+⸻
+
+Con gratitud,
+Marvin Lira
+Nutrición Funcional & Salud desde la raíz
+📩 contacto@transformadiabetes.com
+🌐 https://transformadiabetes.com
+
+⸻
+
+🛡️ Nota educativa
+
+Esta guía tiene fines educativos y no sustituye orientación médica.
+Las referencias a suplementos o plantas son informativas, sin dosis ni marcas.
+Consulta a tu médico antes de realizar cambios significativos.
+
+⸻
+
+✅ Instrucciones para Replit
+	•	Enviar este correo automáticamente cuando se cumplan 30 días de suscripción activa.
+	•	Reemplazar {{nombre}} con el nombre del usuario.
+	•	Incluir el enlace directo al módulo 2 dentro del panel.
+	•	Remitente: contacto@transformadiabetes.com
+	•	Asunto: “🌿 Nuevo módulo desbloqueado — Fortalece tu energía y calma desde la raíz.”

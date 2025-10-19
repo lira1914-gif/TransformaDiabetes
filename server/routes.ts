@@ -1012,7 +1012,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     }
 
     try {
-      const { sendWelcomeEmail, sendReportReadyEmail, sendEmail } = await import("./email");
+      const { sendWelcomeEmail, sendReportReadyEmail, sendModuleUnlockedEmail, sendEmail } = await import("./email");
       const { type, to, name, moduleNumber } = req.body;
 
       if (!to) {
@@ -1032,6 +1032,12 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         res.json({ 
           success: true, 
           message: `Correo de informe listo enviado a ${to}` 
+        });
+      } else if (type === 'module') {
+        await sendModuleUnlockedEmail(to, name, moduleNumber || 2);
+        res.json({ 
+          success: true, 
+          message: `Correo de módulo desbloqueado enviado a ${to}` 
         });
       } else {
         const { subject, html } = req.body;
