@@ -147,13 +147,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Crear o actualizar el usuario en PostgreSQL
       let user = await storage.getUserByEmail(email);
+      const subscriptionStartDate = new Date();
 
       if (user) {
         // Actualizar con datos de Stripe
         user = await storage.updateUser(user.id, {
           stripeCustomerId: customerId,
           stripeSubscriptionId: subscription.id,
-          subscriptionStatus: subscription.status
+          subscriptionStatus: subscription.status,
+          subscriptionStartDate: subscriptionStartDate,
+          unlockedModules: [1] // Módulo 1 se desbloquea inmediatamente
         });
       } else {
         // Crear nuevo usuario
@@ -161,7 +164,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           email,
           stripeCustomerId: customerId,
           stripeSubscriptionId: subscription.id,
-          subscriptionStatus: subscription.status
+          subscriptionStatus: subscription.status,
+          subscriptionStartDate: subscriptionStartDate,
+          unlockedModules: [1] // Módulo 1 se desbloquea inmediatamente
         });
       }
 
@@ -294,6 +299,74 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Endpoint para verificar y desbloquear módulos automáticamente
+  app.get("/api/modules/check/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      if (!user.subscriptionStartDate) {
+        return res.json({ 
+          unlockedModules: [],
+          newlyUnlocked: [],
+          message: "No se encontró fecha de suscripción" 
+        });
+      }
+
+      // Calcular días desde la suscripción
+      const now = new Date();
+      const startDate = new Date(user.subscriptionStartDate);
+      const daysSinceSubscription = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+      
+      // Determinar qué módulos deberían estar desbloqueados
+      const shouldBeUnlocked: number[] = [1]; // Módulo 1 siempre
+      
+      // Módulo 2 se desbloquea a los 30 días
+      if (daysSinceSubscription >= 30) {
+        shouldBeUnlocked.push(2);
+      }
+      
+      // Módulos 3-12 están inactivos (solo para revisión)
+      // Se pueden agregar aquí cuando estén listos para lanzamiento
+
+      // Obtener módulos actualmente desbloqueados
+      const currentUnlocked = (user.unlockedModules as number[]) || [];
+      
+      // Encontrar módulos nuevos a desbloquear
+      const newlyUnlocked = shouldBeUnlocked.filter(m => !currentUnlocked.includes(m));
+      
+      // Si hay nuevos módulos, actualizar en BD
+      if (newlyUnlocked.length > 0) {
+        const combinedSet = new Set([...currentUnlocked, ...newlyUnlocked]);
+        const updatedUnlocked = Array.from(combinedSet).sort((a, b) => a - b);
+        await storage.updateUser(userId, {
+          unlockedModules: updatedUnlocked
+        });
+        
+        return res.json({
+          unlockedModules: updatedUnlocked,
+          newlyUnlocked,
+          message: newlyUnlocked.length > 0 
+            ? "🎉 Tu cuerpo avanza en su proceso. Ya puedes acceder a tu nuevo módulo educativo."
+            : null
+        });
+      }
+      
+      res.json({
+        unlockedModules: currentUnlocked,
+        newlyUnlocked: [],
+        message: null
+      });
+    } catch (error: any) {
+      console.error("Error verificando módulos:", error);
+      res.status(500).json({ error: "Error al verificar módulos" });
+    }
+  });
+
   // User routes
   app.post("/api/users", async (req, res) => {
     try {
@@ -365,6 +438,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const user = await storage.getUser(userId);
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Verificar acceso al módulo solicitado
+      const unlockedModules = (user.unlockedModules as number[]) || [];
+      if (!unlockedModules.includes(moduleNumber)) {
+        return res.status(403).json({ 
+          error: "Acceso denegado", 
+          message: `El Módulo ${moduleNumber} aún no está disponible para ti. Se desbloqueará automáticamente en tu proceso.`,
+          unlockedModules 
+        });
       }
 
       // Obtener intake form

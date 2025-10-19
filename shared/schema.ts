@@ -9,6 +9,8 @@ export const users = pgTable("users", {
   stripeCustomerId: text("stripe_customer_id"),
   stripeSubscriptionId: text("stripe_subscription_id"),
   subscriptionStatus: text("subscription_status"),
+  subscriptionStartDate: timestamp("subscription_start_date"),
+  unlockedModules: jsonb("unlocked_modules").$type<number[]>().default(sql`'[]'::jsonb`),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
