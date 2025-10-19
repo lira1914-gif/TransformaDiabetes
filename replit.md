@@ -71,6 +71,18 @@ Wouter is used for client-side routing with smooth scrolling. The landing page i
   - Environment secrets: `STRIPE_SECRET_KEY`, `VITE_STRIPE_PUBLIC_KEY`, `STRIPE_PRICE_ID`.
   - Supports recurring billing, automatic card updates, and PCI-compliant payment processing.
 
+### Email System
+- **Nodemailer + Namecheap PrivateEmail**: Configured for automated transactional emails via SMTP.
+  - Host: `mail.privateemail.com` (port 465, SSL/TLS)
+  - From address: `contacto@transformadiabetes.com`
+  - Environment secret: `SMTP_PASSWORD`
+  - Email templates include:
+    - **Welcome Email** (`sendWelcomeEmail`): Sent upon subscription with introduction to the 3 functional axes
+    - **Report Ready Email** (`sendReportReadyEmail`): Notifies users when their personalized functional report is available
+  - Service file: `server/email.ts` exports reusable email functions
+  - Test endpoint: `POST /api/test-email` supports `type: "welcome"` or `type: "report"` for manual testing
+  - Connection verification: `verifyEmailConnection()` confirms SMTP credentials before sending
+
 ### AI Integration & Functional Knowledge Base
 - **OpenAI GPT-4o**: Integrated via Replit AI Integrations service (no API key required, charged to Replit credits).
   - Model: `gpt-4o` configured in `server/openai.ts` (switched from `gpt-5` due to reasoning token bug).
