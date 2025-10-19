@@ -1003,6 +1003,52 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     }
   });
 
+  // Test email endpoint
+  app.post("/api/test-email", async (req, res) => {
+    try {
+      const { sendWelcomeEmail, sendReportReadyEmail, sendEmail } = await import("./email");
+      const { type, to, name, moduleNumber } = req.body;
+
+      if (!to) {
+        return res.status(400).json({ error: "El campo 'to' es requerido" });
+      }
+
+      console.log(`📧 Enviando correo de prueba tipo: ${type || 'custom'} a ${to}`);
+
+      if (type === 'welcome') {
+        await sendWelcomeEmail(to, name);
+        res.json({ 
+          success: true, 
+          message: `Correo de bienvenida enviado a ${to}` 
+        });
+      } else if (type === 'report') {
+        await sendReportReadyEmail(to, name, moduleNumber || 1);
+        res.json({ 
+          success: true, 
+          message: `Correo de informe listo enviado a ${to}` 
+        });
+      } else {
+        const { subject, html } = req.body;
+        if (!subject || !html) {
+          return res.status(400).json({ 
+            error: "Para correo personalizado, 'subject' y 'html' son requeridos" 
+          });
+        }
+        await sendEmail({ to, subject, html });
+        res.json({ 
+          success: true, 
+          message: `Correo personalizado enviado a ${to}` 
+        });
+      }
+    } catch (error: any) {
+      console.error("Error enviando correo de prueba:", error);
+      res.status(500).json({ 
+        error: "Error al enviar el correo",
+        details: error.message 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
