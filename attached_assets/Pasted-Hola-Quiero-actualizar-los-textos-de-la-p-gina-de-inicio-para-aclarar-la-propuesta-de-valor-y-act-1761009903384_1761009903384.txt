@@ -1,0 +1,82 @@
+Hola 👋
+Quiero actualizar los textos de la página de inicio para aclarar la propuesta de valor y activar prueba gratuita de 7 días con suscripción de $5/mes.
+Solo son cambios de contenido/labels (sin alterar el flujo).
+
+1) HERO (encabezado principal)
+
+Título:
+
+Tu cuerpo no está roto. Solo necesita guía para volver al equilibrio.
+
+Subtítulo (2–3 líneas):
+
+TransformaDiabetes no es una IA genérica. Es un acompañamiento funcional que interpreta mis hábitos y registros para darme claridad paso a paso, con el método de Marvin Lira: ciencia, nutrición y consciencia corporal.
+
+CTA principal (botón):
+
+Comenzar prueba gratuita de 7 días
+
+Nota breve bajo el botón (texto pequeño):
+
+Acceso completo al Módulo 1. Luego $5 USD/mes. Cancela en cualquier momento desde tu perfil.
+
+⸻
+
+2) Bloque “¿Qué significa revertir la diabetes desde la raíz?”
+
+Párrafo introductorio (reemplazar el actual):
+
+Revertir no es tapar síntomas; es entender por qué el cuerpo los genera. TransformaDiabetes combina nutrición funcional, biología del estrés y hábitos conscientes para recuperar sensibilidad a la insulina, energía y claridad mental — sin dietas extremas ni respuestas genéricas.
+
+(Dejar los 3 ítems/beneficios como están, solo revisar que el tono sea educativo.)
+
+⸻
+
+3) Sección final de suscripción (reemplazar por versión trial)
+
+Encabezado:
+
+🌿 Tu transformación funcional comienza con 7 días gratuitos
+
+Texto:
+
+Vive la experiencia completa del Módulo 1 sin costo: evaluación, registro de 5 días, informe personalizado y acceso al chat educativo.
+Si decides continuar, tu suscripción se activa automáticamente por $5 USD/mes.
+Puedes cancelar en cualquier momento desde tu perfil (Stripe Customer Portal).
+
+Incluye checklist (bullets):
+	•	Informe funcional con raíces y recomendaciones personalizadas
+	•	Chat funcional semanal (educativo, no médico)
+	•	Acompañamiento mensual por módulos, sin dietas extremas
+	•	Acceso a historial y progreso
+
+CTA final (botón):
+
+Comenzar prueba gratuita de 7 días
+
+Nota legal pequeña:
+
+Programa educativo. No reemplaza la orientación médica.
+
+⸻
+
+4) Ajustes globales
+	•	Reemplazar menciones a $15 por $5 USD/mes en toda la web.
+	•	Mantener en el Perfil el botón “🧾 Gestionar mi suscripción” (Stripe Portal).
+	•	No cambiar funciones ni flujos (solo copy/labels).
+
+⸻
+
+5) Trial en Stripe (si aplica)
+	•	Activar trial de 7 días en el plan mensual ($5), con cancel_at_period_end si el usuario cancela.
+	•	Redirección post-trial: si no cancela, desbloquear Módulo 2 automáticamente.
+
+⸻
+
+6) Criterios de aceptación
+	•	El hero muestra el nuevo título, subtítulo y botón “Comenzar prueba gratuita de 7 días”.
+	•	En la sección final aparece el bloque de trial 7 días + $5/mes y la nota de cancelación.
+	•	No queda ninguna mención a $15.
+	•	El flujo de suscripción no cambia; solo el texto.
+
+Gracias 🌿
