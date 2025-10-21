@@ -331,11 +331,12 @@ export default function Registro5DiasDetallado() {
               fontWeight: 600,
               cursor: 'pointer'
             }}
+            data-testid="button-ver-progreso"
           >
             Ver mi progreso
           </button>
           <button
-            onClick={reiniciarRegistro}
+            onClick={reiniciarRegistroSolo}
             style={{
               background: '#dc2626',
               color: '#fff',
@@ -345,6 +346,7 @@ export default function Registro5DiasDetallado() {
               fontWeight: 600,
               cursor: 'pointer'
             }}
+            data-testid="button-reiniciar-registro"
           >
             Reiniciar registro
           </button>

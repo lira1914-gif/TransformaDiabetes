@@ -41,15 +41,6 @@ export default function ChatSemanal() {
   const [, setLocation] = useLocation();
   const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
 
-  // Verificar si completó el informe inicial
-  const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
-  
-  // Si no ha completado el informe, redirigir al onboarding
-  if (!informeCompletado) {
-    setLocation('/onboarding/bienvenida');
-    return null;
-  }
-
   // Verificar estado del trial
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
@@ -87,6 +78,43 @@ export default function ChatSemanal() {
       sendMessage.mutate(message.trim());
     }
   };
+
+  // Verificar si completó el informe inicial - redirigir si no lo ha hecho
+  const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
+  
+  if (!informeCompletado) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container max-w-4xl mx-auto py-8 px-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Lock className="w-5 h-5" />
+                Acceso Restringido
+              </CardTitle>
+              <CardDescription>
+                Debes completar tu informe inicial antes de acceder al Chat Semanal
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">
+                Para usar el Chat Semanal, primero necesitas:
+              </p>
+              <ol className="list-decimal list-inside space-y-2 mb-6">
+                <li>Completar el formulario de intake</li>
+                <li>Registrar tus 5 días de observación funcional</li>
+                <li>Generar tu informe inicial personalizado</li>
+              </ol>
+              <Button onClick={() => setLocation('/onboarding/bienvenida')}>
+                Ir al onboarding
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   // Mostrar pantalla de cuenta archivada si el trial expiró hace más de 3 días (día 11+)
   // y el usuario no tiene suscripción activa
