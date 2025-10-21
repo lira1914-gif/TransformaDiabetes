@@ -991,11 +991,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "Usuario no encontrado" });
       }
 
+      // Si no hay fecha de suscripción (usuario trial o sin pagar), 
+      // simplemente devolver los módulos que ya tiene desbloqueados
       if (!user.subscriptionStartDate) {
+        const currentUnlocked = (user.unlockedModules as number[]) || [];
         return res.json({ 
-          unlockedModules: [],
+          unlockedModules: currentUnlocked,
           newlyUnlocked: [],
-          message: "No se encontró fecha de suscripción" 
+          message: null
         });
       }
 
@@ -1079,7 +1082,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         email,
         stripeCustomerId,
         stripeSubscriptionId,
-        subscriptionStatus: stripeSubscriptionId ? 'active' : undefined
+        subscriptionStatus: stripeSubscriptionId ? 'active' : undefined,
+        unlockedModules: [1] // Módulo 1 siempre desbloqueado para nuevos usuarios
       });
 
       res.json(user);
