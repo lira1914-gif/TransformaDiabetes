@@ -67,10 +67,10 @@ export default function Registro5DiasDetallado() {
         localStorage.setItem('tm_registro_done', 'true');
         toast({
           title: "✅ Registro completo",
-          description: "Has completado tus 5 días de registro funcional.",
+          description: "Has completado tus 5 días de registro funcional. Generando tu informe personalizado...",
         });
         setTimeout(() => {
-          setLocation('/onboarding/mes1');
+          setLocation('/onboarding/informe-inicial');
         }, 1500);
       } else {
         toast({
@@ -302,7 +302,7 @@ export default function Registro5DiasDetallado() {
         <p>Has completado tus 5 días de registro funcional.</p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem' }}>
           <button
-            onClick={() => setLocation('/onboarding/mes1')}
+            onClick={() => setLocation('/onboarding/informe-inicial')}
             style={{
               background: '#556B2F',
               color: '#fff',
