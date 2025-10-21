@@ -37,13 +37,26 @@ export default function Day5Banner({ daysRemaining, isActive }: Day5BannerProps)
 
   return (
     <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-2xl px-4">
-      <Card className="border-amber-200 bg-amber-50 shadow-lg">
+      <Card 
+        className="shadow-xl"
+        style={{
+          borderColor: '#D4A373',
+          backgroundColor: '#FFFDF8',
+          border: '2px solid'
+        }}
+      >
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-amber-600" />
-              <CardTitle className="text-amber-900">
-                ¡Solo quedan 2 días de tu prueba gratuita!
+              <AlertCircle 
+                className="h-5 w-5 flex-shrink-0" 
+                style={{ color: '#A15C38' }}
+              />
+              <CardTitle 
+                className="font-serif"
+                style={{ color: '#556B2F', fontSize: '1.25rem' }}
+              >
+                🔔 Tu prueba gratuita está por terminar
               </CardTitle>
             </div>
             <Button
@@ -56,24 +69,48 @@ export default function Day5Banner({ daysRemaining, isActive }: Day5BannerProps)
               <X className="h-4 w-4" />
             </Button>
           </div>
-          <CardDescription className="text-amber-800 mt-2">
-            No pierdas tu progreso. Activa tu suscripción ahora para continuar con tu transformación funcional y acceder a todos los módulos educativos.
-          </CardDescription>
+          
+          <div className="mt-4 space-y-3" style={{ color: '#3A3A3A' }}>
+            <p className="leading-relaxed">
+              Has avanzado increíblemente estos días. Ya diste los primeros pasos para entender 
+              cómo responde tu cuerpo y cómo puedes comenzar a revertir la resistencia a la 
+              insulina desde la raíz.
+            </p>
+            
+            <p className="leading-relaxed">
+              ⏳ <strong>Te quedan 2 días</strong> para seguir explorando el chat funcional y 
+              registrar tus progresos.
+            </p>
+            
+            <p className="leading-relaxed">
+              Si quieres continuar con tu transformación, acceder al Módulo 1 y mantener tu 
+              acompañamiento semanal, activa tu suscripción por solo <strong>$5 USD/mes</strong>.
+            </p>
+          </div>
         </CardHeader>
         <CardContent className="pt-0">
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button
               onClick={handleActivate}
               className="flex-1"
               data-testid="button-activate-from-day5-banner"
+              style={{
+                backgroundColor: '#A15C38',
+                color: 'white',
+                fontWeight: 600
+              }}
             >
-              Activar mi acceso continuo ($5 USD/mes)
+              Continuar con mi transformación
             </Button>
             <Button
               variant="outline"
               onClick={handleDismiss}
               className="sm:w-auto"
               data-testid="button-remind-later-day5"
+              style={{
+                borderColor: '#D4A373',
+                color: '#A15C38'
+              }}
             >
               Recordarme después
             </Button>
