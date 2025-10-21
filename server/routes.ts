@@ -313,6 +313,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Trial status endpoint - calcular días restantes y estado
+  app.get("/api/trial-status/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      const TRIAL_DAYS = 7;
+      const now = new Date();
+      const startDate = user.subscriptionStartDate || user.createdAt;
+      
+      if (!startDate) {
+        return res.json({
+          hasAccess: false,
+          isTrialing: false,
+          trialExpired: true,
+          daysRemaining: 0,
+          subscriptionStatus: user.subscriptionStatus || null
+        });
+      }
+
+      // Calcular días desde el inicio
+      const daysSinceStart = Math.floor((now.getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24));
+      const daysRemaining = Math.max(0, TRIAL_DAYS - daysSinceStart);
+      
+      // Determinar estado del trial
+      const isTrialing = user.subscriptionStatus === 'trialing';
+      const isActive = user.subscriptionStatus === 'active';
+      const isCanceled = user.subscriptionStatus === 'canceled' || user.subscriptionStatus === 'cancelled';
+      
+      // El trial ha expirado si:
+      // - Han pasado más de 7 días Y
+      // - No tiene suscripción activa (no está en 'active' ni 'trialing')
+      const trialExpired = daysSinceStart >= TRIAL_DAYS && !isActive && !isTrialing;
+      
+      // El usuario tiene acceso si:
+      // - Está en trial (trialing) O
+      // - Tiene suscripción activa O
+      // - Aún está dentro de los 7 días del trial (aunque no tenga status de Stripe)
+      const hasAccess = isTrialing || isActive || daysRemaining > 0;
+
+      res.json({
+        hasAccess,
+        isTrialing,
+        isActive,
+        isCanceled,
+        trialExpired,
+        daysRemaining,
+        daysSinceStart,
+        subscriptionStatus: user.subscriptionStatus || null,
+        startDate: startDate
+      });
+    } catch (error: any) {
+      console.error("Error obteniendo estado del trial:", error);
+      res.status(500).json({ error: "Error al obtener estado del trial" });
+    }
+  });
+
   // Intake Form routes
   app.post("/api/intake-form", async (req, res) => {
     try {

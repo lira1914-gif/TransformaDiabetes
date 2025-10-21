@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { User, Calendar, Activity, Weight, Ruler, ClipboardList, CreditCard } from "lucide-react";
+import { User, Calendar, Activity, Weight, Ruler, ClipboardList, CreditCard, Clock } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
@@ -14,6 +15,12 @@ export default function Perfil() {
   
   // TODO: Obtener el userId real del usuario logueado
   const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+
+  // Obtener estado del trial
+  const { data: trialStatus } = useQuery({
+    queryKey: ['/api/trial-status', userId],
+    enabled: !!userId,
+  });
 
   // Detectar retorno desde Stripe Portal
   useEffect(() => {
@@ -185,6 +192,68 @@ export default function Perfil() {
                 No sustituye la consulta con un profesional de salud. Para un seguimiento médico real, consulta a tu médico.
               </p>
             </div>
+
+            {/* Trial Counter - Solo visible si está en trial */}
+            {trialStatus?.isTrialing && trialStatus?.daysRemaining > 0 && (
+              <div className="max-w-2xl mx-auto mb-8">
+                <div 
+                  className="rounded-xl p-6 text-center"
+                  style={{ 
+                    backgroundColor: '#F0F7E6',
+                    border: '2px solid #6B7041',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)'
+                  }}
+                >
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Clock className="w-6 h-6" style={{ color: '#6B7041' }} />
+                    <h3 className="text-xl font-bold" style={{ color: '#3E3E2E' }}>
+                      🕓 Te quedan {trialStatus.daysRemaining} {trialStatus.daysRemaining === 1 ? 'día' : 'días'} de tu acceso gratuito
+                    </h3>
+                  </div>
+                  <p className="text-sm" style={{ color: '#6F6E66' }}>
+                    Estás explorando TransformaDiabetes sin costo. Después de tu periodo gratuito, tu suscripción se activará automáticamente por $5 USD/mes.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Trial Expired Message - Solo visible si trial expiró y no hay suscripción */}
+            {trialStatus?.trialExpired && !trialStatus?.isActive && (
+              <div className="max-w-2xl mx-auto mb-8">
+                <div 
+                  className="rounded-xl p-8 text-center"
+                  style={{ 
+                    backgroundColor: '#FFF9E6',
+                    border: '2px solid #FFB74D',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                  }}
+                >
+                  <h3 className="text-2xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
+                    🌿 Tu periodo gratuito ha finalizado
+                  </h3>
+                  <p className="text-base mb-6 leading-relaxed" style={{ color: '#6F6E66' }}>
+                    Para continuar recibiendo tus reportes personalizados y soporte funcional, activa tu suscripción por $5 USD/mes.
+                  </p>
+                  <button
+                    onClick={() => setLocation('/onboarding/checkout')}
+                    className="px-8 py-3 rounded-lg font-semibold text-lg transition"
+                    style={{ 
+                      backgroundColor: '#A15C38',
+                      color: '#FFFFFF',
+                      border: 'none'
+                    }}
+                    data-testid="button-activate-subscription"
+                    onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                  >
+                    Activar suscripción
+                  </button>
+                  <p className="text-xs mt-3" style={{ color: '#9A998C' }}>
+                    Solo $5 USD/mes • Cancela cuando quieras
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Subscription Management Section */}
             <div className="max-w-2xl mx-auto mb-8">
