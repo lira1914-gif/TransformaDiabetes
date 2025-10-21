@@ -26,14 +26,14 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight"
               style={{ color: '#556B2F' }}
             >
-              Tu cuerpo no está roto. Solo necesita guía para volver al equilibrio.
+              Tu cuerpo no está roto. Solo necesita apoyo.
             </h1>
             
             <p 
               className="text-lg sm:text-xl leading-relaxed"
               style={{ color: '#3A3A3A' }}
             >
-              TransformaDiabetes no es una IA genérica. Es un acompañamiento funcional que interpreta mis hábitos y registros para darme claridad paso a paso, con el método de Marvin Lira: ciencia, nutrición y consciencia corporal.
+              Descubre cómo recuperar tu equilibrio natural y mejorar tu metabolismo con un enfoque funcional guiado paso a paso.
             </p>
 
             <div className="pt-4">

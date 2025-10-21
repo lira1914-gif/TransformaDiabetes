@@ -20,13 +20,11 @@ export default function SuscripcionSection() {
       style={{ '--suscripcion-bg-image': `url(${backgroundImage})` } as React.CSSProperties}
     >
       <div className="wrap">
-        <h1>🌿 Tu transformación funcional comienza con 7 días gratuitos</h1>
+        <h1>Tu transformación funcional comienza aquí.</h1>
         <p className="sub">
-          Vive la experiencia completa del Módulo 1 sin costo: evaluación, registro de 5 días, informe personalizado y acceso al chat educativo.
-          <br />
-          Si decides continuar, tu suscripción se activa automáticamente por $5 USD/mes.
-          <br />
-          Puedes cancelar en cualquier momento desde tu perfil (Stripe Customer Portal).
+          Accede a una guía práctica, sesiones interactivas y recomendaciones personalizadas para entender tu cuerpo, no solo controlar los síntomas.
+          <br /><br />
+          Da el primer paso con orientación real y herramientas que te ayuden a crear equilibrio físico, mental y metabólico.
         </p>
 
         <h2>¿Qué incluye tu prueba gratuita?</h2>

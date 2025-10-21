@@ -3,6 +3,16 @@
 ## Overview
 TransformaDiabetes is a health and wellness web application dedicated to reversing type 2 diabetes through functional nutrition education. It offers educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform features a **7-day free trial** with $5 USD/month subscription pricing thereafter. The platform aims to build trust, reduce health anxiety with an empathetic, wellness-focused design, and provide a clear path to health transformation.
 
+## Recent Changes (October 21, 2025)
+- **7-Day Free Trial Implementation**: All landing page copy updated to reflect trial offering
+  - Hero title: "Tu cuerpo no está roto. Solo necesita apoyo."
+  - Hero subtitle: Simplified to focus on practical value proposition
+  - Subscription section: "Tu transformación funcional comienza aquí" with emphasis on practical guidance
+  - All CTAs: "Comenzar prueba gratuita de 7 días"
+  - Pricing: $5 USD/mes (all $15 references removed)
+- **Email Collection**: Added LinkAuthenticationElement to Checkout.tsx to guarantee email capture
+- **Stripe Trial Configuration**: Backend configured with `trial_period_days: 7`
+
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
