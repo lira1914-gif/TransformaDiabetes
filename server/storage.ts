@@ -19,7 +19,7 @@ import {
   weeklyCheckins
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 
 export interface IStorage {
   // Users
@@ -28,6 +28,7 @@ export interface IStorage {
   getUserByStripeCustomerId(stripeCustomerId: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined>;
+  markEmailAsSentIfNotSent(id: string, emailField: 'day6EmailSent' | 'day8EmailSent'): Promise<boolean>;
   
   // Intake Forms
   createIntakeForm(intakeForm: InsertIntakeForm): Promise<IntakeForm>;
@@ -78,6 +79,22 @@ export class PostgreSQLStorage implements IStorage {
   async updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined> {
     const result = await db.update(users).set(data).where(eq(users.id, id)).returning();
     return result[0];
+  }
+
+  async markEmailAsSentIfNotSent(id: string, emailField: 'day6EmailSent' | 'day8EmailSent'): Promise<boolean> {
+    // Atomic conditional update: only set to true if currently false
+    // Returns true if the update succeeded (i.e., this request won the race)
+    const result = await db.update(users)
+      .set({ [emailField]: true })
+      .where(and(
+        eq(users.id, id),
+        eq(users[emailField], false)
+      ))
+      .returning();
+    
+    // If result has rows, the update succeeded (flag was false, now true)
+    // If result is empty, flag was already true (another request won)
+    return result.length > 0;
   }
 
   // Intake Forms

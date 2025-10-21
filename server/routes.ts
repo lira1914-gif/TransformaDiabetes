@@ -673,6 +673,72 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // - Aún está dentro de los 7 días del trial (aunque no tenga status de Stripe)
       const hasAccess = isTrialing || isActive || daysRemaining > 0;
 
+      // 📧 Event-driven email automation with atomic flag updates
+      // Día 6: Enviar recordatorio si el trial termina mañana (daysRemaining === 1)
+      // No check !user.day6EmailSent here - rely entirely on atomic DB operation
+      if (daysRemaining === 1 && !isActive) {
+        // Attempt atomic flag update - only one concurrent request will succeed
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day6EmailSent');
+        
+        if (wonRace) {
+          // This request won the race, send the email
+          try {
+            // Obtener nombre del usuario desde intake form
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre del intake form para email día 6');
+            }
+
+            console.log('📧 Enviando email día 6 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay6ReminderEmail } = await import("./email");
+            await sendDay6ReminderEmail(user.email, userName);
+            console.log('✅ Email día 6 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 6:', error);
+            // Revert flag to allow retry on next visit
+            await storage.updateUser(userId, { day6EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 6 ya fue enviado por otro request concurrente');
+        }
+      }
+
+      // Día 8+: Enviar seguimiento si no se suscribió
+      // Usar >= 8 para enviar incluso si el usuario regresa después del día 8
+      // No check !user.day8EmailSent here - rely entirely on atomic DB operation
+      if (daysSinceStart >= 8 && !isActive && !isTrialing) {
+        // Attempt atomic flag update - only one concurrent request will succeed
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day8EmailSent');
+        
+        if (wonRace) {
+          // This request won the race, send the email
+          try {
+            // Obtener nombre del usuario desde intake form
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre del intake form para email día 8');
+            }
+
+            console.log('📧 Enviando email día 8 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay8FollowupEmail } = await import("./email");
+            await sendDay8FollowupEmail(user.email, userName);
+            console.log('✅ Email día 8 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 8:', error);
+            // Revert flag to allow retry on next visit
+            await storage.updateUser(userId, { day8EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 8 ya fue enviado por otro request concurrente');
+        }
+      }
+
       res.json({
         hasAccess,
         isTrialing,
