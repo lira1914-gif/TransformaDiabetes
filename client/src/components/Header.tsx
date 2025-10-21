@@ -131,7 +131,7 @@ export default function Header() {
           Diagnóstico
         </Link>
         {/* Chat Semanal: visible solo después de completar el informe inicial */}
-        {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
+        {userId && informeCompletado && (
           <Link 
             href="/chat-semanal" 
             className="font-medium hover:opacity-80 transition-opacity"
@@ -223,7 +223,7 @@ export default function Header() {
             Diagnóstico
           </Link>
           {/* Chat Semanal: visible solo después de completar el informe inicial */}
-          {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
+          {userId && informeCompletado && (
             <Link 
               href="/chat-semanal" 
               className="font-medium py-2"
