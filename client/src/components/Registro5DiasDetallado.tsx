@@ -248,8 +248,26 @@ export default function Registro5DiasDetallado() {
     }
   };
   
-  const reiniciarRegistroSolo = () => {
+  const reiniciarRegistroSolo = async () => {
     if (confirm('¿Seguro que deseas borrar solo el registro de 5 días (manteniendo el intake)?')) {
+      const userId = localStorage.getItem('tm_user_id');
+      
+      if (userId) {
+        try {
+          // Eliminar registros de la base de datos
+          await apiRequest('DELETE', `/api/daily-logs/${userId}`);
+          console.log('✅ Registros eliminados de la base de datos');
+        } catch (error) {
+          console.error('Error eliminando registros de la base de datos:', error);
+          toast({
+            title: "⚠️ Advertencia",
+            description: "No se pudieron eliminar todos los registros de la base de datos. Continúa de todos modos.",
+            variant: "destructive",
+          });
+        }
+      }
+      
+      // Limpiar localStorage
       localStorage.removeItem('registro5dias');
       localStorage.removeItem('registro5dias_detallado');
       localStorage.removeItem('tm_registro_dias');
@@ -283,7 +301,7 @@ export default function Registro5DiasDetallado() {
       });
       toast({
         title: "✅ Registro reiniciado",
-        description: "Empezando desde el día 1",
+        description: "Empezando desde el día 1. Todos los registros previos han sido eliminados.",
       });
     }
   };
