@@ -10,3 +10,7 @@ export interface TrialStatus {
   subscriptionStatus: string | null;
   startDate: string;
 }
+
+export interface IntakeForm {
+  nombre?: string;
+}

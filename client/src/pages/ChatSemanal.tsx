@@ -7,13 +7,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Send, MessageCircle, Lock } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import { TrialStatus } from "@/types/trial";
+import { TrialStatus, IntakeForm } from "@/types/trial";
 import Header from "@/components/Header";
 import Day7TrialModal from "@/components/Day7TrialModal";
 import Day6TrialModal from "@/components/Day6TrialModal";
 import Day8Banner from "@/components/Day8Banner";
 import Day7Banner from "@/components/Day7Banner";
 import Day5Banner from "@/components/Day5Banner";
+import ArchivedAccountPage from "@/pages/ArchivedAccountPage";
 
 interface WeeklyCheckin {
   id: string;
@@ -46,6 +47,12 @@ export default function ChatSemanal() {
     enabled: !!userId,
   });
 
+  // Obtener intake form para nombre del usuario
+  const { data: intakeForm } = useQuery<IntakeForm>({
+    queryKey: ['/api/intake-form', userId],
+    enabled: !!userId,
+  });
+
   const { data: checkins, isLoading: loadingHistory } = useQuery<WeeklyCheckin[]>({
     queryKey: ['/api/weekly-checkins', userId],
     enabled: !!userId,
@@ -71,6 +78,17 @@ export default function ChatSemanal() {
       sendMessage.mutate(message.trim());
     }
   };
+
+  // Mostrar pantalla de cuenta archivada si el trial expiró hace más de 3 días (día 11+)
+  // y el usuario no tiene suscripción activa
+  const showArchivedPage = trialStatus && 
+    trialStatus.daysSinceStart >= 11 && 
+    !trialStatus.isActive && 
+    !trialStatus.isTrialing;
+
+  if (showArchivedPage) {
+    return <ArchivedAccountPage userName={intakeForm?.nombre} />;
+  }
 
   return (
     <div className="min-h-screen bg-background">

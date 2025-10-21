@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 import { useQuery } from '@tanstack/react-query';
-import { TrialStatus } from '@/types/trial';
+import { TrialStatus, IntakeForm } from '@/types/trial';
 import InformeFuncional from '@/components/InformeFuncional';
 import Header from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,6 +10,7 @@ import { Lock } from 'lucide-react';
 import Day8Banner from '@/components/Day8Banner';
 import Day7Banner from '@/components/Day7Banner';
 import Day5Banner from '@/components/Day5Banner';
+import ArchivedAccountPage from '@/pages/ArchivedAccountPage';
 
 export default function Informe() {
   const [, setLocation] = useLocation();
@@ -20,8 +21,19 @@ export default function Informe() {
     enabled: !!userId,
   });
 
+  // Obtener intake form para nombre del usuario
+  const { data: intakeForm } = useQuery<IntakeForm>({
+    queryKey: ['/api/intake-form', userId],
+    enabled: !!userId,
+  });
+
   useEffect(() => {
     if (!trialStatus) return;
+    
+    // No redirigir si está en día 11+ (se mostrará ArchivedAccountPage)
+    if (trialStatus.daysSinceStart >= 11 && !trialStatus.isActive) {
+      return;
+    }
     
     if (!trialStatus.hasAccess && !trialStatus.isActive) {
       const subscribed = localStorage.getItem('tm_subscribed_at');
@@ -31,6 +43,17 @@ export default function Informe() {
       }
     }
   }, [setLocation, trialStatus]);
+
+  // Mostrar pantalla de cuenta archivada si el trial expiró hace más de 3 días (día 11+)
+  // y el usuario no tiene suscripción activa
+  const showArchivedPage = trialStatus && 
+    trialStatus.daysSinceStart >= 11 && 
+    !trialStatus.isActive && 
+    !trialStatus.isTrialing;
+
+  if (showArchivedPage) {
+    return <ArchivedAccountPage userName={intakeForm?.nombre} />;
+  }
 
   return (
     <div style={{ minHeight: '100vh' }}>

@@ -10,7 +10,8 @@ import Day7TrialModal from "@/components/Day7TrialModal";
 import Day6TrialModal from "@/components/Day6TrialModal";
 import Day8Banner from "@/components/Day8Banner";
 import Day7Banner from "@/components/Day7Banner";
-import { TrialStatus } from "@/types/trial";
+import { TrialStatus, IntakeForm } from "@/types/trial";
+import ArchivedAccountPage from "@/pages/ArchivedAccountPage";
 
 export default function Perfil() {
   const [, setLocation] = useLocation();
@@ -24,6 +25,12 @@ export default function Perfil() {
   // Obtener estado del trial
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
+    enabled: !!userId,
+  });
+
+  // Obtener intake form para nombre del usuario
+  const { data: intakeForm } = useQuery<IntakeForm>({
+    queryKey: ['/api/intake-form', userId],
     enabled: !!userId,
   });
 
@@ -170,6 +177,17 @@ export default function Perfil() {
       setIsSaving(false);
     }
   };
+
+  // Mostrar pantalla de cuenta archivada si el trial expiró hace más de 3 días (día 11+)
+  // y el usuario no tiene suscripción activa
+  const showArchivedPage = trialStatus && 
+    trialStatus.daysSinceStart >= 11 && 
+    !trialStatus.isActive && 
+    !trialStatus.isTrialing;
+
+  if (showArchivedPage) {
+    return <ArchivedAccountPage userName={intakeForm?.nombre} />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F9F7F2' }}>
