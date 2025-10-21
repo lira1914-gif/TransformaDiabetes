@@ -69,11 +69,18 @@ export default function Modulo1() {
   const handleContinueToModule2 = () => {
     localStorage.removeItem('tm_module1_completed');
     setShowClosing(false);
-    // TODO: Cuando el Módulo 2 esté disponible, redirigir a /modulo-2
-    // Por ahora, mostrar un mensaje y recargar para mostrar el contenido del módulo
-    alert('El Módulo 2 estará disponible próximamente. Por ahora, continúa explorando tu contenido en el chat semanal.');
-    // Recargar la página para mostrar el contenido normal del módulo
-    window.location.reload();
+    
+    // Verificar si el usuario tiene suscripción activa
+    const isSubscribed = trialStatus?.isActive || false;
+    
+    if (!isSubscribed) {
+      // Si no está suscrito, redirigir al checkout
+      setLocation('/onboarding/checkout');
+    } else {
+      // Si ya está suscrito, mostrar mensaje y recargar
+      alert('El Módulo 2 estará disponible próximamente. Por ahora, continúa explorando tu contenido en el chat semanal.');
+      window.location.reload();
+    }
   };
 
   // Verificar si el usuario tiene acceso al Módulo 1
