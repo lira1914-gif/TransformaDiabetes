@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Send, MessageCircle, Lock } from "lucide-react";
+import { Loader2, Send, MessageCircle, Lock, AlertCircle } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { TrialStatus, IntakeForm } from "@/types/trial";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Day7TrialModal from "@/components/Day7TrialModal";
 import Day6TrialModal from "@/components/Day6TrialModal";
@@ -15,6 +16,16 @@ import Day8Banner from "@/components/Day8Banner";
 import Day7Banner from "@/components/Day7Banner";
 import Day5Banner from "@/components/Day5Banner";
 import ArchivedAccountPage from "@/pages/ArchivedAccountPage";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 interface WeeklyCheckin {
   id: string;
@@ -39,6 +50,8 @@ const SYSTEM_EMOJI: Record<string, string> = {
 export default function ChatSemanal() {
   const [message, setMessage] = useState("");
   const [, setLocation] = useLocation();
+  const [showLimitModal, setShowLimitModal] = useState(false);
+  const { toast } = useToast();
   const userId = localStorage.getItem('tm_user_id');
 
   // Verificar estado del trial
@@ -64,11 +77,36 @@ export default function ChatSemanal() {
         userId, 
         message: text 
       });
+      
+      // Manejar cualquier error de respuesta
+      if (!response.ok) {
+        const errorData = await response.json();
+        
+        // Caso especial: límite de conversaciones alcanzado
+        if (response.status === 403 && errorData.error === 'LIMIT_REACHED') {
+          throw new Error('LIMIT_REACHED');
+        }
+        
+        // Otros errores: usar mensaje del servidor o genérico
+        throw new Error(errorData.message || errorData.error || 'Error al enviar mensaje');
+      }
+      
       return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/weekly-checkins', userId] });
       setMessage("");
+    },
+    onError: (error: Error) => {
+      if (error.message === 'LIMIT_REACHED') {
+        setShowLimitModal(true);
+      } else {
+        toast({
+          title: "Error",
+          description: error.message || "Hubo un problema enviando tu mensaje. Por favor intenta nuevamente.",
+          variant: "destructive",
+        });
+      }
     }
   });
 
@@ -78,6 +116,11 @@ export default function ChatSemanal() {
       sendMessage.mutate(message.trim());
     }
   };
+
+  // Verificar si el usuario alcanzó el límite de conversaciones
+  const isSubscribed = trialStatus?.isActive || false;
+  const conversationCount = checkins?.length || 0;
+  const hasReachedLimit = !isSubscribed && conversationCount >= 3;
 
   // Verificar si completó el informe inicial - redirigir si no lo ha hecho
   const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
@@ -181,6 +224,25 @@ export default function ChatSemanal() {
           <p className="text-muted-foreground">
             Comparte cómo te sentiste esta semana y recibe orientación funcional personalizada
           </p>
+          
+          {/* Contador de conversaciones gratuitas para usuarios en trial */}
+          {trialStatus && !trialStatus.isActive && checkins && (
+            <div className="mt-4">
+              <Card className="border-blue-200 bg-blue-50">
+                <CardContent className="pt-4">
+                  <p className="text-sm text-blue-900 flex items-center gap-2">
+                    <MessageCircle className="h-4 w-4" />
+                    <strong>Conversaciones usadas:</strong> {checkins.length} de 3 gratuitas
+                    {checkins.length >= 3 && (
+                      <span className="text-orange-700 ml-2">
+                        • Suscríbete para conversaciones ilimitadas
+                      </span>
+                    )}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
         </div>
 
         {/* Mensaje de bloqueo si el trial expiró (día 7 o posterior) */}
@@ -233,13 +295,18 @@ export default function ChatSemanal() {
                   <Button 
                     data-testid="button-send-message"
                     type="submit" 
-                    disabled={!message.trim() || sendMessage.isPending}
+                    disabled={!message.trim() || sendMessage.isPending || hasReachedLimit}
                     className="w-full sm:w-auto"
                   >
                     {sendMessage.isPending ? (
                       <>
                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                         Marvin está pensando...
+                      </>
+                    ) : hasReachedLimit ? (
+                      <>
+                        <Lock className="h-4 w-4 mr-2" />
+                        Límite alcanzado
                       </>
                     ) : (
                       <>
@@ -248,6 +315,18 @@ export default function ChatSemanal() {
                       </>
                     )}
                   </Button>
+                  
+                  {/* Mensaje informativo cuando alcanzó el límite */}
+                  {hasReachedLimit && (
+                    <p className="text-sm text-orange-700 mt-2">
+                      Has usado tus 3 conversaciones gratuitas. <button 
+                        onClick={() => setShowLimitModal(true)}
+                        className="underline font-semibold hover:text-orange-900"
+                      >
+                        Suscríbete para continuar
+                      </button>
+                    </p>
+                  )}
                 </form>
               </CardContent>
             </Card>
@@ -351,6 +430,48 @@ export default function ChatSemanal() {
           </div>
         )}
       </div>
+
+      {/* Modal de límite de conversaciones alcanzado */}
+      <AlertDialog open={showLimitModal} onOpenChange={setShowLimitModal}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-orange-600" />
+              Límite de conversaciones gratuitas alcanzado
+            </AlertDialogTitle>
+            <AlertDialogDescription className="space-y-3 pt-2">
+              <p>
+                Has usado tus <strong>3 conversaciones gratuitas</strong> del chat semanal con Marvin Lira IA.
+              </p>
+              <p>
+                Para continuar recibiendo orientación funcional personalizada ilimitada, activa tu suscripción por solo <strong>$5 USD/mes</strong>.
+              </p>
+              <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mt-3">
+                <p className="text-sm text-blue-900 font-semibold mb-2">
+                  Con tu suscripción desbloqueas:
+                </p>
+                <ul className="text-sm text-blue-800 space-y-1">
+                  <li>✓ Chat semanal ilimitado con Marvin Lira IA</li>
+                  <li>✓ Módulos educativos progresivos</li>
+                  <li>✓ Seguimiento personalizado de tu progreso</li>
+                </ul>
+              </div>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel data-testid="button-cancel-limit-modal">
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction
+              data-testid="button-subscribe-limit-modal"
+              onClick={() => setLocation('/onboarding/checkout')}
+              style={{ backgroundColor: '#A15C38' }}
+            >
+              Suscribirme por $5 USD/mes
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

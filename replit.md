@@ -20,6 +20,8 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 ### Feature Specifications
 - **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns and "Mini Guías Funcionales".
 - **Subscription Onboarding Flow**: A multi-page process encompassing Stripe checkout, intake form, 5-day functional tracking, and an AI-generated initial report.
+- **Subscription CTAs**: Prominent call-to-action banners in InformeFuncional encouraging trial users to subscribe, highlighting benefits ($5 USD/month, unlimited chat, progressive modules, personalized tracking).
+- **Chat Conversation Limit**: Trial users limited to 3 free chat conversations with Marvin Lira IA. After 3 conversations, users must subscribe to continue chatting. Backend enforces limit via conversation count check, frontend shows counter and disabled button with upgrade modal.
 - **7-Day Free Trial with Progressive Messaging**:
   - **Day 5**: Soft reminder banner ("Tu prueba gratuita está por terminar")
   - **Day 6**: Modal celebration ("Has completado tu prueba funcional gratuita") + Email reminder
@@ -30,8 +32,9 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
   - **Day 11+**: Archived account page ("Tu cuenta ha sido archivada") replaces app interface for expired trial users
 - **Informe Funcional**: A dedicated page for AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Progressive educational content where modules unlock automatically based on subscription duration, with server-side access control.
-- **Weekly Check-in Chat System ("Marvin Lira IA")**: A GPT-4o powered interactive chat for personalized functional medicine guidance.
+- **Weekly Check-in Chat System ("Marvin Lira IA")**: A GPT-4o powered interactive chat for personalized functional medicine guidance. Trial users get 3 free conversations; subscription required for unlimited access.
 - **Stripe Customer Portal Integration**: Allows users to self-manage subscriptions (payment methods, billing history, cancellation, reactivation) via Stripe's hosted portal.
+- **Dynamic User Management**: User IDs stored in localStorage (`tm_user_id`) and used dynamically across all components. Trial users receive temporary IDs (`trial_<timestamp>_<random>`), which are replaced with permanent Stripe customer IDs upon subscription.
 - **Cancellation/Reactivation Confirmation Pages**: Empathetic messages displayed upon subscription cancellation (`/cancelacion-confirmada`) or reactivation (`/reactivacion-confirmada`).
 
 ## External Dependencies
