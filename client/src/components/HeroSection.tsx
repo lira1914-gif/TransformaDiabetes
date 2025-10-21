@@ -32,8 +32,56 @@ export default function HeroSection() {
     return "Tu cuerpo no está roto, solo necesita apoyo para sanar desde la raíz.";
   };
 
+  const getHeroSubtitle = () => {
+    if (isEnglish) {
+      return "Discover how to balance your body and reverse diabetes from the root.";
+    }
+    return "Descubre cómo equilibrar tu cuerpo y revertir la diabetes desde la raíz.";
+  };
+
+  const getHeroDescription = () => {
+    if (isEnglish) {
+      return "For 7 days, you'll have free access to your functional diagnosis, personalized guidance, and step-by-step support to understand what your body really needs to heal.";
+    }
+    return "Durante 7 días tendrás acceso gratuito a tu diagnóstico funcional, guía personalizada y acompañamiento paso a paso para entender lo que tu cuerpo realmente necesita para sanar.";
+  };
+
+  const getButtonText = () => {
+    if (isEnglish) {
+      return "Start my free 7-day trial";
+    }
+    return "Comenzar mi prueba gratuita de 7 días";
+  };
+
+  const getButtonSubtext = () => {
+    if (isEnglish) {
+      return "Includes functional diagnosis + daily tracking + guided chat";
+    }
+    return "Incluye diagnóstico funcional + registro diario + chat guiado";
+  };
+
+  const getInspirationalQuote = () => {
+    if (isEnglish) {
+      return "Your body doesn't need perfection, it needs consistent support.";
+    }
+    return "Tu cuerpo no necesita perfección, necesita apoyo constante.";
+  };
+
+  const getFinalQuote = () => {
+    if (isEnglish) {
+      return "Reversing diabetes isn't a miracle, it's a functional process that begins with understanding your body.";
+    }
+    return "Revertir la diabetes no es un milagro, es un proceso funcional que comienza entendiendo tu cuerpo.";
+  };
+
   const tooltipText = getTooltipText();
   const heroTitle = getHeroTitle();
+  const heroSubtitle = getHeroSubtitle();
+  const heroDescription = getHeroDescription();
+  const buttonText = getButtonText();
+  const buttonSubtext = getButtonSubtext();
+  const inspirationalQuote = getInspirationalQuote();
+  const finalQuote = getFinalQuote();
 
   const handleMobileTouch = (e: React.TouchEvent) => {
     // Si ya está visible, ocultarlo
@@ -96,16 +144,14 @@ export default function HeroSection() {
                 className="text-lg sm:text-xl leading-relaxed"
                 style={{ color: '#3A3A3A' }}
               >
-                Descubre cómo equilibrar tu glucosa, reducir la inflamación y recuperar tu energía natural 
-                con un enfoque funcional diseñado para <strong>revertir la diabetes tipo 2 desde la raíz</strong>.
+                {heroSubtitle}
               </p>
 
               <p 
                 className="text-base leading-relaxed"
                 style={{ color: '#3A3A3A' }}
               >
-                Durante 7 días tendrás acceso gratuito a tu diagnóstico funcional, guía personalizada 
-                y acompañamiento paso a paso para entender lo que tu cuerpo realmente necesita para sanar.
+                {heroDescription}
               </p>
 
               <div className="pt-4">
@@ -133,7 +179,7 @@ export default function HeroSection() {
                             e.currentTarget.style.boxShadow = '0 4px 12px rgba(161, 92, 56, 0.2)';
                           }}
                         >
-                          Comenzar mi prueba gratuita de 7 días
+                          {buttonText}
                         </Button>
                       </Link>
                     </TooltipTrigger>
@@ -159,7 +205,15 @@ export default function HeroSection() {
                   className="text-sm mt-3"
                   style={{ color: '#666666' }}
                 >
-                  Incluye diagnóstico funcional + registro diario + chat guiado
+                  {buttonSubtext}
+                </p>
+                
+                {/* Línea inspiradora para conversión */}
+                <p 
+                  className="text-sm mt-4 italic font-medium"
+                  style={{ color: '#556B2F' }}
+                >
+                  {inspirationalQuote}
                 </p>
               </div>
 
@@ -171,7 +225,7 @@ export default function HeroSection() {
                 className="text-base italic"
                 style={{ color: '#777777' }}
               >
-                "Revertir la diabetes no es un milagro, es un proceso funcional que comienza entendiendo tu cuerpo."
+                "{finalQuote}"
               </p>
             </motion.div>
 
@@ -253,8 +307,7 @@ export default function HeroSection() {
               lineHeight: '1.6'
             }}
           >
-            Recupera tu equilibrio natural y aprende a <strong>revertir la diabetes tipo 2</strong> desde la raíz 
-            con una guía funcional práctica y personalizada.
+            {heroSubtitle}
           </p>
 
           <p 
@@ -264,7 +317,10 @@ export default function HeroSection() {
               marginTop: '0.8rem'
             }}
           >
-            Acceso gratuito por 7 días: diagnóstico, registro diario y chat guiado.
+            {isEnglish 
+              ? "Free access for 7 days: diagnosis, daily tracking, and guided chat."
+              : "Acceso gratuito por 7 días: diagnóstico, registro diario y chat guiado."
+            }
           </p>
 
           <div className="text-center relative" style={{ marginTop: '1.5rem' }}>
@@ -290,7 +346,7 @@ export default function HeroSection() {
                     e.currentTarget.style.boxShadow = '0 4px 12px rgba(183, 73, 47, 0.2)';
                   }}
                 >
-                  Comenzar prueba gratuita
+                  {isEnglish ? "Start free trial" : "Comenzar prueba gratuita"}
                 </Button>
               </Link>
             </div>
@@ -317,14 +373,14 @@ export default function HeroSection() {
           </div>
 
           <p 
-            className="text-center italic"
+            className="text-center italic font-medium"
             style={{ 
               marginTop: '1rem', 
               fontSize: '0.85rem', 
-              color: '#777'
+              color: '#2d6a4f'
             }}
           >
-            "Entender tu cuerpo es el primer paso para sanarlo."
+            {inspirationalQuote}
           </p>
         </motion.div>
       </section>
