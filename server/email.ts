@@ -1429,6 +1429,153 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
   });
 }
 
+export async function sendDay9FollowupEmail(to: string, name?: string): Promise<void> {
+  const userName = name || '';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .highlight-box {
+          background-color: #f9f7f4;
+          border-left: 4px solid #4a5d23;
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 4px;
+        }
+        .benefits-list {
+          margin: 20px 0;
+          padding-left: 20px;
+        }
+        .benefit-item {
+          margin-bottom: 10px;
+          line-height: 1.6;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #4a5d23;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .quote {
+          font-style: italic;
+          color: #4a5d23;
+          text-align: center;
+          font-size: 17px;
+          margin: 30px 0;
+          padding: 20px;
+          background-color: #f5f3ef;
+          border-radius: 6px;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+        .disclaimer {
+          font-size: 13px;
+          color: #888;
+          margin-top: 20px;
+          padding: 15px;
+          background-color: #f9f9f9;
+          border-radius: 6px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Durante estos 7 días diste un paso que muchas personas nunca se atreven a dar: <strong>escuchar lo que tu cuerpo realmente necesita</strong>.</p>
+          
+          <p>Tus respuestas y registros mostraron señales claras de mejora — mejor digestión, sueño más profundo o menos antojos de azúcar.<br>
+          <strong>Eso significa que tu cuerpo ya empezó a responder.</strong></p>
+          
+          <p>No dejes que ese avance se pierda.</p>
+        </div>
+
+        <div class="highlight-box">
+          <p style="margin: 0 0 15px 0; font-weight: 600; color: #2a2a2a;">
+            Por solo $5 USD al mes, puedes continuar con el <strong>Módulo 1: Empieza desde la raíz</strong>, donde recibirás:
+          </p>
+          <div class="benefits-list">
+            <div class="benefit-item">🌱 Tu plan funcional personalizado</div>
+            <div class="benefit-item">💬 Acceso al chat interactivo con IA</div>
+            <div class="benefit-item">📊 Actualizaciones semanales según tus registros</div>
+            <div class="benefit-item">🌿 Contenido educativo exclusivo cada mes</div>
+          </div>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/onboarding/checkout" class="cta-button">
+            Reactivar mi acceso ahora
+          </a>
+        </div>
+
+        <div class="quote">
+          "Tu cuerpo no está roto — solo necesita constancia, claridad y apoyo."
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>💚<br>
+            <strong>Equipo de Marvin Lira Nutrición Funcional</strong><br>
+            TransformaDiabetes<br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+          <div class="disclaimer">
+            Programa educativo, no sustituto de orientación médica.
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '🌿 Tu cuerpo ya comenzó a mejorar — no detengas el proceso',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     await transporter.verify();

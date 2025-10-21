@@ -739,6 +739,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
+      // Día 9: Enviar seguimiento 24h después del día 8 si aún no se suscribió
+      // Usar >= 9 para enviar incluso si el usuario regresa después del día 9
+      // No check !user.day9EmailSent here - rely entirely on atomic DB operation
+      if (daysSinceStart >= 9 && !isActive && !isTrialing) {
+        // Attempt atomic flag update - only one concurrent request will succeed
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day9EmailSent');
+        
+        if (wonRace) {
+          // This request won the race, send the email
+          try {
+            // Obtener nombre del usuario desde intake form
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre del intake form para email día 9');
+            }
+
+            console.log('📧 Enviando email día 9 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay9FollowupEmail } = await import("./email");
+            await sendDay9FollowupEmail(user.email, userName);
+            console.log('✅ Email día 9 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 9:', error);
+            // Revert flag to allow retry on next visit
+            await storage.updateUser(userId, { day9EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 9 ya fue enviado por otro request concurrente');
+        }
+      }
+
       res.json({
         hasAccess,
         isTrialing,

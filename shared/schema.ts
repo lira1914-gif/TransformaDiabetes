@@ -15,6 +15,7 @@ export const users = pgTable("users", {
   trialEnded: boolean("trial_ended").default(false),
   day6EmailSent: boolean("day6_email_sent").default(false),
   day8EmailSent: boolean("day8_email_sent").default(false),
+  day9EmailSent: boolean("day9_email_sent").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -28,7 +28,7 @@ export interface IStorage {
   getUserByStripeCustomerId(stripeCustomerId: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined>;
-  markEmailAsSentIfNotSent(id: string, emailField: 'day6EmailSent' | 'day8EmailSent'): Promise<boolean>;
+  markEmailAsSentIfNotSent(id: string, emailField: 'day6EmailSent' | 'day8EmailSent' | 'day9EmailSent'): Promise<boolean>;
   
   // Intake Forms
   createIntakeForm(intakeForm: InsertIntakeForm): Promise<IntakeForm>;
@@ -81,7 +81,7 @@ export class PostgreSQLStorage implements IStorage {
     return result[0];
   }
 
-  async markEmailAsSentIfNotSent(id: string, emailField: 'day6EmailSent' | 'day8EmailSent'): Promise<boolean> {
+  async markEmailAsSentIfNotSent(id: string, emailField: 'day6EmailSent' | 'day8EmailSent' | 'day9EmailSent'): Promise<boolean> {
     // Atomic conditional update: only set to true if currently false
     // Returns true if the update succeeded (i.e., this request won the race)
     const result = await db.update(users)
