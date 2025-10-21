@@ -327,13 +327,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const TRIAL_DAYS = 7;
       const now = new Date();
-      const startDate = user.subscriptionStartDate || user.createdAt;
+      
+      // Usar trialStartDate preferentemente, con fallback a subscriptionStartDate o createdAt
+      const startDate = user.trialStartDate || user.subscriptionStartDate || user.createdAt;
       
       if (!startDate) {
         return res.json({
           hasAccess: false,
           isTrialing: false,
           trialExpired: true,
+          trialEnded: user.trialEnded || false,
           daysRemaining: 0,
           subscriptionStatus: user.subscriptionStatus || null
         });
@@ -365,6 +368,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         isActive,
         isCanceled,
         trialExpired,
+        trialEnded: user.trialEnded || false,
         daysRemaining,
         daysSinceStart,
         subscriptionStatus: user.subscriptionStatus || null,
@@ -396,6 +400,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Crear uno nuevo
       const intakeForm = await storage.createIntakeForm({ userId, ...formData });
+      
+      // Iniciar el trial cuando se completa el intake (si no ha iniciado ya)
+      const user = await storage.getUser(userId);
+      if (user && !user.trialStartDate) {
+        await storage.updateUser(userId, {
+          trialStartDate: new Date()
+        });
+      }
+      
       res.json(intakeForm);
     } catch (error: any) {
       console.error("Error guardando intake form:", error);

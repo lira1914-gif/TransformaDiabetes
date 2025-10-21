@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, jsonb, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -11,6 +11,8 @@ export const users = pgTable("users", {
   subscriptionStatus: text("subscription_status"),
   subscriptionStartDate: timestamp("subscription_start_date"),
   unlockedModules: jsonb("unlocked_modules").$type<number[]>().default(sql`'[]'::jsonb`),
+  trialStartDate: timestamp("trial_start_date"),
+  trialEnded: boolean("trial_ended").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

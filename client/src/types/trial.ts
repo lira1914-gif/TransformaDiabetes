@@ -4,6 +4,7 @@ export interface TrialStatus {
   isActive: boolean;
   isCanceled: boolean;
   trialExpired: boolean;
+  trialEnded: boolean;
   daysRemaining: number;
   daysSinceStart: number;
   subscriptionStatus: string | null;
