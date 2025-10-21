@@ -1,7 +1,7 @@
 # TransformaDiabetes - Revertir DM2
 
 ## Overview
-TransformaDiabetes is a health and wellness web application dedicated to reversing type 2 diabetes through functional nutrition education. It offers educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform aims to build trust, reduce health anxiety with an empathetic, wellness-focused design, and provide a clear path to health transformation.
+TransformaDiabetes is a health and wellness web application dedicated to reversing type 2 diabetes through functional nutrition education. It offers educational content, a diagnostic assessment, success stories, and guided pathways to address insulin resistance from a root-cause perspective. The platform features a **7-day free trial** with $5 USD/month subscription pricing thereafter. The platform aims to build trust, reduce health anxiety with an empathetic, wellness-focused design, and provide a clear path to health transformation.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -31,7 +31,7 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 
 - **UI & Development**: Radix UI, Lucide React, class-variance-authority, cmdk, embla-carousel-react, TypeScript, PostCSS, Autoprefixer, Vite, esbuild, tsx, clsx, tailwind-merge, nanoid.
 - **Data & Forms**: Drizzle ORM, @neondatabase/serverless, drizzle-zod, react-hook-form, @hookform/resolvers, zod, date-fns.
-- **Payment Integration**: **Stripe** for $5/month subscriptions, utilizing Stripe.js with React Stripe Elements for client-side and Stripe Node SDK for server-side subscription management.
+- **Payment Integration**: **Stripe** for $5/month subscriptions with **7-day free trial**, utilizing Stripe.js with React Stripe Elements for client-side and Stripe Node SDK for server-side subscription management. Trial period configured via `trial_period_days: 7` parameter in subscription creation.
 - **Email System**: **Nodemailer** configured with Namecheap PrivateEmail for automated transactional emails (Welcome, Report Ready, Module Unlocked, Reactivation) using SMTP (mail.privateemail.com:465).
 - **AI Integration**: **OpenAI GPT-4o** (via Replit AI Integrations) for generating personalized functional medicine reports and powering the "Marvin Lira IA" weekly check-in chat system. The AI uses a condensed clinical knowledge base for functional medicine guidance and is structured to provide module-specific recommendations.
 - **Support Chat**: **Chatbase** floating chat widget integrated globally (ID: `yxaUbszINwsobf8Upa-xh`) configured exclusively for technical support assistance, not health advice.

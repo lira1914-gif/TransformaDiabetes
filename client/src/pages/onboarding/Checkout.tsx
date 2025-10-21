@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'wouter';
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Elements, PaymentElement, LinkAuthenticationElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { useToast } from "@/hooks/use-toast";
 
@@ -16,6 +16,7 @@ function CheckoutForm({ customerId }: { customerId: string }) {
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [email, setEmail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,6 +90,15 @@ function CheckoutForm({ customerId }: { customerId: string }) {
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '1.5rem' }}>
+        <LinkAuthenticationElement
+          onChange={(e) => {
+            if (e.value.email) {
+              setEmail(e.value.email);
+            }
+          }}
+        />
+      </div>
       <PaymentElement />
       <button
         type="submit"
@@ -251,12 +261,7 @@ export default function Checkout() {
         <Elements 
           stripe={stripePromise} 
           options={{ 
-            clientSecret,
-            fields: {
-              billingDetails: {
-                email: 'always'
-              }
-            }
+            clientSecret
           }}
         >
           <CheckoutForm customerId={customerId} />
