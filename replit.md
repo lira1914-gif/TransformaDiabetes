@@ -6,6 +6,16 @@ TransformaDiabetes is a web application focused on reversing type 2 diabetes thr
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (October 21, 2025)
+
+### Authorization & Route Protection Improvements
+- **Fixed critical security bug**: Anonymous users (incognito) could see and access protected pages ("Mi Perfil", "Mi Informe") without authentication
+- **Header Navigation**: Protected links ("Mi Informe", "Perfil") now only visible when `tm_user_id` exists in localStorage
+- **Route Guards**: Added redirect protection in Perfil.tsx, InformeFuncional.tsx, and ChatSemanal.tsx - users without `tm_user_id` are redirected to `/onboarding/bienvenida-trial`
+- **Chat Semanal Visibility**: Simplified condition - now appears for all users with `userId && tm_informe_ready` (removed restrictive subscription status checks)
+- **Trial Initialization Bug Fix**: BienvenidaTrial.tsx now properly generates `tm_user_id` (format: `trial_<timestamp>_<random>`) when user clicks "Empezar mi diagnóstico gratuito"
+- **Perfil Page Simplification**: Removed duplicate medical intake form (age, weight, symptoms, history) - page now focuses solely on subscription management via Stripe portal
+
 ## System Architecture
 
 ### UI/UX & Frontend
