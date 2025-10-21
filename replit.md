@@ -38,6 +38,13 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
     - Now reads userId from localStorage (tm_user_id)
     - Redirects to home if userId missing
     - Correct API endpoint: `/api/modules/check/:userId`
+  - **Module 1 Welcome Screen (October 21, 2025)** ✅ **COMPLETED**:
+    - Full-screen welcome message shown once after first payment
+    - Displays before Module 1 content, does not modify existing module flow
+    - Includes objectives, action guide, and motivational messaging
+    - User clicks "Continuar al contenido del módulo" to proceed
+    - Flag `tm_just_subscribed` removed after user continues
+    - Never shows again on subsequent visits
   - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups
 
 ## User Preferences

@@ -35,18 +35,18 @@ export default function Modulo1() {
   });
 
   useEffect(() => {
-    // Mostrar mensaje de bienvenida si es un usuario que acaba de suscribirse
+    // Mostrar pantalla de bienvenida si es un usuario que acaba de suscribirse
     const justSubscribed = localStorage.getItem('tm_just_subscribed');
     if (justSubscribed === 'true') {
       setShowWelcome(true);
-      localStorage.removeItem('tm_just_subscribed');
-      
-      // Ocultar el mensaje después de 5 segundos
-      setTimeout(() => {
-        setShowWelcome(false);
-      }, 5000);
+      // No removemos el flag aún - lo haremos cuando el usuario haga clic en "Continuar"
     }
   }, []);
+
+  const handleContinueFromWelcome = () => {
+    setShowWelcome(false);
+    localStorage.removeItem('tm_just_subscribed');
+  };
 
   // Verificar si el usuario tiene acceso al Módulo 1
   const hasAccessToModule1 = moduleCheck?.unlockedModules?.includes(1) || false;
@@ -98,30 +98,102 @@ export default function Modulo1() {
     );
   }
 
+  // Si debe mostrar la pantalla de bienvenida
+  if (showWelcome) {
+    return (
+      <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF8F4' }}>
+        <Header />
+        <main className="flex-1 py-12 md:py-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <div 
+              className="bg-white rounded-lg border p-8 md:p-12 shadow-sm"
+              style={{ borderColor: '#E6E3D9' }}
+              data-testid="welcome-screen-module1"
+            >
+              {/* Header */}
+              <div className="mb-8">
+                <p className="text-sm font-medium tracking-wide uppercase mb-3" style={{ color: '#6B7041' }}>
+                  MÓDULO 1 — Empieza desde la raíz
+                </p>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
+                  🎉 ¡Bienvenido al Módulo 1 de tu Transformación Funcional!
+                </h1>
+                <p className="text-xl font-medium" style={{ color: '#6F6E66' }}>
+                  Tu cuerpo no está roto: solo está buscando equilibrio.
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <p className="text-lg leading-relaxed" style={{ color: '#6F6E66' }}>
+                  En este primer módulo aprenderás a reconocer las señales más importantes que tu cuerpo usa para comunicarse — digestión, sueño, energía y glucosa — y cómo ajustarlas con hábitos simples y sostenibles.
+                </p>
+
+                <hr style={{ borderColor: '#E6E3D9' }} />
+
+                {/* Objetivo de la semana */}
+                <div>
+                  <h2 className="text-xl font-bold mb-3" style={{ color: '#3E3E2E' }}>
+                    🩺 Tu objetivo esta semana:
+                  </h2>
+                  <p className="text-lg font-medium mb-2" style={{ color: '#6B7041' }}>
+                    Observar sin juzgar.
+                  </p>
+                  <p style={{ color: '#6F6E66' }}>
+                    Anotar cómo duermes, cómo digieres y cómo te sientes después de cada comida.
+                  </p>
+                </div>
+
+                <hr style={{ borderColor: '#E6E3D9' }} />
+
+                {/* Guía de acción */}
+                <div>
+                  <h2 className="text-xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
+                    🌿 Tu guía de acción funcional:
+                  </h2>
+                  <ol className="space-y-2 ml-5 list-decimal">
+                    <li style={{ color: '#6F6E66' }}>Registra tus días con calma.</li>
+                    <li style={{ color: '#6F6E66' }}>Elige alimentos reales que no te inflamen.</li>
+                    <li style={{ color: '#6F6E66' }}>Duerme antes de las 11 p.m.</li>
+                    <li style={{ color: '#6F6E66' }}>Respira profundamente antes de comer.</li>
+                  </ol>
+                </div>
+
+                <hr style={{ borderColor: '#E6E3D9' }} />
+
+                {/* Recordatorio */}
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <p className="font-medium mb-2" style={{ color: '#92400E' }}>
+                    Recuerda: mientras el cuerpo esté en alerta, no puede sanar.
+                  </p>
+                  <p className="text-sm" style={{ color: '#92400E' }}>
+                    🌱 Esta semana empieza la reconexión entre tu cuerpo y tu consciencia.
+                    Nutri-Marvin te acompañará paso a paso en este proceso.
+                  </p>
+                </div>
+
+                {/* Botón para continuar */}
+                <div className="pt-6">
+                  <Button
+                    onClick={handleContinueFromWelcome}
+                    className="w-full md:w-auto"
+                    size="lg"
+                    data-testid="button-continue-to-module"
+                  >
+                    Continuar al contenido del módulo
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF8F4' }}>
       <Header />
-      
-      {/* Mensaje de bienvenida para nuevos suscriptores */}
-      {showWelcome && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-xl px-4">
-          <Card className="border-green-200 bg-green-50 shadow-lg">
-            <CardContent className="pt-6">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-green-900 mb-1">
-                    ¡Bienvenido a tu transformación funcional! 🌱
-                  </p>
-                  <p className="text-sm text-green-800">
-                    Ya tienes acceso al Módulo 1. Tu camino hacia el equilibrio metabólico comienza aquí.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
 
       <main className="flex-1 py-8 md:py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
