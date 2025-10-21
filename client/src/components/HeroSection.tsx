@@ -14,9 +14,28 @@ export default function HeroSection() {
   const [showMobileTooltip, setShowMobileTooltip] = useState(false);
   const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null);
 
-  // Detectar idioma del navegador
-  const userLanguage = navigator.language.toLowerCase();
-  const isEnglish = userLanguage.includes('en');
+  // Detectar idioma: primero localStorage, luego default a español
+  const getInitialLanguage = () => {
+    const savedLang = localStorage.getItem('tm_language');
+    if (savedLang) return savedLang === 'en';
+    // Default siempre español
+    return false;
+  };
+
+  const [isEnglish, setIsEnglish] = useState(getInitialLanguage);
+
+  // Escuchar cambios de idioma desde el header
+  useEffect(() => {
+    const handleLanguageChange = (e: CustomEvent) => {
+      setIsEnglish(e.detail.isEnglish);
+    };
+    
+    window.addEventListener('languageChange' as any, handleLanguageChange);
+    
+    return () => {
+      window.removeEventListener('languageChange' as any, handleLanguageChange);
+    };
+  }, []);
   
   const getTooltipText = () => {
     if (isEnglish) {

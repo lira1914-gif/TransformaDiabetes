@@ -6,12 +6,28 @@ import TrialCounter from "./TrialCounter";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  
+  // Idioma: español por default
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem('tm_language') || 'es';
+  });
 
   const handleInicioClick = (e: React.MouseEvent) => {
     if (location === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+  };
+
+  const toggleLanguage = () => {
+    const newLang = language === 'es' ? 'en' : 'es';
+    setLanguage(newLang);
+    localStorage.setItem('tm_language', newLang);
+    
+    // Disparar evento para que HeroSection se actualice
+    window.dispatchEvent(new CustomEvent('languageChange', {
+      detail: { isEnglish: newLang === 'en' }
+    }));
   };
 
   useEffect(() => {
@@ -57,6 +73,26 @@ export default function Header() {
       >
         ☰
       </button>
+
+      {/* Selector de Idioma - Solo en Landing */}
+      {location === "/" && (
+        <button
+          onClick={toggleLanguage}
+          className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-md transition-all hover:opacity-80"
+          style={{
+            backgroundColor: 'rgba(85, 107, 47, 0.1)',
+            color: '#556B2F',
+            border: '1px solid rgba(85, 107, 47, 0.2)',
+            fontSize: '0.9rem',
+            fontWeight: 500,
+            cursor: 'pointer'
+          }}
+          data-testid="button-language-toggle"
+        >
+          <span>{language === 'es' ? '🇪🇸 ES' : '🇺🇸 EN'}</span>
+          <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>⇄</span>
+        </button>
+      )}
 
       {/* Contador de Trial */}
       <div className="hidden md:block">
@@ -129,6 +165,26 @@ export default function Header() {
           <div className="mb-2">
             <TrialCounter />
           </div>
+          
+          {/* Selector de Idioma (móvil) - Solo en Landing */}
+          {location === "/" && (
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-md transition-all hover:opacity-80 mb-2"
+              style={{
+                backgroundColor: 'rgba(85, 107, 47, 0.1)',
+                color: '#556B2F',
+                border: '1px solid rgba(85, 107, 47, 0.2)',
+                fontSize: '0.9rem',
+                fontWeight: 500,
+                cursor: 'pointer'
+              }}
+              data-testid="button-language-toggle-mobile"
+            >
+              <span>{language === 'es' ? '🇪🇸 Español' : '🇺🇸 English'}</span>
+              <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>⇄</span>
+            </button>
+          )}
           
           <Link 
             href="/" 
