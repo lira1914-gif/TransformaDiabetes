@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Lock } from 'lucide-react';
+import Day5Banner from '@/components/Day5Banner';
 
 export default function Informe() {
   const [, setLocation] = useLocation();
@@ -32,6 +33,15 @@ export default function Informe() {
   return (
     <div style={{ minHeight: '100vh' }}>
       <Header />
+      
+      {/* Banner del Día 5 */}
+      {trialStatus && (
+        <Day5Banner
+          daysRemaining={trialStatus.daysRemaining}
+          isActive={trialStatus.isActive}
+        />
+      )}
+      
       <div style={{ padding: '2rem 0' }}>
         {trialStatus && trialStatus.daysRemaining === 0 && !trialStatus.isActive && (
           <div className="container max-w-4xl mx-auto px-4 mb-6">

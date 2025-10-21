@@ -10,6 +10,7 @@ import { apiRequest, queryClient } from "@/lib/queryClient";
 import { TrialStatus } from "@/types/trial";
 import Header from "@/components/Header";
 import Day7TrialModal from "@/components/Day7TrialModal";
+import Day5Banner from "@/components/Day5Banner";
 
 interface WeeklyCheckin {
   id: string;
@@ -77,6 +78,14 @@ export default function ChatSemanal() {
         <Day7TrialModal
           daysRemaining={trialStatus.daysRemaining}
           hasAccess={trialStatus.hasAccess}
+          isActive={trialStatus.isActive}
+        />
+      )}
+
+      {/* Banner del Día 5 */}
+      {trialStatus && (
+        <Day5Banner
+          daysRemaining={trialStatus.daysRemaining}
           isActive={trialStatus.isActive}
         />
       )}
