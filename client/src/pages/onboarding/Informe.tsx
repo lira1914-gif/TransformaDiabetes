@@ -18,38 +18,16 @@ export default function Informe() {
   });
 
   useEffect(() => {
-    const subscribed = localStorage.getItem('tm_subscribed_at');
-    const bienvenidaDone = localStorage.getItem('tm_bienvenida_done');
-    const motivacionDone = localStorage.getItem('tm_motivacion_done');
-    const informeReady = localStorage.getItem('tm_informe_ready') === 'true';
-    const diasRegistrados = parseInt(localStorage.getItem('tm_registro_dias') || '0');
+    if (!trialStatus) return;
     
-    if (!subscribed) {
-      alert('Necesitas suscribirte primero para acceder al informe funcional.');
-      setLocation('/');
-      return;
+    if (!trialStatus.hasAccess && !trialStatus.isActive) {
+      const subscribed = localStorage.getItem('tm_subscribed_at');
+      if (!subscribed) {
+        setLocation('/');
+        return;
+      }
     }
-    if (!bienvenidaDone) {
-      alert('Debes completar la bienvenida antes de ver tu informe.');
-      setLocation('/onboarding/bienvenida');
-      return;
-    }
-    if (!motivacionDone) {
-      alert('Debes completar la motivación antes de ver tu informe.');
-      setLocation('/onboarding/motivacion');
-      return;
-    }
-    if (diasRegistrados < 5) {
-      alert('Aún no has completado tus 5 días de registro funcional. Por favor completa el registro primero.');
-      setLocation('/onboarding/registro');
-      return;
-    }
-    if (!informeReady) {
-      alert('Debes generar tu informe inicial desde el tablero del Mes 1.');
-      setLocation('/onboarding/mes1');
-      return;
-    }
-  }, [setLocation]);
+  }, [setLocation, trialStatus]);
 
   return (
     <div style={{ minHeight: '100vh' }}>

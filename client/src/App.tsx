@@ -58,6 +58,7 @@ function Router() {
       <Route path="/onboarding/mes1" component={OnboardingMes1} />
       <Route path="/onboarding/registro" component={OnboardingRegistro} />
       <Route path="/onboarding/informe-inicial" component={OnboardingInforme} />
+      <Route path="/onboarding/informe" component={OnboardingInforme} />
       
       <Route component={NotFound} />
     </Switch>
