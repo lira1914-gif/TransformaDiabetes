@@ -39,6 +39,7 @@ export interface IStorage {
   createDailyLog(dailyLog: InsertDailyLog): Promise<DailyLog>;
   getDailyLogsByUserId(userId: string): Promise<DailyLog[]>;
   getDailyLogById(id: string): Promise<DailyLog | undefined>;
+  deleteDailyLogsByUserId(userId: string): Promise<number>;
   
   // Daily Log Moments
   createDailyLogMoment(moment: InsertDailyLogMoment): Promise<DailyLogMoment>;
@@ -126,6 +127,20 @@ export class PostgreSQLStorage implements IStorage {
   async getDailyLogById(id: string): Promise<DailyLog | undefined> {
     const result = await db.select().from(dailyLogs).where(eq(dailyLogs.id, id)).limit(1);
     return result[0];
+  }
+
+  async deleteDailyLogsByUserId(userId: string): Promise<number> {
+    // Primero obtener todos los daily logs del usuario
+    const userLogs = await db.select().from(dailyLogs).where(eq(dailyLogs.userId, userId));
+    
+    // Eliminar todos los momentos asociados
+    for (const log of userLogs) {
+      await db.delete(dailyLogMoments).where(eq(dailyLogMoments.dailyLogId, log.id));
+    }
+    
+    // Eliminar los daily logs
+    const result = await db.delete(dailyLogs).where(eq(dailyLogs.userId, userId));
+    return userLogs.length;
   }
 
   // Daily Log Moments

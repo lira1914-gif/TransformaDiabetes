@@ -966,6 +966,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.delete("/api/daily-logs/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const deletedCount = await storage.deleteDailyLogsByUserId(userId);
+      
+      res.json({ 
+        message: `${deletedCount} registros eliminados correctamente`,
+        deletedCount 
+      });
+    } catch (error: any) {
+      console.error("Error eliminando daily logs:", error);
+      res.status(500).json({ error: "Error al eliminar los registros" });
+    }
+  });
+
   // Endpoint para verificar y desbloquear módulos automáticamente
   app.get("/api/modules/check/:userId", async (req, res) => {
     try {
