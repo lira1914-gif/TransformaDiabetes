@@ -63,9 +63,17 @@ export default function HeroSection() {
                       color: 'white',
                       padding: '0.9rem 1.8rem',
                       fontSize: '1.05rem',
-                      fontWeight: 600
+                      fontWeight: 600,
+                      boxShadow: '0 4px 12px rgba(161, 92, 56, 0.2)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                     }}
-                    className="hover:opacity-90 transition-opacity"
+                    className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(161, 92, 56, 0.35)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(161, 92, 56, 0.2)';
+                    }}
                   >
                     Comenzar mi prueba gratuita de 7 días
                   </Button>
@@ -193,9 +201,17 @@ export default function HeroSection() {
                   padding: '0.8rem 1.5rem',
                   borderRadius: '6px',
                   fontWeight: 600,
-                  fontSize: '1rem'
+                  fontSize: '1rem',
+                  boxShadow: '0 4px 12px rgba(183, 73, 47, 0.2)',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
-                className="hover:opacity-90 transition-opacity inline-block"
+                className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl inline-block"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(183, 73, 47, 0.35)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(183, 73, 47, 0.2)';
+                }}
               >
                 Comenzar prueba gratuita
               </Button>
