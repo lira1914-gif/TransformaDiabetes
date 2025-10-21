@@ -35,6 +35,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Crear un customer (por ahora anónimo, luego puede asociarse a un usuario)
       const customer = await stripe.customers.create({
+        name: 'TransformaDiabetes',
+        description: 'TransformaDiabetes - Revertir DM2',
         metadata: {
           source: 'TransformaDiabetes'
         }
