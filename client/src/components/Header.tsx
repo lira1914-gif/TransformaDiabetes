@@ -141,22 +141,28 @@ export default function Header() {
             Chat Semanal
           </Link>
         )}
-        <Link 
-          href="/onboarding/informe-inicial" 
-          className="font-medium hover:opacity-80 transition-opacity"
-          style={{ color: '#4B4B3B', textDecoration: 'none' }}
-          data-testid="link-informe-nav"
-        >
-          Mi Informe
-        </Link>
-        <Link 
-          href="/perfil" 
-          className="font-medium hover:opacity-80 transition-opacity"
-          style={{ color: '#4B4B3B', textDecoration: 'none' }}
-          data-testid="link-perfil-nav"
-        >
-          Perfil
-        </Link>
+        {/* Mi Informe: solo visible para usuarios con userId */}
+        {userId && (
+          <Link 
+            href="/onboarding/informe-inicial" 
+            className="font-medium hover:opacity-80 transition-opacity"
+            style={{ color: '#4B4B3B', textDecoration: 'none' }}
+            data-testid="link-informe-nav"
+          >
+            Mi Informe
+          </Link>
+        )}
+        {/* Perfil: solo visible para usuarios con userId */}
+        {userId && (
+          <Link 
+            href="/perfil" 
+            className="font-medium hover:opacity-80 transition-opacity"
+            style={{ color: '#4B4B3B', textDecoration: 'none' }}
+            data-testid="link-perfil-nav"
+          >
+            Perfil
+          </Link>
+        )}
       </nav>
 
       {/* CTA Desktop */}
@@ -234,24 +240,30 @@ export default function Header() {
               Chat Semanal
             </Link>
           )}
-          <Link 
-            href="/onboarding/informe-inicial" 
-            className="font-medium py-2"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            onClick={() => setMobileMenuOpen(false)}
-            data-testid="link-mobile-informe"
-          >
-            Mi Informe
-          </Link>
-          <Link 
-            href="/perfil" 
-            className="font-medium py-2"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            onClick={() => setMobileMenuOpen(false)}
-            data-testid="link-mobile-perfil"
-          >
-            Perfil
-          </Link>
+          {/* Mi Informe: solo visible para usuarios con userId */}
+          {userId && (
+            <Link 
+              href="/onboarding/informe-inicial" 
+              className="font-medium py-2"
+              style={{ color: '#4B4B3B', textDecoration: 'none' }}
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="link-mobile-informe"
+            >
+              Mi Informe
+            </Link>
+          )}
+          {/* Perfil: solo visible para usuarios con userId */}
+          {userId && (
+            <Link 
+              href="/perfil" 
+              className="font-medium py-2"
+              style={{ color: '#4B4B3B', textDecoration: 'none' }}
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="link-mobile-perfil"
+            >
+              Perfil
+            </Link>
+          )}
           <Link
             href="/onboarding/bienvenida-trial"
             className="inline-block px-4 py-2 rounded-md text-white font-semibold text-center mt-2"
