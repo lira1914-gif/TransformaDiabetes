@@ -57,6 +57,13 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
       - Subject: "🌿 Has completado tu primer módulo — Tu cuerpo ya está respondiendo"
       - Includes congratulations, functional reflection, and CTA to continue to Module 2
       - Non-blocking: email sent asynchronously, navigation proceeds even if email fails
+  - **Module 2 Completion Email (October 21, 2025)** ✅ **IMPLEMENTED**:
+    - Email function ready for when Module 2 is implemented
+    - Subject: "🌿 Has completado el Módulo 2 — Tu cuerpo está encontrando su equilibrio"
+    - Content includes: congratulations, three-level balance summary (digestive, glycemic, nervous), functional reflection, and CTA to Module 3
+    - Endpoint: `/api/notify-module2-completed` ready to be integrated
+    - Personalizes with user's name from intake form when available
+    - Fire-and-forget pattern for non-blocking email delivery
   - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups
 
 ## User Preferences
@@ -95,6 +102,6 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 - **UI & Development**: Radix UI, Lucide React, class-variance-authority, cmdk, embla-carousel-react, TypeScript, PostCSS, Autoprefixer, Vite, esbuild, tsx, clsx, tailwind-merge, nanoid.
 - **Data & Forms**: Drizzle ORM, @neondatabase/serverless, drizzle-zod, react-hook-form, @hookform/resolvers, zod, date-fns.
 - **Payment Integration**: **Stripe** for $5/month subscriptions with **7-day free trial**, utilizing Stripe.js with React Stripe Elements for client-side and Stripe Node SDK for server-side subscription management. Trial period configured via `trial_period_days: 7` parameter in subscription creation.
-- **Email System**: **Nodemailer** configured with Namecheap PrivateEmail for automated transactional emails (Welcome, Report Ready, Module Unlocked, Module 1 Completed, Reactivation) using SMTP (mail.privateemail.com:465).
+- **Email System**: **Nodemailer** configured with Namecheap PrivateEmail for automated transactional emails (Welcome, Report Ready, Module Unlocked, Module 1 Completed, Module 2 Completed, Reactivation) using SMTP (mail.privateemail.com:465).
 - **AI Integration**: **OpenAI GPT-4o** (via Replit AI Integrations) for generating personalized functional medicine reports and powering the "Marvin Lira IA" weekly check-in chat system. The AI uses a condensed clinical knowledge base for functional medicine guidance and is structured to provide module-specific recommendations.
 - **Support Chat**: **Chatbase** floating chat widget integrated globally (ID: `yxaUbszINwsobf8Upa-xh`) configured exclusively for technical support assistance, not health advice.

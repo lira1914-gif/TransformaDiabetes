@@ -1051,6 +1051,181 @@ export async function sendModule1CompletedEmail(to: string, name?: string): Prom
   });
 }
 
+export async function sendModule2CompletedEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        h1 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 26px;
+          margin-bottom: 10px;
+          line-height: 1.3;
+        }
+        h2 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 20px;
+          margin-top: 30px;
+          margin-bottom: 15px;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.8;
+        }
+        .highlight {
+          background-color: #f5f3ef;
+          border-left: 4px solid #4a5d23;
+          padding: 20px;
+          margin: 30px 0;
+          border-radius: 4px;
+        }
+        .quote {
+          font-style: italic;
+          font-size: 18px;
+          color: #4a5d23;
+          text-align: center;
+          padding: 25px;
+          margin: 30px 0;
+          background-color: #f9f9f7;
+          border-radius: 6px;
+        }
+        .benefits-list {
+          list-style: none;
+          padding: 0;
+          margin: 20px 0;
+        }
+        .benefits-list li {
+          padding: 10px 0;
+          padding-left: 30px;
+          position: relative;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #6B7041;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 600;
+          margin: 25px 0;
+          text-align: center;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 30px 0;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 25px;
+          border-top: 1px solid #e6e3d9;
+          font-size: 14px;
+          color: #6a6a6a;
+        }
+        .signature {
+          margin-top: 20px;
+        }
+        .emoji {
+          font-size: 22px;
+          margin-right: 8px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1><span class="emoji">🌿</span> Has completado el Módulo 2</h1>
+        </div>
+        
+        <div class="content">
+          <p>${userName},</p>
+          
+          <p><span class="emoji">✨</span> <strong>¡Felicidades! Has completado el Módulo 2 — "Equilibra desde adentro."</strong></p>
+          
+          <p>Tu cuerpo ya no solo reacciona, ahora responde.<br>
+          Durante este módulo aprendiste a observar cómo tu digestión, tu descanso y tus emociones se conectan con tu energía diaria.</p>
+          
+          <p>Has comenzado a cultivar equilibrio en tres niveles:</p>
+          <ul class="benefits-list">
+            <li><span class="emoji">🌿</span> <strong>Digestivo:</strong> alivio y regularidad.</li>
+            <li><span class="emoji">💧</span> <strong>Glucémico:</strong> energía más estable y menos antojos.</li>
+            <li><span class="emoji">🌙</span> <strong>Nervioso:</strong> descanso más profundo, cuerpo más tranquilo.</li>
+          </ul>
+        </div>
+        
+        <div class="highlight">
+          <h2><span class="emoji">🧭</span> Reflexión funcional</h2>
+          <div class="quote">
+            "El equilibrio no se fuerza, se cultiva cada día con decisiones simples."
+          </div>
+          <div class="content">
+            <p>Cada respiración, cada alimento y cada noche de descanso forman parte de tu proceso de recuperación funcional.<br>
+            Estás reprogramando la manera en que tu cuerpo busca bienestar.</p>
+          </div>
+        </div>
+        
+        <div class="content">
+          <h2><span class="emoji">🌱</span> Tu siguiente paso</h2>
+          <p>El Módulo 3, <strong>"Energía estable y metabolismo consciente,"</strong> te enseñará cómo mantener esa estabilidad y fortalecer tu metabolismo con estrategias de movimiento, ritmo y alimentación funcional.</p>
+        </div>
+        
+        <div class="cta-container">
+          <a href="${baseUrl}/modulo-3" class="cta-button">
+            <span class="emoji">👉</span> Desbloquear el Módulo 3
+          </a>
+        </div>
+        
+        <div class="content" style="font-size: 14px; color: #6a6a6a; margin-top: 30px;">
+          <p><span class="emoji">💬</span> Si tienes preguntas técnicas o problemas para acceder, puedes escribirnos al chat de soporte dentro de la aplicación.</p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
+            Nutrición Funcional<br>
+            <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '🌿 Has completado el Módulo 2 — Tu cuerpo está encontrando su equilibrio',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     await transporter.verify();

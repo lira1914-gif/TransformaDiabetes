@@ -560,6 +560,70 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Module 2 completion notification endpoint
+  app.post("/api/notify-module2-completed", async (req, res) => {
+    try {
+      const { userId } = req.body;
+
+      if (!userId) {
+        return res.status(400).json({ 
+          error: "userId es requerido" 
+        });
+      }
+
+      // Obtener el usuario de la base de datos
+      const user = await storage.getUser(userId);
+      
+      if (!user) {
+        return res.status(404).json({ 
+          error: "Usuario no encontrado" 
+        });
+      }
+
+      if (!user.email) {
+        return res.status(400).json({ 
+          error: "El usuario no tiene email registrado" 
+        });
+      }
+
+      // Intentar obtener el nombre del usuario desde el intake form
+      let userName: string | undefined;
+      try {
+        const intakeForm = await storage.getIntakeFormByUserId(userId);
+        userName = intakeForm?.nombre || undefined;
+        if (!userName) {
+          console.log('📧 Usuario no tiene nombre registrado en intake form, usando saludo genérico');
+        } else {
+          console.log('📧 Email Módulo 2 será personalizado con nombre:', userName);
+        }
+      } catch (error) {
+        console.log('⚠️ Error obteniendo intake form:', error);
+        console.log('📧 Usando saludo genérico');
+      }
+
+      console.log('Enviando email de cierre de Módulo 2 a:', user.email, userName ? `(${userName})` : '');
+
+      // Enviar email de cierre del módulo 2
+      const { sendModule2CompletedEmail } = await import("./email");
+      await sendModule2CompletedEmail(user.email, userName);
+
+      console.log('✅ Email de cierre de Módulo 2 enviado exitosamente');
+
+      res.json({ 
+        success: true,
+        message: "Email de cierre de Módulo 2 enviado correctamente" 
+      });
+    } catch (error: any) {
+      console.error("Error enviando email de cierre de Módulo 2:", error);
+      
+      // No fallar la request si el email falla, solo registrar el error
+      res.json({ 
+        success: false,
+        message: "Error al enviar el email, pero la compleción fue exitosa" 
+      });
+    }
+  });
+
   // Trial status endpoint - calcular días restantes y estado
   app.get("/api/trial-status/:userId", async (req, res) => {
     try {
