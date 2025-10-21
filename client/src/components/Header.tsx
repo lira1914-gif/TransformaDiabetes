@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import logoImage from "@assets/generated_images/TransformaDiabetes_complete_logo_with_tagline_2f0190f6.png";
 import TrialCounter from "./TrialCounter";
+import { TrialStatus } from "@/types/trial";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [location] = useLocation();
+  
+  // Obtener estado del trial para controlar visibilidad del Chat Semanal
+  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+  const { data: trialStatus } = useQuery<TrialStatus>({
+    queryKey: ['/api/trial-status', userId],
+    enabled: !!userId,
+  });
   
   // Idioma: español por default
   const [language, setLanguage] = useState(() => {
@@ -118,14 +127,17 @@ export default function Header() {
         >
           Diagnóstico
         </Link>
-        <Link 
-          href="/chat-semanal" 
-          className="font-medium hover:opacity-80 transition-opacity"
-          style={{ color: '#4B4B3B', textDecoration: 'none' }}
-          data-testid="link-chat-nav"
-        >
-          Chat Semanal
-        </Link>
+        {/* Chat Semanal: visible solo si el usuario está activo o en trial */}
+        {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+          <Link 
+            href="/chat-semanal" 
+            className="font-medium hover:opacity-80 transition-opacity"
+            style={{ color: '#4B4B3B', textDecoration: 'none' }}
+            data-testid="link-chat-nav"
+          >
+            Chat Semanal
+          </Link>
+        )}
         <Link 
           href="/onboarding/informe-inicial" 
           className="font-medium hover:opacity-80 transition-opacity"
@@ -207,15 +219,18 @@ export default function Header() {
           >
             Diagnóstico
           </Link>
-          <Link 
-            href="/chat-semanal" 
-            className="font-medium py-2"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            onClick={() => setMobileMenuOpen(false)}
-            data-testid="link-mobile-chat"
-          >
-            Chat Semanal
-          </Link>
+          {/* Chat Semanal: visible solo si el usuario está activo o en trial */}
+          {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+            <Link 
+              href="/chat-semanal" 
+              className="font-medium py-2"
+              style={{ color: '#4B4B3B', textDecoration: 'none' }}
+              onClick={() => setMobileMenuOpen(false)}
+              data-testid="link-mobile-chat"
+            >
+              Chat Semanal
+            </Link>
+          )}
           <Link 
             href="/onboarding/informe-inicial" 
             className="font-medium py-2"
