@@ -37,7 +37,7 @@ export default function HeroSection() {
             </p>
 
             <div className="pt-4">
-              <Link href="/pre-registro">
+              <Link href="/onboarding/bienvenida-trial">
                 <Button 
                   size="lg"
                   data-testid="button-diagnostico-hero"

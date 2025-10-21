@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import logoImage from "@assets/generated_images/TransformaDiabetes_complete_logo_with_tagline_2f0190f6.png";
+import TrialCounter from "./TrialCounter";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,6 +58,11 @@ export default function Header() {
         ☰
       </button>
 
+      {/* Contador de Trial */}
+      <div className="hidden md:block">
+        <TrialCounter />
+      </div>
+
       {/* Menú de Navegación Desktop */}
       <nav className="hidden md:flex items-center gap-6">
         <Link 
@@ -69,7 +75,7 @@ export default function Header() {
           Inicio
         </Link>
         <Link 
-          href="/pre-registro" 
+          href="/onboarding/bienvenida-trial" 
           className="font-medium hover:opacity-80 transition-opacity"
           style={{ color: '#4B4B3B', textDecoration: 'none' }}
           data-testid="link-diagnostico-nav"
@@ -105,7 +111,7 @@ export default function Header() {
       {/* CTA Desktop */}
       <div className="hidden md:block">
         <Link
-          href="/pre-registro"
+          href="/onboarding/bienvenida-trial"
           className="inline-block px-4 py-2 rounded-md text-white font-semibold transition-all"
           style={{ backgroundColor: '#A15C38', textDecoration: 'none' }}
           data-testid="button-cta-diagnostico"
@@ -119,6 +125,11 @@ export default function Header() {
       {/* Menú Móvil */}
       {mobileMenuOpen && (
         <div className="w-full md:hidden mt-4 flex flex-col gap-3">
+          {/* Contador de Trial (móvil) */}
+          <div className="mb-2">
+            <TrialCounter />
+          </div>
+          
           <Link 
             href="/" 
             className="font-medium py-2"
@@ -132,7 +143,7 @@ export default function Header() {
             Inicio
           </Link>
           <Link 
-            href="/pre-registro" 
+            href="/onboarding/bienvenida-trial" 
             className="font-medium py-2"
             style={{ color: '#4B4B3B', textDecoration: 'none' }}
             onClick={() => setMobileMenuOpen(false)}
@@ -168,7 +179,7 @@ export default function Header() {
             Perfil
           </Link>
           <Link
-            href="/pre-registro"
+            href="/onboarding/bienvenida-trial"
             className="inline-block px-4 py-2 rounded-md text-white font-semibold text-center mt-2"
             style={{ backgroundColor: '#A15C38', textDecoration: 'none' }}
             onClick={() => setMobileMenuOpen(false)}

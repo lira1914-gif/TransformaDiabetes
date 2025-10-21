@@ -132,8 +132,20 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     mutationFn: async (data: any) => {
       return await apiRequest('POST', '/api/intake-form', data);
     },
-    onSuccess: () => {
+    onSuccess: (response: any) => {
+      // Marcar intake como completado
       localStorage.setItem('tm_intake_done', 'true');
+      
+      // Guardar userId si viene en la respuesta (nuevo usuario de trial)
+      if (response.userId) {
+        localStorage.setItem('tm_user_id', response.userId);
+      }
+      
+      // Guardar fecha de inicio del trial
+      if (!localStorage.getItem('tm_trial_start')) {
+        localStorage.setItem('tm_trial_start', String(Date.now()));
+      }
+      
       toast({
         title: "✅ Historial guardado",
         description: "Tu información ha sido registrada correctamente en nuestra base de datos.",
@@ -160,16 +172,14 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Obtener userId de localStorage
-    const userId = localStorage.getItem('tm_user_id');
+    // Obtener userId de localStorage (puede no existir para nuevos usuarios de trial)
+    let userId = localStorage.getItem('tm_user_id');
     
+    // Si no hay userId, crear uno temporal para el trial
     if (!userId) {
-      toast({
-        title: "❌ Error",
-        description: "No se pudo identificar tu cuenta. Por favor vuelve a iniciar sesión.",
-        variant: "destructive",
-      });
-      return;
+      // Generar un ID temporal único
+      userId = `trial_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('tm_user_id', userId);
     }
 
     // Guardar en localStorage como backup

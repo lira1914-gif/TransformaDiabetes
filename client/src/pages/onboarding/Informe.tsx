@@ -33,16 +33,16 @@ export default function Informe() {
     <div style={{ minHeight: '100vh' }}>
       <Header />
       <div style={{ padding: '2rem 0' }}>
-        {trialStatus?.trialExpired && !trialStatus?.isActive && (
+        {trialStatus && trialStatus.daysRemaining === 0 && !trialStatus.isActive && (
           <div className="container max-w-4xl mx-auto px-4 mb-6">
             <Card className="border-orange-200 bg-orange-50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-orange-900">
                   <Lock className="h-5 w-5" />
-                  Modo lectura: Tu prueba gratuita ha finalizado
+                  Modo lectura: Tu prueba gratuita ha finalizado (Día 7)
                 </CardTitle>
                 <CardDescription className="text-orange-800">
-                  Puedes ver este primer informe, pero necesitas activar tu suscripción para acceder a más contenido personalizado y continuar tu transformación
+                  Puedes ver este primer informe, pero necesitas activar tu suscripción para acceder a más contenido personalizado, chat guiado y continuar tu transformación
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -57,7 +57,7 @@ export default function Informe() {
             </Card>
           </div>
         )}
-        <InformeFuncional readOnly={trialStatus?.trialExpired && !trialStatus?.isActive} />
+        <InformeFuncional readOnly={trialStatus ? (trialStatus.daysRemaining === 0 && !trialStatus.isActive) : false} />
       </div>
     </div>
   );

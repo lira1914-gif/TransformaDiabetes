@@ -91,13 +91,13 @@ export default function ChatSemanal() {
           </p>
         </div>
 
-        {/* Mensaje de bloqueo si el trial expiró */}
-        {trialStatus?.trialExpired && !trialStatus?.isActive && (
+        {/* Mensaje de bloqueo si el trial expiró (día 7 o posterior) */}
+        {trialStatus && trialStatus.daysRemaining === 0 && !trialStatus.isActive && (
           <Card className="mb-6 border-orange-200 bg-orange-50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-900">
                 <Lock className="h-5 w-5" />
-                Acceso restringido
+                Chat bloqueado - Día 7
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -115,8 +115,8 @@ export default function ChatSemanal() {
           </Card>
         )}
 
-        {/* Formulario de envío y historial - Solo visible si tiene acceso */}
-        {trialStatus?.hasAccess && (
+        {/* Formulario de envío y historial - Solo visible si tiene acceso (días 1-6 o suscripción activa) */}
+        {trialStatus && (trialStatus.isActive || trialStatus.daysRemaining > 0) && (
           <div>
             <Card className="mb-6">
               <CardHeader>
