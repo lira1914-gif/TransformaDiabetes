@@ -89,6 +89,15 @@ export default function BienvenidaTrial() {
               <Button
                 size="lg"
                 onClick={() => {
+                  // Generar userId temporal si no existe
+                  let userId = localStorage.getItem('tm_user_id');
+                  if (!userId) {
+                    const timestamp = Date.now();
+                    const random = Math.random().toString(36).substring(2, 8);
+                    userId = `trial_${timestamp}_${random}`;
+                    localStorage.setItem('tm_user_id', userId);
+                  }
+                  
                   localStorage.setItem('tm_bienvenida_done', 'true');
                   setLocation("/onboarding/intake");
                 }}
