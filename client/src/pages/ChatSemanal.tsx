@@ -41,6 +41,15 @@ export default function ChatSemanal() {
   const [, setLocation] = useLocation();
   const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
 
+  // Verificar si completó el informe inicial
+  const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
+  
+  // Si no ha completado el informe, redirigir al onboarding
+  if (!informeCompletado) {
+    setLocation('/onboarding/bienvenida');
+    return null;
+  }
+
   // Verificar estado del trial
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
