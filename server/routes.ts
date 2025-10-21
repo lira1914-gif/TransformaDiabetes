@@ -182,6 +182,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json({ 
         userId: user.id,
+        email: user.email,
         customerId: customerId,
         subscriptionId: subscription.id,
         status: subscription.status
@@ -264,6 +265,186 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       
       res.status(500).json({ error: errorMessage });
+    }
+  });
+
+  // Stripe Webhook - Maneja eventos de Stripe
+  app.post("/api/stripe-webhook", async (req, res) => {
+    try {
+      if (!stripe) {
+        console.error("Stripe not configured: STRIPE_SECRET_KEY is missing");
+        return res.status(500).json({ 
+          error: "Stripe no está configurado" 
+        });
+      }
+
+      const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+      
+      if (!webhookSecret) {
+        console.error("⚠️ STRIPE_WEBHOOK_SECRET no está configurado - no se puede verificar la firma del webhook");
+        return res.status(500).json({ 
+          error: "Webhook secret no configurado" 
+        });
+      }
+
+      const sig = req.headers['stripe-signature'];
+
+      if (!sig) {
+        console.error("No se encontró la firma de Stripe en el webhook");
+        return res.status(400).json({ 
+          error: "Firma de webhook faltante" 
+        });
+      }
+
+      let event: Stripe.Event;
+
+      try {
+        // Verificar la firma del webhook para seguridad
+        event = stripe.webhooks.constructEvent(
+          req.body,
+          sig,
+          webhookSecret
+        );
+      } catch (err: any) {
+        console.error(`⚠️ Error verificando firma del webhook: ${err.message}`);
+        return res.status(400).json({ 
+          error: `Firma del webhook inválida: ${err.message}` 
+        });
+      }
+
+      console.log(`✅ Webhook verificado: ${event.type}`);
+
+      // Manejar eventos específicos
+      switch (event.type) {
+        case 'checkout.session.completed': {
+          const session = event.data.object as Stripe.Checkout.Session;
+          console.log('💳 Checkout completado:', session.id);
+          console.log('Customer:', session.customer);
+          console.log('Subscription:', session.subscription);
+
+          // Obtener el customer ID y subscription ID
+          const customerId = session.customer as string;
+          const subscriptionId = session.subscription as string;
+
+          if (!customerId || !subscriptionId) {
+            console.error('⚠️ Checkout session sin customer o subscription:', session.id);
+            break;
+          }
+
+          // Buscar el usuario por stripeCustomerId
+          const user = await storage.getUserByStripeCustomerId(customerId);
+
+          if (!user) {
+            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            break;
+          }
+
+          // Actualizar el usuario con la información de la suscripción
+          await storage.updateUser(user.id, {
+            stripeSubscriptionId: subscriptionId,
+            subscriptionStatus: 'trialing', // El trial acaba de empezar
+            trialEnded: false,
+            unlockedModules: [1] // Desbloquear Módulo 1 inmediatamente
+          });
+
+          console.log('✅ Usuario actualizado tras checkout:', user.id);
+          break;
+        }
+
+        case 'invoice.payment_succeeded': {
+          const invoice = event.data.object as Stripe.Invoice;
+          console.log('💰 Pago exitoso:', invoice.id);
+          
+          const customerId = invoice.customer as string;
+          const subscriptionId = invoice.subscription as string;
+
+          if (!customerId || !subscriptionId) {
+            console.error('⚠️ Invoice sin customer o subscription:', invoice.id);
+            break;
+          }
+
+          // Buscar el usuario
+          const user = await storage.getUserByStripeCustomerId(customerId);
+
+          if (!user) {
+            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            break;
+          }
+
+          // Obtener la suscripción de Stripe para verificar el estado
+          const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+          // Actualizar el estado de la suscripción
+          await storage.updateUser(user.id, {
+            subscriptionStatus: subscription.status,
+            trialEnded: subscription.status === 'active' && !subscription.trial_end,
+            unlockedModules: [1] // Asegurar que Módulo 1 está desbloqueado
+          });
+
+          console.log('✅ Usuario actualizado tras pago exitoso:', user.id);
+          break;
+        }
+
+        case 'customer.subscription.updated': {
+          const subscription = event.data.object as Stripe.Subscription;
+          console.log('🔄 Suscripción actualizada:', subscription.id);
+
+          const customerId = subscription.customer as string;
+
+          // Buscar el usuario
+          const user = await storage.getUserByStripeCustomerId(customerId);
+
+          if (!user) {
+            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            break;
+          }
+
+          // Actualizar el estado de la suscripción
+          await storage.updateUser(user.id, {
+            subscriptionStatus: subscription.status,
+            trialEnded: subscription.status === 'active' && !subscription.trial_end,
+          });
+
+          console.log('✅ Usuario actualizado tras actualización de suscripción:', user.id);
+          break;
+        }
+
+        case 'customer.subscription.deleted': {
+          const subscription = event.data.object as Stripe.Subscription;
+          console.log('❌ Suscripción cancelada:', subscription.id);
+
+          const customerId = subscription.customer as string;
+
+          // Buscar el usuario
+          const user = await storage.getUserByStripeCustomerId(customerId);
+
+          if (!user) {
+            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            break;
+          }
+
+          // Marcar la suscripción como cancelada
+          await storage.updateUser(user.id, {
+            subscriptionStatus: 'canceled',
+            trialEnded: true,
+          });
+
+          console.log('✅ Usuario actualizado tras cancelación:', user.id);
+          break;
+        }
+
+        default:
+          console.log(`ℹ️ Evento de webhook no manejado: ${event.type}`);
+      }
+
+      // Responder a Stripe que el webhook fue recibido
+      res.json({ received: true });
+    } catch (error: any) {
+      console.error("❌ Error procesando webhook de Stripe:", error);
+      res.status(500).json({ 
+        error: "Error procesando webhook",
+        message: error.message 
+      });
     }
   });
 

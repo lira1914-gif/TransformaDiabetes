@@ -17,11 +17,20 @@ interface ModuleCheckResponse {
 export default function Modulo1() {
   const [, setLocation] = useLocation();
   const [showWelcome, setShowWelcome] = useState(false);
-  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+  
+  // Obtener userId de localStorage
+  const userId = localStorage.getItem('tm_user_id');
+
+  // Si no hay userId, redirigir a la página de inicio
+  useEffect(() => {
+    if (!userId) {
+      setLocation('/');
+    }
+  }, [userId, setLocation]);
 
   // Verificar módulos desbloqueados
   const { data: moduleCheck, isLoading } = useQuery<ModuleCheckResponse>({
-    queryKey: ['/api/check-modules', userId],
+    queryKey: ['/api/modules/check', userId],
     enabled: !!userId,
   });
 

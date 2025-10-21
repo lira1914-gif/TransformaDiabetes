@@ -12,16 +12,22 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
   - Pricing: $5 USD/mes (all $15 references removed)
 - **Email Collection**: Added LinkAuthenticationElement to Checkout.tsx to guarantee email capture
 - **Stripe Trial Configuration**: Backend configured with `trial_period_days: 7`
-- **Trial Expiration Controls** ✅ **COMPLETED**:
-  - Trial countdown timer in Perfil.tsx showing remaining free access days
-  - Backend endpoint `/api/trial-status/:userId` returns comprehensive trial status
-  - Chat access blocked when trial expires (ChatSemanal.tsx) - displays orange warning with upgrade CTA
-  - Report read-only mode (Informe.tsx) - content visible but "Finalizar" button hidden when trial expires
-  - TrialStatus TypeScript interface centralized in `client/src/types/trial.ts`
-  - Dual route support: `/onboarding/informe` and `/onboarding/informe-inicial` (both accessible)
-  - Simplified access control logic - removed overly strict localStorage checks
-  - **Day 7 Trial Modal** (Day7TrialModal.tsx) - Empathetic conversion message appearing on final day of trial
-  - E2E tested: Trial status, chat blocking, report read-only mode, and upgrade CTAs all functional
+- **New Trial Flow (October 21, 2025)** ✅ **COMPLETED**:
+  - **Welcome Screen**: Created `/onboarding/bienvenida-trial` intermediate page before intake form
+  - **Unified Entry Points**: All header CTAs now route through welcome screen → intake form
+  - **Trial Start on Intake**: Trial starts when intake form is completed (tm_trial_start in localStorage + trialStartDate in DB)
+  - **Day Counter**: TrialCounter component with robust validation, capped daysRemaining (0-7), malformed date protection
+  - **Chat Blocking**: Active days 1-6 (daysRemaining > 0), blocked on Day 7 (daysRemaining === 0) with upgrade prompt
+  - **Day 5 Banner**: Soft reminder banner at daysRemaining === 2 in ChatSemanal and Informe pages
+  - **Database Fields**: Added `trialStartDate` (timestamp) and `trialEnded` (boolean) to users table
+  - **TypeScript Types**: Added `trialEnded` field to TrialStatus interface in `client/src/types/trial.ts`
+  - **Module 1 Page**: Created `/modulo-1` with educational content and access control via unlockedModules
+  - **Stripe Webhook**: Implemented `/api/stripe-webhook` with signature verification for secure event handling
+    - Handles: checkout.session.completed, invoice.payment_succeeded, customer.subscription.updated, customer.subscription.deleted
+    - Updates DB: subscriptionStatus, trialEnded, unlockedModules
+    - Requires: STRIPE_WEBHOOK_SECRET environment variable (not yet configured)
+  - **Post-Payment Redirect**: Checkout now redirects to `/modulo-1` with welcome message (tm_just_subscribed flag)
+  - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.

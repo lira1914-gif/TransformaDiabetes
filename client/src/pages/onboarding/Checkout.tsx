@@ -69,6 +69,7 @@ function CheckoutForm({ customerId }: { customerId: string }) {
       localStorage.setItem('tm_subscribed_at', String(Date.now()));
       localStorage.setItem('tm_user_id', subscriptionData.userId);
       localStorage.setItem('tm_user_email', subscriptionData.email || '');
+      localStorage.setItem('tm_just_subscribed', 'true'); // Flag para mostrar mensaje de bienvenida
       
       console.log('Usuario creado en BD:', subscriptionData.userId);
       
@@ -77,7 +78,8 @@ function CheckoutForm({ customerId }: { customerId: string }) {
         description: "Bienvenido a TransformaDiabetes",
       });
       
-      setLocation('/onboarding/bienvenida');
+      // Redirigir al Módulo 1 directamente
+      setLocation('/modulo-1');
     } catch (err: any) {
       toast({
         title: "Error",
