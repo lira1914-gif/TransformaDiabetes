@@ -67,10 +67,10 @@ export default function Day7TrialModal({ daysRemaining, hasAccess, isActive }: D
           
           <AlertDialogHeader>
             <AlertDialogTitle 
-              className="text-2xl sm:text-3xl text-center font-bold leading-tight"
-              style={{ color: '#3E3E2E' }}
+              className="text-2xl sm:text-3xl text-center font-bold leading-tight font-serif"
+              style={{ color: '#556B2F' }}
             >
-              Tu cuerpo está respondiendo…
+              🌱 Tu prueba gratuita ha finalizado, pero tu proceso apenas comienza
             </AlertDialogTitle>
           </AlertDialogHeader>
         </div>
@@ -78,39 +78,35 @@ export default function Day7TrialModal({ daysRemaining, hasAccess, isActive }: D
         {/* Contenido principal */}
         <div className="px-6 pb-6">
           <AlertDialogDescription asChild>
-            <div className="space-y-4 text-base leading-relaxed" style={{ color: '#6F6E66' }}>
+            <div className="space-y-4 text-base leading-relaxed" style={{ color: '#3A3A3A' }}>
               <p className="text-center">
-                Has dado los primeros pasos hacia el equilibrio.
-                Este espacio fue solo una muestra de lo que puedes lograr cuando empiezas a entender las señales de tu cuerpo desde la raíz.
+                Has dado pasos importantes para reconectar con tu cuerpo, observar tus señales 
+                y entender cómo se comporta tu metabolismo.
               </p>
 
-              {/* Mensaje clave con icono */}
+              <p className="text-center">
+                Ahora es momento de dar el siguiente paso: continuar con tu plan funcional guiado, 
+                donde aprenderás a equilibrar tu glucosa, reducir la inflamación y mantener tu 
+                energía estable día a día.
+              </p>
+
+              {/* Mensaje de bloqueo */}
               <div 
                 className="rounded-lg p-4 my-5"
                 style={{ 
-                  backgroundColor: 'rgba(107, 112, 65, 0.08)',
-                  border: '1px solid rgba(107, 112, 65, 0.2)'
+                  backgroundColor: 'rgba(161, 92, 56, 0.08)',
+                  border: '2px solid rgba(161, 92, 56, 0.2)'
                 }}
               >
-                <p className="text-center font-medium" style={{ color: '#3E3E2E' }}>
-                  🌱 Si sentiste cambios — más claridad, energía o calma — no los detengas.
+                <p className="text-center font-semibold" style={{ color: '#A15C38' }}>
+                  🔒 El chat funcional y los módulos están reservados para miembros activos del programa
                 </p>
               </div>
 
               <p className="text-center">
-                Activa tu suscripción y continúa con tus próximos módulos funcionales, 
-                reportes personalizados y acceso al chat guiado.
+                👉 Activa tu suscripción por <strong>$5 USD/mes</strong> y sigue avanzando con tu 
+                guía personalizada, sesiones educativas y acompañamiento continuo.
               </p>
-
-              {/* Recordatorio empático */}
-              <div className="pt-2">
-                <p 
-                  className="text-center italic text-lg font-medium"
-                  style={{ color: '#6B7041' }}
-                >
-                  Recuerda: tu cuerpo no está roto, solo necesita apoyo.
-                </p>
-              </div>
             </div>
           </AlertDialogDescription>
 
@@ -120,13 +116,13 @@ export default function Day7TrialModal({ daysRemaining, hasAccess, isActive }: D
               onClick={handleContinue}
               className="w-full py-3 text-base font-semibold rounded-lg transition-all shadow-sm hover:shadow-md"
               style={{ 
-                backgroundColor: '#6B7041',
+                backgroundColor: '#A15C38',
                 color: '#FFFFFF',
               }}
               data-testid="button-continue-trial-day7"
             >
               <span className="flex items-center justify-center gap-2">
-                Continuar mi proceso por $5/mes
+                Continuar con mi transformación funcional
                 <ArrowRight className="w-4 h-4" />
               </span>
             </AlertDialogAction>
