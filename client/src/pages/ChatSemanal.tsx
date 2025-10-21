@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Send, MessageCircle } from "lucide-react";
+import { Loader2, Send, MessageCircle, Lock } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import Header from "@/components/Header";
 
@@ -16,6 +17,18 @@ interface WeeklyCheckin {
   emotionTags: string[];
   systemsDetected: string[];
   createdAt: string;
+}
+
+interface TrialStatus {
+  hasAccess: boolean;
+  isTrialing: boolean;
+  isActive: boolean;
+  isCanceled: boolean;
+  trialExpired: boolean;
+  daysRemaining: number;
+  daysSinceStart: number;
+  subscriptionStatus: string | null;
+  startDate: string;
 }
 
 const SYSTEM_EMOJI: Record<string, string> = {
@@ -30,7 +43,14 @@ const SYSTEM_EMOJI: Record<string, string> = {
 
 export default function ChatSemanal() {
   const [message, setMessage] = useState("");
+  const [, setLocation] = useLocation();
   const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+
+  // Verificar estado del trial
+  const { data: trialStatus } = useQuery<TrialStatus>({
+    queryKey: ['/api/trial-status', userId],
+    enabled: !!userId,
+  });
 
   const { data: checkins, isLoading: loadingHistory } = useQuery<WeeklyCheckin[]>({
     queryKey: ['/api/weekly-checkins', userId],
@@ -71,56 +91,81 @@ export default function ChatSemanal() {
           </p>
         </div>
 
-        {/* Formulario de envío */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <MessageCircle className="h-5 w-5" />
-              ¿Cómo te sentiste esta semana?
-            </CardTitle>
-            <CardDescription>
-              Comparte tus síntomas, emociones o cualquier cambio que hayas notado
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Textarea
-                data-testid="input-weekly-message"
-                placeholder="Ejemplo: Esta semana dormí mal y tuve muchos antojos de dulce..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={4}
-                className="resize-none"
-              />
+        {/* Mensaje de bloqueo si el trial expiró */}
+        {trialStatus?.trialExpired && !trialStatus?.isActive && (
+          <Card className="mb-6 border-orange-200 bg-orange-50">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-orange-900">
+                <Lock className="h-5 w-5" />
+                Acceso restringido
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-orange-800 mb-4">
+                Tu periodo gratuito de 7 días ha finalizado. Para continuar usando el chat semanal con Marvin Lira IA y recibir orientación funcional personalizada, necesitas activar tu suscripción.
+              </p>
               <Button 
-                data-testid="button-send-message"
-                type="submit" 
-                disabled={!message.trim() || sendMessage.isPending}
+                onClick={() => setLocation('/onboarding/checkout')}
                 className="w-full sm:w-auto"
+                data-testid="button-activate-from-chat"
               >
-                {sendMessage.isPending ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Marvin está pensando...
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-4 w-4 mr-2" />
-                    Enviar mensaje
-                  </>
-                )}
+                Activar suscripción por $5 USD/mes
               </Button>
-            </form>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        )}
 
-        {/* Historial de conversaciones */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-serif font-semibold text-foreground">
-            Historial de conversaciones
-          </h2>
+        {/* Formulario de envío y historial - Solo visible si tiene acceso */}
+        {trialStatus?.hasAccess && (
+          <div>
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5" />
+                  ¿Cómo te sentiste esta semana?
+                </CardTitle>
+                <CardDescription>
+                  Comparte tus síntomas, emociones o cualquier cambio que hayas notado
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <Textarea
+                    data-testid="input-weekly-message"
+                    placeholder="Ejemplo: Esta semana dormí mal y tuve muchos antojos de dulce..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={4}
+                    className="resize-none"
+                  />
+                  <Button 
+                    data-testid="button-send-message"
+                    type="submit" 
+                    disabled={!message.trim() || sendMessage.isPending}
+                    className="w-full sm:w-auto"
+                  >
+                    {sendMessage.isPending ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Marvin está pensando...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4 mr-2" />
+                        Enviar mensaje
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
 
-          {loadingHistory ? (
+            <div className="space-y-4">
+              <h2 className="text-xl font-serif font-semibold text-foreground">
+                Historial de conversaciones
+              </h2>
+
+              {loadingHistory ? (
             <Card>
               <CardContent className="flex items-center justify-center py-8">
                 <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
@@ -209,8 +254,10 @@ export default function ChatSemanal() {
                 </CardContent>
               </Card>
             ))
-          )}
-        </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
