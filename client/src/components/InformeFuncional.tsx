@@ -101,6 +101,69 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         </p>
       </div>
 
+      {/* CTA de Suscripción para usuarios en trial */}
+      {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+        <div style={{ 
+          marginTop: '2.5rem',
+          padding: '2rem',
+          backgroundColor: 'rgba(161, 92, 56, 0.08)',
+          borderRadius: '16px',
+          border: '2px solid rgba(161, 92, 56, 0.25)',
+          textAlign: 'center'
+        }}>
+          <h3 style={{ 
+            color: '#A15C38', 
+            fontSize: '1.4rem', 
+            fontWeight: 700,
+            marginBottom: '1rem'
+          }}>
+            ✨ Continúa tu transformación funcional
+          </h3>
+          <p style={{ 
+            color: '#3A3A3A', 
+            fontSize: '1rem',
+            marginBottom: '0.75rem',
+            lineHeight: 1.6
+          }}>
+            Este informe es solo el inicio. Con tu suscripción de <strong>$5 USD/mes</strong> desbloqueas:
+          </p>
+          <ul style={{ 
+            listStyle: 'none',
+            padding: 0,
+            margin: '1.25rem 0',
+            color: '#3A3A3A',
+            fontSize: '0.95rem',
+            lineHeight: 1.8
+          }}>
+            <li>🌿 <strong>Chat semanal ilimitado</strong> con Marvin Lira IA</li>
+            <li>📚 <strong>Módulos educativos progresivos</strong> (se desbloquean cada semana)</li>
+            <li>📊 <strong>Seguimiento personalizado</strong> de tu progreso funcional</li>
+            <li>💬 <strong>Guías de acción específicas</strong> basadas en tus síntomas</li>
+          </ul>
+          <button
+            className="btn-finalizar"
+            data-testid="button-subscribe-from-informe"
+            onClick={() => navigate('/onboarding/checkout')}
+            style={{
+              backgroundColor: '#A15C38',
+              padding: '16px 36px',
+              fontSize: '1.1rem',
+              marginTop: '1rem'
+            }}
+          >
+            Suscribirme por $5 USD/mes
+          </button>
+          <p style={{ 
+            color: '#6F6E66', 
+            fontSize: '0.85rem',
+            marginTop: '1rem',
+            marginBottom: 0
+          }}>
+            🔒 Pago seguro con Stripe • Cancela cuando quieras
+          </p>
+        </div>
+      )}
+
       {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
         <div style={{ 
           display: 'flex', 
