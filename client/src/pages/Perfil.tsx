@@ -20,6 +20,13 @@ export default function Perfil() {
   
   const userId = localStorage.getItem('tm_user_id');
 
+  // Protección: redirigir si no hay userId
+  useEffect(() => {
+    if (!userId) {
+      setLocation('/onboarding/bienvenida-trial');
+    }
+  }, [userId, setLocation]);
+
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
     enabled: !!userId,

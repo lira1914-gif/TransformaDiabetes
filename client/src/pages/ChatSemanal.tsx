@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -53,6 +53,18 @@ export default function ChatSemanal() {
   const [showLimitModal, setShowLimitModal] = useState(false);
   const { toast } = useToast();
   const userId = localStorage.getItem('tm_user_id');
+
+  // Protección: redirigir si no hay userId o no completó informe
+  useEffect(() => {
+    if (!userId) {
+      setLocation('/onboarding/bienvenida-trial');
+      return;
+    }
+    const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
+    if (!informeCompletado) {
+      setLocation('/onboarding/informe-inicial');
+    }
+  }, [userId, setLocation]);
 
   // Verificar estado del trial
   const { data: trialStatus } = useQuery<TrialStatus>({

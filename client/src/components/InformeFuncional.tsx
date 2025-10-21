@@ -17,6 +17,14 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
   
   // Obtener estado del trial para controlar visibilidad del Chat Semanal
   const userId = localStorage.getItem('tm_user_id');
+
+  // Protección: redirigir si no hay userId
+  useEffect(() => {
+    if (!userId) {
+      navigate('/onboarding/bienvenida-trial');
+    }
+  }, [userId, navigate]);
+
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
     enabled: !!userId,
