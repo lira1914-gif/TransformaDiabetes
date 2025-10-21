@@ -14,6 +14,21 @@ export default function HeroSection() {
   const [showMobileTooltip, setShowMobileTooltip] = useState(false);
   const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null);
 
+  // Detectar idioma del navegador
+  const getTooltipText = () => {
+    const userLanguage = navigator.language.toLowerCase();
+    
+    // Si el idioma incluye 'en' (inglés), mostrar versión en inglés
+    if (userLanguage.includes('en')) {
+      return "✨ Start your functional transformation today";
+    }
+    
+    // Por defecto, mostrar en español
+    return "✨ Empieza tu transformación funcional hoy";
+  };
+
+  const tooltipText = getTooltipText();
+
   const handleMobileTouch = (e: React.TouchEvent) => {
     // Si ya está visible, ocultarlo
     if (showMobileTooltip) {
@@ -129,7 +144,7 @@ export default function HeroSection() {
                         fontWeight: 500
                       }}
                     >
-                      <span>✨ Empieza tu transformación funcional hoy</span>
+                      <span>{tooltipText}</span>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -290,7 +305,7 @@ export default function HeroSection() {
                   whiteSpace: 'nowrap'
                 }}
               >
-                <span>✨ Empieza tu transformación funcional hoy</span>
+                <span>{tooltipText}</span>
               </div>
             )}
           </div>
