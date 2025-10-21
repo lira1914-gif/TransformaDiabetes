@@ -26,41 +26,61 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight"
               style={{ color: '#556B2F' }}
             >
-              Tu cuerpo no está roto. Solo necesita apoyo.
+              Tu cuerpo no está roto.<br />Solo necesita dirección.
             </h1>
             
             <p 
               className="text-lg sm:text-xl leading-relaxed"
               style={{ color: '#3A3A3A' }}
             >
-              Descubre cómo recuperar tu equilibrio natural y mejorar tu metabolismo con un enfoque funcional guiado paso a paso.
+              Descubre cómo equilibrar tu glucosa, reducir la inflamación y recuperar tu energía natural 
+              con un enfoque funcional diseñado para <strong>revertir la diabetes tipo 2 desde la raíz</strong>.
+            </p>
+
+            <p 
+              className="text-base leading-relaxed"
+              style={{ color: '#3A3A3A' }}
+            >
+              Durante 7 días tendrás acceso gratuito a tu diagnóstico funcional, guía personalizada 
+              y acompañamiento paso a paso para entender lo que tu cuerpo realmente necesita para sanar.
             </p>
 
             <div className="pt-4">
-              <Link href="/onboarding/bienvenida-trial">
+              <Link href="/diagnostico">
                 <Button 
                   size="lg"
                   data-testid="button-diagnostico-hero"
                   style={{
                     backgroundColor: '#A15C38',
                     color: 'white',
-                    padding: '0.9rem 1.5rem',
-                    fontSize: '1rem',
+                    padding: '0.9rem 1.8rem',
+                    fontSize: '1.05rem',
                     fontWeight: 600
                   }}
                   className="hover:opacity-90 transition-opacity"
                 >
-                  Comenzar prueba gratuita de 7 días
+                  Comenzar mi prueba gratuita de 7 días
                 </Button>
               </Link>
               
               <p 
                 className="text-sm mt-3"
-                style={{ color: '#6F6E66' }}
+                style={{ color: '#666666' }}
               >
-                Acceso completo al Módulo 1. Luego $5 USD/mes. Cancela en cualquier momento desde tu perfil.
+                Incluye diagnóstico funcional + registro diario + chat guiado
               </p>
             </div>
+
+            {/* Línea divisoria */}
+            <hr className="border-t border-gray-300 my-8" />
+
+            {/* Cita inspiradora */}
+            <p 
+              className="text-base italic"
+              style={{ color: '#777777' }}
+            >
+              "Revertir la diabetes no es un milagro, es un proceso funcional que comienza entendiendo tu cuerpo."
+            </p>
           </div>
 
           {/* Columna derecha - Imagen */}
