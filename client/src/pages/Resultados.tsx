@@ -312,17 +312,21 @@ export default function Resultados() {
                 className="text-base mb-6"
                 style={{ color: '#3A3A3A', lineHeight: 1.6 }}
               >
-                Esta mini guía es solo el inicio. Podemos crear un plan personalizado basado en tu historial, hábitos y análisis.
+                Esta mini guía es solo el inicio. Completa tu evaluación funcional completa y recibe un plan personalizado basado en tu historial, hábitos y análisis.
               </p>
               
-              <Link href="/suscripcion">
+              <Link href="/onboarding/bienvenida-trial">
                 <Button 
                   size="lg"
                   variant="default"
                   className="w-full sm:w-auto mx-auto block"
-                  data-testid="button-subscribe-results"
+                  data-testid="button-start-trial-results"
+                  style={{
+                    backgroundColor: '#A15C38',
+                    color: 'white'
+                  }}
                 >
-                  Suscribirme al Plan TransformaDiabetes ($5/mes)
+                  Comenzar mi prueba gratuita de 7 días
                 </Button>
               </Link>
             </div>

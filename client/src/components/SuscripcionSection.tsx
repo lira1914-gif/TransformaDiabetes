@@ -9,8 +9,8 @@ export default function SuscripcionSection() {
 
   const handleSubscribe = async () => {
     setIsLoading(true);
-    // Redirigir a la página de checkout de Stripe
-    setLocation('/onboarding/checkout');
+    // Redirigir a la pantalla de bienvenida del trial (NO al checkout)
+    setLocation('/onboarding/bienvenida-trial');
   };
 
   return (
