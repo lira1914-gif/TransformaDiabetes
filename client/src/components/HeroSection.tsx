@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import heroImage from "@assets/generated_images/Latino_man_tablet_metabolismo_f95a9523.png";
 
 export default function HeroSection() {
@@ -23,7 +24,12 @@ export default function HeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Columna izquierda - Texto */}
-            <div className="space-y-6">
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               <h1 
                 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight"
                 style={{ color: '#556B2F' }}
@@ -83,10 +89,15 @@ export default function HeroSection() {
               >
                 "Revertir la diabetes no es un milagro, es un proceso funcional que comienza entendiendo tu cuerpo."
               </p>
-            </div>
+            </motion.div>
 
             {/* Columna derecha - Imagen */}
-            <div className="hidden lg:flex justify-center items-center">
+            <motion.div 
+              className="hidden lg:flex justify-center items-center"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+            >
               <div 
                 className="relative rounded-lg overflow-hidden shadow-2xl"
                 style={{
@@ -110,7 +121,7 @@ export default function HeroSection() {
                   }}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -132,7 +143,12 @@ export default function HeroSection() {
           }}
         />
 
-        <div className="relative z-10">
+        <motion.div 
+          className="relative z-10"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <h1 
             className="font-serif font-bold leading-tight"
             style={{ 
@@ -196,7 +212,7 @@ export default function HeroSection() {
           >
             "Entender tu cuerpo es el primer paso para sanarlo."
           </p>
-        </div>
+        </motion.div>
       </section>
     </>
   );
