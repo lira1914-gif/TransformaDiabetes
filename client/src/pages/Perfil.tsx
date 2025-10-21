@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Day7TrialModal from "@/components/Day7TrialModal";
 import Day6TrialModal from "@/components/Day6TrialModal";
+import Day7Banner from "@/components/Day7Banner";
 import { TrialStatus } from "@/types/trial";
 
 export default function Perfil() {
@@ -187,6 +188,14 @@ export default function Perfil() {
         <Day6TrialModal
           daysRemaining={trialStatus.daysRemaining}
           hasAccess={trialStatus.hasAccess}
+          isActive={trialStatus.isActive}
+        />
+      )}
+
+      {/* Banner del Día 7 */}
+      {trialStatus && (
+        <Day7Banner
+          daysRemaining={trialStatus.daysRemaining}
           isActive={trialStatus.isActive}
         />
       )}
