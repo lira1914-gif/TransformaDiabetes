@@ -12,7 +12,7 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
   - Pricing: $5 USD/mes (all $15 references removed)
 - **Email Collection**: Added LinkAuthenticationElement to Checkout.tsx to guarantee email capture
 - **Stripe Trial Configuration**: Backend configured with `trial_period_days: 7`
-- **New Trial Flow (October 21, 2025)** ✅ **COMPLETED**:
+- **New Trial Flow (October 21, 2025)** ✅ **COMPLETED & VERIFIED**:
   - **Welcome Screen**: Created `/onboarding/bienvenida-trial` intermediate page before intake form
   - **Unified Entry Points**: All header CTAs now route through welcome screen → intake form
   - **Trial Start on Intake**: Trial starts when intake form is completed (tm_trial_start in localStorage + trialStartDate in DB)
@@ -26,7 +26,18 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
     - Handles: checkout.session.completed, invoice.payment_succeeded, customer.subscription.updated, customer.subscription.deleted
     - Updates DB: subscriptionStatus, trialEnded, unlockedModules
     - Requires: STRIPE_WEBHOOK_SECRET environment variable (not yet configured)
-  - **Post-Payment Redirect**: Checkout now redirects to `/modulo-1` with welcome message (tm_just_subscribed flag)
+    - **Security**: Raw body middleware correctly ordered before express.json() in server/index.ts
+    - **Reliability**: Always responds with 200 status to prevent Stripe retries
+  - **Post-Payment Flow (FIXED)**: 
+    - `/api/create-subscription-with-payment` now returns email in response
+    - `Checkout.tsx` saves userId, email to localStorage and sets tm_just_subscribed flag
+    - Redirects to `/modulo-1` with welcome banner on first visit
+    - Module 1 unlocked immediately upon subscription creation
+  - **Modulo1.tsx (CRITICAL FIX)**: 
+    - Removed hardcoded test userId (d48af8be-dabe-4b0e-94cb-48eadfb0fbe8)
+    - Now reads userId from localStorage (tm_user_id)
+    - Redirects to home if userId missing
+    - Correct API endpoint: `/api/modules/check/:userId`
   - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups
 
 ## User Preferences
