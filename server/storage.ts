@@ -73,12 +73,12 @@ export class PostgreSQLStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const result = await db.insert(users).values(insertUser).returning();
+    const result = await db.insert(users).values(insertUser as any).returning();
     return result[0];
   }
 
   async updateUser(id: string, data: Partial<InsertUser>): Promise<User | undefined> {
-    const result = await db.update(users).set(data).where(eq(users.id, id)).returning();
+    const result = await db.update(users).set(data as any).where(eq(users.id, id)).returning();
     return result[0];
   }
 
@@ -166,7 +166,7 @@ export class PostgreSQLStorage implements IStorage {
 
   // Weekly Checkins
   async createWeeklyCheckin(insertCheckin: InsertWeeklyCheckin): Promise<WeeklyCheckin> {
-    const result = await db.insert(weeklyCheckins).values(insertCheckin).returning();
+    const result = await db.insert(weeklyCheckins).values(insertCheckin as any).returning();
     return result[0];
   }
 

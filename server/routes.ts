@@ -354,11 +354,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
 
         case 'invoice.payment_succeeded': {
-          const invoice = event.data.object as Stripe.Invoice;
+          const invoice = event.data.object as any;
           console.log('💰 Pago exitoso:', invoice.id);
           
           const customerId = invoice.customer as string;
-          const subscriptionId = invoice.subscription as string;
+          const subscriptionId = typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id;
 
           if (!customerId || !subscriptionId) {
             console.error('⚠️ Invoice sin customer o subscription:', invoice.id);
