@@ -1,0 +1,70 @@
+Aquí tienes los textos listos para copiar y pegar en Replit (pueden insertarse directamente en los correos NodeMailer).
+El tono está alineado con la voz de TransformaDiabetes: cálido, esperanzador y educativo, sin sonar comercial.
+
+⸻
+
+💌 Correo Día 6 – “Tu prueba termina mañana”
+
+Asunto: ⏰ Tu prueba termina mañana — no pierdas tu progreso
+Mensaje (HTML o texto plano):
+
+⸻
+
+Hola [nombre],
+
+Tu cuerpo ya empezó a responder.
+Durante estos días has dado los primeros pasos para entender mejor tus señales, equilibrar tu energía y reducir la inflamación.
+
+👉 Mañana termina tu acceso gratuito a TransformaDiabetes, pero tu transformación apenas comienza.
+
+Si te está gustando el proceso, no lo detengas ahora.
+Activa tu suscripción por solo $5 USD al mes y continúa con el Módulo 1: Empieza desde la raíz, donde aprenderás a mantener tus niveles de glucosa estables sin dietas extremas ni restricciones.
+
+Tu cuerpo no está roto — solo necesita apoyo constante.
+Dale la oportunidad de seguir mejorando.
+
+🔗 Continuar mi transformación
+
+Con equilibrio,
+Marvin Lira, Coach Funcional
+TransformaDiabetes 🌿
+
+⸻
+
+⸻
+
+💌 Correo Día 8 – “Extrañamos tu presencia”
+
+Asunto: 🌱 Extrañamos tu presencia — tu transformación aún te espera
+Mensaje (HTML o texto plano):
+
+⸻
+
+Hola [nombre],
+
+Notamos que tu prueba gratuita terminó hace poco,
+pero tu cuerpo sigue hablando contigo cada día.
+
+En TransformaDiabetes, no se trata solo de controlar el azúcar,
+sino de entender lo que tu cuerpo necesita para sanar desde la raíz.
+
+Vuelve a tu guía, tus registros y tu chat funcional —
+allí está el camino que ya comenzaste.
+
+💚 Reactiva tu cuenta hoy y continúa donde te quedaste:
+👉 Retomar mi transformación
+
+Tu bienestar no tiene fecha de expiración,
+solo necesita continuidad.
+
+Con aprecio,
+Marvin Lira, Coach Funcional
+TransformaDiabetes 🌿
+
+⸻
+
+✅ Notas para Replit (puedes incluirlas en las instrucciones):
+	•	Estos correos deben enviarse automáticamente:
+	•	Día 6 → solo a usuarios con trial activo.
+	•	Día 8 → solo a usuarios cuyo trial terminó y no tienen suscripción activa.
+	•	Mantener los enlaces actualizados con el dominio final (transformadiabetes.com o el de Replit temporal).

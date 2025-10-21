@@ -1226,6 +1226,294 @@ export async function sendModule2CompletedEmail(to: string, name?: string): Prom
   });
 }
 
+export async function sendDay6ReminderEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Estimado usuario';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .emoji {
+          font-size: 24px;
+          margin-right: 8px;
+        }
+        h1 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 26px;
+          margin-bottom: 10px;
+          line-height: 1.3;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .highlight {
+          background-color: #f9f7f4;
+          border-left: 4px solid #b85c38;
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 6px;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #b85c38;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1><span class="emoji">⏰</span> Tu prueba gratuita termina mañana</h1>
+          <p style="color: #757575; font-size: 15px; margin-top: 10px;">No pierdas tu progreso funcional</p>
+        </div>
+        
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Tu prueba gratuita de 7 días en TransformaDiabetes finaliza <strong>mañana</strong>.</p>
+          
+          <p>Estos días han sido el inicio de algo importante: has comenzado a observar tu cuerpo, a entender sus señales y a descubrir cómo funciona tu metabolismo desde la raíz.</p>
+        </div>
+
+        <div class="highlight">
+          <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+            <span class="emoji">🌱</span> <strong>Tu proceso apenas comienza.</strong> Mantener el acceso a tu plan funcional significa continuar con:
+          </p>
+          <ul style="margin-top: 15px; padding-left: 20px;">
+            <li>Chat funcional semanal con IA especializada</li>
+            <li>Módulos educativos progresivos</li>
+            <li>Seguimiento personalizado de tu evolución</li>
+            <li>Guías prácticas para equilibrar tu glucosa</li>
+          </ul>
+        </div>
+
+        <div class="content">
+          <p><strong>Por solo $5 USD al mes</strong>, mantienes tu transformación activa y sigues avanzando con el acompañamiento que tu cuerpo necesita.</p>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/onboarding/checkout" class="cta-button">
+            <span class="emoji">👉</span> Continuar mi transformación
+          </a>
+        </div>
+
+        <div class="content" style="font-size: 15px; color: #6a6a6a; text-align: center;">
+          <p>No dejes que este progreso se detenga.<br>Tu cuerpo ya está respondiendo — sigue adelante.</p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
+            Nutrición Funcional<br>
+            <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '⏰ Tu prueba gratuita termina mañana — No pierdas tu progreso',
+    html
+  });
+}
+
+export async function sendDay8FollowupEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Estimado usuario';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .emoji {
+          font-size: 24px;
+          margin-right: 8px;
+        }
+        h1 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 26px;
+          margin-bottom: 10px;
+          line-height: 1.3;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .highlight {
+          background-color: #f9f7f4;
+          border-left: 4px solid #6B7041;
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 6px;
+        }
+        .quote {
+          font-style: italic;
+          color: #4a5d23;
+          font-size: 17px;
+          margin: 15px 0;
+          text-align: center;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #b85c38;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1><span class="emoji">💚</span> Extrañamos tu presencia</h1>
+          <p style="color: #757575; font-size: 15px; margin-top: 10px;">Tu transformación funcional te está esperando</p>
+        </div>
+        
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Notamos que tu prueba gratuita ha finalizado y aún no has activado tu suscripción.</p>
+          
+          <p>Sabemos que comenzar un proceso de salud requiere decisión y constancia. Por eso queremos recordarte que <strong>tu cuerpo ya empezó a responder</strong> durante estos días de observación funcional.</p>
+        </div>
+
+        <div class="highlight">
+          <div class="quote">
+            "El equilibrio no se alcanza en 7 días, se cultiva cada día con decisiones simples."
+          </div>
+          <p style="margin-top: 15px; font-size: 15px; line-height: 1.6;">
+            Durante tu prueba, comenzaste a reconectar con tu cuerpo. Ahora es el momento de profundizar ese aprendizaje y mantener el impulso con tu plan funcional guiado.
+          </p>
+        </div>
+
+        <div class="content">
+          <p><strong>¿Qué incluye tu membresía de $5 USD/mes?</strong></p>
+          <ul style="padding-left: 20px; margin-top: 10px;">
+            <li><span class="emoji">💬</span> Chat funcional semanal con IA especializada</li>
+            <li><span class="emoji">📚</span> Acceso a todos los módulos educativos</li>
+            <li><span class="emoji">📊</span> Seguimiento personalizado de tu evolución</li>
+            <li><span class="emoji">🌿</span> Guías prácticas para equilibrar tu glucosa desde la raíz</li>
+          </ul>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/onboarding/checkout" class="cta-button">
+            <span class="emoji">👉</span> Reactivar mi transformación
+          </a>
+        </div>
+
+        <div class="content" style="font-size: 15px; color: #6a6a6a; text-align: center;">
+          <p>Tu cuerpo no está roto, solo necesita apoyo.<br>Estamos aquí para acompañarte en cada paso.</p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
+            Nutrición Funcional<br>
+            <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '💚 Extrañamos tu presencia — Continúa tu transformación funcional',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     await transporter.verify();
