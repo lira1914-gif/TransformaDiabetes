@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { TrialStatus } from "@/types/trial";
 
 interface InformeFuncionalProps {
   readOnly?: boolean;
@@ -12,6 +14,13 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
   
   // Verificar si el usuario ya está suscrito
   const isSubscribed = localStorage.getItem('tm_subscribed_at') !== null;
+  
+  // Obtener estado del trial para controlar visibilidad del Chat Semanal
+  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+  const { data: trialStatus } = useQuery<TrialStatus>({
+    queryKey: ['/api/trial-status', userId],
+    enabled: !!userId,
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 200);
@@ -89,7 +98,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         </p>
       </div>
 
-      {!readOnly && !isSubscribed && (
+      {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
         <div style={{ 
           display: 'flex', 
           flexDirection: 'column', 

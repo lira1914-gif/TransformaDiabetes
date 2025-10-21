@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sprout, Lock, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { TrialStatus } from '@/types/trial';
 
 interface ModuleCheckResponse {
   unlockedModules: number[];
@@ -21,6 +22,12 @@ export default function Modulo1() {
   
   // Obtener userId de localStorage
   const userId = localStorage.getItem('tm_user_id');
+  
+  // Obtener estado del trial para controlar visibilidad del Chat Semanal
+  const { data: trialStatus } = useQuery<TrialStatus>({
+    queryKey: ['/api/trial-status', userId],
+    enabled: !!userId,
+  });
 
   // Si no hay userId, redirigir a la página de inicio
   useEffect(() => {
@@ -485,21 +492,23 @@ export default function Modulo1() {
               </div>
             </section>
 
-            {/* Call to action */}
-            <div className="mt-8 pt-6 border-t" style={{ borderColor: '#E6E3D9' }}>
-              <div className="text-center">
-                <p className="mb-4 font-medium" style={{ color: '#3E3E2E' }}>
-                  Continúa tu aprendizaje en el chat semanal
-                </p>
-                <Button
-                  onClick={() => setLocation('/chat-semanal')}
-                  className="w-full md:w-auto"
-                  data-testid="button-go-to-chat"
-                >
-                  Ir al chat semanal
-                </Button>
+            {/* Call to action - Solo visible si el usuario está activo o en trial */}
+            {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+              <div className="mt-8 pt-6 border-t" style={{ borderColor: '#E6E3D9' }}>
+                <div className="text-center">
+                  <p className="mb-4 font-medium" style={{ color: '#3E3E2E' }}>
+                    Continúa tu aprendizaje en el chat semanal
+                  </p>
+                  <Button
+                    onClick={() => setLocation('/chat-semanal')}
+                    className="w-full md:w-auto"
+                    data-testid="button-go-to-chat"
+                  >
+                    Ir al chat semanal
+                  </Button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </main>
