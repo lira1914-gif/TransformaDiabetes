@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
+import { apiRequest } from "@/lib/queryClient";
 
 interface InformeFuncionalProps {
   readOnly?: boolean;
@@ -13,6 +14,22 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
     const timer = setTimeout(() => setVisible(true), 200);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleFinalize = () => {
+    // Marcar que el usuario completó el informe y está listo para cerrar el Módulo 1
+    localStorage.setItem('tm_module1_completed', 'true');
+    
+    // Enviar correo de cierre del módulo 1 en segundo plano (fire-and-forget)
+    const userId = localStorage.getItem('tm_user_id');
+    if (userId) {
+      apiRequest('POST', '/api/notify-module1-completed', { userId })
+        .then(() => console.log('✅ Email de cierre de Módulo 1 enviado'))
+        .catch(error => console.error('Error enviando email de cierre:', error));
+    }
+    
+    // Redirigir inmediatamente sin esperar el email
+    navigate('/modulo-1');
+  };
 
   return (
     <section
@@ -68,12 +85,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         <button
           className="btn-finalizar"
           data-testid="button-finalizar-informe"
-          onClick={() => {
-            // Marcar que el usuario completó el informe y está listo para cerrar el Módulo 1
-            localStorage.setItem('tm_module1_completed', 'true');
-            // Redirigir a la página del Módulo 1 donde verá la pantalla de cierre
-            navigate('/modulo-1');
-          }}
+          onClick={handleFinalize}
         >
           Finalizar
         </button>

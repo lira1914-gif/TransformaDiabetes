@@ -1,0 +1,54 @@
+Aquí tienes el correo automático de cierre del Módulo 2 — “Equilibra desde adentro”, listo para entregar a Replit (o al desarrollador encargado de la automatización de correos).
+Este correo tiene el mismo tono funcional, humano y empático del proyecto, alineado con Marvin Lira Nutrición Funcional.
+
+⸻
+
+📧 Correo Automático — Cierre del Módulo 2
+
+Asunto: 🌿 Has completado el Módulo 2 — Tu cuerpo está encontrando su equilibrio
+
+⸻
+
+Hola [Nombre],
+
+✨ ¡Felicidades! Has completado el Módulo 2 — “Equilibra desde adentro.”
+
+Tu cuerpo ya no solo reacciona, ahora responde.
+Durante este módulo aprendiste a observar cómo tu digestión, tu descanso y tus emociones se conectan con tu energía diaria.
+
+Has comenzado a cultivar equilibrio en tres niveles:
+	•	🌿 Digestivo: alivio y regularidad.
+	•	💧 Glucémico: energía más estable y menos antojos.
+	•	🌙 Nervioso: descanso más profundo, cuerpo más tranquilo.
+
+⸻
+
+🧭 Reflexión funcional
+
+“El equilibrio no se fuerza, se cultiva cada día con decisiones simples.”
+
+Cada respiración, cada alimento y cada noche de descanso forman parte de tu proceso de recuperación funcional.
+Estás reprogramando la manera en que tu cuerpo busca bienestar.
+
+⸻
+
+🌱 Tu siguiente paso
+
+El Módulo 3, “Energía estable y metabolismo consciente,” te enseñará cómo mantener esa estabilidad y fortalecer tu metabolismo con estrategias de movimiento, ritmo y alimentación funcional.
+
+🔗 Haz clic aquí para continuar:
+👉 [Desbloquear el Módulo 3]
+
+⸻
+
+💬 Si tienes preguntas técnicas o problemas para acceder, puedes escribirnos al chat de soporte dentro de la aplicación.
+
+🌿 Marvin Lira
+Nutrición Funcional — Tu cuerpo no está roto, está buscando equilibrio.
+
+⸻
+
+✅ Instrucciones para Replit (técnicas):
+	•	Este correo se envía automáticamente cuando el usuario completa el Módulo 2 (al generarse el informe final).
+	•	El botón [Desbloquear el Módulo 3] debe redirigir al flujo del Módulo 3 en la app.
+	•	Usar el nombre del usuario (user.first_name) si está disponible.

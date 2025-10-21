@@ -892,6 +892,165 @@ export async function sendReactivationEmail(to: string, name?: string): Promise<
   });
 }
 
+export async function sendModule1CompletedEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        h1 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 26px;
+          margin-bottom: 10px;
+          line-height: 1.3;
+        }
+        h2 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 20px;
+          margin-top: 30px;
+          margin-bottom: 15px;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.8;
+        }
+        .highlight {
+          background-color: #f5f3ef;
+          border-left: 4px solid #4a5d23;
+          padding: 20px;
+          margin: 30px 0;
+          border-radius: 4px;
+        }
+        .quote {
+          font-style: italic;
+          font-size: 18px;
+          color: #4a5d23;
+          text-align: center;
+          padding: 25px;
+          margin: 30px 0;
+          background-color: #f9f9f7;
+          border-radius: 6px;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #6B7041;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 6px;
+          font-weight: 600;
+          margin: 25px 0;
+          text-align: center;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 30px 0;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 25px;
+          border-top: 1px solid #e6e3d9;
+          font-size: 14px;
+          color: #6a6a6a;
+        }
+        .signature {
+          margin-top: 20px;
+        }
+        .emoji {
+          font-size: 22px;
+          margin-right: 8px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1><span class="emoji">🌿</span> Has completado tu primer módulo</h1>
+        </div>
+        
+        <div class="content">
+          <p>${userName},</p>
+          
+          <p><span class="emoji">✨</span> <strong>¡Felicidades! Has completado el Módulo 1 — "Empieza desde la raíz."</strong></p>
+          
+          <p>Este primer paso marca el inicio real de tu transformación funcional.<br>
+          Has aprendido a observar las señales de tu cuerpo — digestión, energía, sueño y emociones — sin juzgarte.<br>
+          Cada registro que hiciste fue una conversación entre tú y tu biología.</p>
+        </div>
+        
+        <div class="highlight">
+          <h2><span class="emoji">🧭</span> Reflexión funcional</h2>
+          <div class="quote">
+            "No se trata de controlar un síntoma, sino de entender la raíz."
+          </div>
+          <div class="content">
+            <p>Tu cuerpo no está roto; está pidiendo equilibrio.<br>
+            Y tú ya estás aprendiendo a escuchar lo que realmente necesita.</p>
+          </div>
+        </div>
+        
+        <div class="content">
+          <h2><span class="emoji">🌱</span> Lo que viene ahora</h2>
+          <p>El siguiente módulo, <strong>"Equilibra desde adentro,"</strong> te enseñará cómo fortalecer tus sistemas desde la nutrición funcional — con estrategias personalizadas y apoyo natural educativo (sin dosis ni marcas).</p>
+        </div>
+        
+        <div class="cta-container">
+          <a href="${baseUrl}/modulo-1" class="cta-button">
+            <span class="emoji">👉</span> Continuar al Módulo 2
+          </a>
+        </div>
+        
+        <div class="content" style="font-size: 14px; color: #6a6a6a; margin-top: 30px;">
+          <p><span class="emoji">💬</span> Si algo no funciona o tienes preguntas sobre tu acceso, puedes escribirnos desde el chat de soporte técnico dentro de la aplicación.</p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
+            Nutrición Funcional<br>
+            <em>Tu cuerpo no está roto, solo está buscando equilibrio.</em><br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '🌿 Has completado tu primer módulo — Tu cuerpo ya está respondiendo',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     await transporter.verify();
