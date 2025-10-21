@@ -19,6 +19,14 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
   - **Day Counter**: TrialCounter component with robust validation, capped daysRemaining (0-7), malformed date protection
   - **Chat Blocking**: Active days 1-6 (daysRemaining > 0), blocked on Day 7 (daysRemaining === 0) with upgrade prompt
   - **Day 5 Banner**: Soft reminder banner at daysRemaining === 2 in ChatSemanal and Informe pages
+  - **Day 6 Modal** (October 21, 2025): ✅ **COMPLETED**
+    - Full-screen modal shown once on day 6 (`daysRemaining === 1`)
+    - Title: "✨ Has completado tu prueba funcional gratuita"
+    - Message emphasizes progress made during trial and encourages continuation with Module 1
+    - CTA: "🟩 Continuar mi transformación por $5 USD/mes" → redirects to checkout
+    - Only shown to users without active subscription
+    - Uses sessionStorage flag `tm_day6_modal_seen` to prevent repeated displays
+    - Displayed in ChatSemanal and Perfil pages
   - **Database Fields**: Added `trialStartDate` (timestamp) and `trialEnded` (boolean) to users table
   - **TypeScript Types**: Added `trialEnded` field to TrialStatus interface in `client/src/types/trial.ts`
   - **Module 1 Page**: Created `/modulo-1` with educational content and access control via unlockedModules

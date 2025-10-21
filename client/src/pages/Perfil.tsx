@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import Day7TrialModal from "@/components/Day7TrialModal";
+import Day6TrialModal from "@/components/Day6TrialModal";
 import { TrialStatus } from "@/types/trial";
 
 export default function Perfil() {
@@ -175,6 +176,15 @@ export default function Perfil() {
       {/* Modal del Día 7 */}
       {trialStatus && (
         <Day7TrialModal
+          daysRemaining={trialStatus.daysRemaining}
+          hasAccess={trialStatus.hasAccess}
+          isActive={trialStatus.isActive}
+        />
+      )}
+
+      {/* Modal del Día 6 */}
+      {trialStatus && (
+        <Day6TrialModal
           daysRemaining={trialStatus.daysRemaining}
           hasAccess={trialStatus.hasAccess}
           isActive={trialStatus.isActive}
