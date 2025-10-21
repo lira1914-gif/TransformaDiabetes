@@ -26,26 +26,15 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight"
               style={{ color: '#556B2F' }}
             >
-              Tu cuerpo no está roto.
-              <br />
-              Solo está protegiéndose.
+              Tu cuerpo no está roto. Solo necesita guía para volver al equilibrio.
             </h1>
             
             <p 
               className="text-lg sm:text-xl leading-relaxed"
               style={{ color: '#3A3A3A' }}
             >
-              Aprende a leer las señales de tu cuerpo, equilibrar tu glucosa y revertir la diabetes tipo 2 desde la raíz.
+              TransformaDiabetes no es una IA genérica. Es un acompañamiento funcional que interpreta mis hábitos y registros para darme claridad paso a paso, con el método de Marvin Lira: ciencia, nutrición y consciencia corporal.
             </p>
-            
-            <div 
-              className="space-y-3"
-              style={{ color: '#6F6E66', fontSize: '0.95rem', lineHeight: 1.6 }}
-            >
-              <p>Sanar no es controlar síntomas,</p>
-              <p>es entender causas.</p>
-              <p>Nutrición funcional clara, aplicada a tu día a día.</p>
-            </div>
 
             <div className="pt-4">
               <Link href="/pre-registro">
@@ -61,7 +50,7 @@ export default function HeroSection() {
                   }}
                   className="hover:opacity-90 transition-opacity"
                 >
-                  Iniciar mi diagnóstico funcional gratuito
+                  Comenzar prueba gratuita de 7 días
                 </Button>
               </Link>
               
@@ -69,7 +58,7 @@ export default function HeroSection() {
                 className="text-sm mt-3"
                 style={{ color: '#6F6E66' }}
               >
-                Gratis • 3–5 minutos • Resultados personalizados
+                Acceso completo al Módulo 1. Luego $5 USD/mes. Cancela en cualquier momento desde tu perfil.
               </p>
             </div>
           </div>

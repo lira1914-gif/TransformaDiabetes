@@ -20,31 +20,33 @@ export default function SuscripcionSection() {
       style={{ '--suscripcion-bg-image': `url(${backgroundImage})` } as React.CSSProperties}
     >
       <div className="wrap">
-        <h1>🌿 Tu transformación funcional comienza aquí</h1>
+        <h1>🌿 Tu transformación funcional comienza con 7 días gratuitos</h1>
         <p className="sub">
-          Acompañamiento humano + ciencia funcional para recuperar tu energía, estabilizar tu glucosa y reconectar con tu cuerpo.
+          Vive la experiencia completa del Módulo 1 sin costo: evaluación, registro de 5 días, informe personalizado y acceso al chat educativo.
           <br />
-          <em>"Tu cuerpo no está roto — solo está protegiéndose."</em>
+          Si decides continuar, tu suscripción se activa automáticamente por $5 USD/mes.
+          <br />
+          Puedes cancelar en cualquier momento desde tu perfil (Stripe Customer Portal).
         </p>
 
-        <h2>Suscripción TransformaDiabetes Funcional</h2>
+        <h2>¿Qué incluye tu prueba gratuita?</h2>
 
         <div>
-          <h3>Qué recibes por $5/mes:</h3>
+          <h3>Durante tus 7 días gratuitos recibes:</h3>
           <ul>
-            <li>Acceso a 10 mini guías funcionales ampliadas.</li>
-            <li>Recomendaciones prácticas para equilibrar tu glucosa y energía.</li>
-            <li>Revisión opcional de tus análisis de sangre para orientación funcional.</li>
-            <li>Microhábitos semanales para mejorar digestión, descanso y claridad mental.</li>
-            <li>Acceso al diario funcional y seguimiento personalizado.</li>
+            <li>Informe funcional con raíces y recomendaciones personalizadas</li>
+            <li>Chat funcional semanal (educativo, no médico)</li>
+            <li>Acompañamiento mensual por módulos, sin dietas extremas</li>
+            <li>Acceso a historial y progreso</li>
           </ul>
 
           <h3>Cómo funciona:</h3>
           <ol>
-            <li>Suscríbete y obtén acceso a tu área personal.</li>
+            <li>Comienza tu prueba gratuita de 7 días (sin costo).</li>
             <li>Completa tu historial funcional (intake médico y hábitos).</li>
             <li>Registra tus 5 días de comidas, sueño y digestión.</li>
-            <li>Recibe tu primer análisis funcional y plan de ajustes personalizado.</li>
+            <li>Recibe tu análisis funcional y plan de ajustes personalizado.</li>
+            <li>Después de 7 días, si decides continuar, se activa automáticamente tu suscripción por $5 USD/mes.</li>
           </ol>
 
           <div className="cta">
@@ -54,13 +56,17 @@ export default function SuscripcionSection() {
               disabled={isLoading}
               style={{ opacity: isLoading ? 0.6 : 1, cursor: isLoading ? 'wait' : 'pointer' }}
             >
-              {isLoading ? 'Procesando...' : 'Unirme por $5 USD/mes'}
+              {isLoading ? 'Procesando...' : 'Comenzar prueba gratuita de 7 días'}
             </button>
           </div>
 
           <div className="footer-note">
-            🔒 Pago seguro procesado por Stripe. Cancela cuando quieras.
+            🔒 Pago seguro procesado por Stripe. Cancela cuando quieras desde tu perfil.
           </div>
+          
+          <p className="text-sm mt-4" style={{ color: '#6F6E66', textAlign: 'center' }}>
+            Programa educativo. No reemplaza la orientación médica.
+          </p>
 
           <section className="disclaimer">
             <p>

@@ -13,8 +13,7 @@ export default function QueEsSection() {
         
         <div className="space-y-8 text-base md:text-lg leading-relaxed text-foreground">
           <p>
-            Revertir la diabetes tipo 2 no es un milagro, es un proceso fisiológico posible cuando entiendes lo que tu cuerpo necesita. 
-            A través de cambios conscientes en tu alimentación, descanso y estilo de vida, puedes restaurar tu sensibilidad a la insulina y recuperar equilibrio, energía y claridad mental.
+            Revertir no es tapar síntomas; es entender por qué el cuerpo los genera. TransformaDiabetes combina nutrición funcional, biología del estrés y hábitos conscientes para recuperar sensibilidad a la insulina, energía y claridad mental — sin dietas extremas ni respuestas genéricas.
           </p>
           
           <div className="grid md:grid-cols-3 gap-6 py-8">
