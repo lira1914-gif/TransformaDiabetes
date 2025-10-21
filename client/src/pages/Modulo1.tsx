@@ -17,6 +17,7 @@ interface ModuleCheckResponse {
 export default function Modulo1() {
   const [, setLocation] = useLocation();
   const [showWelcome, setShowWelcome] = useState(false);
+  const [showClosing, setShowClosing] = useState(false);
   
   // Obtener userId de localStorage
   const userId = localStorage.getItem('tm_user_id');
@@ -35,6 +36,13 @@ export default function Modulo1() {
   });
 
   useEffect(() => {
+    // Verificar primero si debe mostrar la pantalla de cierre (prioridad más alta)
+    const module1Completed = localStorage.getItem('tm_module1_completed');
+    if (module1Completed === 'true') {
+      setShowClosing(true);
+      return;
+    }
+    
     // Mostrar pantalla de bienvenida si es un usuario que acaba de suscribirse
     const justSubscribed = localStorage.getItem('tm_just_subscribed');
     if (justSubscribed === 'true') {
@@ -46,6 +54,16 @@ export default function Modulo1() {
   const handleContinueFromWelcome = () => {
     setShowWelcome(false);
     localStorage.removeItem('tm_just_subscribed');
+  };
+
+  const handleContinueToModule2 = () => {
+    localStorage.removeItem('tm_module1_completed');
+    setShowClosing(false);
+    // TODO: Cuando el Módulo 2 esté disponible, redirigir a /modulo-2
+    // Por ahora, mostrar un mensaje y recargar para mostrar el contenido del módulo
+    alert('El Módulo 2 estará disponible próximamente. Por ahora, continúa explorando tu contenido en el chat semanal.');
+    // Recargar la página para mostrar el contenido normal del módulo
+    window.location.reload();
   };
 
   // Verificar si el usuario tiene acceso al Módulo 1
@@ -65,32 +83,82 @@ export default function Modulo1() {
     );
   }
 
-  // Si no tiene acceso, mostrar mensaje de bloqueo
-  if (!hasAccessToModule1) {
+  // IMPORTANTE: Las pantallas de cierre y bienvenida tienen prioridad sobre la verificación de acceso
+  // Esto permite que los usuarios que completaron el módulo o acaban de suscribirse vean estas pantallas
+  // incluso mientras se carga o verifica el acceso
+
+  // Si debe mostrar la pantalla de cierre (prioridad más alta)
+  if (showClosing) {
     return (
       <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF8F4' }}>
         <Header />
-        <main className="flex-1 py-12">
-          <div className="max-w-2xl mx-auto px-4">
-            <Card className="border-orange-200 bg-orange-50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-orange-900">
-                  <Lock className="h-5 w-5" />
-                  Módulo bloqueado
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-orange-800 mb-4">
-                  Este módulo está disponible solo para suscriptores activos. Activa tu suscripción para acceder a todo el contenido educativo.
+        <main className="flex-1 py-12 md:py-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <div 
+              className="bg-white rounded-lg border p-8 md:p-12 shadow-sm"
+              style={{ borderColor: '#E6E3D9' }}
+              data-testid="closing-screen-module1"
+            >
+              {/* Header */}
+              <div className="mb-8">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#3E3E2E' }}>
+                  🌿 Has completado el Módulo 1 — Empieza desde la raíz
+                </h1>
+                <p className="text-xl font-medium mb-4" style={{ color: '#6F6E66' }}>
+                  ✨ Tu cuerpo ya está respondiendo.
                 </p>
-                <Button 
-                  onClick={() => setLocation('/onboarding/checkout')}
-                  data-testid="button-subscribe-from-module"
+                <p className="text-lg leading-relaxed" style={{ color: '#6F6E66' }}>
+                  Has dado los primeros pasos hacia un equilibrio real: digestión más tranquila, energía más estable y sueño más reparador.
+                </p>
+              </div>
+
+              <hr style={{ borderColor: '#E6E3D9' }} className="my-6" />
+
+              {/* Reflexión funcional */}
+              <div className="mb-8">
+                <h2 className="text-xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
+                  🧭 Reflexión funcional:
+                </h2>
+                <blockquote className="border-l-4 pl-4 mb-4" style={{ borderColor: '#6B7041' }}>
+                  <p className="text-lg font-medium italic mb-3" style={{ color: '#6B7041' }}>
+                    "No se trata de controlar un síntoma, sino de entender la raíz."
+                  </p>
+                </blockquote>
+                <p className="leading-relaxed" style={{ color: '#6F6E66' }}>
+                  En este módulo aprendiste a observar sin juzgar, reconectar con tus señales corporales y establecer los pilares de tu energía funcional.
+                  Lo que sigue es profundizar en los ajustes nutricionales y de soporte que consolidan este cambio.
+                </p>
+              </div>
+
+              <hr style={{ borderColor: '#E6E3D9' }} className="my-6" />
+
+              {/* Próximo paso */}
+              <div className="mb-8">
+                <h2 className="text-xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
+                  🌱 Próximo paso:
+                </h2>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-5 mb-4">
+                  <p className="font-medium mb-2" style={{ color: '#166534' }}>
+                    👉 Desbloquea el Módulo 2: "Equilibra desde adentro"
+                  </p>
+                  <p className="text-sm" style={{ color: '#15803D' }}>
+                    para acceder a estrategias funcionales avanzadas, suplementos educativos con precauciones y tu nueva guía de acción personalizada.
+                  </p>
+                </div>
+              </div>
+
+              {/* Botón para continuar */}
+              <div className="pt-6">
+                <Button
+                  onClick={handleContinueToModule2}
+                  className="w-full md:w-auto"
+                  size="lg"
+                  data-testid="button-continue-to-module2"
                 >
-                  Activar suscripción ($5 USD/mes)
+                  Continuar al Módulo 2
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </main>
         <Footer />
@@ -184,6 +252,40 @@ export default function Modulo1() {
                 </div>
               </div>
             </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Si no tiene acceso al módulo, mostrar mensaje de bloqueo
+  // Esta verificación se hace al final para que las pantallas de cierre/bienvenida tengan prioridad
+  if (!hasAccessToModule1) {
+    return (
+      <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF8F4' }}>
+        <Header />
+        <main className="flex-1 py-12">
+          <div className="max-w-2xl mx-auto px-4">
+            <Card className="border-orange-200 bg-orange-50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-orange-900">
+                  <Lock className="h-5 w-5" />
+                  Módulo bloqueado
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-orange-800 mb-4">
+                  Este módulo está disponible solo para suscriptores activos. Activa tu suscripción para acceder a todo el contenido educativo.
+                </p>
+                <Button 
+                  onClick={() => setLocation('/onboarding/checkout')}
+                  data-testid="button-subscribe-from-module"
+                >
+                  Activar suscripción ($5 USD/mes)
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </main>
         <Footer />

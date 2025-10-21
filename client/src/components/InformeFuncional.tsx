@@ -69,7 +69,10 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
           className="btn-finalizar"
           data-testid="button-finalizar-informe"
           onClick={() => {
-            alert("Has completado tu primera semana. Pronto podrás continuar al Mes 2 con ajustes personalizados y diario guiado por IA.");
+            // Marcar que el usuario completó el informe y está listo para cerrar el Módulo 1
+            localStorage.setItem('tm_module1_completed', 'true');
+            // Redirigir a la página del Módulo 1 donde verá la pantalla de cierre
+            navigate('/modulo-1');
           }}
         >
           Finalizar

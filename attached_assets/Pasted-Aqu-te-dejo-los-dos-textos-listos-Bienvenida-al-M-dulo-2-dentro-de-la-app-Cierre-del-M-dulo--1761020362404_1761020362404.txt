@@ -1,0 +1,95 @@
+Aquí te dejo los dos textos listos:
+✅ Bienvenida al Módulo 2 (dentro de la app)
+✅ Cierre del Módulo 2 (antes de pasar al Módulo 3)
+Ambos vienen con las instrucciones exactas que Replit necesita para implementarlos sin alterar el flujo técnico.
+
+⸻
+
+🟢 PANTALLA DE BIENVENIDA — MÓDULO 2 “Equilibra desde adentro”
+
+📩 Instrucción para Replit:
+Mostrar esta pantalla una sola vez, cuando el usuario desbloquea el Módulo 2 después del pago o la confirmación de continuación.
+No reemplaza el contenido del módulo — solo aparece al inicio, antes de acceder al flujo normal.
+
+⸻
+
+🌿 Texto completo (Bienvenida al Módulo 2)
+
+🎉 ¡Bienvenido al Módulo 2 — Equilibra desde adentro!
+
+Tu cuerpo ya empezó a responder.
+Ahora vamos a fortalecerlo desde adentro, ayudando a tus sistemas a trabajar en sincronía: digestivo, hepático, hormonal y nervioso.
+
+⸻
+
+🧠 Objetivo de este módulo:
+
+Encontrar equilibrio en tres niveles:
+	1.	Digestivo: restaurar el fuego digestivo y la absorción.
+	2.	Glucémico: estabilizar energía y azúcar en sangre.
+	3.	Neuroendocrino: calmar el sistema nervioso y modular el estrés.
+
+⸻
+
+🌱 Tu guía práctica para este mes:
+	•	Observa cómo reacciona tu cuerpo ante ciertos alimentos.
+	•	Usa los registros diarios para conectar patrones entre digestión, energía y sueño.
+	•	Aplica pequeñas acciones que suman grandes resultados:
+	•	Comer sin pantallas
+	•	Dormir antes de las 11 p.m.
+	•	Respirar 4-7-8 antes de cada comida
+
+⸻
+
+“Cuando el cuerpo se siente seguro, empieza a sanar de verdad.”
+
+⸻
+
+Botón: Comenzar Módulo 2
+
+✅ Criterios técnicos para Replit:
+	•	Mostrar una sola vez, justo al iniciar el Módulo 2.
+	•	Después de presionar “Comenzar Módulo 2”, dirigir al flujo ya existente (registro, IA, reporte, etc.).
+
+⸻
+
+🔵 PANTALLA DE CIERRE — MÓDULO 2
+
+📩 Instrucción para Replit:
+Mostrar esta pantalla automáticamente al finalizar el Módulo 2 (cuando se genera el informe final).
+Debe incluir el botón para avanzar al Módulo 3.
+No modificar la estructura interna del módulo.
+
+⸻
+
+🌿 Texto completo (Cierre del Módulo 2)
+
+✨ ¡Has completado el Módulo 2 — Equilibra desde adentro!
+
+Tu cuerpo está aprendiendo a mantenerse estable sin forzarlo.
+Has trabajado en el equilibrio entre alimentación, descanso y energía funcional.
+Ahora tu sistema digestivo y nervioso están más conectados, y tus niveles de glucosa empiezan a responder.
+
+⸻
+
+🧭 Reflexión funcional:
+
+“El equilibrio no se busca, se cultiva con constancia.”
+
+Has aprendido a crear ese equilibrio con decisiones conscientes, sin rigidez, desde la observación.
+
+⸻
+
+🌿 Próximo paso:
+
+👉 Desbloquea el Módulo 3: “Energía estable y metabolismo consciente”
+para profundizar en la relación entre energía, movimiento y metabolismo funcional.
+
+Botón: Continuar al Módulo 3
+
+⸻
+
+✅ Criterios técnicos para Replit:
+	•	Mostrar pantalla al finalizar Módulo 2 (tras el informe IA).
+	•	Incluir botón que redirija al flujo del Módulo 3.
+	•	No modificar datos ni lógica del módulo.

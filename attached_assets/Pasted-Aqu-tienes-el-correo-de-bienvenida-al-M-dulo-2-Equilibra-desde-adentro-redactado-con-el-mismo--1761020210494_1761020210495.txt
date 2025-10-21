@@ -1,0 +1,58 @@
+Aquí tienes el correo de bienvenida al Módulo 2 — “Equilibra desde adentro”, redactado con el mismo tono empático y funcional del proyecto TransformaDiabetes y alineado con Marvin Lira Nutrición Funcional.
+Está diseñado para motivar, educar y mantener el sentido de continuidad del proceso.
+
+⸻
+
+📧 Correo Automático — Bienvenida al Módulo 2
+
+Asunto: 🌿 Tu siguiente paso: Equilibra desde adentro
+
+⸻
+
+Hola [Nombre],
+
+✨ Bienvenido al Módulo 2 de tu Transformación Funcional — “Equilibra desde adentro.”
+
+Tu cuerpo ya ha comenzado a responder, y este módulo te ayudará a fortalecer desde el interior:
+equilibrando digestión, hormonas, energía y metabolismo a través de una alimentación funcional y apoyo natural educativo.
+
+⸻
+
+🧠 Qué vas a aprender este mes:
+	1.	Cómo mantener tus niveles de azúcar estables durante el día.
+	2.	Qué alimentos y combinaciones reducen la inflamación y equilibran tu sistema digestivo.
+	3.	Qué suplementos y fitoterapia pueden apoyar tu proceso (con precauciones y educación, sin dosis).
+	4.	Cómo mejorar tu descanso y energía con pequeñas rutinas funcionales.
+
+⸻
+
+🌿 Tu guía práctica para este módulo:
+	•	Prioriza alimentos reales, coloridos y con fibra natural.
+	•	Elimina o reduce azúcares añadidos y harinas refinadas.
+	•	Mantén tus horarios de sueño constantes (antes de las 11 p.m.).
+	•	Practica respiración profunda antes de comer: calma al sistema nervioso.
+
+⸻
+
+“Mientras el cuerpo esté en alerta, no puede sanar.”
+
+Este módulo te enseñará cómo ayudar a tu cuerpo a sentirse seguro, para que pueda repararse, equilibrarse y mantener energía sostenida durante el día.
+
+⸻
+
+🔗 Accede ahora a tu nuevo módulo:
+👉 [Entrar al Módulo 2 — Equilibra desde adentro]
+
+⸻
+
+💬 Si tienes preguntas técnicas o problemas con el acceso, puedes escribirnos en el chat de soporte dentro de la aplicación.
+
+🌿 Marvin Lira
+Nutrición Funcional — Tu cuerpo no está roto, está buscando equilibrio.
+
+⸻
+
+✅ Instrucciones para Replit (técnicas):
+	•	Este correo se envía automáticamente cuando el usuario desbloquea el Módulo 2.
+	•	El botón [Entrar al Módulo 2 — Equilibra desde adentro] debe redirigir al flujo del Módulo 2 en la app.
+	•	Usar el nombre del usuario (user.first_name) si está disponible.

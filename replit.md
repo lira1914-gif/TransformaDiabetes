@@ -45,6 +45,14 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
     - User clicks "Continuar al contenido del módulo" to proceed
     - Flag `tm_just_subscribed` removed after user continues
     - Never shows again on subsequent visits
+  - **Module 1 Closing Screen (October 21, 2025)** ✅ **COMPLETED**:
+    - Completion screen shown after user finishes 5-day tracking and views functional report
+    - Triggered by clicking "Finalizar" button in InformeFuncional component
+    - Sets `tm_module1_completed` flag in localStorage
+    - Displays congratulations message, functional reflection, and next steps
+    - Includes "Continuar al Módulo 2" button (currently shows placeholder message)
+    - Flag removed after clicking continue button
+    - Does not interfere with module content or data
   - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups
 
 ## User Preferences
