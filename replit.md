@@ -68,15 +68,17 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
     - **Day 6 Email** ("Tu prueba termina mañana - No pierdas tu progreso"):
       - Sent automatically when user visits app on day 6 of trial (`daysRemaining === 1`)
       - Only sent to users without active subscription
-      - Reminds about trial ending tomorrow and value of continuing
-      - Includes CTA to checkout page ($5/month pricing)
-      - Subject: "⏰ Tu prueba gratuita termina mañana — No pierdas tu progreso"
-    - **Day 8+ Email** ("Extrañamos tu presencia - Continúa tu transformación"):
+      - Subject: "⏰ Tu prueba termina mañana — no pierdas tu progreso"
+      - Content: Cálido y esperanzador, enfatizando que el cuerpo ya empezó a responder y motivando a continuar con el Módulo 1
+      - CTA: "🔗 Continuar mi transformación" → Checkout page ($5/month)
+      - Firma: "Con equilibrio, Marvin Lira, Coach Funcional"
+    - **Day 8+ Email** ("Extrañamos tu presencia - Tu transformación aún te espera"):
       - Sent automatically when user visits app on or after day 8 (`daysSinceStart >= 8`)
       - Only sent to users who didn't subscribe (not active, not trialing)
-      - Encourages reactivation with empathetic functional medicine messaging
-      - Includes CTA to checkout page for subscription
-      - Subject: "💚 Extrañamos tu presencia — Continúa tu transformación funcional"
+      - Subject: "🌱 Extrañamos tu presencia — tu transformación aún te espera"
+      - Content: Empático, recordando que la transformación no es solo controlar el azúcar sino sanar desde la raíz
+      - CTA: "👉 Retomar mi transformación" → Checkout page
+      - Firma: "Con aprecio, Marvin Lira, Coach Funcional"
     - **Event-Driven Architecture**: Emails triggered by `/api/trial-status` endpoint visits (no cron jobs needed)
     - **Atomic Duplicate Prevention**: Database-level conditional updates prevent race conditions and duplicate sends
       - New storage method: `markEmailAsSentIfNotSent(id, emailField)` with `WHERE field = false` clause

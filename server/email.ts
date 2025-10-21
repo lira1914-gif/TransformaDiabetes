@@ -1227,7 +1227,7 @@ export async function sendModule2CompletedEmail(to: string, name?: string): Prom
 }
 
 export async function sendDay6ReminderEmail(to: string, name?: string): Promise<void> {
-  const userName = name || 'Estimado usuario';
+  const userName = name || '';
   const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
   
   const html = `
@@ -1252,32 +1252,10 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
           padding: 40px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .header {
-          text-align: center;
-          margin-bottom: 30px;
-        }
-        .emoji {
-          font-size: 24px;
-          margin-right: 8px;
-        }
-        h1 {
-          font-family: 'Playfair Display', Georgia, serif;
-          color: #4a5d23;
-          font-size: 26px;
-          margin-bottom: 10px;
-          line-height: 1.3;
-        }
         .content {
           font-size: 16px;
           margin-bottom: 20px;
           line-height: 1.7;
-        }
-        .highlight {
-          background-color: #f9f7f4;
-          border-left: 4px solid #b85c38;
-          padding: 20px;
-          margin: 25px 0;
-          border-radius: 6px;
         }
         .cta-container {
           text-align: center;
@@ -1306,50 +1284,32 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
     </head>
     <body>
       <div class="container">
-        <div class="header">
-          <h1><span class="emoji">⏰</span> Tu prueba gratuita termina mañana</h1>
-          <p style="color: #757575; font-size: 15px; margin-top: 10px;">No pierdas tu progreso funcional</p>
-        </div>
-        
         <div class="content">
           <p>Hola <strong>${userName}</strong>,</p>
           
-          <p>Tu prueba gratuita de 7 días en TransformaDiabetes finaliza <strong>mañana</strong>.</p>
+          <p><strong>Tu cuerpo ya empezó a responder.</strong><br>
+          Durante estos días has dado los primeros pasos para entender mejor tus señales, equilibrar tu energía y reducir la inflamación.</p>
           
-          <p>Estos días han sido el inicio de algo importante: has comenzado a observar tu cuerpo, a entender sus señales y a descubrir cómo funciona tu metabolismo desde la raíz.</p>
-        </div>
-
-        <div class="highlight">
-          <p style="margin: 0; font-size: 16px; line-height: 1.6;">
-            <span class="emoji">🌱</span> <strong>Tu proceso apenas comienza.</strong> Mantener el acceso a tu plan funcional significa continuar con:
-          </p>
-          <ul style="margin-top: 15px; padding-left: 20px;">
-            <li>Chat funcional semanal con IA especializada</li>
-            <li>Módulos educativos progresivos</li>
-            <li>Seguimiento personalizado de tu evolución</li>
-            <li>Guías prácticas para equilibrar tu glucosa</li>
-          </ul>
-        </div>
-
-        <div class="content">
-          <p><strong>Por solo $5 USD al mes</strong>, mantienes tu transformación activa y sigues avanzando con el acompañamiento que tu cuerpo necesita.</p>
+          <p>👉 <strong>Mañana termina tu acceso gratuito a TransformaDiabetes</strong>, pero tu transformación apenas comienza.</p>
+          
+          <p>Si te está gustando el proceso, no lo detengas ahora.<br>
+          Activa tu suscripción por solo <strong>$5 USD al mes</strong> y continúa con el <strong>Módulo 1: Empieza desde la raíz</strong>, donde aprenderás a mantener tus niveles de glucosa estables sin dietas extremas ni restricciones.</p>
+          
+          <p><strong>Tu cuerpo no está roto — solo necesita apoyo constante.</strong><br>
+          Dale la oportunidad de seguir mejorando.</p>
         </div>
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            <span class="emoji">👉</span> Continuar mi transformación
+            🔗 Continuar mi transformación
           </a>
-        </div>
-
-        <div class="content" style="font-size: 15px; color: #6a6a6a; text-align: center;">
-          <p>No dejes que este progreso se detenga.<br>Tu cuerpo ya está respondiendo — sigue adelante.</p>
         </div>
         
         <div class="footer">
           <div class="signature">
-            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
-            Nutrición Funcional<br>
-            <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
+            <p>Con equilibrio,<br>
+            <strong>Marvin Lira, Coach Funcional</strong><br>
+            TransformaDiabetes 🌿<br><br>
             📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
           </div>
         </div>
@@ -1360,13 +1320,13 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '⏰ Tu prueba gratuita termina mañana — No pierdas tu progreso',
+    subject: '⏰ Tu prueba termina mañana — no pierdas tu progreso',
     html
   });
 }
 
 export async function sendDay8FollowupEmail(to: string, name?: string): Promise<void> {
-  const userName = name || 'Estimado usuario';
+  const userName = name || '';
   const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
   
   const html = `
@@ -1391,39 +1351,10 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
           padding: 40px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .header {
-          text-align: center;
-          margin-bottom: 30px;
-        }
-        .emoji {
-          font-size: 24px;
-          margin-right: 8px;
-        }
-        h1 {
-          font-family: 'Playfair Display', Georgia, serif;
-          color: #4a5d23;
-          font-size: 26px;
-          margin-bottom: 10px;
-          line-height: 1.3;
-        }
         .content {
           font-size: 16px;
           margin-bottom: 20px;
           line-height: 1.7;
-        }
-        .highlight {
-          background-color: #f9f7f4;
-          border-left: 4px solid #6B7041;
-          padding: 20px;
-          margin: 25px 0;
-          border-radius: 6px;
-        }
-        .quote {
-          font-style: italic;
-          color: #4a5d23;
-          font-size: 17px;
-          margin: 15px 0;
-          text-align: center;
         }
         .cta-container {
           text-align: center;
@@ -1452,53 +1383,37 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
     </head>
     <body>
       <div class="container">
-        <div class="header">
-          <h1><span class="emoji">💚</span> Extrañamos tu presencia</h1>
-          <p style="color: #757575; font-size: 15px; margin-top: 10px;">Tu transformación funcional te está esperando</p>
-        </div>
-        
         <div class="content">
           <p>Hola <strong>${userName}</strong>,</p>
           
-          <p>Notamos que tu prueba gratuita ha finalizado y aún no has activado tu suscripción.</p>
+          <p>Notamos que tu prueba gratuita terminó hace poco,<br>
+          pero tu cuerpo sigue hablando contigo cada día.</p>
           
-          <p>Sabemos que comenzar un proceso de salud requiere decisión y constancia. Por eso queremos recordarte que <strong>tu cuerpo ya empezó a responder</strong> durante estos días de observación funcional.</p>
-        </div>
-
-        <div class="highlight">
-          <div class="quote">
-            "El equilibrio no se alcanza en 7 días, se cultiva cada día con decisiones simples."
-          </div>
-          <p style="margin-top: 15px; font-size: 15px; line-height: 1.6;">
-            Durante tu prueba, comenzaste a reconectar con tu cuerpo. Ahora es el momento de profundizar ese aprendizaje y mantener el impulso con tu plan funcional guiado.
-          </p>
-        </div>
-
-        <div class="content">
-          <p><strong>¿Qué incluye tu membresía de $5 USD/mes?</strong></p>
-          <ul style="padding-left: 20px; margin-top: 10px;">
-            <li><span class="emoji">💬</span> Chat funcional semanal con IA especializada</li>
-            <li><span class="emoji">📚</span> Acceso a todos los módulos educativos</li>
-            <li><span class="emoji">📊</span> Seguimiento personalizado de tu evolución</li>
-            <li><span class="emoji">🌿</span> Guías prácticas para equilibrar tu glucosa desde la raíz</li>
-          </ul>
+          <p>En TransformaDiabetes, <strong>no se trata solo de controlar el azúcar</strong>,<br>
+          sino de entender lo que tu cuerpo necesita para sanar desde la raíz.</p>
+          
+          <p>Vuelve a tu guía, tus registros y tu chat funcional —<br>
+          allí está el camino que ya comenzaste.</p>
+          
+          <p>💚 <strong>Reactiva tu cuenta hoy y continúa donde te quedaste:</strong></p>
         </div>
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            <span class="emoji">👉</span> Reactivar mi transformación
+            👉 Retomar mi transformación
           </a>
         </div>
 
         <div class="content" style="font-size: 15px; color: #6a6a6a; text-align: center;">
-          <p>Tu cuerpo no está roto, solo necesita apoyo.<br>Estamos aquí para acompañarte en cada paso.</p>
+          <p><strong>Tu bienestar no tiene fecha de expiración,<br>
+          solo necesita continuidad.</strong></p>
         </div>
         
         <div class="footer">
           <div class="signature">
-            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
-            Nutrición Funcional<br>
-            <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
+            <p>Con aprecio,<br>
+            <strong>Marvin Lira, Coach Funcional</strong><br>
+            TransformaDiabetes 🌿<br><br>
             📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
           </div>
         </div>
@@ -1509,7 +1424,7 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '💚 Extrañamos tu presencia — Continúa tu transformación funcional',
+    subject: '🌱 Extrañamos tu presencia — tu transformación aún te espera',
     html
   });
 }
