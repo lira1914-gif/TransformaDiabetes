@@ -25,7 +25,8 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
   - **Day 6**: Modal celebration ("Has completado tu prueba funcional gratuita") + Email reminder
   - **Day 7**: Final day banner ("Tu prueba termina hoy") + Blocking modal + Chat access ends
   - **Day 8**: Post-trial banner ("Tu acceso gratuito ha finalizado") + Follow-up email ("Extrañamos tu presencia")
-  - **Day 9**: Follow-up email 24h after Day 8 ("Tu cuerpo ya comenzó a mejorar — no detengas el proceso")
+  - **Day 9**: Follow-up email 24h after Day 8 ("Tu cuerpo ya comenzó a mejorar")
+  - **Day 10**: Final reminder email 48h after Day 8 ("Último día para conservar tu progreso funcional")
 - **Informe Funcional**: A dedicated page for AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Progressive educational content where modules unlock automatically based on subscription duration, with server-side access control.
 - **Weekly Check-in Chat System ("Marvin Lira IA")**: A GPT-4o powered interactive chat for personalized functional medicine guidance.

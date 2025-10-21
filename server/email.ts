@@ -1576,6 +1576,185 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
   });
 }
 
+export async function sendDay10FinalReminderEmail(to: string, name?: string): Promise<void> {
+  const userName = name || '';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .warning-header {
+          background-color: #fff4e6;
+          border-left: 4px solid #f59e0b;
+          padding: 20px;
+          margin-bottom: 30px;
+          border-radius: 6px;
+        }
+        .warning-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #f59e0b;
+          margin-bottom: 10px;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .benefits-box {
+          background-color: #f9f7f4;
+          padding: 25px;
+          margin: 25px 0;
+          border-radius: 6px;
+        }
+        .benefits-intro {
+          font-weight: 600;
+          color: #2a2a2a;
+          margin-bottom: 15px;
+        }
+        .benefit-item {
+          margin-bottom: 12px;
+          line-height: 1.6;
+          font-size: 15px;
+        }
+        .urgency-text {
+          background-color: #fef2f2;
+          border-left: 4px solid #b85c38;
+          padding: 15px;
+          margin: 25px 0;
+          border-radius: 4px;
+          font-weight: 600;
+          color: #991b1b;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #b85c38;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .cta-subtext {
+          font-size: 14px;
+          color: #666;
+          margin-top: 10px;
+        }
+        .quote {
+          font-style: italic;
+          color: #4a5d23;
+          text-align: center;
+          font-size: 16px;
+          margin: 30px 0;
+          padding: 20px;
+          background-color: #f5f3ef;
+          border-radius: 6px;
+          line-height: 1.6;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+        .disclaimer {
+          font-size: 13px;
+          color: #888;
+          margin-top: 20px;
+          padding: 15px;
+          background-color: #f9f9f9;
+          border-radius: 6px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="warning-header">
+          <div class="warning-title">⚠️ Último día para conservar tu progreso funcional</div>
+        </div>
+        
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Tu acceso gratuito a Marvin Lira Nutrición Funcional 🌿 <strong>está por finalizar hoy</strong>.<br>
+          Durante estos días, comenzaste a conectar con la raíz de tus síntomas y a darle a tu cuerpo lo que realmente necesita.</p>
+          
+          <p>Queremos que ese esfuerzo no se pierda.</p>
+        </div>
+
+        <div class="benefits-box">
+          <div class="benefits-intro">Si reactivas hoy tu cuenta, conservarás:</div>
+          <div class="benefit-item">✅ Tu informe funcional inicial</div>
+          <div class="benefit-item">✅ El acceso a tu chat interactivo con IA</div>
+          <div class="benefit-item">✅ Los módulos de avance mensual</div>
+          <div class="benefit-item">✅ Todo tu historial y registros personales</div>
+        </div>
+
+        <div class="urgency-text">
+          Después de hoy, tu cuenta quedará inactiva y se perderá tu progreso.
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/onboarding/checkout" class="cta-button">
+            Reactivar mi acceso ahora
+          </a>
+          <div class="cta-subtext">(Solo $5 USD al mes, cancela cuando quieras)</div>
+        </div>
+
+        <div class="quote">
+          "No es un salto gigante lo que transforma tu salud,<br>
+          sino los pasos pequeños y constantes que das cada día."
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>💚<br>
+            <strong>Equipo de Marvin Lira Nutrición Funcional</strong><br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+          </div>
+          <div class="disclaimer">
+            Programa educativo, no sustituto de orientación médica.
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '⚠️ Último día para conservar tu progreso funcional',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     await transporter.verify();

@@ -772,6 +772,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
 
+      // Día 10: Enviar recordatorio final 48h después del día 8 si aún no se suscribió
+      // Usar >= 10 para enviar incluso si el usuario regresa después del día 10
+      // No check !user.day10EmailSent here - rely entirely on atomic DB operation
+      if (daysSinceStart >= 10 && !isActive && !isTrialing) {
+        // Attempt atomic flag update - only one concurrent request will succeed
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day10EmailSent');
+        
+        if (wonRace) {
+          // This request won the race, send the email
+          try {
+            // Obtener nombre del usuario desde intake form
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre del intake form para email día 10');
+            }
+
+            console.log('📧 Enviando email día 10 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay10FinalReminderEmail } = await import("./email");
+            await sendDay10FinalReminderEmail(user.email, userName);
+            console.log('✅ Email día 10 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 10:', error);
+            // Revert flag to allow retry on next visit
+            await storage.updateUser(userId, { day10EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 10 ya fue enviado por otro request concurrente');
+        }
+      }
+
       res.json({
         hasAccess,
         isTrialing,
