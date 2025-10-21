@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Send, MessageCircle, Lock } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { TrialStatus } from "@/types/trial";
 import Header from "@/components/Header";
 
 interface WeeklyCheckin {
@@ -17,18 +18,6 @@ interface WeeklyCheckin {
   emotionTags: string[];
   systemsDetected: string[];
   createdAt: string;
-}
-
-interface TrialStatus {
-  hasAccess: boolean;
-  isTrialing: boolean;
-  isActive: boolean;
-  isCanceled: boolean;
-  trialExpired: boolean;
-  daysRemaining: number;
-  daysSinceStart: number;
-  subscriptionStatus: string | null;
-  startDate: string;
 }
 
 const SYSTEM_EMOJI: Record<string, string> = {

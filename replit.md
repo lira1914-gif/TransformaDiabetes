@@ -12,9 +12,23 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
   - Pricing: $5 USD/mes (all $15 references removed)
 - **Email Collection**: Added LinkAuthenticationElement to Checkout.tsx to guarantee email capture
 - **Stripe Trial Configuration**: Backend configured with `trial_period_days: 7`
+- **Trial Expiration Controls**: Implemented comprehensive trial access restrictions
+  - Trial countdown timer in Perfil.tsx showing remaining free access days
+  - Backend endpoint `/api/trial-status/:userId` returns structured status with `hasAccess`, `trialExpired`, `isActive`
+  - Chat access blocked when trial expires without active subscription (ChatSemanal.tsx)
+  - Report access restricted to read-only mode for first report when trial expires (Informe.tsx)
+  - TrialStatus TypeScript interface centralized in `client/src/types/trial.ts`
+  - Clear upgrade messaging with "Activar suscripción" CTAs across blocked features
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
+
+## Known Security Issues (To Address)
+- **Unauthenticated Endpoints**: Trial status and user endpoints accept userId in URL without authentication
+  - Endpoints `/api/trial-status/:userId` and `/api/users/id/:userId` are vulnerable to UUID guessing
+  - **Impact**: Unauthorized users could access subscription and profile data
+  - **Recommendation**: Implement session-based authentication or require auth tokens
+  - **Status**: Deferred - requires authentication system implementation
 
 ## System Architecture
 

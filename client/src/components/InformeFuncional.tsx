@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
-export default function InformeFuncional() {
+interface InformeFuncionalProps {
+  readOnly?: boolean;
+}
+
+export default function InformeFuncional({ readOnly = false }: InformeFuncionalProps) {
   const [visible, setVisible] = useState(false);
   const [, navigate] = useLocation();
 
@@ -60,15 +64,17 @@ export default function InformeFuncional() {
         </p>
       </div>
 
-      <button
-        className="btn-finalizar"
-        data-testid="button-finalizar-informe"
-        onClick={() => {
-          alert("Has completado tu primera semana. Pronto podrás continuar al Mes 2 con ajustes personalizados y diario guiado por IA.");
-        }}
-      >
-        Finalizar
-      </button>
+      {!readOnly && (
+        <button
+          className="btn-finalizar"
+          data-testid="button-finalizar-informe"
+          onClick={() => {
+            alert("Has completado tu primera semana. Pronto podrás continuar al Mes 2 con ajustes personalizados y diario guiado por IA.");
+          }}
+        >
+          Finalizar
+        </button>
+      )}
     </section>
   );
 }
