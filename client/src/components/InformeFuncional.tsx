@@ -102,7 +102,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
       </div>
 
       {/* CTA de Suscripción para usuarios en trial */}
-      {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+      {!readOnly && !isSubscribed && trialStatus && trialStatus.subscriptionStatus !== 'active' && (
         <div style={{ 
           marginTop: '2.5rem',
           padding: '2rem',
@@ -164,7 +164,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         </div>
       )}
 
-      {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
+      {!readOnly && !isSubscribed && trialStatus && trialStatus.subscriptionStatus !== 'active' && informeCompletado && (
         <div style={{ 
           display: 'flex', 
           flexDirection: 'column', 
