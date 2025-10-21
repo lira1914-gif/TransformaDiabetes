@@ -26,8 +26,8 @@ export default function HeroSection() {
             {/* Columna izquierda - Texto */}
             <motion.div 
               className="space-y-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <h1 
@@ -94,8 +94,8 @@ export default function HeroSection() {
             {/* Columna derecha - Imagen */}
             <motion.div 
               className="hidden lg:flex justify-center items-center"
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: 40, filter: "blur(8px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
             >
               <div 
@@ -145,8 +145,8 @@ export default function HeroSection() {
 
         <motion.div 
           className="relative z-10"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 
