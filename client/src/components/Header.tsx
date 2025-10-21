@@ -10,7 +10,7 @@ export default function Header() {
   const [location] = useLocation();
   
   // Obtener estado del trial para controlar visibilidad del Chat Semanal
-  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+  const userId = localStorage.getItem('tm_user_id');
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
     enabled: !!userId,

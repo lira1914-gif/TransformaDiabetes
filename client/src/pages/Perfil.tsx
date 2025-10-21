@@ -19,8 +19,8 @@ export default function Perfil() {
   const [isSaving, setIsSaving] = useState(false);
   const [isLoadingPortal, setIsLoadingPortal] = useState(false);
   
-  // TODO: Obtener el userId real del usuario logueado
-  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+  // Obtener el userId real del localStorage
+  const userId = localStorage.getItem('tm_user_id');
 
   // Obtener estado del trial
   const { data: trialStatus } = useQuery<TrialStatus>({

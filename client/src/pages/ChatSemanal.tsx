@@ -39,7 +39,7 @@ const SYSTEM_EMOJI: Record<string, string> = {
 export default function ChatSemanal() {
   const [message, setMessage] = useState("");
   const [, setLocation] = useLocation();
-  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
+  const userId = localStorage.getItem('tm_user_id');
 
   // Verificar estado del trial
   const { data: trialStatus } = useQuery<TrialStatus>({

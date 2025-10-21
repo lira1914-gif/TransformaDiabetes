@@ -14,7 +14,7 @@ import ArchivedAccountPage from '@/pages/ArchivedAccountPage';
 
 export default function Informe() {
   const [, setLocation] = useLocation();
-  const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8";
+  const userId = localStorage.getItem('tm_user_id');
 
   const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
