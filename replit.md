@@ -20,6 +20,7 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
   - TrialStatus TypeScript interface centralized in `client/src/types/trial.ts`
   - Dual route support: `/onboarding/informe` and `/onboarding/informe-inicial` (both accessible)
   - Simplified access control logic - removed overly strict localStorage checks
+  - **Day 7 Trial Modal** (Day7TrialModal.tsx) - Empathetic conversion message appearing on final day of trial
   - E2E tested: Trial status, chat blocking, report read-only mode, and upgrade CTAs all functional
 
 ## User Preferences

@@ -6,6 +6,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import Day7TrialModal from "@/components/Day7TrialModal";
+import { TrialStatus } from "@/types/trial";
 
 export default function Perfil() {
   const [, setLocation] = useLocation();
@@ -17,7 +19,7 @@ export default function Perfil() {
   const userId = "d48af8be-dabe-4b0e-94cb-48eadfb0fbe8"; // Usuario de prueba
 
   // Obtener estado del trial
-  const { data: trialStatus } = useQuery({
+  const { data: trialStatus } = useQuery<TrialStatus>({
     queryKey: ['/api/trial-status', userId],
     enabled: !!userId,
   });
@@ -169,6 +171,16 @@ export default function Perfil() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#F9F7F2' }}>
       <Header />
+      
+      {/* Modal del Día 7 */}
+      {trialStatus && (
+        <Day7TrialModal
+          daysRemaining={trialStatus.daysRemaining}
+          hasAccess={trialStatus.hasAccess}
+          isActive={trialStatus.isActive}
+        />
+      )}
+      
       <main className="flex-1 py-8 sm:py-12 px-4 sm:px-6">
         <section className="max-w-3xl mx-auto">
           <div className="text-center mb-8">

@@ -9,6 +9,7 @@ import { Loader2, Send, MessageCircle, Lock } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { TrialStatus } from "@/types/trial";
 import Header from "@/components/Header";
+import Day7TrialModal from "@/components/Day7TrialModal";
 
 interface WeeklyCheckin {
   id: string;
@@ -70,6 +71,16 @@ export default function ChatSemanal() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      
+      {/* Modal del Día 7 */}
+      {trialStatus && (
+        <Day7TrialModal
+          daysRemaining={trialStatus.daysRemaining}
+          hasAccess={trialStatus.hasAccess}
+          isActive={trialStatus.isActive}
+        />
+      )}
+      
       <div className="container max-w-4xl mx-auto py-8 px-4">
         <div className="mb-8">
           <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
