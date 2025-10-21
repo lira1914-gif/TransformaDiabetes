@@ -21,6 +21,9 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
     queryKey: ['/api/trial-status', userId],
     enabled: !!userId,
   });
+  
+  // Chat Semanal solo visible después de completar el informe inicial
+  const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 200);
@@ -98,7 +101,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         </p>
       </div>
 
-      {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+      {!readOnly && !isSubscribed && trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
         <div style={{ 
           display: 'flex', 
           flexDirection: 'column', 

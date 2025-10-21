@@ -28,6 +28,9 @@ export default function Modulo1() {
     queryKey: ['/api/trial-status', userId],
     enabled: !!userId,
   });
+  
+  // Chat Semanal solo visible después de completar el informe inicial
+  const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
 
   // Si no hay userId, redirigir a la página de inicio
   useEffect(() => {
@@ -492,8 +495,8 @@ export default function Modulo1() {
               </div>
             </section>
 
-            {/* Call to action - Solo visible si el usuario está activo o en trial */}
-            {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+            {/* Call to action - Solo visible después de completar el informe inicial */}
+            {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
               <div className="mt-8 pt-6 border-t" style={{ borderColor: '#E6E3D9' }}>
                 <div className="text-center">
                   <p className="mb-4 font-medium" style={{ color: '#3E3E2E' }}>

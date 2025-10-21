@@ -16,6 +16,9 @@ export default function Header() {
     enabled: !!userId,
   });
   
+  // Chat Semanal solo visible después de completar el informe inicial
+  const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
+  
   // Idioma: español por default
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem('tm_language') || 'es';
@@ -127,8 +130,8 @@ export default function Header() {
         >
           Diagnóstico
         </Link>
-        {/* Chat Semanal: visible solo si el usuario está activo o en trial */}
-        {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+        {/* Chat Semanal: visible solo después de completar el informe inicial */}
+        {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
           <Link 
             href="/chat-semanal" 
             className="font-medium hover:opacity-80 transition-opacity"
@@ -219,8 +222,8 @@ export default function Header() {
           >
             Diagnóstico
           </Link>
-          {/* Chat Semanal: visible solo si el usuario está activo o en trial */}
-          {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && (
+          {/* Chat Semanal: visible solo después de completar el informe inicial */}
+          {trialStatus && (trialStatus.isActive || trialStatus.isTrialing) && informeCompletado && (
             <Link 
               href="/chat-semanal" 
               className="font-medium py-2"
