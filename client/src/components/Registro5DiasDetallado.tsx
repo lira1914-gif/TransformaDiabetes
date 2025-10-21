@@ -254,20 +254,21 @@ export default function Registro5DiasDetallado() {
       
       if (userId) {
         try {
-          // Eliminar registros de la base de datos
+          // Eliminar registros de la base de datos PRIMERO
           await apiRequest('DELETE', `/api/daily-logs/${userId}`);
           console.log('✅ Registros eliminados de la base de datos');
         } catch (error) {
           console.error('Error eliminando registros de la base de datos:', error);
           toast({
-            title: "⚠️ Advertencia",
-            description: "No se pudieron eliminar todos los registros de la base de datos. Continúa de todos modos.",
+            title: "❌ Error al reiniciar",
+            description: "No se pudieron eliminar los registros de la base de datos. Por favor intenta nuevamente o contacta soporte.",
             variant: "destructive",
           });
+          return; // NO continuar si falla el DELETE
         }
       }
       
-      // Limpiar localStorage
+      // Solo limpiar localStorage si el DELETE fue exitoso
       localStorage.removeItem('registro5dias');
       localStorage.removeItem('registro5dias_detallado');
       localStorage.removeItem('tm_registro_dias');
