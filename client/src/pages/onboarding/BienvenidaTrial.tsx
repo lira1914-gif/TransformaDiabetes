@@ -88,7 +88,10 @@ export default function BienvenidaTrial() {
             <div className="flex justify-center">
               <Button
                 size="lg"
-                onClick={() => setLocation("/onboarding/intake")}
+                onClick={() => {
+                  localStorage.setItem('tm_bienvenida_done', 'true');
+                  setLocation("/onboarding/intake");
+                }}
                 data-testid="button-empezar-diagnostico"
                 style={{
                   backgroundColor: '#A15C38',
