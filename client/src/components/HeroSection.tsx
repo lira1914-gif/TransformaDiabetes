@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -10,6 +11,33 @@ import {
 import heroImage from "@assets/generated_images/Latino_man_tablet_metabolismo_f95a9523.png";
 
 export default function HeroSection() {
+  const [showMobileTooltip, setShowMobileTooltip] = useState(false);
+  const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null);
+
+  const handleMobileTouch = (e: React.TouchEvent) => {
+    // Si ya está visible, ocultarlo
+    if (showMobileTooltip) {
+      setShowMobileTooltip(false);
+      if (tooltipTimer) clearTimeout(tooltipTimer);
+      return;
+    }
+    
+    // Mostrar tooltip
+    setShowMobileTooltip(true);
+    
+    // Ocultar después de 2 segundos
+    const timer = setTimeout(() => {
+      setShowMobileTooltip(false);
+    }, 2000);
+    
+    setTooltipTimer(timer);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (tooltipTimer) clearTimeout(tooltipTimer);
+    };
+  }, [tooltipTimer]);
   return (
     <>
       {/* VERSIÓN DESKTOP - Oculta en móvil, visible en md (768px) en adelante */}
@@ -218,52 +246,53 @@ export default function HeroSection() {
             Acceso gratuito por 7 días: diagnóstico, registro diario y chat guiado.
           </p>
 
-          <div className="text-center" style={{ marginTop: '1.5rem' }}>
-            <TooltipProvider>
-              <Tooltip delayDuration={300}>
-                <TooltipTrigger asChild>
-                  <Link href="/diagnostico">
-                    <Button
-                      data-testid="button-diagnostico-hero-mobile"
-                      style={{
-                        backgroundColor: '#b7492f',
-                        color: '#fff',
-                        padding: '0.8rem 1.5rem',
-                        borderRadius: '6px',
-                        fontWeight: 600,
-                        fontSize: '1rem',
-                        boxShadow: '0 4px 12px rgba(183, 73, 47, 0.2)',
-                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                      }}
-                      className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl inline-block"
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.boxShadow = '0 8px 24px rgba(183, 73, 47, 0.35)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(183, 73, 47, 0.2)';
-                      }}
-                    >
-                      Comenzar prueba gratuita
-                    </Button>
-                  </Link>
-                </TooltipTrigger>
-                <TooltipContent 
-                  side="bottom"
-                  className="animate-in fade-in-50 zoom-in-95"
+          <div className="text-center relative" style={{ marginTop: '1.5rem' }}>
+            <div onTouchStart={handleMobileTouch}>
+              <Link href="/diagnostico">
+                <Button
+                  data-testid="button-diagnostico-hero-mobile"
                   style={{
-                    backgroundColor: 'white',
-                    color: '#556B2F',
-                    border: '1px solid rgba(85, 107, 47, 0.1)',
-                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
-                    padding: '0.5rem 1rem',
-                    fontSize: '0.9rem',
-                    fontWeight: 500
+                    backgroundColor: '#b7492f',
+                    color: '#fff',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '6px',
+                    fontWeight: 600,
+                    fontSize: '1rem',
+                    boxShadow: '0 4px 12px rgba(183, 73, 47, 0.2)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                  className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl inline-block"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(183, 73, 47, 0.35)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(183, 73, 47, 0.2)';
                   }}
                 >
-                  <span>✨ Empieza tu transformación funcional hoy</span>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+                  Comenzar prueba gratuita
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Tooltip para móvil */}
+            {showMobileTooltip && (
+              <div
+                className="absolute left-1/2 transform -translate-x-1/2 mt-2 z-50 animate-in fade-in-50 zoom-in-95"
+                style={{
+                  backgroundColor: 'white',
+                  color: '#2d6a4f',
+                  border: '1px solid rgba(45, 106, 79, 0.15)',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                  padding: '0.6rem 1.2rem',
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                <span>✨ Empieza tu transformación funcional hoy</span>
+              </div>
+            )}
           </div>
 
           <p 
