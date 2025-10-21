@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import heroImage from "@assets/generated_images/Latino_man_tablet_metabolismo_f95a9523.png";
 
 export default function HeroSection() {
@@ -54,30 +60,51 @@ export default function HeroSection() {
               </p>
 
               <div className="pt-4">
-                <Link href="/diagnostico">
-                  <Button 
-                    size="lg"
-                    data-testid="button-diagnostico-hero"
-                    style={{
-                      backgroundColor: '#A15C38',
-                      color: 'white',
-                      padding: '0.9rem 1.8rem',
-                      fontSize: '1.05rem',
-                      fontWeight: 600,
-                      boxShadow: '0 4px 12px rgba(161, 92, 56, 0.2)',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                    }}
-                    className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl"
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(161, 92, 56, 0.35)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(161, 92, 56, 0.2)';
-                    }}
-                  >
-                    Comenzar mi prueba gratuita de 7 días
-                  </Button>
-                </Link>
+                <TooltipProvider>
+                  <Tooltip delayDuration={300}>
+                    <TooltipTrigger asChild>
+                      <Link href="/diagnostico">
+                        <Button 
+                          size="lg"
+                          data-testid="button-diagnostico-hero"
+                          style={{
+                            backgroundColor: '#A15C38',
+                            color: 'white',
+                            padding: '0.9rem 1.8rem',
+                            fontSize: '1.05rem',
+                            fontWeight: 600,
+                            boxShadow: '0 4px 12px rgba(161, 92, 56, 0.2)',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                          }}
+                          className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl"
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(161, 92, 56, 0.35)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(161, 92, 56, 0.2)';
+                          }}
+                        >
+                          Comenzar mi prueba gratuita de 7 días
+                        </Button>
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent 
+                      side="bottom"
+                      className="animate-in fade-in-50 zoom-in-95"
+                      style={{
+                        backgroundColor: 'white',
+                        color: '#556B2F',
+                        border: '1px solid rgba(85, 107, 47, 0.1)',
+                        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+                        padding: '0.5rem 1rem',
+                        fontSize: '0.9rem',
+                        fontWeight: 500
+                      }}
+                    >
+                      <span>✨ Empieza tu transformación funcional hoy</span>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
                 
                 <p 
                   className="text-sm mt-3"
@@ -192,30 +219,51 @@ export default function HeroSection() {
           </p>
 
           <div className="text-center" style={{ marginTop: '1.5rem' }}>
-            <Link href="/diagnostico">
-              <Button
-                data-testid="button-diagnostico-hero-mobile"
-                style={{
-                  backgroundColor: '#b7492f',
-                  color: '#fff',
-                  padding: '0.8rem 1.5rem',
-                  borderRadius: '6px',
-                  fontWeight: 600,
-                  fontSize: '1rem',
-                  boxShadow: '0 4px 12px rgba(183, 73, 47, 0.2)',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                }}
-                className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl inline-block"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(183, 73, 47, 0.35)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(183, 73, 47, 0.2)';
-                }}
-              >
-                Comenzar prueba gratuita
-              </Button>
-            </Link>
+            <TooltipProvider>
+              <Tooltip delayDuration={300}>
+                <TooltipTrigger asChild>
+                  <Link href="/diagnostico">
+                    <Button
+                      data-testid="button-diagnostico-hero-mobile"
+                      style={{
+                        backgroundColor: '#b7492f',
+                        color: '#fff',
+                        padding: '0.8rem 1.5rem',
+                        borderRadius: '6px',
+                        fontWeight: 600,
+                        fontSize: '1rem',
+                        boxShadow: '0 4px 12px rgba(183, 73, 47, 0.2)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      className="hover:brightness-110 hover:-translate-y-1 hover:shadow-xl inline-block"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = '0 8px 24px rgba(183, 73, 47, 0.35)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(183, 73, 47, 0.2)';
+                      }}
+                    >
+                      Comenzar prueba gratuita
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent 
+                  side="bottom"
+                  className="animate-in fade-in-50 zoom-in-95"
+                  style={{
+                    backgroundColor: 'white',
+                    color: '#556B2F',
+                    border: '1px solid rgba(85, 107, 47, 0.1)',
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08)',
+                    padding: '0.5rem 1rem',
+                    fontSize: '0.9rem',
+                    fontWeight: 500
+                  }}
+                >
+                  <span>✨ Empieza tu transformación funcional hoy</span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
 
           <p 
