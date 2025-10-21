@@ -64,7 +64,28 @@ TransformaDiabetes is a health and wellness web application dedicated to reversi
     - Endpoint: `/api/notify-module2-completed` ready to be integrated
     - Personalizes with user's name from intake form when available
     - Fire-and-forget pattern for non-blocking email delivery
-  - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups
+  - **Automated Trial Reminder Emails (October 21, 2025)** ✅ **COMPLETED & PRODUCTION-READY**:
+    - **Day 6 Email** ("Tu prueba termina mañana - No pierdas tu progreso"):
+      - Sent automatically when user visits app on day 6 of trial (`daysRemaining === 1`)
+      - Only sent to users without active subscription
+      - Reminds about trial ending tomorrow and value of continuing
+      - Includes CTA to checkout page ($5/month pricing)
+      - Subject: "⏰ Tu prueba gratuita termina mañana — No pierdas tu progreso"
+    - **Day 8+ Email** ("Extrañamos tu presencia - Continúa tu transformación"):
+      - Sent automatically when user visits app on or after day 8 (`daysSinceStart >= 8`)
+      - Only sent to users who didn't subscribe (not active, not trialing)
+      - Encourages reactivation with empathetic functional medicine messaging
+      - Includes CTA to checkout page for subscription
+      - Subject: "💚 Extrañamos tu presencia — Continúa tu transformación funcional"
+    - **Event-Driven Architecture**: Emails triggered by `/api/trial-status` endpoint visits (no cron jobs needed)
+    - **Atomic Duplicate Prevention**: Database-level conditional updates prevent race conditions and duplicate sends
+      - New storage method: `markEmailAsSentIfNotSent(id, emailField)` with `WHERE field = false` clause
+      - Only one concurrent request can successfully mark flag as sent
+      - Failed email sends revert flag for automatic retry on next visit
+    - **Database Tracking**: Added `day6EmailSent` and `day8EmailSent` boolean fields to users table
+    - **Personalization**: Fetches user's name from intake form for email greeting
+    - **Reliability**: Synchronous email sending with proper error handling and logging
+  - **Storage Enhancement**: Added `getUserByStripeCustomerId()` method for webhook lookups and `markEmailAsSentIfNotSent()` for atomic flag updates
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
