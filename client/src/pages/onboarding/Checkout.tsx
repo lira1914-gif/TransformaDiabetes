@@ -107,8 +107,16 @@ function CheckoutForm({ customerId }: { customerId: string }) {
           cursor: isProcessing ? 'not-allowed' : 'pointer',
         }}
       >
-        {isProcessing ? 'Procesando...' : 'Pagar $5 USD/mes'}
+        {isProcessing ? 'Procesando...' : 'Comenzar prueba gratuita de 7 días'}
       </button>
+      <p style={{
+        marginTop: '1rem',
+        fontSize: '0.9rem',
+        color: '#6F6E66',
+        textAlign: 'center',
+      }}>
+        Luego $5 USD/mes. Cancela cuando quieras.
+      </p>
     </form>
   );
 }

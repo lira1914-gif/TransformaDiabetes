@@ -132,7 +132,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         },
       });
 
-      // Crear la suscripción
+      // Crear la suscripción con trial de 7 días
       const subscription = await stripe.subscriptions.create({
         customer: customerId,
         items: [
@@ -141,6 +141,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           },
         ],
         default_payment_method: paymentMethodId,
+        trial_period_days: 7,
       });
 
       console.log('Suscripción creada exitosamente:', subscription.id);
