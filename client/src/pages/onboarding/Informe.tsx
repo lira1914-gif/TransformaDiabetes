@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Lock } from 'lucide-react';
+import Day8Banner from '@/components/Day8Banner';
 import Day7Banner from '@/components/Day7Banner';
 import Day5Banner from '@/components/Day5Banner';
 
@@ -35,6 +36,14 @@ export default function Informe() {
     <div style={{ minHeight: '100vh' }}>
       <Header />
       
+      {/* Banner del Día 8+ */}
+      {trialStatus && (
+        <Day8Banner
+          daysRemaining={trialStatus.daysRemaining}
+          isActive={trialStatus.isActive}
+        />
+      )}
+
       {/* Banner del Día 7 */}
       {trialStatus && (
         <Day7Banner

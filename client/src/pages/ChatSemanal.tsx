@@ -11,6 +11,7 @@ import { TrialStatus } from "@/types/trial";
 import Header from "@/components/Header";
 import Day7TrialModal from "@/components/Day7TrialModal";
 import Day6TrialModal from "@/components/Day6TrialModal";
+import Day8Banner from "@/components/Day8Banner";
 import Day7Banner from "@/components/Day7Banner";
 import Day5Banner from "@/components/Day5Banner";
 
@@ -89,6 +90,14 @@ export default function ChatSemanal() {
         <Day6TrialModal
           daysRemaining={trialStatus.daysRemaining}
           hasAccess={trialStatus.hasAccess}
+          isActive={trialStatus.isActive}
+        />
+      )}
+
+      {/* Banner del Día 8+ */}
+      {trialStatus && (
+        <Day8Banner
+          daysRemaining={trialStatus.daysRemaining}
           isActive={trialStatus.isActive}
         />
       )}
