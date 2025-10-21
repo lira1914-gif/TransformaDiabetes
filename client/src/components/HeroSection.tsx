@@ -15,19 +15,25 @@ export default function HeroSection() {
   const [tooltipTimer, setTooltipTimer] = useState<NodeJS.Timeout | null>(null);
 
   // Detectar idioma del navegador
+  const userLanguage = navigator.language.toLowerCase();
+  const isEnglish = userLanguage.includes('en');
+  
   const getTooltipText = () => {
-    const userLanguage = navigator.language.toLowerCase();
-    
-    // Si el idioma incluye 'en' (inglés), mostrar versión en inglés
-    if (userLanguage.includes('en')) {
+    if (isEnglish) {
       return "✨ Start your functional transformation today";
     }
-    
-    // Por defecto, mostrar en español
     return "✨ Empieza tu transformación funcional hoy";
   };
 
+  const getHeroTitle = () => {
+    if (isEnglish) {
+      return "Your body isn't broken — it just needs the right support to heal from the root.";
+    }
+    return "Tu cuerpo no está roto, solo necesita apoyo para sanar desde la raíz.";
+  };
+
   const tooltipText = getTooltipText();
+  const heroTitle = getHeroTitle();
 
   const handleMobileTouch = (e: React.TouchEvent) => {
     // Si ya está visible, ocultarlo
@@ -83,7 +89,7 @@ export default function HeroSection() {
                 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight"
                 style={{ color: '#556B2F' }}
               >
-                Tu cuerpo no está roto.<br />Solo necesita dirección.
+                {heroTitle}
               </h1>
               
               <p 
@@ -235,7 +241,7 @@ export default function HeroSection() {
               lineHeight: '1.3'
             }}
           >
-            Tu cuerpo no está roto.<br />Solo necesita dirección.
+            {heroTitle}
           </h1>
 
           <p 
