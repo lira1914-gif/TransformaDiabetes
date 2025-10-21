@@ -1,6 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { db } from "./db";
+import { users } from "@shared/schema";
 import Stripe from "stripe";
 import { sendReactivationEmail } from "./email";
 
@@ -692,33 +694,65 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Intake Form routes
   app.post("/api/intake-form", async (req, res) => {
     try {
-      const { userId, ...formData } = req.body;
+      const { userId, email, ...formData } = req.body;
 
       if (!userId) {
         return res.status(400).json({ error: "userId es requerido" });
       }
 
+      if (!email) {
+        return res.status(400).json({ error: "email es requerido" });
+      }
+
+      // Verificar si el usuario existe por ID o por email
+      let user = await storage.getUser(userId);
+      
+      if (!user) {
+        // Verificar si existe un usuario con ese email
+        const existingUserByEmail = await storage.getUserByEmail(email);
+        
+        if (existingUserByEmail) {
+          // El usuario ya existe con este email, usar su ID existente
+          user = existingUserByEmail;
+          // Actualizar el userId en localStorage del cliente
+          console.log('✅ Usuario existente encontrado por email:', user.id, email);
+        } else {
+          // Crear usuario nuevo con estado de trial usando inserción directa
+          const result = await db.insert(users).values({
+            id: userId,
+            email: email,
+            subscriptionStatus: 'trial',
+            trialStartDate: new Date(),
+            unlockedModules: []
+          }).returning();
+          user = result[0];
+          console.log('✅ Usuario de trial creado:', userId, email);
+        }
+      }
+
+      // Usar el ID del usuario real (importante si se encontró por email)
+      const actualUserId = user.id;
+
       // Verificar si ya existe un intake form para este usuario
-      const existing = await storage.getIntakeFormByUserId(userId);
+      const existing = await storage.getIntakeFormByUserId(actualUserId);
 
       if (existing) {
         // Actualizar el existente
         const updated = await storage.updateIntakeForm(existing.id, formData);
-        return res.json(updated);
+        return res.json({ ...updated, userId: actualUserId });
       }
 
-      // Crear uno nuevo
-      const intakeForm = await storage.createIntakeForm({ userId, ...formData });
+      // Crear uno nuevo con el userId correcto
+      const intakeForm = await storage.createIntakeForm({ userId: actualUserId, ...formData });
       
       // Iniciar el trial cuando se completa el intake (si no ha iniciado ya)
-      const user = await storage.getUser(userId);
       if (user && !user.trialStartDate) {
-        await storage.updateUser(userId, {
+        await storage.updateUser(actualUserId, {
           trialStartDate: new Date()
         });
       }
       
-      res.json(intakeForm);
+      res.json({ ...intakeForm, userId: actualUserId });
     } catch (error: any) {
       console.error("Error guardando intake form:", error);
       res.status(500).json({ error: "Error al guardar el formulario" });
