@@ -202,7 +202,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
             lineHeight: 1.6,
             maxWidth: '600px'
           }}>
-            Abre el chat y comparte cómo te sientes cada día (cómo dormiste, cómo está tu digestión, tu energía, tu ánimo). Marvin Lira IA te dará recomendaciones personalizadas basadas en lo que compartas. <strong>Tienes 3 conversaciones gratuitas durante tu prueba de 7 días.</strong>
+            Abre el chat y comparte cómo te sientes cada día (cómo dormiste, cómo está tu digestión, tu energía, tu ánimo). Marvin Lira IA te dará recomendaciones personalizadas basadas en lo que compartas. <strong>Tienes acceso completo durante tu prueba de 7 días.</strong>
           </p>
           <button
             className="btn-finalizar"
