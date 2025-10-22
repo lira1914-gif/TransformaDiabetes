@@ -156,7 +156,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       
       toast({
         title: "✅ Historial guardado",
-        description: "Tu información ha sido registrada correctamente. Generando tu informe personalizado...",
+        description: "Tu información ha sido registrada correctamente.",
       });
       
       // Validación defensiva: asegurar que tenemos un userId válido
@@ -170,6 +170,13 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
         return;
       }
       
+      // Mostrar mensaje de progreso mientras se genera el informe
+      toast({
+        title: "🧠 Analizando tu información...",
+        description: "Estamos creando tu guía funcional personalizada. Esto puede tomar 15-20 segundos.",
+        duration: 25000, // Mostrar por 25 segundos
+      });
+      
       try {
         // Generar reporte inmediatamente con módulo 1
         console.log('✅ Generando reporte para userId:', userId);
@@ -182,7 +189,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
         localStorage.setItem('tm_informe_ready', 'true');
         
         toast({
-          title: "🎉 Informe generado",
+          title: "🎉 ¡Listo!",
           description: "Tu guía funcional personalizada está lista. Te redirigiremos ahora...",
         });
         
