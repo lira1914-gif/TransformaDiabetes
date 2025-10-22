@@ -6,15 +6,24 @@ TransformaDiabetes is a web application focused on reversing type 2 diabetes thr
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (October 21, 2025)
+## Recent Changes (October 22, 2025)
 
-### Authorization & Route Protection Improvements
-- **Fixed critical security bug**: Anonymous users (incognito) could see and access protected pages ("Mi Perfil", "Mi Informe") without authentication
-- **Header Navigation**: Protected links ("Mi Informe", "Perfil") now only visible when `tm_user_id` exists in localStorage
-- **Route Guards**: Added redirect protection in Perfil.tsx, InformeFuncional.tsx, and ChatSemanal.tsx - users without `tm_user_id` are redirected to `/onboarding/bienvenida-trial`
-- **Chat Semanal Visibility**: Simplified condition - now appears for all users with `userId && tm_informe_ready` (removed restrictive subscription status checks)
-- **Trial Initialization Bug Fix**: BienvenidaTrial.tsx now properly generates `tm_user_id` (format: `trial_<timestamp>_<random>`) when user clicks "Empezar mi diagnóstico gratuito"
-- **Perfil Page Simplification**: Removed duplicate medical intake form (age, weight, symptoms, history) - page now focuses solely on subscription management via Stripe portal
+### Daily Log Registration System Fixed
+- **Fixed localStorage rehydration bug**: Component now validates localStorage data before rehydration to prevent stale data from being automatically re-saved
+- **Enhanced backend validation**: POST /api/daily-log now verifies user exists before saving, preventing foreign key constraint violations
+- **Improved error logging**: Backend now logs detailed error information (message, code, detail) for easier debugging
+- **Force reload after reset**: "Reiniciar registro solo" now forces page reload to prevent state corruption
+
+### Header Navigation Cleanup (October 22, 2025)
+- **Removed "Perfil" from header**: Was duplicate of intake form, no longer needed in navigation
+- **Fixed "Mi Informe" visibility**: Now only appears AFTER completing 5-day registration and generating initial report
+- **Correct flow**: Header shows only "Inicio" and "Diagnóstico" until user completes intake + 5-day registration, then "Mi Informe" and "Chat Semanal" appear
+
+### Authorization & Route Protection (October 21, 2025)
+- **Fixed critical security bug**: Anonymous users (incognito) could see and access protected pages without authentication
+- **Header Navigation**: Protected links ("Mi Informe", "Chat Semanal") only visible when `userId && tm_informe_ready` 
+- **Route Guards**: Added redirect protection in InformeFuncional.tsx and ChatSemanal.tsx - users without proper credentials redirected to `/onboarding/bienvenida-trial`
+- **Trial Initialization**: BienvenidaTrial.tsx properly generates `tm_user_id` (format: `trial_<timestamp>_<random>`) when user starts diagnostic
 
 ## System Architecture
 

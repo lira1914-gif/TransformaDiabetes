@@ -130,38 +130,26 @@ export default function Header() {
         >
           Diagnóstico
         </Link>
-        {/* Chat Semanal: visible solo después de completar el informe inicial */}
+        {/* Mi Informe y Chat: visibles solo después de completar el informe inicial */}
         {userId && informeCompletado && (
-          <Link 
-            href="/chat-semanal" 
-            className="font-medium hover:opacity-80 transition-opacity"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            data-testid="link-chat-nav"
-          >
-            Chat Semanal
-          </Link>
-        )}
-        {/* Mi Informe: solo visible para usuarios con userId */}
-        {userId && (
-          <Link 
-            href="/onboarding/informe-inicial" 
-            className="font-medium hover:opacity-80 transition-opacity"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            data-testid="link-informe-nav"
-          >
-            Mi Informe
-          </Link>
-        )}
-        {/* Perfil: solo visible para usuarios con userId */}
-        {userId && (
-          <Link 
-            href="/perfil" 
-            className="font-medium hover:opacity-80 transition-opacity"
-            style={{ color: '#4B4B3B', textDecoration: 'none' }}
-            data-testid="link-perfil-nav"
-          >
-            Perfil
-          </Link>
+          <>
+            <Link 
+              href="/onboarding/informe-inicial" 
+              className="font-medium hover:opacity-80 transition-opacity"
+              style={{ color: '#4B4B3B', textDecoration: 'none' }}
+              data-testid="link-informe-nav"
+            >
+              Mi Informe
+            </Link>
+            <Link 
+              href="/chat-semanal" 
+              className="font-medium hover:opacity-80 transition-opacity"
+              style={{ color: '#4B4B3B', textDecoration: 'none' }}
+              data-testid="link-chat-nav"
+            >
+              Chat Semanal
+            </Link>
+          </>
         )}
       </nav>
 
@@ -228,41 +216,28 @@ export default function Header() {
           >
             Diagnóstico
           </Link>
-          {/* Chat Semanal: visible solo después de completar el informe inicial */}
+          {/* Mi Informe y Chat: visibles solo después de completar el informe inicial */}
           {userId && informeCompletado && (
-            <Link 
-              href="/chat-semanal" 
-              className="font-medium py-2"
-              style={{ color: '#4B4B3B', textDecoration: 'none' }}
-              onClick={() => setMobileMenuOpen(false)}
-              data-testid="link-mobile-chat"
-            >
-              Chat Semanal
-            </Link>
-          )}
-          {/* Mi Informe: solo visible para usuarios con userId */}
-          {userId && (
-            <Link 
-              href="/onboarding/informe-inicial" 
-              className="font-medium py-2"
-              style={{ color: '#4B4B3B', textDecoration: 'none' }}
-              onClick={() => setMobileMenuOpen(false)}
-              data-testid="link-mobile-informe"
-            >
-              Mi Informe
-            </Link>
-          )}
-          {/* Perfil: solo visible para usuarios con userId */}
-          {userId && (
-            <Link 
-              href="/perfil" 
-              className="font-medium py-2"
-              style={{ color: '#4B4B3B', textDecoration: 'none' }}
-              onClick={() => setMobileMenuOpen(false)}
-              data-testid="link-mobile-perfil"
-            >
-              Perfil
-            </Link>
+            <>
+              <Link 
+                href="/onboarding/informe-inicial" 
+                className="font-medium py-2"
+                style={{ color: '#4B4B3B', textDecoration: 'none' }}
+                onClick={() => setMobileMenuOpen(false)}
+                data-testid="link-mobile-informe"
+              >
+                Mi Informe
+              </Link>
+              <Link 
+                href="/chat-semanal" 
+                className="font-medium py-2"
+                style={{ color: '#4B4B3B', textDecoration: 'none' }}
+                onClick={() => setMobileMenuOpen(false)}
+                data-testid="link-mobile-chat"
+              >
+                Chat Semanal
+              </Link>
+            </>
           )}
           <Link
             href="/onboarding/bienvenida-trial"
