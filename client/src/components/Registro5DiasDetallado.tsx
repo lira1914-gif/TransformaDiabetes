@@ -67,6 +67,7 @@ export default function Registro5DiasDetallado() {
       
       if (nuevosDias.length >= 5) {
         localStorage.setItem('tm_registro_done', 'true');
+        localStorage.setItem('tm_informe_ready', 'true'); // Habilitar chat y Mi Informe en header
         toast({
           title: "✅ Registro completo",
           description: "Has completado tus 5 días de registro funcional. Generando tu informe personalizado...",
