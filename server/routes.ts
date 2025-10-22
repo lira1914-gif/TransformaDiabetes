@@ -1593,20 +1593,9 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
       const previousCheckins = await storage.getWeeklyCheckinsByUserId(userId);
       const hasHistory = previousCheckins.length > 0;
 
-      // LÍMITE DE CONVERSACIONES PARA TRIAL: 3 conversaciones gratuitas
-      // Si el usuario NO está suscrito (subscriptionStatus !== 'active') y ya tiene 3+ conversaciones, bloquear
-      const isSubscribed = user.subscriptionStatus === 'active';
-      const conversationCount = previousCheckins.length;
-      
-      if (!isSubscribed && conversationCount >= 3) {
-        console.log(`Usuario ${userId} alcanzó el límite de 3 conversaciones gratuitas (tiene ${conversationCount})`);
-        return res.status(403).json({ 
-          error: "LIMIT_REACHED",
-          message: "Has alcanzado el límite de 3 conversaciones gratuitas. Suscríbete para continuar usando el chat.",
-          conversationCount,
-          limit: 3
-        });
-      }
+      // ACCESO AL CHAT DURANTE EL TRIAL:
+      // Los usuarios de trial tienen acceso ILIMITADO al chat durante 7 días
+      // No hay límite de conversaciones - el límite es solo temporal (7 días)
 
       // Preparar el prompt para "Marvin Lira IA"
       const { openai } = await import("./openai");
