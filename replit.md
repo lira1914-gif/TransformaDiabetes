@@ -21,6 +21,7 @@ Preferred communication style: Simple, everyday language.
 - **Chat system enhanced**: "Marvin Lira IA" now positioned as the primary tool for users to share daily symptoms (sleep, digestion, energy, mood) during their 7-day trial
 - **Trial access simplified**: Based purely on time (7 days from intake completion), not task completion
 - **Bug fix**: Eliminated intermediate "mensaje" page that referenced obsolete 5-day registration flow and caused 404 errors
+- **Chat conversation limit removed**: Eliminated the 3-conversation limit for trial users. Chat is now completely unlimited during the 7-day trial period. Updated backend to remove conversation count checks and frontend to remove limit messaging and modals.
 
 ### Header Navigation Cleanup (October 22, 2025)
 - **"Mi Informe" and "Chat Semanal" visibility**: Now appear immediately after completing intake form (when `tm_informe_ready='true'`)
@@ -45,7 +46,7 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 - **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns and "Mini Guías Funcionales".
 - **Simplified Onboarding Flow**: Intake form (62 fields, flexible - not all required) → Immediate AI report generation → Chat access for daily symptom journaling during 7-day trial.
 - **Subscription CTAs**: Prominent call-to-action banners in InformeFuncional encouraging trial users to subscribe, highlighting benefits ($5 USD/month, unlimited chat, progressive modules, personalized tracking).
-- **Chat Conversation Limit**: Trial users limited to 3 free chat conversations with Marvin Lira IA. After 3 conversations, users must subscribe to continue chatting. Backend enforces limit via conversation count check, frontend shows counter and disabled button with upgrade modal.
+- **Chat Access During Trial**: Trial users have UNLIMITED access to chat with Marvin Lira IA during their 7-day trial period. There is no conversation limit - the only restriction is time-based (7 days from intake completion). At day 7, users must subscribe to continue using the chat.
 - **7-Day Free Trial with Progressive Messaging**:
   - **Day 5**: Soft reminder banner ("Tu prueba gratuita está por terminar")
   - **Day 6**: Modal celebration ("Has completado tu prueba funcional gratuita") + Email reminder
