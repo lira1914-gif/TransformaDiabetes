@@ -16,9 +16,9 @@ export default function IntakeFormPage() {
   }, [setLocation]);
 
   const handleComplete = () => {
-    // El IntakeForm ya guarda los datos y marca tm_intake_done
-    // Navegar al mensaje
-    setLocation('/onboarding/mensaje');
+    // El IntakeForm ya guarda los datos, genera el reporte, y marca tm_intake_done
+    // Navegar directamente al informe inicial (ya no necesitamos la página de mensaje)
+    setLocation('/onboarding/informe-inicial');
   };
 
   return (

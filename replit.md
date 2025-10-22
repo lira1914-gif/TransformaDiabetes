@@ -13,12 +13,14 @@ Preferred communication style: Simple, everyday language.
 - **New user journey**: Intake Form → AI Report Generated → Chat Opens (with 3 free conversations during 7-day trial)
 - **Backend updates**: `/api/generate-report` endpoint now generates reports using only intake form data, no longer requires daily logs
 - **Frontend changes**: 
-  - Removed Registro.tsx, Registro5DiasDetallado.tsx, and Registro5Dias.tsx components
-  - Removed `/onboarding/registro` route
-  - IntakeForm now automatically generates report and sets `tm_informe_ready='true'` upon completion
+  - Removed Registro.tsx, Registro5DiasDetallado.tsx, Registro5Dias.tsx, and Mensaje.tsx components
+  - Removed `/onboarding/registro` and `/onboarding/mensaje` routes
+  - IntakeFormPage now redirects directly to `/onboarding/informe-inicial` (no intermediate message page)
+  - IntakeForm automatically generates report and sets `tm_informe_ready='true'` upon completion
   - InformeFuncional updated with prominent CTA directing users to chat for daily symptom tracking
 - **Chat system enhanced**: "Marvin Lira IA" now positioned as the primary tool for users to share daily symptoms (sleep, digestion, energy, mood) during their 7-day trial
 - **Trial access simplified**: Based purely on time (7 days from intake completion), not task completion
+- **Bug fix**: Eliminated intermediate "mensaje" page that referenced obsolete 5-day registration flow and caused 404 errors
 
 ### Header Navigation Cleanup (October 22, 2025)
 - **"Mi Informe" and "Chat Semanal" visibility**: Now appear immediately after completing intake form (when `tm_informe_ready='true'`)

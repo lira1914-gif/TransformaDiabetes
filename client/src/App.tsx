@@ -27,7 +27,6 @@ import OnboardingBienvenidaTrial from "@/pages/onboarding/BienvenidaTrial";
 import OnboardingMotivacion from "@/pages/onboarding/Motivacion";
 import OnboardingFormularioSalud from "@/pages/onboarding/FormularioSalud";
 import OnboardingIntake from "@/pages/onboarding/IntakeFormPage";
-import OnboardingMensaje from "@/pages/onboarding/Mensaje";
 import OnboardingMes1 from "@/pages/onboarding/Mes1";
 import OnboardingInforme from "@/pages/onboarding/Informe";
 
@@ -57,7 +56,6 @@ function Router() {
       <Route path="/onboarding/motivacion" component={OnboardingMotivacion} />
       <Route path="/onboarding/formulario-salud" component={OnboardingFormularioSalud} />
       <Route path="/onboarding/intake" component={OnboardingIntake} />
-      <Route path="/onboarding/mensaje" component={OnboardingMensaje} />
       <Route path="/onboarding/mes1" component={OnboardingMes1} />
       <Route path="/onboarding/informe-inicial" component={OnboardingInforme} />
       <Route path="/onboarding/informe" component={OnboardingInforme} />
