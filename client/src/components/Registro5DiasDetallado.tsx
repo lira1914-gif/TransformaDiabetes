@@ -52,10 +52,12 @@ export default function Registro5DiasDetallado() {
   });
 
   const saveDailyLogMutation = useMutation({
-    mutationFn: async (data: any) => {
-      return await apiRequest('POST', '/api/daily-log', data);
+    mutationFn: async ({ apiData }: any) => {
+      console.log('🚀 Llamando POST /api/daily-log con:', apiData);
+      return await apiRequest('POST', '/api/daily-log', apiData);
     },
     onSuccess: (data, variables) => {
+      console.log('✅ Respuesta del servidor:', data);
       const nuevosDias = [...diasCompletados, variables.diaData];
       setDiasCompletados(nuevosDias);
       
@@ -232,12 +234,13 @@ export default function Registro5DiasDetallado() {
         comida: m.comida,
         estadoAnimo: m.estado_animo,
         evacuaciones: m.evacuaciones
-      })),
-      diaData: nuevoDia // Para usar en onSuccess
+      }))
     };
     
-    // Enviar a PostgreSQL
-    saveDailyLogMutation.mutate(apiData);
+    console.log('📤 Enviando daily log al servidor:', apiData);
+    
+    // Enviar a PostgreSQL con diaData como contexto separado
+    saveDailyLogMutation.mutate({ apiData, diaData: nuevoDia });
   };
 
   const reiniciarRegistro = () => {
