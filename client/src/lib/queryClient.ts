@@ -12,9 +12,14 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  console.log(`🌐 apiRequest: ${method} ${url}`, data ? { data } : '');
+  // Construir URL absoluta para asegurar compatibilidad en producción
+  const absoluteUrl = url.startsWith('http') 
+    ? url 
+    : `${window.location.origin}${url.startsWith('/') ? url : '/' + url}`;
   
-  const res = await fetch(url, {
+  console.log(`🌐 apiRequest: ${method} ${absoluteUrl}`, data ? { data } : '');
+  
+  const res = await fetch(absoluteUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
