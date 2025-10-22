@@ -1507,7 +1507,7 @@ Tu cuerpo no está roto, está buscando equilibrio.
 Mientras el cuerpo esté en alerta, no puede sanar.
 Sanar no es controlar un síntoma, es entender la raíz."
 
-EXTENSIÓN: 400–700 palabras.
+EXTENSIÓN: 300–500 palabras (conciso y directo).
 FORMATO VISUAL: Usa subtítulos y emojis para hacerlo más visual y amigable.
 LENGUAJE: Completamente claro, sin abreviaturas técnicas.
 
@@ -1522,6 +1522,7 @@ FORMATO DE RESPUESTA - Responde ÚNICAMENTE en formato JSON con esta estructura 
 IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
 
       console.log('Generando informe con OpenAI usando conocimiento funcional...');
+      const startTime = Date.now();
       
       // Usar gpt-4o-mini para respuestas más rápidas (5-10 segundos en lugar de 30-60 segundos)
       const completion = await openai.chat.completions.create({
@@ -1537,9 +1538,12 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
           }
         ],
         response_format: { type: "json_object" },
-        max_completion_tokens: 2000,
+        max_completion_tokens: 1500,
         temperature: 0.7
       });
+      
+      const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2);
+      console.log(`⏱️ OpenAI respondió en ${elapsedTime}s`);
 
       const aiResponse = completion.choices[0]?.message?.content;
       if (!aiResponse) {
