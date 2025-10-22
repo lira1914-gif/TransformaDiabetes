@@ -69,4 +69,5 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 - **Payment Integration**: **Stripe** for $5/month subscriptions with a 7-day free trial, using Stripe.js and Stripe Node SDK.
 - **Email System**: **Nodemailer** configured with Namecheap PrivateEmail (SMTP) for automated transactional emails (e.g., Welcome, Report Ready, Module Completed, Trial Reminders).
 - **AI Integration**: **OpenAI GPT-4o** for generating personalized functional medicine reports and powering the "Marvin Lira IA" weekly check-in chat system.
+- **Analytics**: **Google Analytics 4** (Measurement ID: `G-YZ6DC4HWJE`) for tracking user behavior, page views, and conversion metrics across transformadiabetes.com and transformadiabetes.online.
 - **Support Chat**: **Chatbase** floating chat widget (`yxaUbszINwsobf8Upa-xh`) for technical support only.
