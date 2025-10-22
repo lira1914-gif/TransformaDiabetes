@@ -133,12 +133,18 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       return await apiRequest('POST', '/api/intake-form', data);
     },
     onSuccess: async (response: any) => {
+      console.log('📥 Respuesta del servidor:', response);
+      
       // Marcar intake como completado
       localStorage.setItem('tm_intake_done', 'true');
       
       // Guardar userId si viene en la respuesta (nuevo usuario de trial)
+      // IMPORTANTE: Usar el userId de la respuesta si existe (usuario existente por email)
       const userId = response.userId || localStorage.getItem('tm_user_id');
+      console.log('🔑 userId a usar para generar reporte:', userId);
+      
       if (response.userId) {
+        console.log('💾 Actualizando localStorage con userId del servidor:', response.userId);
         localStorage.setItem('tm_user_id', response.userId);
       }
       
