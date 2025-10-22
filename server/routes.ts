@@ -17,6 +17,9 @@ if (stripe) {
   console.warn('⚠️ Stripe not configured: STRIPE_SECRET_KEY is missing');
 }
 
+// Cachear conocimiento funcional en memoria (se carga solo una vez)
+let conocimientoFuncionalCache: string | null = null;
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Stripe subscription endpoint
   app.post("/api/create-subscription", async (req, res) => {
@@ -1196,13 +1199,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Preparar el informe generado por IA
       const { openai } = await import("./openai");
       
-      // Cargar conocimiento funcional
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      const conocimientoFuncional = await fs.readFile(
-        path.join(process.cwd(), 'server', 'conocimiento-funcional-condensado.txt'),
-        'utf-8'
-      );
+      // Cargar conocimiento funcional (con cache)
+      if (!conocimientoFuncionalCache) {
+        const fs = await import('fs/promises');
+        const path = await import('path');
+        conocimientoFuncionalCache = await fs.readFile(
+          path.join(process.cwd(), 'server', 'conocimiento-funcional-condensado.txt'),
+          'utf-8'
+        );
+        console.log('✅ Conocimiento funcional cargado en cache');
+      }
+      const conocimientoFuncional = conocimientoFuncionalCache;
       
       // Construir instrucciones específicas según el módulo
       let moduleInstructions = '';
@@ -1516,9 +1523,9 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
 
       console.log('Generando informe con OpenAI usando conocimiento funcional...');
       
-      // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+      // Usar gpt-4o-mini para respuestas más rápidas (5-10 segundos en lugar de 30-60 segundos)
       const completion = await openai.chat.completions.create({
-        model: "gpt-5",
+        model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
@@ -1530,7 +1537,8 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
           }
         ],
         response_format: { type: "json_object" },
-        max_completion_tokens: 8192
+        max_completion_tokens: 2000,
+        temperature: 0.7
       });
 
       const aiResponse = completion.choices[0]?.message?.content;
