@@ -118,24 +118,36 @@ export default function Registro5DiasDetallado() {
   useEffect(() => {
     console.log('🟢 Registro5DiasDetallado montado');
     const datosGuardados = localStorage.getItem('registro5dias_detallado');
+    const registroDone = localStorage.getItem('tm_registro_done');
     
-    if (datosGuardados) {
+    // Solo cargar datos si están marcados como completados
+    // Esto previene cargar datos obsoletos después de reiniciar
+    if (datosGuardados && registroDone === 'true') {
       try {
         const diasGuardados = JSON.parse(datosGuardados);
         
-        if (Array.isArray(diasGuardados) && diasGuardados.length > 0) {
+        if (Array.isArray(diasGuardados) && diasGuardados.length >= 5) {
+          console.log('✅ Ya completó 5 días, mostrando pantalla de completado');
           setDiasCompletados(diasGuardados);
-          
-          if (diasGuardados.length >= 5) {
-            console.log('✅ Ya completó 5 días, mostrando pantalla de completado');
-            setDiaActual(6);
-          } else {
-            setDiaActual(diasGuardados.length + 1);
-          }
+          setDiaActual(6);
+        } else {
+          // Si no tiene 5 días completos, no confiar en estos datos
+          console.log('⚠️ Datos incompletos en localStorage, empezando desde día 1');
+          localStorage.removeItem('registro5dias_detallado');
+          setDiasCompletados([]);
+          setDiaActual(1);
         }
       } catch (error) {
         console.error('Error al cargar datos guardados:', error);
+        localStorage.removeItem('registro5dias_detallado');
+        setDiasCompletados([]);
+        setDiaActual(1);
       }
+    } else {
+      // No hay datos completados, empezar desde día 1
+      console.log('🆕 Empezando registro desde día 1');
+      setDiasCompletados([]);
+      setDiaActual(1);
     }
   }, []);
 
@@ -268,42 +280,23 @@ export default function Registro5DiasDetallado() {
         }
       }
       
-      // Solo limpiar localStorage si el DELETE fue exitoso
+      // Limpiar localStorage completamente
       localStorage.removeItem('registro5dias');
       localStorage.removeItem('registro5dias_detallado');
       localStorage.removeItem('tm_registro_dias');
       localStorage.removeItem('tm_registro_completado');
+      localStorage.removeItem('tm_registro_done');
+      localStorage.removeItem('tm_informe_ready');
       
-      setDiasCompletados([]);
-      setDiaActual(1);
-      setFormData({
-        fecha: new Date().toISOString().split('T')[0],
-        hora_dormir: "",
-        hora_despertar: "",
-        veces_desperto: "0",
-        manana_comida: "",
-        manana_animo: "",
-        manana_evacuaciones: "",
-        media_manana_comida: "",
-        media_manana_animo: "",
-        media_manana_evacuaciones: "",
-        almuerzo_comida: "",
-        almuerzo_animo: "",
-        almuerzo_evacuaciones: "",
-        media_tarde_comida: "",
-        media_tarde_animo: "",
-        media_tarde_evacuaciones: "",
-        cena_comida: "",
-        cena_animo: "",
-        cena_evacuaciones: "",
-        noche_comida: "",
-        noche_animo: "",
-        noche_evacuaciones: ""
-      });
       toast({
         title: "✅ Registro reiniciado",
-        description: "Empezando desde el día 1. Todos los registros previos han sido eliminados.",
+        description: "Recargando página para empezar desde el día 1...",
       });
+      
+      // Forzar recarga completa de la página para limpiar cualquier estado obsoleto
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   };
 
