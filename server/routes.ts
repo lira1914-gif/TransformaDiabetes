@@ -912,9 +912,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { userId, dia, fecha, horaDormir, horaDespertar, vecesDesperto, momentos } = req.body;
 
+      console.log('📝 POST /api/daily-log - Recibiendo datos:', {
+        userId,
+        dia,
+        fecha,
+        horaDormir: horaDormir || '(vacío)',
+        horaDespertar: horaDespertar || '(vacío)',
+        vecesDesperto: vecesDesperto || '(vacío)',
+        momentosCount: momentos?.length || 0
+      });
+
       if (!userId || !dia || !fecha) {
+        console.error('❌ Faltan campos requeridos:', { userId: !!userId, dia: !!dia, fecha: !!fecha });
         return res.status(400).json({ error: "userId, dia y fecha son requeridos" });
       }
+
+      // Verificar que el usuario existe
+      const userExists = await storage.getUser(userId);
+      if (!userExists) {
+        console.error(`❌ Usuario no existe en la base de datos: ${userId}`);
+        return res.status(404).json({ 
+          error: "Usuario no encontrado. Por favor completa el formulario de intake primero." 
+        });
+      }
+
+      console.log('✅ Usuario verificado, guardando daily log...');
 
       // Crear el daily log
       const dailyLog = await storage.createDailyLog({
@@ -926,8 +948,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         vecesDesperto,
       });
 
+      console.log('✅ Daily log creado:', dailyLog.id);
+
       // Crear los momentos asociados
       if (momentos && Array.isArray(momentos)) {
+        console.log(`📝 Guardando ${momentos.length} momentos...`);
         for (const momento of momentos) {
           await storage.createDailyLogMoment({
             dailyLogId: dailyLog.id,
@@ -937,11 +962,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
             evacuaciones: momento.evacuaciones,
           });
         }
+        console.log('✅ Momentos guardados exitosamente');
       }
 
+      console.log('✅ Daily log completado exitosamente');
       res.json(dailyLog);
     } catch (error: any) {
-      console.error("Error guardando daily log:", error);
+      console.error("❌ Error guardando daily log:", error);
+      console.error("❌ Error details:", {
+        message: error.message,
+        code: error.code,
+        detail: error.detail
+      });
       res.status(500).json({ error: "Error al guardar el registro diario" });
     }
   });
