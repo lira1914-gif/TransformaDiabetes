@@ -201,19 +201,19 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
           </div>
           
           <div class="step">
-            <div class="step-number">2. Registra tus 5 días</div>
+            <div class="step-number">2. Recibe tu informe funcional inmediatamente</div>
+            <div class="step-title">Módulo 1: Empieza desde la raíz</div>
             <div class="step-desc">
-              Anota lo que comes, cómo duermes y cómo te sientes cada día.<br>
-              Este paso es clave para que la IA pueda generar tu primer informe funcional personalizado.
+              Tan pronto completes tu formulario, nuestra IA generará tu primer informe funcional personalizado.<br>
+              Incluye observaciones, hábitos y tu plan educativo inicial basado en tus respuestas.
             </div>
           </div>
           
           <div class="step">
-            <div class="step-number">3. Recibirás tu guía funcional</div>
-            <div class="step-title">Módulo 1: Empieza desde la raíz</div>
+            <div class="step-number">3. Usa el chat para rastrear tus síntomas diarios</div>
             <div class="step-desc">
-              Tu informe se entregará directamente en esta bandeja.<br>
-              Incluye observaciones, hábitos y tu plan educativo inicial.
+              Durante tu prueba de 7 días tendrás acceso ilimitado al chat "Marvin Lira IA".<br>
+              Comparte cómo te sientes cada día: sueño, digestión, energía y ánimo. La IA aprenderá de ti y te guiará.
             </div>
           </div>
         </div>
@@ -454,6 +454,43 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
             El informe incluye tus observaciones, hábitos clave y recomendaciones educativas
             creadas con el método Marvin Lira | Nutrición Funcional,
             basado en fisiología, empatía y consciencia del cuerpo.
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>Siguiente paso: Rastrear tus síntomas diarios</h2>
+        
+        <div class="module-box" style="border-left-color: #6b8e23;">
+          <div class="module-title" style="color: #6b8e23;">💬 Chat con Marvin Lira IA — Disponible ahora</div>
+          <div class="module-subtitle">
+            Durante tu prueba de 7 días, tienes acceso ilimitado al chat interactivo.
+            Úsalo cada día para compartir:
+          </div>
+          
+          <div class="pillar">
+            <div class="pillar-number">🌙 Cómo dormiste</div>
+            <div class="pillar-desc">
+              ¿Cuántas horas? ¿Despertaste en la noche? ¿Cómo te sentiste al levantarte?
+            </div>
+          </div>
+          
+          <div class="pillar">
+            <div class="pillar-number">🍽️ Cómo estuvo tu digestión</div>
+            <div class="pillar-desc">
+              ¿Inflamación? ¿Estreñimiento? ¿Acidez? Observa sin juzgar.
+            </div>
+          </div>
+          
+          <div class="pillar">
+            <div class="pillar-number">⚡ Tu nivel de energía y ánimo</div>
+            <div class="pillar-desc">
+              ¿Estable o con bajones? ¿Antojos de dulce? ¿Ansiedad? Todo es información valiosa.
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; text-align: center;">
+            <a href="${baseUrl}/chat-semanal" class="button" style="background-color: #6b8e23;">Ir al chat ahora</a>
           </div>
         </div>
 
@@ -1525,7 +1562,7 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
           
           <p>Durante estos 7 días diste un paso que muchas personas nunca se atreven a dar: <strong>escuchar lo que tu cuerpo realmente necesita</strong>.</p>
           
-          <p>Tus respuestas y registros mostraron señales claras de mejora — mejor digestión, sueño más profundo o menos antojos de azúcar.<br>
+          <p>Tus conversaciones con el chat y tu informe funcional mostraron señales claras de mejora — mejor digestión, sueño más profundo o menos antojos de azúcar.<br>
           <strong>Eso significa que tu cuerpo ya empezó a responder.</strong></p>
           
           <p>No dejes que ese avance se pierda.</p>
@@ -1537,8 +1574,8 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
           </p>
           <div class="benefits-list">
             <div class="benefit-item">🌱 Tu plan funcional personalizado</div>
-            <div class="benefit-item">💬 Acceso al chat interactivo con IA</div>
-            <div class="benefit-item">📊 Actualizaciones semanales según tus registros</div>
+            <div class="benefit-item">💬 Acceso ilimitado al chat interactivo con IA</div>
+            <div class="benefit-item">📊 Seguimiento continuo de tus síntomas y progreso</div>
             <div class="benefit-item">🌿 Contenido educativo exclusivo cada mes</div>
           </div>
         </div>
