@@ -28,6 +28,15 @@ export default function Informe() {
   });
 
   useEffect(() => {
+    // Marcar que el informe está listo cuando el usuario llega a esta página
+    // Esto habilita el botón del chat en el informe y el enlace en el header
+    const registroDone = localStorage.getItem('tm_registro_done');
+    if (registroDone === 'true') {
+      localStorage.setItem('tm_informe_ready', 'true');
+    }
+  }, []);
+
+  useEffect(() => {
     if (!trialStatus) return;
     
     // No redirigir si está en día 11+ (se mostrará ArchivedAccountPage)
