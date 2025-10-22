@@ -130,22 +130,23 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
 
   const saveIntakeMutation = useMutation({
     mutationFn: async (data: any) => {
-      return await apiRequest('POST', '/api/intake-form', data);
+      const response = await apiRequest('POST', '/api/intake-form', data);
+      return await response.json();
     },
-    onSuccess: async (response: any) => {
-      console.log('📥 Respuesta del servidor:', response);
+    onSuccess: async (data: any) => {
+      console.log('📥 Respuesta del servidor:', data);
       
       // Marcar intake como completado
       localStorage.setItem('tm_intake_done', 'true');
       
       // Guardar userId si viene en la respuesta (nuevo usuario de trial)
       // IMPORTANTE: Usar el userId de la respuesta si existe (usuario existente por email)
-      const userId = response.userId || localStorage.getItem('tm_user_id');
+      const userId = data.userId || localStorage.getItem('tm_user_id');
       console.log('🔑 userId a usar para generar reporte:', userId);
       
-      if (response.userId) {
-        console.log('💾 Actualizando localStorage con userId del servidor:', response.userId);
-        localStorage.setItem('tm_user_id', response.userId);
+      if (data.userId) {
+        console.log('💾 Actualizando localStorage con userId del servidor:', data.userId);
+        localStorage.setItem('tm_user_id', data.userId);
       }
       
       // Guardar fecha de inicio del trial
