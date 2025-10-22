@@ -850,15 +850,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.log('✅ Usuario existente encontrado por email:', user.id, email);
         } else {
           // Crear usuario nuevo con estado de trial usando inserción directa
+          // Módulo 1 desbloqueado automáticamente para usuarios de trial
           const result = await db.insert(users).values({
             id: userId,
             email: email,
             subscriptionStatus: 'trial',
             trialStartDate: new Date(),
-            unlockedModules: []
+            unlockedModules: [1]
           }).returning();
           user = result[0];
-          console.log('✅ Usuario de trial creado:', userId, email);
+          console.log('✅ Usuario de trial creado con Módulo 1 desbloqueado:', userId, email);
         }
       }
 
