@@ -132,11 +132,12 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     mutationFn: async (data: any) => {
       return await apiRequest('POST', '/api/intake-form', data);
     },
-    onSuccess: (response: any) => {
+    onSuccess: async (response: any) => {
       // Marcar intake como completado
       localStorage.setItem('tm_intake_done', 'true');
       
       // Guardar userId si viene en la respuesta (nuevo usuario de trial)
+      const userId = response.userId || localStorage.getItem('tm_user_id');
       if (response.userId) {
         localStorage.setItem('tm_user_id', response.userId);
       }
@@ -148,9 +149,48 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       
       toast({
         title: "✅ Historial guardado",
-        description: "Tu información ha sido registrada correctamente en nuestra base de datos.",
+        description: "Tu información ha sido registrada correctamente. Generando tu informe personalizado...",
       });
-      onComplete();
+      
+      // Validación defensiva: asegurar que tenemos un userId válido
+      if (!userId) {
+        console.error('❌ No se pudo obtener userId para generar el reporte');
+        toast({
+          title: "⚠️ Error de configuración",
+          description: "No se pudo identificar tu usuario. Por favor recarga la página e intenta nuevamente.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      try {
+        // Generar reporte inmediatamente con módulo 1
+        console.log('✅ Generando reporte para userId:', userId);
+        await apiRequest('POST', '/api/generate-report', {
+          userId,
+          moduleNumber: 1
+        });
+        
+        // Marcar informe como listo (ya no necesita 5 días de registro)
+        localStorage.setItem('tm_informe_ready', 'true');
+        
+        toast({
+          title: "🎉 Informe generado",
+          description: "Tu guía funcional personalizada está lista. Te redirigiremos ahora...",
+        });
+        
+        // Esperar 1 segundo antes de redirigir
+        setTimeout(() => {
+          onComplete();
+        }, 1000);
+      } catch (error) {
+        console.error('❌ Error generando reporte:', error);
+        toast({
+          title: "⚠️ Error generando informe",
+          description: "Hubo un problema generando tu informe. Por favor intenta nuevamente.",
+          variant: "destructive",
+        });
+      }
     },
     onError: (error: any) => {
       console.error('Error guardando intake form:', error);

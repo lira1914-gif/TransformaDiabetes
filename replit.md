@@ -8,22 +8,25 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 22, 2025)
 
-### Daily Log Registration System Fixed
-- **Fixed localStorage rehydration bug**: Component now validates localStorage data before rehydration to prevent stale data from being automatically re-saved
-- **Enhanced backend validation**: POST /api/daily-log now verifies user exists before saving, preventing foreign key constraint violations
-- **Improved error logging**: Backend now logs detailed error information (message, code, detail) for easier debugging
-- **Force reload after reset**: "Reiniciar registro solo" now forces page reload to prevent state corruption
+### Major Simplification: Removed 5-Day Registration Requirement (October 22, 2025)
+- **Simplified trial flow**: Users now receive their personalized functional report IMMEDIATELY after completing the intake form, removing the previous 5-day registration barrier
+- **New user journey**: Intake Form → AI Report Generated → Chat Opens (with 3 free conversations during 7-day trial)
+- **Backend updates**: `/api/generate-report` endpoint now generates reports using only intake form data, no longer requires daily logs
+- **Frontend changes**: 
+  - Removed Registro.tsx, Registro5DiasDetallado.tsx, and Registro5Dias.tsx components
+  - Removed `/onboarding/registro` route
+  - IntakeForm now automatically generates report and sets `tm_informe_ready='true'` upon completion
+  - InformeFuncional updated with prominent CTA directing users to chat for daily symptom tracking
+- **Chat system enhanced**: "Marvin Lira IA" now positioned as the primary tool for users to share daily symptoms (sleep, digestion, energy, mood) during their 7-day trial
+- **Trial access simplified**: Based purely on time (7 days from intake completion), not task completion
 
 ### Header Navigation Cleanup (October 22, 2025)
-- **Removed "Perfil" from header**: Was duplicate of intake form, no longer needed in navigation
-- **Fixed "Mi Informe" visibility**: Now only appears AFTER completing 5-day registration and generating initial report
-- **Correct flow**: Header shows only "Inicio" and "Diagnóstico" until user completes intake + 5-day registration, then "Mi Informe" and "Chat Semanal" appear
+- **"Mi Informe" and "Chat Semanal" visibility**: Now appear immediately after completing intake form (when `tm_informe_ready='true'`)
+- **Correct flow**: Header shows only "Inicio" and "Diagnóstico" initially, then adds "Mi Informe" and "Chat Semanal" after intake completion
 
 ### Authorization & Route Protection (October 21, 2025)
-- **Fixed critical security bug**: Anonymous users (incognito) could see and access protected pages without authentication
-- **Header Navigation**: Protected links ("Mi Informe", "Chat Semanal") only visible when `userId && tm_informe_ready` 
-- **Route Guards**: Added redirect protection in InformeFuncional.tsx and ChatSemanal.tsx - users without proper credentials redirected to `/onboarding/bienvenida-trial`
-- **Trial Initialization**: BienvenidaTrial.tsx properly generates `tm_user_id` (format: `trial_<timestamp>_<random>`) when user starts diagnostic
+- **Route Guards**: InformeFuncional.tsx and ChatSemanal.tsx redirect users without proper credentials to `/onboarding/bienvenida-trial`
+- **Trial Initialization**: BienvenidaTrial.tsx generates `tm_user_id` (format: `trial_<timestamp>_<random>`) when user starts diagnostic
 
 ## System Architecture
 
@@ -31,14 +34,14 @@ Preferred communication style: Simple, everyday language.
 The application is built with React 18, TypeScript, Vite, Wouter for routing, and TanStack Query. The UI uses Radix UI primitives and shadcn/ui (New York style) with Tailwind CSS, custom design tokens, a wellness-focused color palette, Playfair Display for headings, and Inter for body text. It features a responsive, mobile-first design, a simplified landing page with a multi-step diagnostic wizard, a comprehensive subscription onboarding flow, dynamic content, and legal pages.
 
 ### Backend & Database
-The backend uses Express.js with TypeScript, Drizzle ORM for PostgreSQL (Neon Database), and Zod for schema validation, structured as a monorepo. The PostgreSQL database includes tables for `users` (with subscription status and module access), `intake_forms`, `daily_logs` and `daily_log_moments`, `reports`, and `weekly_checkins`. User creation, intake form submissions, and daily log entries are all linked by `userId`.
+The backend uses Express.js with TypeScript, Drizzle ORM for PostgreSQL (Neon Database), and Zod for schema validation, structured as a monorepo. The PostgreSQL database includes tables for `users` (with subscription status and module access), `intake_forms`, `reports`, and `weekly_checkins`. User creation and intake form submissions are linked by `userId`. **Note**: `daily_logs` and `daily_log_moments` tables are deprecated and no longer used (chat system replaced the structured 5-day logging).
 
 ### Routing
 Wouter manages client-side routing with smooth scrolling. The landing page is a single-page scroll, while the subscription onboarding is a multi-page sequential flow.
 
 ### Feature Specifications
 - **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns and "Mini Guías Funcionales".
-- **Subscription Onboarding Flow**: A multi-page process encompassing Stripe checkout, intake form, 5-day functional tracking, and an AI-generated initial report.
+- **Simplified Onboarding Flow**: Intake form (62 fields, flexible - not all required) → Immediate AI report generation → Chat access for daily symptom journaling during 7-day trial.
 - **Subscription CTAs**: Prominent call-to-action banners in InformeFuncional encouraging trial users to subscribe, highlighting benefits ($5 USD/month, unlimited chat, progressive modules, personalized tracking).
 - **Chat Conversation Limit**: Trial users limited to 3 free chat conversations with Marvin Lira IA. After 3 conversations, users must subscribe to continue chatting. Backend enforces limit via conversation count check, frontend shows counter and disabled button with upgrade modal.
 - **7-Day Free Trial with Progressive Messaging**:

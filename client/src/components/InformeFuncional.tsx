@@ -65,18 +65,19 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
       className={`informe-funcional ${visible ? "fade-in" : ""}`}
       data-testid="informe-inicial"
     >
-      <h2>🌿 Tu Guía Funcional Personalizada — Semana 1</h2>
+      <h2>🌿 Tu Guía Funcional Personalizada — Inicio</h2>
       <p className="subtitulo">
         "Tu cuerpo no está roto, solo se está protegiendo. Aprende a escuchar su
         mensaje con calma y curiosidad."
       </p>
 
       <div className="bloque-texto">
-        <h3>Resumen de tus primeros 5 días</h3>
+        <h3>Resumen de tu perfil inicial</h3>
         <p>
-          Basado en tus registros de alimentación, sueño y digestión, tu cuerpo está
-          ajustando su equilibrio interno. No busca fallar, está aprendiendo a
-          responder de otra forma. 🧠💪
+          Basado en tu historial de salud, alimentación y estilo de vida, tu cuerpo está
+          mostrando señales importantes. Durante los próximos 7 días, podrás usar el chat para
+          compartir cómo te sientes cada día (sueño, digestión, energía, ánimo) y recibirás
+          recomendaciones personalizadas en tiempo real. 🧠💪
         </p>
       </div>
 
@@ -104,8 +105,8 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
       <div className="nota-final">
         <p>
           *Este contenido es educativo y no reemplaza la atención médica profesional.
-          La próxima etapa incluirá ajustes más específicos y la activación del
-          diario funcional guiado por IA.* 🤖
+          Ahora puedes usar el chat durante 7 días para compartir cómo te sientes y
+          recibir recomendaciones personalizadas basadas en tus síntomas diarios.* 🤖
         </p>
       </div>
 
@@ -179,27 +180,29 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
           alignItems: 'center', 
           gap: '1rem',
           marginTop: '2rem',
-          padding: '1.5rem',
-          backgroundColor: 'rgba(107, 112, 65, 0.08)',
-          borderRadius: '12px',
-          border: '2px solid rgba(107, 112, 65, 0.2)'
+          padding: '2rem',
+          backgroundColor: 'rgba(107, 112, 65, 0.12)',
+          borderRadius: '16px',
+          border: '3px solid rgba(107, 112, 65, 0.3)'
         }}>
           <p style={{ 
             color: '#556B2F', 
-            fontSize: '1.1rem', 
-            fontWeight: 600,
+            fontSize: '1.3rem', 
+            fontWeight: 700,
             margin: 0,
             textAlign: 'center'
           }}>
-            💬 ¿Tienes preguntas sobre tu informe?
+            💬 Siguiente paso: Comparte tus síntomas durante 7 días
           </p>
           <p style={{ 
             color: '#3A3A3A', 
-            fontSize: '0.95rem',
+            fontSize: '1rem',
             margin: 0,
-            textAlign: 'center'
+            textAlign: 'center',
+            lineHeight: 1.6,
+            maxWidth: '600px'
           }}>
-            Abre tu chat semanal guiado por IA para explorar tus resultados y recibir orientación personalizada
+            Abre el chat y comparte cómo te sientes cada día (cómo dormiste, cómo está tu digestión, tu energía, tu ánimo). Marvin Lira IA te dará recomendaciones personalizadas basadas en lo que compartas. <strong>Tienes 3 conversaciones gratuitas durante tu prueba de 7 días.</strong>
           </p>
           <button
             className="btn-finalizar"
@@ -207,11 +210,13 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
             onClick={handleOpenChat}
             style={{
               backgroundColor: '#6B7041',
-              padding: '14px 32px',
-              fontSize: '1.05rem'
+              padding: '16px 40px',
+              fontSize: '1.15rem',
+              marginTop: '0.5rem',
+              boxShadow: '0 4px 12px rgba(107, 112, 65, 0.25)'
             }}
           >
-            🌿 Abrir Chat Semanal
+            🌿 Abrir Chat Ahora
           </button>
         </div>
       )}

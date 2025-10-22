@@ -1190,19 +1190,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ error: "Formulario de intake no encontrado" });
       }
 
-      // Obtener todos los daily logs del usuario
-      const dailyLogs = await storage.getDailyLogsByUserId(userId);
-      if (dailyLogs.length === 0) {
-        return res.status(404).json({ error: "No hay registros de 5 días disponibles" });
-      }
-
-      // Obtener los momentos de cada día
-      const logsWithMoments = await Promise.all(
-        dailyLogs.map(async (log) => {
-          const moments = await storage.getDailyLogMomentsByLogId(log.id);
-          return { ...log, moments };
-        })
-      );
+      // NOTA: Ya no requerimos daily logs - el reporte se genera solo con intake form
 
       // Preparar el informe generado por IA
       const { openai } = await import("./openai");
@@ -1298,13 +1286,15 @@ FORMATO EDUCATIVO (no prescriptivo):
       }
       
       // Construir el mensaje del sistema con el conocimiento funcional
-      const systemMessage = `🌿 SYSTEM PROMPT — "GUÍA FUNCIONAL MARVIN LIRA" (v3 con Trifecta Oficial)
+      const systemMessage = `🌿 SYSTEM PROMPT — "GUÍA FUNCIONAL MARVIN LIRA" (v4 - Perfil Inicial)
 
 Rol:
 Eres un analista funcional de salud con el estilo y metodología de Marvin Lira | Nutrición Funcional.
-Tu tarea es transformar los datos del usuario (intake + registro de 5 días) en una Guía Funcional personalizada, con tono cálido, educativo y esperanzador.
+Tu tarea es transformar los datos del formulario de ingreso del usuario en una Guía Funcional personalizada inicial, con tono cálido, educativo y esperanzador.
 El informe debe tener un formato de mini guía Marvin Lira, con subtítulos, listas y lenguaje sencillo (400–700 palabras).
 Tu prioridad es educar, no diagnosticar.
+
+IMPORTANTE: Este es un informe inicial basado en el perfil del usuario. Le explicarás que puede usar el chat durante los próximos 7 días para ir compartiendo cómo se siente día a día (síntomas, energía, digestión, sueño, ánimo) y recibirá recomendaciones personalizadas basadas en lo que vaya reportando.
 
 CONOCIMIENTO CLÍNICO BASE:
 ${conocimientoFuncional}
@@ -1397,7 +1387,7 @@ TONO:
 Respondes siempre en español y en formato JSON estructurado.`;
       
       // Construir el prompt con los datos del usuario
-      const userPrompt = `Analiza los siguientes datos de un paciente y genera un informe funcional personalizado.
+      const userPrompt = `Analiza los siguientes datos de un paciente y genera un informe funcional personalizado basado en su perfil inicial.
 
 DATOS DEL PACIENTE:
 Nombre: ${intakeForm.nombre || 'No especificado'}
@@ -1416,13 +1406,13 @@ ALIMENTACIÓN:
 - Dieta especial: ${intakeForm.dietaEspecial || 'No especificada'}
 - Síntomas después de comer: ${intakeForm.sintomasDespuesComer || 'No especificado'}
 
-REGISTRO DE 5 DÍAS (FOOD-MOOD-POOP):
-${logsWithMoments.map((log, idx) => `
-Día ${log.dia} (${log.fecha}):
-  Sueño: Durmió a las ${log.horaDormir || 'N/A'}, despertó a las ${log.horaDespertar || 'N/A'}, despertó ${log.vecesDesperto || '0'} veces.
-  Momentos del día:
-${log.moments.map(m => `    - ${m.momento}: Comida: ${m.comida || 'N/A'}, Estado de ánimo: ${m.estadoAnimo || 'N/A'}, Evacuaciones: ${m.evacuaciones || 'N/A'}`).join('\n')}
-`).join('\n')}
+ESTILO DE VIDA Y HÁBITOS:
+- Satisfecho con sueño: ${intakeForm.satisfechoSueno || 'No especificado'}
+- Horas de sueño: ${intakeForm.horasSueno || 'No especificado'}
+- Estado de ánimo: ${intakeForm.estadoAnimo || 'No especificado'}
+- Nivel de energía: ${intakeForm.nivelEnergia || 'No especificado'}
+- Frecuencia de evacuaciones: ${intakeForm.frecuenciaEvacuaciones || 'No especificada'}
+- Consistencia de evacuaciones: ${intakeForm.consistenciaEvacuaciones || 'No especificada'}
 
 MÓDULO ACTUAL: ${moduleNumber}
 
@@ -1622,7 +1612,7 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
       const { openai } = await import("./openai");
 
       const systemMessage = `Eres el asistente funcional "Marvin Lira IA" 🌿
-Tu rol es escuchar el estado semanal del usuario y responder con empatía y claridad,
+Tu rol es escuchar cómo se siente el usuario día a día durante su prueba de 7 días y responder con empatía y claridad,
 explicando brevemente qué puede significar lo que siente y cómo puede apoyar su cuerpo desde la raíz.
 
 PRINCIPIOS EDUCATIVOS:
@@ -1666,13 +1656,13 @@ Responde en JSON con esta estructura exacta:
   "emotionTags": ["array de emociones: ansiedad, cansancio, frustración, esperanza, alegría"]
 }`;
 
-      const userPrompt = `El usuario te comparte cómo se sintió esta semana:
+      const userPrompt = `El usuario te comparte cómo se sintió hoy (sueño, digestión, energía, ánimo):
 
 "${message}"
 
-${hasHistory ? `(El usuario ha compartido ${previousCheckins.length} veces anteriores. Puedes mencionar progreso si es evidente.)` : '(Esta es la primera vez que el usuario comparte contigo.)'}
+${hasHistory ? `(El usuario ha compartido ${previousCheckins.length} veces anteriores durante su prueba de 7 días. Puedes mencionar progreso si es evidente.)` : '(Esta es la primera vez que el usuario comparte contigo durante su prueba de 7 días gratuitos.)'}
 
-Responde con empatía, identifica sistemas afectados y ofrece orientación funcional simple.
+Responde con empatía, identifica sistemas afectados y ofrece orientación funcional simple basada en los síntomas que comparte hoy.
 Devuelve SOLO el JSON, sin texto adicional.`;
 
       console.log('Generando respuesta del chat con Marvin Lira IA...');
