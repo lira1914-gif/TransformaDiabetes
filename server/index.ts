@@ -1,11 +1,54 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import fs from "fs";
 
 const app = express();
 app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// 🛡️ Protección contra bots y rutas sospechosas
+const blockedPaths = [
+  "/wp-admin",
+  "/wordpress",
+  "/wp-login",
+  "/xmlrpc.php",
+  "/.env",
+  "/wp-content",
+  "/wp-includes",
+  "/.git",
+  "/config.php",
+  "/phpmyadmin",
+  "/admin.php",
+  "/setup.php"
+];
+
+const blockedIPs: string[] = [
+  // Agregar IPs sospechosas aquí si es necesario
+];
+
+app.use((req, res, next) => {
+  const ip = (req.headers["x-forwarded-for"] as string) || req.socket.remoteAddress || "unknown";
+
+  // Bloquear rutas sospechosas
+  if (blockedPaths.some(path => req.url.startsWith(path))) {
+    const logMessage = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    fs.appendFileSync("blocked.log", logMessage);
+    console.log(logMessage.trim());
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  // Bloquear IPs en lista negra
+  if (blockedIPs.includes(ip)) {
+    const logMessage = `🚫 IP bloqueada: ${ip}\n`;
+    fs.appendFileSync("blocked.log", logMessage);
+    console.log(logMessage.trim());
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();

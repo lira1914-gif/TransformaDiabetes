@@ -1,0 +1,64 @@
+INSTRUCCIONES SENCILLAS para bloquear bots en tu servidor Replit
+
+🧩 PASO 1: Abre tu archivo del servidor
+
+Abre el archivo donde inicias tu servidor (normalmente se llama server.js o app.js).
+
+⸻
+
+🧩 PASO 2: Copia y pega este código justo al inicio del archivo, después de importar express pero antes de tus rutas (app.get(...) o app.post(...)).// 🛡️ Protección simple contra bots y rutas sospechosas
+import express from "express";
+import fs from "fs";
+
+const app = express();
+
+// --- Lista de rutas sospechosas (WordPress, configuraciones, etc.) ---
+const blockedPaths = [
+  "/wp-admin",
+  "/wordpress",
+  "/wp-login",
+  "/xmlrpc.php",
+  "/.env"
+];
+
+// --- Lista opcional de IPs bloqueadas ---
+const blockedIPs = [
+  "192.168.0.1", // ejemplo — puedes agregar otras si ves repetidas
+];
+
+// --- Middleware que bloquea bots ---
+app.use((req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  // Si entra a una ruta sospechosa, se bloquea
+  if (blockedPaths.some(path => req.url.startsWith(path))) {
+    const log = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  // Si la IP está en lista negra, también se bloquea
+  if (blockedIPs.includes(ip)) {
+    const log = `🚫 IP bloqueada: ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  next(); // Deja pasar todo lo demás
+});PASO 3: Guarda los cambios
+
+Haz clic en Save 💾 y reinicia tu servidor (botón “Run” en Replit).
+
+⸻
+
+🧩 PASO 4: (Opcional) Ver los intentos bloqueados
+
+Cada intento sospechoso quedará guardado en un archivo llamado blocked.log dentro de tu proyecto.
+Puedes abrirlo para ver líneas como:🚫 Ruta bloqueada: /wp-admin/setup-config.php desde IP 45.67.88.90
+🚫 IP bloqueada: 192.168.0.1✅ ¿Qué hace este código?
+	•	Bloquea bots que intentan entrar a rutas como /wp-admin o /.env.
+	•	Guarda un registro en blocked.log.
+	•	Evita que esos bots sigan cargando tu sitio (ahorrando ancho de banda).
+	•	No afecta a tus visitantes reales.
