@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import fs from "fs";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
@@ -49,6 +50,24 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// 🛡️ Limitador de solicitudes (Rate Limiting)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // máximo 100 requests por IP en 15 minutos
+  message: "Demasiadas solicitudes desde esta IP, intenta de nuevo más tarde.",
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res, _next, options) => {
+    const ip = (req.headers["x-forwarded-for"] as string) || req.socket.remoteAddress || "unknown";
+    const logMessage = `⚠️ Límite alcanzado: ${ip} - ${req.url}\n`;
+    fs.appendFileSync("blocked.log", logMessage);
+    console.log(logMessage.trim());
+    res.status(options.statusCode).send(options.message);
+  }
+});
+
+app.use(limiter);
 
 app.use((req, res, next) => {
   const start = Date.now();

@@ -1,0 +1,242 @@
+npm install express-rate-limit
+// 🛡️ Protección avanzada contra bots y abuso
+import express from "express";
+import fs from "fs";
+import rateLimit from "express-rate-limit";
+
+const app = express();
+
+// --- Lista de rutas sospechosas (por seguridad) ---
+const blockedPaths = [
+  "/wp-admin",
+  "/wordpress",
+  "/wp-login",
+  "/xmlrpc.php",
+  "/.env"
+];
+
+// --- Lista opcional de IPs bloqueadas ---
+const blockedIPs = [
+  "192.168.0.1", // ejemplo, puedes agregar más si ves repetidas
+];
+
+// --- Middleware: bloqueo por ruta o IP sospechosa ---
+app.use((req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  // Bloqueo por rutas sospechosas
+  if (blockedPaths.some(path => req.url.startsWith(path))) {
+    const log = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  // Bloqueo por IP específica
+  if (blockedIPs.includes(ip)) {
+    const log = `🚫 IP bloqueada: ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  next(); // Si pasa los filtros, continúa
+});
+
+// --- Limitador de solicitudes ---
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // máximo 100 requests por IP
+  message: "Demasiadas solicitudes desde esta IP, intenta de nuevo más tarde.",
+  handler: (req, res, next, options) => {
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const log = `⚠️ Límite alcanzado: ${ip} - ${req.url}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    res.status(options.statusCode).send(options.message);
+  }
+});
+
+// Aplica el limitador a todas las rutas
+app.use(limiter);// 🛡️ Protección avanzada contra bots y abuso
+import express from "express";
+import fs from "fs";
+import rateLimit from "express-rate-limit";
+
+const app = express();
+
+// --- Lista de rutas sospechosas (por seguridad) ---
+const blockedPaths = [
+  "/wp-admin",
+  "/wordpress",
+  "/wp-login",
+  "/xmlrpc.php",
+  "/.env"
+];
+
+// --- Lista opcional de IPs bloqueadas ---
+const blockedIPs = [
+  "192.168.0.1", // ejemplo, puedes agregar más si ves repetidas
+];
+
+// --- Middleware: bloqueo por ruta o IP sospechosa ---
+app.use((req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  // Bloqueo por rutas sospechosas
+  if (blockedPaths.some(path => req.url.startsWith(path))) {
+    const log = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  // Bloqueo por IP específica
+  if (blockedIPs.includes(ip)) {
+    const log = `🚫 IP bloqueada: ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  next(); // Si pasa los filtros, continúa
+});
+
+// --- Limitador de solicitudes ---
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // máximo 100 requests por IP
+  message: "Demasiadas solicitudes desde esta IP, intenta de nuevo más tarde.",
+  handler: (req, res, next, options) => {
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const log = `⚠️ Límite alcanzado: ${ip} - ${req.url}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    res.status(options.statusCode).send(options.message);
+  }
+});
+
+// Aplica el limitador a todas las rutas
+app.use(limiter);// 🛡️ Protección avanzada contra bots y abuso
+import express from "express";
+import fs from "fs";
+import rateLimit from "express-rate-limit";
+
+const app = express();
+
+// --- Lista de rutas sospechosas (por seguridad) ---
+const blockedPaths = [
+  "/wp-admin",
+  "/wordpress",
+  "/wp-login",
+  "/xmlrpc.php",
+  "/.env"
+];
+
+// --- Lista opcional de IPs bloqueadas ---
+const blockedIPs = [
+  "192.168.0.1", // ejemplo, puedes agregar más si ves repetidas
+];
+
+// --- Middleware: bloqueo por ruta o IP sospechosa ---
+app.use((req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  // Bloqueo por rutas sospechosas
+  if (blockedPaths.some(path => req.url.startsWith(path))) {
+    const log = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  // Bloqueo por IP específica
+  if (blockedIPs.includes(ip)) {
+    const log = `🚫 IP bloqueada: ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  next(); // Si pasa los filtros, continúa
+});
+
+// --- Limitador de solicitudes ---
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // máximo 100 requests por IP
+  message: "Demasiadas solicitudes desde esta IP, intenta de nuevo más tarde.",
+  handler: (req, res, next, options) => {
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const log = `⚠️ Límite alcanzado: ${ip} - ${req.url}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    res.status(options.statusCode).send(options.message);
+  }
+});
+
+// Aplica el limitador a todas las rutas
+app.use(limiter);// 🛡️ Protección avanzada contra bots y abuso
+import express from "express";
+import fs from "fs";
+import rateLimit from "express-rate-limit";
+
+const app = express();
+
+// --- Lista de rutas sospechosas (por seguridad) ---
+const blockedPaths = [
+  "/wp-admin",
+  "/wordpress",
+  "/wp-login",
+  "/xmlrpc.php",
+  "/.env"
+];
+
+// --- Lista opcional de IPs bloqueadas ---
+const blockedIPs = [
+  "192.168.0.1", // ejemplo, puedes agregar más si ves repetidas
+];
+
+// --- Middleware: bloqueo por ruta o IP sospechosa ---
+app.use((req, res, next) => {
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+  // Bloqueo por rutas sospechosas
+  if (blockedPaths.some(path => req.url.startsWith(path))) {
+    const log = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  // Bloqueo por IP específica
+  if (blockedIPs.includes(ip)) {
+    const log = `🚫 IP bloqueada: ${ip}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    return res.status(403).send("Acceso denegado 🚫");
+  }
+
+  next(); // Si pasa los filtros, continúa
+});
+
+// --- Limitador de solicitudes ---
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // máximo 100 requests por IP
+  message: "Demasiadas solicitudes desde esta IP, intenta de nuevo más tarde.",
+  handler: (req, res, next, options) => {
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const log = `⚠️ Límite alcanzado: ${ip} - ${req.url}\n`;
+    fs.appendFileSync("blocked.log", log);
+    console.log(log);
+    res.status(options.statusCode).send(options.message);
+  }
+});
+
+// Aplica el limitador a todas las rutas
+app.use(limiter);Ahora, si algún bot intenta:
+	•	Entrar a /wp-admin, /xmlrpc.php o rutas similares 🚫
+	•	Hacer más de 100 solicitudes en 15 minutos ⚠️
+→ El intento quedará registrado en un archivo llamado blocked.log en tu proyecto.🚫 Ruta bloqueada: /wp-admin/setup-config.php desde IP 45.33.21.88
+⚠️ Límite alcanzado: 181.45.22.10 - /
