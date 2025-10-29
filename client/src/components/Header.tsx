@@ -146,48 +146,36 @@ export default function Header() {
         >
           Inicio
         </Link>
+        {/* Mi Informe y Chat: visibles solo después de completar el informe inicial */}
         <Link 
-          href="/onboarding/bienvenida-trial" 
+          href="/onboarding/informe-inicial" 
           className="font-medium hover:opacity-80 transition-opacity"
           style={{ color: '#4B4B3B', textDecoration: 'none' }}
-          data-testid="link-diagnostico-nav"
+          data-testid="link-informe-nav"
         >
-          Diagnóstico
+          Mi Informe
         </Link>
-        {/* Mi Informe y Chat: visibles solo después de completar el informe inicial */}
-        {userId && informeCompletado && (
-          <>
-            <Link 
-              href="/onboarding/informe-inicial" 
-              className="font-medium hover:opacity-80 transition-opacity"
-              style={{ color: '#4B4B3B', textDecoration: 'none' }}
-              data-testid="link-informe-nav"
-            >
-              Mi Informe
-            </Link>
-            <Link 
-              href="/chat-semanal" 
-              className="font-medium hover:opacity-80 transition-opacity"
-              style={{ color: '#4B4B3B', textDecoration: 'none' }}
-              data-testid="link-chat-nav"
-            >
-              Chat Semanal
-            </Link>
-          </>
-        )}
+        <Link 
+          href="/chat-semanal" 
+          className="font-medium hover:opacity-80 transition-opacity"
+          style={{ color: '#4B4B3B', textDecoration: 'none' }}
+          data-testid="link-chat-nav"
+        >
+          Chat Semanal
+        </Link>
       </nav>
 
       {/* CTA Desktop */}
       <div className="hidden md:block">
         <Link
-          href="/onboarding/bienvenida-trial"
+          href="/cuestionario"
           className="inline-block px-4 py-2 rounded-md text-white font-semibold transition-all"
           style={{ backgroundColor: '#A15C38', textDecoration: 'none' }}
-          data-testid="button-cta-diagnostico"
+          data-testid="button-cta-cuestionario"
           onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#8C4E30'}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
         >
-          Empieza tu diagnóstico
+          Comenzar evaluación
         </Link>
       </div>
 
@@ -232,45 +220,31 @@ export default function Header() {
             Inicio
           </Link>
           <Link 
-            href="/onboarding/bienvenida-trial" 
+            href="/onboarding/informe-inicial" 
             className="font-medium py-2"
             style={{ color: '#4B4B3B', textDecoration: 'none' }}
             onClick={() => setMobileMenuOpen(false)}
-            data-testid="link-mobile-diagnostico"
+            data-testid="link-mobile-informe"
           >
-            Diagnóstico
+            Mi Informe
           </Link>
-          {/* Mi Informe y Chat: visibles solo después de completar el informe inicial */}
-          {userId && informeCompletado && (
-            <>
-              <Link 
-                href="/onboarding/informe-inicial" 
-                className="font-medium py-2"
-                style={{ color: '#4B4B3B', textDecoration: 'none' }}
-                onClick={() => setMobileMenuOpen(false)}
-                data-testid="link-mobile-informe"
-              >
-                Mi Informe
-              </Link>
-              <Link 
-                href="/chat-semanal" 
-                className="font-medium py-2"
-                style={{ color: '#4B4B3B', textDecoration: 'none' }}
-                onClick={() => setMobileMenuOpen(false)}
-                data-testid="link-mobile-chat"
-              >
-                Chat Semanal
-              </Link>
-            </>
-          )}
+          <Link 
+            href="/chat-semanal" 
+            className="font-medium py-2"
+            style={{ color: '#4B4B3B', textDecoration: 'none' }}
+            onClick={() => setMobileMenuOpen(false)}
+            data-testid="link-mobile-chat"
+          >
+            Chat Semanal
+          </Link>
           <Link
-            href="/onboarding/bienvenida-trial"
+            href="/cuestionario"
             className="inline-block px-4 py-2 rounded-md text-white font-semibold text-center mt-2"
             style={{ backgroundColor: '#A15C38', textDecoration: 'none' }}
             onClick={() => setMobileMenuOpen(false)}
-            data-testid="button-mobile-cta-diagnostico"
+            data-testid="button-mobile-cta-cuestionario"
           >
-            Empieza tu diagnóstico
+            Comenzar evaluación
           </Link>
         </div>
       )}
