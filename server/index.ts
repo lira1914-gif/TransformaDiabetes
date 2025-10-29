@@ -51,7 +51,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// 🛡️ Limitador de solicitudes (Rate Limiting)
+// 🛡️ Limitador de solicitudes (Rate Limiting) - Solo para rutas API
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 100, // máximo 100 requests por IP en 15 minutos
@@ -67,7 +67,8 @@ const limiter = rateLimit({
   }
 });
 
-app.use(limiter);
+// Aplicar rate limiter SOLO a rutas API (no a assets de Vite)
+app.use('/api', limiter);
 
 app.use((req, res, next) => {
   const start = Date.now();
