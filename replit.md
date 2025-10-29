@@ -8,7 +8,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 29, 2025)
 
-### Expanded 5-Step Questionnaire with Direct-to-Chat Flow (October 29, 2025)
+### Optimized Conversion Flow with Emotional CTA (October 29, 2025)
 - **Enhanced questionnaire**: Expanded CuestionarioBreve.tsx from 3 steps to 5 comprehensive steps:
   - **Step 1**: Personal information (name, email, age, weight in lbs, height in ft/in)
   - **Step 2**: General health status (sleep quality, digestion, anxiety levels)
@@ -16,12 +16,13 @@ Preferred communication style: Simple, everyday language.
   - **Step 4**: Functional diagnostic questions (main concern, current state, health goal)
   - **Step 5**: Additional medical information (Type 2 diabetes confirmation, energy level slider, detailed symptoms)
 - **Imperial units**: UI displays pounds and feet/inches with automatic backend conversion to kg/cm
-- **Direct-to-chat flow**: After completing questionnaire, users redirect to `/chat-semanal` instead of `/onboarding/informe-inicial` for immediate chat access
-- **Report generation**: AI report still generates in background during questionnaire completion; accessible via "Mi Informe" menu link
-- **Header visibility**: Menu navigation remains visible after questionnaire completion showing "Inicio", "Mi Informe", "Chat Semanal"
+- **Value-first flow**: After completing questionnaire, users redirect to `/onboarding/informe-inicial` to see their personalized functional guide BEFORE being asked to subscribe
+- **Emotional CTA**: InformeFuncional displays powerful emotional call-to-action "¿Quieres seguir este camino conmigo?" after user reads their personalized recommendations
+- **7-day trial offer**: Below subscription CTA, users can try chat for free during 7-day trial period ("Mientras decides, prueba el chat gratis")
+- **Conditional header**: Header shows minimal version (logo only) on landing/questionnaire, full navigation after completing questionnaire
+- **Header visibility**: After questionnaire completion, full menu shows "Inicio", "Diagnóstico", "Mi Informe", "Chat Semanal"
 - **Rate limiter fix**: Moved rate limiting from global scope to `/api/*` routes only to prevent blocking Vite development resources
 - **Trust proxy configured**: Added Express trust proxy setting for proper rate limiter validation
-- **End-to-end tested**: Full flow validated from home → 5-step questionnaire → chat redirect with successful message processing
 
 ### Previous: Simplified Onboarding Flow (October 29, 2025)
 - **Unified questionnaire**: Initially created `CuestionarioBreve.tsx` combining 3 diagnostic questions + 11 essential intake fields (reduced from 62) into a single, streamlined 3-step form
