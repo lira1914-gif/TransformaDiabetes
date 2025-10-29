@@ -1179,8 +1179,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Verificar acceso al módulo solicitado
+      // Módulo 1 siempre está disponible para todos (trial y suscritos)
       const unlockedModules = (user.unlockedModules as number[]) || [];
-      if (!unlockedModules.includes(moduleNumber)) {
+      if (moduleNumber !== 1 && !unlockedModules.includes(moduleNumber)) {
         return res.status(403).json({ 
           error: "Acceso denegado", 
           message: `El Módulo ${moduleNumber} aún no está disponible para ti. Se desbloqueará automáticamente en tu proceso.`,
