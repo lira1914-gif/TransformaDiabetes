@@ -8,6 +8,23 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 29, 2025)
 
+### Trial Activation Fix & Header Simplification (October 29, 2025 - Final)
+- **Trial initialization fixed**: Trial now starts correctly when users complete the intake questionnaire, regardless of whether it's a new or updated form
+  - `trialStartDate` set to current timestamp upon intake completion
+  - `subscriptionStatus` set to 'trialing' (standardized from 'trial' for consistency)
+  - `unlockedModules` set to [1] automatically
+  - Fixed issue where trial status API returned `isTrialing: false` for new users
+- **Header navigation simplified**: Removed "Diagnóstico" from menu
+  - **Before questionnaire**: Minimal header (logo only, centered)
+  - **After questionnaire**: Full navigation with "Inicio", "Mi Informe", "Chat Semanal"
+  - CTA button text: "Comenzar evaluación" (links to `/cuestionario`)
+- **Trial status API consistency**: `/api/trial-status/:userId` now correctly returns:
+  - `isTrialing: true` for active trial users (within 7-day period)
+  - `hasAccess: true` for trial and subscribed users
+  - `daysRemaining: 7` on day 0 (first day)
+  - `subscriptionStatus: "trialing"` for trial users
+- **End-to-end tested**: Complete user flow verified from landing → questionnaire → report → chat access
+
 ### Optimized Conversion Flow with Emotional CTA (October 29, 2025)
 - **Enhanced questionnaire**: Expanded CuestionarioBreve.tsx from 3 steps to 5 comprehensive steps:
   - **Step 1**: Personal information (name, email, age, weight in lbs, height in ft/in)
@@ -19,8 +36,6 @@ Preferred communication style: Simple, everyday language.
 - **Value-first flow**: After completing questionnaire, users redirect to `/onboarding/informe-inicial` to see their personalized functional guide BEFORE being asked to subscribe
 - **Emotional CTA**: InformeFuncional displays powerful emotional call-to-action "¿Quieres seguir este camino conmigo?" after user reads their personalized recommendations
 - **7-day trial offer**: Below subscription CTA, users can try chat for free during 7-day trial period ("Mientras decides, prueba el chat gratis")
-- **Conditional header**: Header shows minimal version (logo only) on landing/questionnaire, full navigation after completing questionnaire
-- **Header visibility**: After questionnaire completion, full menu shows "Inicio", "Diagnóstico", "Mi Informe", "Chat Semanal"
 - **Rate limiter fix**: Moved rate limiting from global scope to `/api/*` routes only to prevent blocking Vite development resources
 - **Trust proxy configured**: Added Express trust proxy setting for proper rate limiter validation
 
@@ -47,7 +62,8 @@ Preferred communication style: Simple, everyday language.
 
 ### Header Navigation Cleanup (October 22, 2025)
 - **"Mi Informe" and "Chat Semanal" visibility**: Now appear immediately after completing intake form (when `tm_informe_ready='true'`)
-- **Correct flow**: Header shows only "Inicio" initially, then adds "Mi Informe" and "Chat Semanal" after intake completion
+- **Correct flow**: Header shows minimal version (logo only) before questionnaire completion, then full navigation after completion
+- **Note**: As of October 29, 2025, "Diagnóstico" was removed from navigation - menu now shows only "Inicio", "Mi Informe", "Chat Semanal"
 
 ### Authorization & Route Protection (October 21, 2025)
 - **Route Guards**: InformeFuncional.tsx and ChatSemanal.tsx redirect users without proper credentials to `/onboarding/bienvenida-trial`
