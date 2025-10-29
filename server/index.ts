@@ -5,6 +5,8 @@ import fs from "fs";
 import rateLimit from "express-rate-limit";
 
 const app = express();
+// Configurar trust proxy para rate limiter
+app.set('trust proxy', 1);
 app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,0 +1,63 @@
+Hola equipo, gracias por los avances. Aún hay algunos ajustes importantes pendientes. Por favor, realicen los siguientes cambios para alinear la app con la experiencia deseada:
+
+⸻
+
+1. 🔁 Evitar redirección a pantalla de inicio tras completar el cuestionario
+	•	Después de llenar el cuestionario y generar la guía, el usuario NO debe volver a la pantalla de “Comenzar prueba gratuita de 7 días”.
+	•	En su lugar, debe ser dirigido directamente al menú principal (Diagnóstico | Mi Informe | Chat Semanal) con un mensaje de bienvenida en el chat, por ejemplo:
+
+“Gracias por completar tu diagnóstico. Aquí puedes llevar un registro diario, hacer preguntas y acceder a tu guía funcional.”
+
+⸻
+
+2. 📋 Cuestionario funcional más completo (formato multiple choice)
+
+Agregar las siguientes preguntas adicionales en formato de selección múltiple:
+
+Salud general:
+	•	¿Cómo duermes por las noches?
+	•	Me cuesta quedarme dormido(a)
+	•	Me despierto varias veces
+	•	Duermo bien casi todas las noches
+	•	¿Cómo está tu digestión?
+	•	Tengo gases, inflamación o acidez frecuente
+	•	Evacuo una vez al día o más
+	•	Sufro de estreñimiento o diarrea
+	•	¿Cómo describirías tu nivel de ansiedad?
+	•	Alta, me cuesta relajarme
+	•	Moderada
+	•	Baja o inexistente
+
+Medicamentos y diagnósticos:
+	•	¿Tienes algún diagnóstico médico relevante?
+	•	Diabetes tipo 2
+	•	Hipotiroidismo
+	•	Presión alta
+	•	Ninguno / No estoy seguro
+	•	¿Estás tomando algún medicamento actualmente?
+	•	Sí, con receta médica
+	•	Sí, suplementos naturales
+	•	No estoy tomando nada
+	•	Prefiero no responder
+
+⸻
+
+3. ⚖️ Unidades de medida
+	•	Cambiar el campo de peso a libras (lbs).
+	•	Cambiar el campo de altura a pies/pulgadas (ft/in).
+
+Ejemplo de formato correcto:
+Altura: 5 ft 10 in
+Peso: 180 lbs
+
+⸻
+
+4. 🧭 Menú y navegación
+	•	Asegurarse de que el menú superior (Diagnóstico | Mi Informe | Chat Semanal) permanezca visible y funcional después de completar el cuestionario.
+	•	Actualmente, al terminar, el flujo parece reiniciarse y vuelve a mostrar la pantalla inicial. Eso debe evitarse.
+
+⸻
+
+5. 🛠️ Recordatorio importante
+
+No modifiquen el flujo de suscripción ni el sistema de pago. Solo aplicar estos ajustes al cuestionario, navegación y campos de entrada.

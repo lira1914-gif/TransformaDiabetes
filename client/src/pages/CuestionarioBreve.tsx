@@ -16,7 +16,13 @@ interface CuestionarioData {
   email: string;
   edad: string;
   peso_actual: string;
-  altura: string;
+  altura_pies: string;
+  altura_pulgadas: string;
+  calidad_sueno: string;
+  digestion: string;
+  nivel_ansiedad: string;
+  diagnosticos_medicos: string;
+  medicamentos: string;
   preocupacion_principal: string;
   estado_actual: string;
   objetivo: string;
@@ -29,14 +35,20 @@ export default function CuestionarioBreve() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 3;
+  const totalSteps = 5;
 
   const [formData, setFormData] = useState<CuestionarioData>({
     nombre: "",
     email: "",
     edad: "",
     peso_actual: "",
-    altura: "",
+    altura_pies: "",
+    altura_pulgadas: "",
+    calidad_sueno: "",
+    digestion: "",
+    nivel_ansiedad: "",
+    diagnosticos_medicos: "",
+    medicamentos: "",
     preocupacion_principal: "",
     estado_actual: "",
     objetivo: "",
@@ -60,17 +72,25 @@ export default function CuestionarioBreve() {
     mutationFn: async (data: any) => {
       const userId = localStorage.getItem('tm_user_id');
       
-      // Enviar datos simplificados al endpoint de intake-form
+      // Convertir unidades imperiales a métricas para el backend
+      const pesoEnKg = data.peso_actual ? (parseFloat(data.peso_actual) * 0.453592).toFixed(1) : "";
+      const pies = parseFloat(data.altura_pies) || 0;
+      const pulgadas = parseFloat(data.altura_pulgadas) || 0;
+      const alturaEnCm = ((pies * 12 + pulgadas) * 2.54).toFixed(0);
+      
+      // Enviar datos completos al endpoint de intake-form
       const intakeData = {
         userId,
         nombre: data.nombre,
         email: data.email,
         edad: data.edad,
-        peso_actual: data.peso_actual,
-        altura: data.altura,
+        peso_actual: pesoEnKg,
+        altura: alturaEnCm,
         nivel_energia: data.nivel_energia,
-        sistema_gastrointestinal: data.sintomas_principales,
-        informacion_adicional: `Preocupación principal: ${data.preocupacion_principal}\nEstado actual: ${data.estado_actual}\nObjetivo: ${data.objetivo}\nDiabetes: ${data.tiene_diabetes}`,
+        satisfecho_sueno: data.calidad_sueno,
+        sistema_gastrointestinal: `Digestión: ${data.digestion}\nSíntomas: ${data.sintomas_principales}`,
+        estado_animo: data.nivel_ansiedad,
+        informacion_adicional: `Preocupación principal: ${data.preocupacion_principal}\nEstado actual: ${data.estado_actual}\nObjetivo: ${data.objetivo}\nDiabetes: ${data.tiene_diabetes}\nDiagnósticos: ${data.diagnosticos_medicos}\nMedicamentos: ${data.medicamentos}`,
         // Campos requeridos con valores por defecto
         direccion: "",
         ciudad: "",
@@ -106,10 +126,8 @@ export default function CuestionarioBreve() {
         ultima_visita_dental: "",
         amalgamas_mercurio: "",
         problemas_encias: "",
-        satisfecho_sueno: "",
         horas_sueno: "",
         tiempo_conciliar_sueno: "",
-        estado_animo: "",
         momento_mejor_bienestar: "",
         apoyo_familiar: "",
         rol_espiritualidad: "",
@@ -157,11 +175,11 @@ export default function CuestionarioBreve() {
         
         toast({
           title: "🎉 ¡Listo!",
-          description: "Tu guía funcional está lista. Te mostraremos los resultados ahora...",
+          description: "Tu guía funcional está lista. Ahora puedes acceder al chat para llevar tu registro diario.",
         });
         
         setTimeout(() => {
-          setLocation('/onboarding/informe-inicial');
+          setLocation('/chat-semanal');
         }, 1000);
       } catch (error) {
         console.error('Error generando reporte:', error);
@@ -200,6 +218,28 @@ export default function CuestionarioBreve() {
     }
     
     if (currentStep === 2) {
+      if (!formData.calidad_sueno || !formData.digestion || !formData.nivel_ansiedad) {
+        toast({
+          title: "Campos requeridos",
+          description: "Por favor responde todas las preguntas de salud para continuar.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    
+    if (currentStep === 3) {
+      if (!formData.diagnosticos_medicos || !formData.medicamentos) {
+        toast({
+          title: "Campos requeridos",
+          description: "Por favor responde las preguntas sobre diagnósticos y medicamentos.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    
+    if (currentStep === 4) {
       if (!formData.preocupacion_principal || !formData.estado_actual || !formData.objetivo) {
         toast({
           title: "Campos requeridos",
@@ -275,8 +315,10 @@ export default function CuestionarioBreve() {
             style={{ color: '#556B2F' }}
           >
             {currentStep === 1 && "Cuéntanos sobre ti"}
-            {currentStep === 2 && "Tu situación de salud"}
-            {currentStep === 3 && "Información adicional"}
+            {currentStep === 2 && "Tu salud general"}
+            {currentStep === 3 && "Diagnósticos y medicamentos"}
+            {currentStep === 4 && "Tu situación actual"}
+            {currentStep === 5 && "Información adicional"}
           </h1>
 
           <form className="space-y-6">
@@ -330,39 +372,183 @@ export default function CuestionarioBreve() {
 
                   <div>
                     <Label htmlFor="peso" className="text-sm font-medium" style={{ color: '#3A3A3A' }}>
-                      Peso (kg)
+                      Peso (lbs)
                     </Label>
                     <Input
                       id="peso"
                       type="number"
                       value={formData.peso_actual}
                       onChange={(e) => handleChange('peso_actual', e.target.value)}
-                      placeholder="75"
+                      placeholder="180"
                       className="mt-1"
                       data-testid="input-peso"
                     />
                   </div>
 
-                  <div>
-                    <Label htmlFor="altura" className="text-sm font-medium" style={{ color: '#3A3A3A' }}>
-                      Altura (cm)
+                  <div className="col-span-2">
+                    <Label className="text-sm font-medium mb-2 block" style={{ color: '#3A3A3A' }}>
+                      Altura (ft/in)
                     </Label>
-                    <Input
-                      id="altura"
-                      type="number"
-                      value={formData.altura}
-                      onChange={(e) => handleChange('altura', e.target.value)}
-                      placeholder="165"
-                      className="mt-1"
-                      data-testid="input-altura"
-                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <Input
+                          id="altura-pies"
+                          type="number"
+                          value={formData.altura_pies}
+                          onChange={(e) => handleChange('altura_pies', e.target.value)}
+                          placeholder="5"
+                          className="mt-1"
+                          data-testid="input-altura-pies"
+                        />
+                        <span className="text-xs" style={{ color: '#6F6E66' }}>pies</span>
+                      </div>
+                      <div>
+                        <Input
+                          id="altura-pulgadas"
+                          type="number"
+                          value={formData.altura_pulgadas}
+                          onChange={(e) => handleChange('altura_pulgadas', e.target.value)}
+                          placeholder="10"
+                          className="mt-1"
+                          data-testid="input-altura-pulgadas"
+                        />
+                        <span className="text-xs" style={{ color: '#6F6E66' }}>pulgadas</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </>
             )}
 
-            {/* PASO 2: Preguntas de diagnóstico */}
+            {/* PASO 2: Salud general */}
             {currentStep === 2 && (
+              <>
+                <div>
+                  <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
+                    ¿Cómo duermes por las noches? *
+                  </Label>
+                  <RadioGroup
+                    value={formData.calidad_sueno}
+                    onValueChange={(value) => handleChange('calidad_sueno', value)}
+                  >
+                    {[
+                      "Me cuesta quedarme dormido(a)",
+                      "Me despierto varias veces",
+                      "Duermo bien casi todas las noches"
+                    ].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50">
+                        <RadioGroupItem value={option} id={option} data-testid={`radio-sueno-${option}`} />
+                        <Label htmlFor={option} className="cursor-pointer flex-1">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+
+                <div>
+                  <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
+                    ¿Cómo está tu digestión? *
+                  </Label>
+                  <RadioGroup
+                    value={formData.digestion}
+                    onValueChange={(value) => handleChange('digestion', value)}
+                  >
+                    {[
+                      "Tengo gases, inflamación o acidez frecuente",
+                      "Evacuo una vez al día o más",
+                      "Sufro de estreñimiento o diarrea"
+                    ].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50">
+                        <RadioGroupItem value={option} id={option} data-testid={`radio-digestion-${option}`} />
+                        <Label htmlFor={option} className="cursor-pointer flex-1">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+
+                <div>
+                  <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
+                    ¿Cómo describirías tu nivel de ansiedad? *
+                  </Label>
+                  <RadioGroup
+                    value={formData.nivel_ansiedad}
+                    onValueChange={(value) => handleChange('nivel_ansiedad', value)}
+                  >
+                    {[
+                      "Alta, me cuesta relajarme",
+                      "Moderada",
+                      "Baja o inexistente"
+                    ].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50">
+                        <RadioGroupItem value={option} id={option} data-testid={`radio-ansiedad-${option}`} />
+                        <Label htmlFor={option} className="cursor-pointer flex-1">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+              </>
+            )}
+
+            {/* PASO 3: Diagnósticos y medicamentos */}
+            {currentStep === 3 && (
+              <>
+                <div>
+                  <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
+                    ¿Tienes algún diagnóstico médico relevante? *
+                  </Label>
+                  <RadioGroup
+                    value={formData.diagnosticos_medicos}
+                    onValueChange={(value) => handleChange('diagnosticos_medicos', value)}
+                  >
+                    {[
+                      "Diabetes tipo 2",
+                      "Hipotiroidismo",
+                      "Presión alta",
+                      "Ninguno / No estoy seguro"
+                    ].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50">
+                        <RadioGroupItem value={option} id={option} data-testid={`radio-diagnostico-${option}`} />
+                        <Label htmlFor={option} className="cursor-pointer flex-1">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+
+                <div>
+                  <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
+                    ¿Estás tomando algún medicamento actualmente? *
+                  </Label>
+                  <RadioGroup
+                    value={formData.medicamentos}
+                    onValueChange={(value) => handleChange('medicamentos', value)}
+                  >
+                    {[
+                      "Sí, con receta médica",
+                      "Sí, suplementos naturales",
+                      "No estoy tomando nada",
+                      "Prefiero no responder"
+                    ].map((option) => (
+                      <div key={option} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50">
+                        <RadioGroupItem value={option} id={option} data-testid={`radio-medicamento-${option}`} />
+                        <Label htmlFor={option} className="cursor-pointer flex-1">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </div>
+              </>
+            )}
+
+            {/* PASO 4: Preguntas de diagnóstico funcional */}
+            {currentStep === 4 && (
               <>
                 <div>
                   <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
@@ -433,8 +619,8 @@ export default function CuestionarioBreve() {
               </>
             )}
 
-            {/* PASO 3: Información médica */}
-            {currentStep === 3 && (
+            {/* PASO 5: Información médica adicional */}
+            {currentStep === 5 && (
               <>
                 <div>
                   <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
