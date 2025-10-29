@@ -175,11 +175,11 @@ export default function CuestionarioBreve() {
         
         toast({
           title: "🎉 ¡Listo!",
-          description: "Tu guía funcional está lista. Ahora puedes acceder al chat para llevar tu registro diario.",
+          description: "Tu guía funcional personalizada está lista. Preparándote para verla...",
         });
         
         setTimeout(() => {
-          setLocation('/chat-semanal');
+          setLocation('/onboarding/informe-inicial');
         }, 1000);
       } catch (error) {
         console.error('Error generando reporte:', error);
