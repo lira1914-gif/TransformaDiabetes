@@ -35,9 +35,13 @@ export default function Informe() {
       return;
     }
     
+    // Permitir acceso si el usuario completó el cuestionario (tiene informe listo)
+    const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
+    
     if (!trialStatus.hasAccess && !trialStatus.isActive) {
       const subscribed = localStorage.getItem('tm_subscribed_at');
-      if (!subscribed) {
+      // Si no tiene suscripción ni informe completado, redirigir al home
+      if (!subscribed && !informeCompletado) {
         setLocation('/');
         return;
       }
