@@ -16,8 +16,9 @@ export default function Header() {
     enabled: !!userId,
   });
   
-  // Chat Semanal solo visible después de completar el informe inicial
+  // Determinar si mostrar header completo o minimalista
   const informeCompletado = localStorage.getItem('tm_informe_ready') === 'true';
+  const mostrarHeaderCompleto = informeCompletado;
   
   // Idioma: español por default
   const [language, setLanguage] = useState(() => {
@@ -53,6 +54,29 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Header minimalista (solo logo) - antes de completar cuestionario
+  if (!mostrarHeaderCompleto) {
+    return (
+      <header 
+        className="sticky top-0 z-[1000] flex items-center justify-center px-4 sm:px-6 py-4 border-b"
+        style={{
+          backgroundColor: '#FFFFFF',
+          borderBottomColor: '#E6E3D9'
+        }}
+      >
+        {/* Logo / Nombre - centrado */}
+        <Link href="/" className="flex items-center">
+          <img 
+            src={logoImage} 
+            alt="TransformaDiabetes - Nutrición funcional para revertir desde la raíz" 
+            className="h-12 sm:h-14"
+          />
+        </Link>
+      </header>
+    );
+  }
+
+  // Header completo (con navegación) - después de completar cuestionario
   return (
     <header 
       className="sticky top-0 z-[1000] flex items-center justify-between flex-wrap px-4 sm:px-6 py-4 border-b"

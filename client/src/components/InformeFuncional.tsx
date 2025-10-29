@@ -110,120 +110,136 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         </p>
       </div>
 
-      {/* CTA de Suscripción para usuarios en trial */}
+      {/* CTA Emocional de Suscripción para usuarios en trial */}
       {!readOnly && !isSubscribed && trialStatus && trialStatus.subscriptionStatus !== 'active' && (
         <div style={{ 
-          marginTop: '2.5rem',
-          padding: '2rem',
-          backgroundColor: 'rgba(161, 92, 56, 0.08)',
-          borderRadius: '16px',
-          border: '2px solid rgba(161, 92, 56, 0.25)',
-          textAlign: 'center'
+          marginTop: '3rem',
+          padding: '2.5rem',
+          background: 'linear-gradient(135deg, rgba(161, 92, 56, 0.06) 0%, rgba(107, 112, 65, 0.08) 100%)',
+          borderRadius: '20px',
+          border: '3px solid rgba(161, 92, 56, 0.3)',
+          textAlign: 'center',
+          boxShadow: '0 8px 24px rgba(161, 92, 56, 0.12)'
         }}>
           <h3 style={{ 
             color: '#A15C38', 
-            fontSize: '1.4rem', 
+            fontSize: '1.8rem', 
             fontWeight: 700,
-            marginBottom: '1rem'
+            marginBottom: '1.25rem',
+            lineHeight: 1.3
           }}>
-            ✨ Continúa tu transformación funcional
+            ¿Quieres seguir este camino conmigo?
           </h3>
           <p style={{ 
             color: '#3A3A3A', 
-            fontSize: '1rem',
-            marginBottom: '0.75rem',
-            lineHeight: 1.6
+            fontSize: '1.15rem',
+            marginBottom: '1.5rem',
+            lineHeight: 1.7,
+            fontWeight: 500
           }}>
-            Este informe es solo el inicio. Con tu suscripción de <strong>$5 USD/mes</strong> desbloqueas:
+            Esta guía funcional es solo el principio de tu transformación. 
+            <br />
+            <span style={{ color: '#556B2F', fontWeight: 600 }}>
+              Tu cuerpo tiene la sabiduría para sanar — solo necesita el camino correcto.
+            </span>
           </p>
-          <ul style={{ 
-            listStyle: 'none',
-            padding: 0,
-            margin: '1.25rem 0',
-            color: '#3A3A3A',
-            fontSize: '0.95rem',
-            lineHeight: 1.8
+          
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            borderRadius: '12px',
+            padding: '1.75rem',
+            marginBottom: '1.75rem',
+            textAlign: 'left',
+            maxWidth: '600px',
+            margin: '0 auto 1.75rem auto'
           }}>
-            <li>🌿 <strong>Chat semanal ilimitado</strong> con Marvin Lira IA</li>
-            <li>📚 <strong>Módulos educativos progresivos</strong> (se desbloquean cada semana)</li>
-            <li>📊 <strong>Seguimiento personalizado</strong> de tu progreso funcional</li>
-            <li>💬 <strong>Guías de acción específicas</strong> basadas en tus síntomas</li>
-          </ul>
+            <p style={{ 
+              color: '#556B2F', 
+              fontSize: '1.05rem',
+              marginBottom: '1rem',
+              fontWeight: 600,
+              textAlign: 'center'
+            }}>
+              Con tu suscripción de <span style={{ color: '#A15C38', fontSize: '1.2rem' }}>$5 USD/mes</span> desbloqueas:
+            </p>
+            <ul style={{ 
+              listStyle: 'none',
+              padding: 0,
+              margin: 0,
+              color: '#3A3A3A',
+              fontSize: '1rem',
+              lineHeight: 2
+            }}>
+              <li>🌿 <strong>Chat semanal ilimitado</strong> con Marvin Lira IA — tu guía personalizada</li>
+              <li>📚 <strong>Módulos educativos progresivos</strong> que se desbloquean cada semana</li>
+              <li>📊 <strong>Seguimiento personalizado</strong> de tu progreso funcional</li>
+              <li>💬 <strong>Guías de acción específicas</strong> basadas en tus síntomas únicos</li>
+              <li>👥 <strong>Comunidad de apoyo</strong> (próximamente)</li>
+            </ul>
+          </div>
+
           <button
             className="btn-finalizar"
             data-testid="button-subscribe-from-informe"
             onClick={() => navigate('/onboarding/checkout')}
             style={{
               backgroundColor: '#A15C38',
-              padding: '16px 36px',
-              fontSize: '1.1rem',
-              marginTop: '1rem'
+              padding: '18px 48px',
+              fontSize: '1.2rem',
+              marginTop: '0.5rem',
+              fontWeight: 700,
+              boxShadow: '0 6px 16px rgba(161, 92, 56, 0.3)',
+              transition: 'all 0.3s ease'
             }}
           >
-            Suscribirme por $5 USD/mes
+            🌸 Sí, quiero transformar mi salud
           </button>
+          
           <p style={{ 
             color: '#6F6E66', 
-            fontSize: '0.85rem',
-            marginTop: '1rem',
-            marginBottom: 0
+            fontSize: '0.9rem',
+            marginTop: '1.25rem',
+            marginBottom: 0,
+            lineHeight: 1.6
           }}>
-            🔒 Pago seguro con Stripe • Cancela cuando quieras
+            <span style={{ fontSize: '1rem' }}>🔒</span> Pago seguro con Stripe • Cancela cuando quieras
+            <br />
+            <span style={{ color: '#A15C38', fontWeight: 600 }}>Solo $5 USD/mes — menos de un café al día</span>
           </p>
         </div>
       )}
 
+      {/* CTA del Chat - Disponible durante los 7 días de trial */}
       {!readOnly && !isSubscribed && trialStatus && trialStatus.subscriptionStatus !== 'active' && informeCompletado && (
         <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          gap: '1.2rem',
-          marginTop: '2.5rem',
-          padding: '2.5rem',
-          backgroundColor: 'rgba(107, 112, 65, 0.12)',
+          marginTop: '2rem',
+          padding: '2rem',
+          backgroundColor: 'rgba(107, 112, 65, 0.08)',
           borderRadius: '16px',
-          border: '3px solid rgba(107, 112, 65, 0.3)'
+          border: '2px dashed rgba(107, 112, 65, 0.3)',
+          textAlign: 'center'
         }}>
           <p style={{ 
             color: '#556B2F', 
-            fontSize: '1.5rem', 
-            fontWeight: 700,
-            margin: 0,
-            textAlign: 'center'
+            fontSize: '1.3rem', 
+            fontWeight: 600,
+            margin: '0 0 1rem 0',
+            lineHeight: 1.4
           }}>
-            💬 ¿Cómo usar el chat durante tu prueba gratuita?
+            💬 Mientras decides, prueba el chat gratis por 7 días
           </p>
           
-          <div style={{ 
+          <p style={{ 
             color: '#3A3A3A', 
             fontSize: '1rem',
-            textAlign: 'left',
-            lineHeight: 1.7,
-            maxWidth: '650px'
+            marginBottom: '1.5rem',
+            lineHeight: 1.6,
+            maxWidth: '600px',
+            margin: '0 auto 1.5rem auto'
           }}>
-            <p style={{ marginBottom: '1rem', fontWeight: 600, fontSize: '1.05rem', color: '#556B2F' }}>
-              Durante los próximos 7 días, el chat es tu espacio personal para:
-            </p>
-            <ul style={{ 
-              paddingLeft: '1.5rem',
-              margin: 0,
-              listStyleType: 'none'
-            }}>
-              <li style={{ marginBottom: '0.75rem' }}>
-                ✅ <strong>Compartir cómo te sientes cada día:</strong> cuéntale a Marvin Lira IA sobre tu sueño, digestión, nivel de energía y estado de ánimo
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                ✅ <strong>Hacer preguntas:</strong> sobre alimentación, síntomas, o cómo aplicar las recomendaciones de tu guía
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                ✅ <strong>Recibir orientación personalizada:</strong> basada en lo que compartas, recibirás consejos específicos para tu situación
-              </li>
-            </ul>
-            <p style={{ marginTop: '1.25rem', fontSize: '0.95rem', fontStyle: 'italic', color: '#6F6E66' }}>
-              💡 <strong>Consejo:</strong> Entre más detalles compartas sobre cómo te sientes, más específicas serán las recomendaciones que recibirás.
-            </p>
-          </div>
+            Comparte cómo te sientes cada día (sueño, digestión, energía) y recibe orientación personalizada de Marvin Lira IA. 
+            <strong> Sin compromiso, sin tarjeta.</strong>
+          </p>
 
           <button
             className="btn-finalizar"
@@ -231,22 +247,22 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
             onClick={handleOpenChat}
             style={{
               backgroundColor: '#6B7041',
-              padding: '16px 40px',
-              fontSize: '1.15rem',
-              marginTop: '0.5rem',
-              boxShadow: '0 4px 12px rgba(107, 112, 65, 0.25)'
+              padding: '14px 36px',
+              fontSize: '1.1rem',
+              boxShadow: '0 4px 12px rgba(107, 112, 65, 0.2)',
+              border: 'none'
             }}
           >
-            🌿 Abrir Chat Ahora
+            🌿 Probar el Chat Gratis
           </button>
           
           <p style={{ 
-            color: '#556B2F', 
-            fontSize: '0.9rem',
-            margin: 0,
-            fontWeight: 600
+            color: '#6F6E66', 
+            fontSize: '0.85rem',
+            marginTop: '1rem',
+            marginBottom: 0
           }}>
-            🎁 Acceso completo e ilimitado durante tu prueba de 7 días
+            🎁 <span style={{ fontWeight: 600 }}>Acceso ilimitado</span> durante los próximos 7 días
           </p>
         </div>
       )}
