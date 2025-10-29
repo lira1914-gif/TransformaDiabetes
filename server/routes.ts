@@ -857,7 +857,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const result = await db.insert(users).values({
             id: userId,
             email: email,
-            subscriptionStatus: 'trial',
+            subscriptionStatus: 'trialing',
             trialStartDate: new Date(),
             unlockedModules: [1]
           }).returning();
@@ -872,20 +872,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Verificar si ya existe un intake form para este usuario
       const existing = await storage.getIntakeFormByUserId(actualUserId);
 
+      let intakeForm;
       if (existing) {
         // Actualizar el existente
-        const updated = await storage.updateIntakeForm(existing.id, formData);
-        return res.json({ ...updated, userId: actualUserId });
+        intakeForm = await storage.updateIntakeForm(existing.id, formData);
+      } else {
+        // Crear uno nuevo con el userId correcto
+        intakeForm = await storage.createIntakeForm({ userId: actualUserId, ...formData });
       }
-
-      // Crear uno nuevo con el userId correcto
-      const intakeForm = await storage.createIntakeForm({ userId: actualUserId, ...formData });
       
       // Iniciar el trial cuando se completa el intake (si no ha iniciado ya)
+      // Esto se hace tanto para intake forms nuevos como actualizados
       if (user && !user.trialStartDate) {
         await storage.updateUser(actualUserId, {
-          trialStartDate: new Date()
+          trialStartDate: new Date(),
+          subscriptionStatus: 'trialing',
+          unlockedModules: [1]
         });
+        console.log('✅ Trial iniciado para usuario:', actualUserId, 'con trialStartDate:', new Date());
       }
       
       res.json({ ...intakeForm, userId: actualUserId });
