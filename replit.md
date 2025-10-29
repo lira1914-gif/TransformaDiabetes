@@ -8,24 +8,35 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 29, 2025)
 
-### Simplified Onboarding Flow (October 29, 2025)
-- **Unified questionnaire**: Created `CuestionarioBreve.tsx` combining 3 diagnostic questions + 11 essential intake fields (reduced from 62) into a single, streamlined 3-step form
-- **New user journey**: Home → CuestionarioBreve (/cuestionario) → AI Report → Chat access
-- **Removed complexity**: Users no longer see separate diagnostic and intake forms
-- **Enhanced chat instructions**: Updated `InformeFuncional.tsx` with clear, detailed instructions on how to use the chat during trial period
-- **Navigation updated**: HeroSection CTA now directs to `/cuestionario` instead of `/diagnostico`
+### Expanded 5-Step Questionnaire with Direct-to-Chat Flow (October 29, 2025)
+- **Enhanced questionnaire**: Expanded CuestionarioBreve.tsx from 3 steps to 5 comprehensive steps:
+  - **Step 1**: Personal information (name, email, age, weight in lbs, height in ft/in)
+  - **Step 2**: General health status (sleep quality, digestion, anxiety levels)
+  - **Step 3**: Medical diagnoses and medications (checkboxes and multiple choice)
+  - **Step 4**: Functional diagnostic questions (main concern, current state, health goal)
+  - **Step 5**: Additional medical information (Type 2 diabetes confirmation, energy level slider, detailed symptoms)
+- **Imperial units**: UI displays pounds and feet/inches with automatic backend conversion to kg/cm
+- **Direct-to-chat flow**: After completing questionnaire, users redirect to `/chat-semanal` instead of `/onboarding/informe-inicial` for immediate chat access
+- **Report generation**: AI report still generates in background during questionnaire completion; accessible via "Mi Informe" menu link
+- **Header visibility**: Menu navigation remains visible after questionnaire completion showing "Inicio", "Mi Informe", "Chat Semanal"
+- **Rate limiter fix**: Moved rate limiting from global scope to `/api/*` routes only to prevent blocking Vite development resources
+- **Trust proxy configured**: Added Express trust proxy setting for proper rate limiter validation
+- **End-to-end tested**: Full flow validated from home → 5-step questionnaire → chat redirect with successful message processing
+
+### Previous: Simplified Onboarding Flow (October 29, 2025)
+- **Unified questionnaire**: Initially created `CuestionarioBreve.tsx` combining 3 diagnostic questions + 11 essential intake fields (reduced from 62) into a single, streamlined 3-step form
+- **Navigation updated**: HeroSection CTA directs to `/cuestionario` instead of `/diagnostico`
 - **Maintained functionality**: All backend integrations (report generation, trial tracking, email system) work seamlessly with simplified form
 
 ## Previous Changes (October 22, 2025)
 
 ### Major Simplification: Removed 5-Day Registration Requirement (October 22, 2025)
 - **Simplified trial flow**: Users now receive their personalized functional report IMMEDIATELY after completing the intake form, removing the previous 5-day registration barrier
-- **New user journey**: Intake Form → AI Report Generated → Chat Opens (with 3 free conversations during 7-day trial)
+- **New user journey**: Intake Form → AI Report Generated → Chat Opens (with unlimited chat access during 7-day trial)
 - **Backend updates**: `/api/generate-report` endpoint now generates reports using only intake form data, no longer requires daily logs
 - **Frontend changes**: 
   - Removed Registro.tsx, Registro5DiasDetallado.tsx, Registro5Dias.tsx, and Mensaje.tsx components
   - Removed `/onboarding/registro` and `/onboarding/mensaje` routes
-  - IntakeFormPage now redirects directly to `/onboarding/informe-inicial` (no intermediate message page)
   - IntakeForm automatically generates report and sets `tm_informe_ready='true'` upon completion
   - InformeFuncional updated with prominent CTA directing users to chat for daily symptom tracking
 - **Chat system enhanced**: "Marvin Lira IA" now positioned as the primary tool for users to share daily symptoms (sleep, digestion, energy, mood) during their 7-day trial
@@ -35,7 +46,7 @@ Preferred communication style: Simple, everyday language.
 
 ### Header Navigation Cleanup (October 22, 2025)
 - **"Mi Informe" and "Chat Semanal" visibility**: Now appear immediately after completing intake form (when `tm_informe_ready='true'`)
-- **Correct flow**: Header shows only "Inicio" and "Diagnóstico" initially, then adds "Mi Informe" and "Chat Semanal" after intake completion
+- **Correct flow**: Header shows only "Inicio" initially, then adds "Mi Informe" and "Chat Semanal" after intake completion
 
 ### Authorization & Route Protection (October 21, 2025)
 - **Route Guards**: InformeFuncional.tsx and ChatSemanal.tsx redirect users without proper credentials to `/onboarding/bienvenida-trial`
@@ -54,7 +65,7 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 
 ### Feature Specifications
 - **Diagnostic System**: A 3-question diagnostic leading to 10 functional patterns and "Mini Guías Funcionales".
-- **Simplified Onboarding Flow**: Intake form (62 fields, flexible - not all required) → Immediate AI report generation → Chat access for daily symptom journaling during 7-day trial.
+- **Enhanced Onboarding Flow**: 5-step comprehensive intake questionnaire (personal info with imperial units, health status, diagnoses/medications, functional questions, detailed symptoms) → AI report generation in background → Direct redirect to chat for immediate engagement during 7-day trial.
 - **Subscription CTAs**: Prominent call-to-action banners in InformeFuncional encouraging trial users to subscribe, highlighting benefits ($5 USD/month, unlimited chat, progressive modules, personalized tracking).
 - **Chat Access During Trial**: Trial users have UNLIMITED access to chat with Marvin Lira IA during their 7-day trial period. There is no conversation limit - the only restriction is time-based (7 days from intake completion). At day 7, users must subscribe to continue using the chat.
 - **7-Day Free Trial with Progressive Messaging**:
@@ -67,7 +78,7 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
   - **Day 11+**: Archived account page ("Tu cuenta ha sido archivada") replaces app interface for expired trial users
 - **Informe Funcional**: A dedicated page for AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Progressive educational content where modules unlock automatically based on subscription duration, with server-side access control.
-- **Weekly Check-in Chat System ("Marvin Lira IA")**: A GPT-4o powered interactive chat for personalized functional medicine guidance. Trial users get 3 free conversations; subscription required for unlimited access.
+- **Weekly Check-in Chat System ("Marvin Lira IA")**: A GPT-4o powered interactive chat for personalized functional medicine guidance. Trial users have unlimited chat access during 7-day trial; subscription required for continued access.
 - **Stripe Customer Portal Integration**: Allows users to self-manage subscriptions (payment methods, billing history, cancellation, reactivation) via Stripe's hosted portal.
 - **Dynamic User Management**: User IDs stored in localStorage (`tm_user_id`) and used dynamically across all components. Trial users receive temporary IDs (`trial_<timestamp>_<random>`), which are replaced with permanent Stripe customer IDs upon subscription.
 - **Cancellation/Reactivation Confirmation Pages**: Empathetic messages displayed upon subscription cancellation (`/cancelacion-confirmada`) or reactivation (`/reactivacion-confirmada`).
