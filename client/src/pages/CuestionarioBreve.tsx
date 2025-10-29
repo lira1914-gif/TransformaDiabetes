@@ -22,7 +22,10 @@ interface CuestionarioData {
   digestion: string;
   nivel_ansiedad: string;
   diagnosticos_medicos: string;
+  diagnostico_otro: string;
   medicamentos: string;
+  medicamentos_detalles: string;
+  suplementos_detalles: string;
   preocupacion_principal: string;
   estado_actual: string;
   objetivo: string;
@@ -48,7 +51,10 @@ export default function CuestionarioBreve() {
     digestion: "",
     nivel_ansiedad: "",
     diagnosticos_medicos: "",
+    diagnostico_otro: "",
     medicamentos: "",
+    medicamentos_detalles: "",
+    suplementos_detalles: "",
     preocupacion_principal: "",
     estado_actual: "",
     objetivo: "",
@@ -90,7 +96,7 @@ export default function CuestionarioBreve() {
         satisfecho_sueno: data.calidad_sueno,
         sistema_gastrointestinal: `Digestión: ${data.digestion}\nSíntomas: ${data.sintomas_principales}`,
         estado_animo: data.nivel_ansiedad,
-        informacion_adicional: `Preocupación principal: ${data.preocupacion_principal}\nEstado actual: ${data.estado_actual}\nObjetivo: ${data.objetivo}\nDiabetes: ${data.tiene_diabetes}\nDiagnósticos: ${data.diagnosticos_medicos}\nMedicamentos: ${data.medicamentos}`,
+        informacion_adicional: `Preocupación principal: ${data.preocupacion_principal}\nEstado actual: ${data.estado_actual}\nObjetivo: ${data.objetivo}\nDiabetes: ${data.tiene_diabetes}\nDiagnósticos: ${data.diagnosticos_medicos}${data.diagnostico_otro ? ` (Otro: ${data.diagnostico_otro})` : ''}\nMedicamentos: ${data.medicamentos}${data.medicamentos_detalles ? ` (${data.medicamentos_detalles})` : ''}${data.suplementos_detalles ? ` (${data.suplementos_detalles})` : ''}`,
         // Campos requeridos con valores por defecto
         direccion: "",
         ciudad: "",
@@ -509,6 +515,7 @@ export default function CuestionarioBreve() {
                       "Diabetes tipo 2",
                       "Hipotiroidismo",
                       "Presión alta",
+                      "Otro",
                       "Ninguno / No estoy seguro"
                     ].map((option) => (
                       <div key={option} className="flex items-center space-x-2 p-3 rounded-md hover:bg-gray-50">
@@ -519,6 +526,22 @@ export default function CuestionarioBreve() {
                       </div>
                     ))}
                   </RadioGroup>
+                  
+                  {formData.diagnosticos_medicos === "Otro" && (
+                    <div className="mt-3">
+                      <Label htmlFor="diagnostico-otro" className="text-sm font-medium" style={{ color: '#3A3A3A' }}>
+                        Por favor especifica tu diagnóstico:
+                      </Label>
+                      <Input
+                        id="diagnostico-otro"
+                        value={formData.diagnostico_otro}
+                        onChange={(e) => handleChange('diagnostico_otro', e.target.value)}
+                        placeholder="Ej: Síndrome de ovario poliquístico"
+                        className="mt-1"
+                        data-testid="input-diagnostico-otro"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div>
@@ -543,6 +566,40 @@ export default function CuestionarioBreve() {
                       </div>
                     ))}
                   </RadioGroup>
+                  
+                  {formData.medicamentos === "Sí, con receta médica" && (
+                    <div className="mt-3">
+                      <Label htmlFor="medicamentos-detalles" className="text-sm font-medium" style={{ color: '#3A3A3A' }}>
+                        ¿Qué medicamentos tomas?
+                      </Label>
+                      <Textarea
+                        id="medicamentos-detalles"
+                        value={formData.medicamentos_detalles}
+                        onChange={(e) => handleChange('medicamentos_detalles', e.target.value)}
+                        placeholder="Ej: Metformina 500mg, Losartán 50mg"
+                        className="mt-1"
+                        rows={3}
+                        data-testid="input-medicamentos-detalles"
+                      />
+                    </div>
+                  )}
+                  
+                  {formData.medicamentos === "Sí, suplementos naturales" && (
+                    <div className="mt-3">
+                      <Label htmlFor="suplementos-detalles" className="text-sm font-medium" style={{ color: '#3A3A3A' }}>
+                        ¿Qué suplementos tomas?
+                      </Label>
+                      <Textarea
+                        id="suplementos-detalles"
+                        value={formData.suplementos_detalles}
+                        onChange={(e) => handleChange('suplementos_detalles', e.target.value)}
+                        placeholder="Ej: Vitamina D, Omega 3, Magnesio"
+                        className="mt-1"
+                        rows={3}
+                        data-testid="input-suplementos-detalles"
+                      />
+                    </div>
+                  )}
                 </div>
               </>
             )}
