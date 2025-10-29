@@ -6,7 +6,17 @@ TransformaDiabetes is a web application focused on reversing type 2 diabetes thr
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (October 22, 2025)
+## Recent Changes (October 29, 2025)
+
+### Simplified Onboarding Flow (October 29, 2025)
+- **Unified questionnaire**: Created `CuestionarioBreve.tsx` combining 3 diagnostic questions + 11 essential intake fields (reduced from 62) into a single, streamlined 3-step form
+- **New user journey**: Home → CuestionarioBreve (/cuestionario) → AI Report → Chat access
+- **Removed complexity**: Users no longer see separate diagnostic and intake forms
+- **Enhanced chat instructions**: Updated `InformeFuncional.tsx` with clear, detailed instructions on how to use the chat during trial period
+- **Navigation updated**: HeroSection CTA now directs to `/cuestionario` instead of `/diagnostico`
+- **Maintained functionality**: All backend integrations (report generation, trial tracking, email system) work seamlessly with simplified form
+
+## Previous Changes (October 22, 2025)
 
 ### Major Simplification: Removed 5-Day Registration Requirement (October 22, 2025)
 - **Simplified trial flow**: Users now receive their personalized functional report IMMEDIATELY after completing the intake form, removing the previous 5-day registration barrier

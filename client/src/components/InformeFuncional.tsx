@@ -178,32 +178,53 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center', 
-          gap: '1rem',
-          marginTop: '2rem',
-          padding: '2rem',
+          gap: '1.2rem',
+          marginTop: '2.5rem',
+          padding: '2.5rem',
           backgroundColor: 'rgba(107, 112, 65, 0.12)',
           borderRadius: '16px',
           border: '3px solid rgba(107, 112, 65, 0.3)'
         }}>
           <p style={{ 
             color: '#556B2F', 
-            fontSize: '1.3rem', 
+            fontSize: '1.5rem', 
             fontWeight: 700,
             margin: 0,
             textAlign: 'center'
           }}>
-            💬 Siguiente paso: Comparte tus síntomas durante 7 días
+            💬 ¿Cómo usar el chat durante tu prueba gratuita?
           </p>
-          <p style={{ 
+          
+          <div style={{ 
             color: '#3A3A3A', 
             fontSize: '1rem',
-            margin: 0,
-            textAlign: 'center',
-            lineHeight: 1.6,
-            maxWidth: '600px'
+            textAlign: 'left',
+            lineHeight: 1.7,
+            maxWidth: '650px'
           }}>
-            Abre el chat y comparte cómo te sientes cada día (cómo dormiste, cómo está tu digestión, tu energía, tu ánimo). Marvin Lira IA te dará recomendaciones personalizadas basadas en lo que compartas. <strong>Tienes acceso completo durante tu prueba de 7 días.</strong>
-          </p>
+            <p style={{ marginBottom: '1rem', fontWeight: 600, fontSize: '1.05rem', color: '#556B2F' }}>
+              Durante los próximos 7 días, el chat es tu espacio personal para:
+            </p>
+            <ul style={{ 
+              paddingLeft: '1.5rem',
+              margin: 0,
+              listStyleType: 'none'
+            }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                ✅ <strong>Compartir cómo te sientes cada día:</strong> cuéntale a Marvin Lira IA sobre tu sueño, digestión, nivel de energía y estado de ánimo
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                ✅ <strong>Hacer preguntas:</strong> sobre alimentación, síntomas, o cómo aplicar las recomendaciones de tu guía
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                ✅ <strong>Recibir orientación personalizada:</strong> basada en lo que compartas, recibirás consejos específicos para tu situación
+              </li>
+            </ul>
+            <p style={{ marginTop: '1.25rem', fontSize: '0.95rem', fontStyle: 'italic', color: '#6F6E66' }}>
+              💡 <strong>Consejo:</strong> Entre más detalles compartas sobre cómo te sientes, más específicas serán las recomendaciones que recibirás.
+            </p>
+          </div>
+
           <button
             className="btn-finalizar"
             data-testid="button-abrir-chat"
@@ -218,6 +239,15 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
           >
             🌿 Abrir Chat Ahora
           </button>
+          
+          <p style={{ 
+            color: '#556B2F', 
+            fontSize: '0.9rem',
+            margin: 0,
+            fontWeight: 600
+          }}>
+            🎁 Acceso completo e ilimitado durante tu prueba de 7 días
+          </p>
         </div>
       )}
       

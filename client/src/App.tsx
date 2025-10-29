@@ -29,11 +29,13 @@ import OnboardingFormularioSalud from "@/pages/onboarding/FormularioSalud";
 import OnboardingIntake from "@/pages/onboarding/IntakeFormPage";
 import OnboardingMes1 from "@/pages/onboarding/Mes1";
 import OnboardingInforme from "@/pages/onboarding/Informe";
+import CuestionarioBreve from "@/pages/CuestionarioBreve";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/cuestionario" component={CuestionarioBreve} />
       <Route path="/pre-registro" component={PreRegistro} />
       <Route path="/diagnostico" component={Diagnostico} />
       <Route path="/resultados" component={Resultados} />

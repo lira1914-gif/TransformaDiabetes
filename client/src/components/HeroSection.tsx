@@ -177,10 +177,10 @@ export default function HeroSection() {
                 <TooltipProvider>
                   <Tooltip delayDuration={300}>
                     <TooltipTrigger asChild>
-                      <Link href="/diagnostico">
+                      <Link href="/cuestionario">
                         <Button 
                           size="lg"
-                          data-testid="button-diagnostico-hero"
+                          data-testid="button-cuestionario-hero"
                           style={{
                             backgroundColor: '#A15C38',
                             color: 'white',
@@ -344,9 +344,9 @@ export default function HeroSection() {
 
           <div className="text-center relative" style={{ marginTop: '1.5rem' }}>
             <div onTouchStart={handleMobileTouch}>
-              <Link href="/diagnostico">
+              <Link href="/cuestionario">
                 <Button
-                  data-testid="button-diagnostico-hero-mobile"
+                  data-testid="button-cuestionario-hero-mobile"
                   style={{
                     backgroundColor: '#b7492f',
                     color: '#fff',
