@@ -1,38 +1,43 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-if (!process.env.SMTP_PASSWORD) {
-  throw new Error('SMTP_PASSWORD environment variable is not configured. Email functionality will not work.');
+if (!process.env.RESEND_API_KEY) {
+  throw new Error('RESEND_API_KEY environment variable is not configured. Email functionality will not work.');
 }
 
-const transporter = nodemailer.createTransport({
-  host: 'mail.privateemail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: 'contacto@transformadiabetes.com',
-    pass: process.env.SMTP_PASSWORD
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export interface EmailOptions {
   to: string;
   subject: string;
   html: string;
   text?: string;
+  bcc?: string;
 }
 
 export async function sendEmail(options: EmailOptions): Promise<void> {
   try {
-    const info = await transporter.sendMail({
-      from: '"TransformaDiabetes" <contacto@transformadiabetes.com>',
-      to: options.to,
+    const emailData: any = {
+      from: 'TransformaDiabetes <onboarding@resend.dev>',
+      to: [options.to],
       subject: options.subject,
-      html: options.html,
-      text: options.text || options.html.replace(/<[^>]*>/g, '')
-    });
+      html: options.html
+    };
 
-    console.log('✅ Email enviado:', info.messageId);
+    if (options.bcc) {
+      emailData.bcc = [options.bcc];
+    }
+
+    const { data, error } = await resend.emails.send(emailData);
+
+    if (error) {
+      throw error;
+    }
+
+    console.log('✅ Email enviado:', data?.id);
     console.log('📧 Destinatario:', options.to);
+    if (options.bcc) {
+      console.log('📧 BCC:', options.bcc);
+    }
   } catch (error) {
     console.error('❌ Error enviando email:', error);
     throw error;
@@ -1794,11 +1799,10 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
 
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
-    await transporter.verify();
-    console.log('✅ Conexión SMTP verificada correctamente');
+    console.log('✅ Resend configurado correctamente');
     return true;
   } catch (error) {
-    console.error('❌ Error verificando conexión SMTP:', error);
+    console.error('❌ Error con Resend:', error);
     return false;
   }
 }
