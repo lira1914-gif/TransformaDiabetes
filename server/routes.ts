@@ -883,13 +883,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Iniciar el trial cuando se completa el intake (si no ha iniciado ya)
       // Esto se hace tanto para intake forms nuevos como actualizados
-      if (user && !user.trialStartDate) {
+      const isNewTrial = user && !user.trialStartDate;
+      if (isNewTrial) {
         await storage.updateUser(actualUserId, {
           trialStartDate: new Date(),
           subscriptionStatus: 'trialing',
           unlockedModules: [1]
         });
         console.log('✅ Trial iniciado para usuario:', actualUserId, 'con trialStartDate:', new Date());
+      }
+      
+      // 📧 ENVIAR EMAILS DE BIENVENIDA (solo para nuevos usuarios)
+      if (isNewTrial) {
+        try {
+          const { sendWelcomeEmail, sendEmail } = await import("./email");
+          const userName = formData.nombre || 'Estimado usuario';
+          
+          // Email de bienvenida al usuario
+          console.log('📧 Enviando email de bienvenida a:', email, `(${userName})`);
+          await sendWelcomeEmail(email, userName);
+          console.log('✅ Email de bienvenida enviado');
+          
+          // Email de notificación al admin
+          const adminEmail = 'contacto@transformadiabetes.com';
+          const adminNotificationHtml = `
+            <h2>🎉 Nuevo registro en TransformaDiabetes</h2>
+            <p><strong>Nombre:</strong> ${userName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Edad:</strong> ${formData.edad || 'No especificada'}</p>
+            <p><strong>Peso:</strong> ${formData.pesoActual || 'No especificado'} kg</p>
+            <p><strong>User ID:</strong> ${actualUserId}</p>
+            <p><strong>Fecha:</strong> ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}</p>
+            <hr>
+            <p><small>Este usuario ha iniciado su prueba gratuita de 7 días.</small></p>
+          `;
+          
+          await sendEmail({
+            to: adminEmail,
+            subject: `🎉 Nuevo registro: ${userName}`,
+            html: adminNotificationHtml
+          });
+          console.log('✅ Notificación enviada al admin');
+        } catch (emailError) {
+          // No fallar el registro si el email falla
+          console.error('⚠️ Error enviando emails (no crítico):', emailError);
+        }
       }
       
       res.json({ ...intakeForm, userId: actualUserId });
@@ -1570,6 +1608,22 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
       });
 
       console.log('Informe guardado en BD:', report.id);
+
+      // 📧 ENVIAR EMAIL DE REPORTE LISTO
+      try {
+        const { sendReportReadyEmail } = await import("./email");
+        const intakeForm = await storage.getIntakeFormByUserId(userId);
+        const userName = intakeForm?.nombre || undefined;
+        
+        if (user.email) {
+          console.log('📧 Enviando email de reporte listo a:', user.email, userName ? `(${userName})` : '');
+          await sendReportReadyEmail(user.email, userName, moduleNumber);
+          console.log('✅ Email de reporte listo enviado');
+        }
+      } catch (emailError) {
+        // No fallar la generación del reporte si el email falla
+        console.error('⚠️ Error enviando email de reporte listo (no crítico):', emailError);
+      }
 
       res.json(report);
     } catch (error: any) {
