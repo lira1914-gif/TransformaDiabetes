@@ -108,8 +108,9 @@ export default function Perfil() {
     }
   };
 
+  // Mostrar pantalla de cuenta archivada si el trial expiró (día 8+) y no es suscriptor
   const showArchivedPage = trialStatus && 
-    trialStatus.daysSinceStart >= 11 && 
+    trialStatus.daysSinceStart >= 8 && 
     !trialStatus.isActive && 
     !trialStatus.isTrialing;
 

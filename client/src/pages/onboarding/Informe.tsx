@@ -30,8 +30,8 @@ export default function Informe() {
   useEffect(() => {
     if (!trialStatus) return;
     
-    // No redirigir si está en día 11+ (se mostrará ArchivedAccountPage)
-    if (trialStatus.daysSinceStart >= 11 && !trialStatus.isActive) {
+    // No redirigir si está en día 8+ (se mostrará ArchivedAccountPage)
+    if (trialStatus.daysSinceStart >= 8 && !trialStatus.isActive) {
       return;
     }
     
@@ -48,10 +48,10 @@ export default function Informe() {
     }
   }, [setLocation, trialStatus]);
 
-  // Mostrar pantalla de cuenta archivada si el trial expiró hace más de 3 días (día 11+)
+  // Mostrar pantalla de cuenta archivada si el trial expiró (día 8+)
   // y el usuario no tiene suscripción activa
   const showArchivedPage = trialStatus && 
-    trialStatus.daysSinceStart >= 11 && 
+    trialStatus.daysSinceStart >= 8 && 
     !trialStatus.isActive && 
     !trialStatus.isTrialing;
 

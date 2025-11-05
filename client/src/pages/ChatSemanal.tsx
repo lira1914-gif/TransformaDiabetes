@@ -146,10 +146,10 @@ export default function ChatSemanal() {
     );
   }
 
-  // Mostrar pantalla de cuenta archivada si el trial expiró hace más de 3 días (día 11+)
+  // Mostrar pantalla de cuenta archivada si el trial expiró (día 8+)
   // y el usuario no tiene suscripción activa
   const showArchivedPage = trialStatus && 
-    trialStatus.daysSinceStart >= 11 && 
+    trialStatus.daysSinceStart >= 8 && 
     !trialStatus.isActive && 
     !trialStatus.isTrialing;
 
