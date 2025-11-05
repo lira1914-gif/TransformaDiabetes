@@ -6,7 +6,24 @@ TransformaDiabetes is a web application focused on reversing type 2 diabetes thr
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
-## Recent Changes (October 29, 2025)
+## Recent Changes (November 5, 2025)
+
+### Critical Conversion Funnel Fixes (November 5, 2025)
+- **Email System Implementation**: Added automated transactional emails at key touchpoints to improve user engagement and admin visibility
+  - **Welcome email**: Sent immediately upon intake form completion (`server/routes.ts` `/api/intake-form` endpoint)
+  - **Report ready email**: Sent when AI-generated functional report is created (`server/routes.ts` `/api/generate-report` endpoint)
+  - **Admin notification**: Welcome email BCC'd to admin for registration tracking
+  - **Email configuration**: Using Nodemailer with Namecheap PrivateEmail (mail.privateemail.com), sender: contacto@transformadiabetes.com
+- **Trial Blocking Logic Fixed**: Corrected trial duration enforcement from 11 days to 8 days (after 7 complete days)
+  - **Backend**: Updated all `daysSinceStart >= 11` checks to `>= 8` across:
+    - `client/src/pages/onboarding/Informe.tsx` (2 instances)
+    - `client/src/pages/ChatSemanal.tsx` (1 instance)
+    - `client/src/pages/Perfil.tsx` (1 instance)
+  - **Impact**: ArchivedAccountPage now displays on day 8 (not day 11), properly enforcing the 7-day trial promise
+  - **User journey**: Day 0-7 = full access → Day 8+ = blocked with archived account page
+- **Context**: These fixes address zero subscription conversions in first 3 weeks by ensuring proper user communication and trial enforcement
+
+## Previous Changes (October 29, 2025)
 
 ### Trial Activation Fix & Header Simplification (October 29, 2025 - Final)
 - **Trial initialization fixed**: Trial now starts correctly when users complete the intake questionnaire, regardless of whether it's a new or updated form
@@ -89,10 +106,9 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
   - **Day 5**: Soft reminder banner ("Tu prueba gratuita está por terminar")
   - **Day 6**: Modal celebration ("Has completado tu prueba funcional gratuita") + Email reminder
   - **Day 7**: Final day banner ("Tu prueba termina hoy") + Blocking modal + Chat access ends
-  - **Day 8**: Post-trial banner ("Tu acceso gratuito ha finalizado") + Follow-up email ("Extrañamos tu presencia")
+  - **Day 8+**: Archived account page ("Tu cuenta ha sido archivada") replaces app interface for expired trial users. Post-trial banner ("Tu acceso gratuito ha finalizado") + Follow-up email ("Extrañamos tu presencia")
   - **Day 9**: Follow-up email 24h after Day 8 ("Tu cuerpo ya comenzó a mejorar")
   - **Day 10**: Final reminder email 48h after Day 8 ("Último día para conservar tu progreso funcional")
-  - **Day 11+**: Archived account page ("Tu cuenta ha sido archivada") replaces app interface for expired trial users
 - **Informe Funcional**: A dedicated page for AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Progressive educational content where modules unlock automatically based on subscription duration, with server-side access control.
 - **Weekly Check-in Chat System ("Marvin Lira IA")**: A GPT-4o powered interactive chat for personalized functional medicine guidance. Trial users have unlimited chat access during 7-day trial; subscription required for continued access.
