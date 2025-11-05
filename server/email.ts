@@ -17,7 +17,7 @@ export interface EmailOptions {
 export async function sendEmail(options: EmailOptions): Promise<void> {
   try {
     const emailData: any = {
-      from: 'TransformaDiabetes <contacto@transformadiabetes.com>',
+      from: 'TransformaDiabetes <contacto@transformadiabetes.online>',
       to: [options.to],
       subject: options.subject,
       html: options.html

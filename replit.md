@@ -13,7 +13,7 @@ Preferred communication style: Simple, everyday language.
   - **Welcome email**: Sent immediately upon intake form completion (`server/routes.ts` `/api/intake-form` endpoint)
   - **Report ready email**: Sent when AI-generated functional report is created (`server/routes.ts` `/api/generate-report` endpoint)
   - **Admin notification**: Welcome email BCC'd to admin for registration tracking
-  - **Email configuration**: Using Resend API with verified domain transformadiabetes.com, sender: contacto@transformadiabetes.com
+  - **Email configuration**: Using Resend API with verified domain transformadiabetes.online, sender: contacto@transformadiabetes.online
 - **Trial Blocking Logic Fixed**: Corrected trial duration enforcement from 11 days to 8 days (after 7 complete days)
   - **Backend**: Updated all `daysSinceStart >= 11` checks to `>= 8` across:
     - `client/src/pages/onboarding/Informe.tsx` (2 instances)
@@ -121,7 +121,7 @@ Wouter manages client-side routing with smooth scrolling. The landing page is a 
 - **UI & Development**: Radix UI, Lucide React, class-variance-authority, cmdk, embla-carousel-react, TypeScript, PostCSS, Autoprefixer, Vite, esbuild, tsx, clsx, tailwind-merge, nanoid.
 - **Data & Forms**: Drizzle ORM, @neondatabase/serverless, drizzle-zod, react-hook-form, @hookform/resolvers, zod, date-fns.
 - **Payment Integration**: **Stripe** for $5/month subscriptions with a 7-day free trial, using Stripe.js and Stripe Node SDK.
-- **Email System**: **Resend** for high-deliverability transactional emails (e.g., Welcome, Report Ready, Module Completed, Trial Reminders). Sender: contacto@transformadiabetes.com. Previously used Nodemailer with Namecheap SMTP (deprecated due to deliverability issues).
+- **Email System**: **Resend** for high-deliverability transactional emails (e.g., Welcome, Report Ready, Module Completed, Trial Reminders). Sender: contacto@transformadiabetes.online. Previously used Nodemailer with Namecheap SMTP (deprecated due to deliverability issues).
 - **AI Integration**: **OpenAI GPT-4o** for generating personalized functional medicine reports and powering the "Marvin Lira IA" weekly check-in chat system.
 - **Analytics**: **Google Analytics 4** (Measurement ID: `G-YZ6DC4HWJE`) for tracking user behavior, page views, and conversion metrics across transformadiabetes.com and transformadiabetes.online.
 - **Support Chat**: **Chatbase** floating chat widget (`yxaUbszINwsobf8Upa-xh`) for technical support only.
