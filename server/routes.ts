@@ -831,14 +831,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { userId, email, ...formData } = req.body;
 
+      console.log('🔍 POST /api/intake-form - Datos recibidos:', { 
+        userId, 
+        email, 
+        nombre: formData.nombre 
+      });
+
       if (!userId) {
+        console.error('❌ userId faltante en request');
         return res.status(400).json({ error: "userId es requerido" });
       }
 
       if (!email) {
+        console.error('❌ email faltante en request');
         return res.status(400).json({ error: "email es requerido" });
       }
 
+      // Rastrear si el usuario es nuevo ANTES de crearlo
+      let isNewUser = false;
+      
       // Verificar si el usuario existe por ID o por email
       let user = await storage.getUser(userId);
       
@@ -854,6 +865,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         } else {
           // Crear usuario nuevo con estado de trial usando inserción directa
           // Módulo 1 desbloqueado automáticamente para usuarios de trial
+          isNewUser = true;  // ← MARCAR COMO NUEVO USUARIO
           const result = await db.insert(users).values({
             id: userId,
             email: email,
@@ -862,8 +874,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
             unlockedModules: [1]
           }).returning();
           user = result[0];
+          
+          if (!user) {
+            console.error('❌ Error: No se pudo crear usuario en la base de datos');
+            return res.status(500).json({ error: "Error al crear usuario" });
+          }
+          
           console.log('✅ Usuario de trial creado con Módulo 1 desbloqueado:', userId, email);
         }
+      } else {
+        console.log('✅ Usuario existente encontrado por ID:', userId);
       }
 
       // Usar el ID del usuario real (importante si se encontró por email)
@@ -875,26 +895,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let intakeForm;
       if (existing) {
         // Actualizar el existente
+        console.log('📝 Actualizando intake form existente para:', actualUserId);
         intakeForm = await storage.updateIntakeForm(existing.id, formData);
       } else {
         // Crear uno nuevo con el userId correcto
+        console.log('📝 Creando nuevo intake form para:', actualUserId);
         intakeForm = await storage.createIntakeForm({ userId: actualUserId, ...formData });
       }
       
-      // Iniciar el trial cuando se completa el intake (si no ha iniciado ya)
-      // Esto se hace tanto para intake forms nuevos como actualizados
-      const isNewTrial = user && !user.trialStartDate;
-      if (isNewTrial) {
-        await storage.updateUser(actualUserId, {
-          trialStartDate: new Date(),
-          subscriptionStatus: 'trialing',
-          unlockedModules: [1]
-        });
-        console.log('✅ Trial iniciado para usuario:', actualUserId, 'con trialStartDate:', new Date());
+      if (!intakeForm) {
+        console.error('❌ Error: No se pudo crear/actualizar intake form');
+        return res.status(500).json({ error: "Error al guardar intake form" });
       }
       
+      console.log('✅ Intake form guardado exitosamente');
+      
       // 📧 ENVIAR EMAILS DE BIENVENIDA (solo para nuevos usuarios)
-      if (isNewTrial) {
+      if (isNewUser) {
+        console.log('📧 Usuario nuevo detectado, enviando emails...');
         try {
           const { sendWelcomeEmail, sendEmail } = await import("./email");
           const userName = formData.nombre || 'Estimado usuario';
@@ -902,7 +920,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // Email de bienvenida al usuario
           console.log('📧 Enviando email de bienvenida a:', email, `(${userName})`);
           await sendWelcomeEmail(email, userName);
-          console.log('✅ Email de bienvenida enviado');
+          console.log('✅ Email de bienvenida enviado exitosamente');
           
           // Email de notificación al admin
           const adminEmail = 'contacto@transformadiabetes.online';
@@ -911,7 +929,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             <p><strong>Nombre:</strong> ${userName}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Edad:</strong> ${formData.edad || 'No especificada'}</p>
-            <p><strong>Peso:</strong> ${formData.pesoActual || 'No especificado'} kg</p>
+            <p><strong>Peso:</strong> ${formData.peso_actual || 'No especificado'} kg</p>
             <p><strong>User ID:</strong> ${actualUserId}</p>
             <p><strong>Fecha:</strong> ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}</p>
             <hr>
@@ -928,11 +946,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // No fallar el registro si el email falla
           console.error('⚠️ Error enviando emails (no crítico):', emailError);
         }
+      } else {
+        console.log('ℹ️ Usuario existente, no se envían emails de bienvenida');
       }
       
+      console.log('✅ Respondiendo con éxito al cliente');
       res.json({ ...intakeForm, userId: actualUserId });
     } catch (error: any) {
-      console.error("Error guardando intake form:", error);
+      console.error("❌ Error guardando intake form:", error);
       res.status(500).json({ error: "Error al guardar el formulario" });
     }
   });
