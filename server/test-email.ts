@@ -14,7 +14,7 @@ async function testEmail() {
   
   try {
     await sendEmail({
-      to: 'contacto@transformadiabetes.com',
+      to: 'contacto@transformadiabetes.online',
       subject: 'Prueba de configuración SMTP - TransformaDiabetes',
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #fffdf8;">
@@ -23,7 +23,7 @@ async function testEmail() {
             <p>El servidor SMTP de TransformaDiabetes está funcionando correctamente.</p>
             <p><strong>Servidor:</strong> mail.privateemail.com<br>
             <strong>Puerto:</strong> 465 (SSL/TLS)<br>
-            <strong>Remitente:</strong> contacto@transformadiabetes.com</p>
+            <strong>Remitente:</strong> contacto@transformadiabetes.online</p>
             <p style="margin-top: 30px; color: #757575; font-size: 14px;">
               Este es un correo de prueba enviado desde el sistema de correos automáticos.
             </p>
@@ -33,7 +33,7 @@ async function testEmail() {
     });
     
     console.log('\n✅ Correo de prueba enviado exitosamente');
-    console.log('📬 Revisa la bandeja de entrada de contacto@transformadiabetes.com');
+    console.log('📬 Revisa la bandeja de entrada de contacto@transformadiabetes.online');
   } catch (error) {
     console.error('\n❌ Error enviando correo de prueba:', error);
     process.exit(1);

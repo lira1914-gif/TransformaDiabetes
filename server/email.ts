@@ -239,7 +239,7 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
             <p>Con gratitud,<br>
             <strong>Marvin Lira</strong><br>
             Nutrición Funcional & Salud desde la raíz<br>
-            <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a><br>
             <a href="https://transformadiabetes.com" style="color: #4a5d23;">transformadiabetes.com</a></p>
           </div>
           
@@ -516,7 +516,7 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
             <p>Con gratitud,<br>
             <strong>Marvin Lira</strong><br>
             Nutrición Funcional & Salud desde la raíz<br>
-            <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a><br>
             <a href="https://transformadiabetes.com" style="color: #4a5d23;">transformadiabetes.com</a></p>
           </div>
           
@@ -774,7 +774,7 @@ export async function sendModuleUnlockedEmail(to: string, name?: string, moduleN
             <p>Con gratitud,<br>
             <strong>Marvin Lira</strong><br>
             Nutrición Funcional & Salud desde la raíz<br>
-            <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a><br>
             <a href="https://transformadiabetes.com" style="color: #4a5d23;">transformadiabetes.com</a></p>
           </div>
           
@@ -919,7 +919,7 @@ export async function sendReactivationEmail(to: string, name?: string): Promise<
             <p>Con gratitud,<br>
             <strong>Marvin Lira</strong><br>
             Nutrición Funcional & Salud desde la raíz<br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1078,7 +1078,7 @@ export async function sendModule1CompletedEmail(to: string, name?: string): Prom
             <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
             Nutrición Funcional<br>
             <em>Tu cuerpo no está roto, solo está buscando equilibrio.</em><br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1253,7 +1253,7 @@ export async function sendModule2CompletedEmail(to: string, name?: string): Prom
             <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
             Nutrición Funcional<br>
             <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1352,7 +1352,7 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
             <p>Con equilibrio,<br>
             <strong>Marvin Lira, Coach Funcional</strong><br>
             TransformaDiabetes 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1456,7 +1456,7 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
             <p>Con aprecio,<br>
             <strong>Marvin Lira, Coach Funcional</strong><br>
             TransformaDiabetes 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1600,7 +1600,7 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
             <p>💚<br>
             <strong>Equipo de Marvin Lira Nutrición Funcional</strong><br>
             TransformaDiabetes<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
           <div class="disclaimer">
             Programa educativo, no sustituto de orientación médica.
@@ -1779,7 +1779,7 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
           <div class="signature">
             <p>💚<br>
             <strong>Equipo de Marvin Lira Nutrición Funcional</strong><br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.com" style="color: #4a5d23;">contacto@transformadiabetes.com</a></p>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
           <div class="disclaimer">
             Programa educativo, no sustituto de orientación médica.
