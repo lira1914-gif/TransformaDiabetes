@@ -923,7 +923,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.log('✅ Email de bienvenida enviado exitosamente');
           
           // Email de notificación al admin
-          const adminEmail = 'contacto@transformadiabetes.online';
+          const adminEmail = 'lira1914@gmail.com';
           const adminNotificationHtml = `
             <h2>🎉 Nuevo registro en TransformaDiabetes</h2>
             <p><strong>Nombre:</strong> ${userName}</p>
