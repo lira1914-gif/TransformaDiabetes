@@ -32,7 +32,13 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
 
 ## External Dependencies
 - **Payment Integration**: Stripe for $5/month subscriptions with a 7-day free trial.
-- **Email System**: Resend for transactional emails (e.g., Welcome, Report Ready, Trial Reminders).
+- **Email System**: Resend API for transactional emails with the following configuration:
+  - **Sender Address**: `no-reply@transformadiabetes.online` (verified domain in Resend)
+  - **Admin Notifications**: Sent to `lira1914@gmail.com` 
+  - **User Emails**: Welcome emails, report ready notifications, trial reminders (all sent from no-reply@)
+  - **DNS Configuration**: Domain `transformadiabetes.online` verified with SPF, DKIM, and DMARC records
+  - **Receiving Emails**: `contacto@transformadiabetes.online` managed via Private Email (Namecheap) for incoming messages only
+  - **Important**: Do NOT send emails FROM `contacto@transformadiabetes.online` to avoid "Relay access denied" errors, as Private Email rejects emails coming from external SMTP servers (Resend/AWS SES)
 - **AI Integration**: OpenAI GPT-4o for AI-generated reports and the "Marvin Lira IA" chat system.
 - **Analytics**: Google Analytics 4 (GA4) for tracking user behavior.
 - **Support Chat**: Chatbase floating chat widget for technical support.
