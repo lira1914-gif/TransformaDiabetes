@@ -2427,6 +2427,323 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
   });
 }
 
+export async function sendWeeklyPostTrialEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        h1 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 28px;
+          margin-bottom: 10px;
+          line-height: 1.3;
+        }
+        h2 {
+          font-family: 'Playfair Display', Georgia, serif;
+          color: #4a5d23;
+          font-size: 20px;
+          margin-top: 30px;
+          margin-bottom: 15px;
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .intro-box {
+          background-color: #f5f3ef;
+          border-left: 4px solid #4a5d23;
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 6px;
+        }
+        .benefits-grid {
+          display: grid;
+          gap: 20px;
+          margin: 30px 0;
+        }
+        .benefit-card {
+          background-color: #f9f7f4;
+          padding: 20px;
+          border-radius: 8px;
+          border-left: 3px solid #4a5d23;
+        }
+        .benefit-title {
+          font-weight: 700;
+          color: #4a5d23;
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+        .benefit-description {
+          font-size: 15px;
+          color: #5a5a5a;
+          line-height: 1.6;
+        }
+        .testimonial-box {
+          background: linear-gradient(135deg, #f5f3ef 0%, #fffdf8 100%);
+          padding: 25px;
+          margin: 30px 0;
+          border-radius: 8px;
+          border: 1px solid #e0ddd8;
+        }
+        .testimonial-text {
+          font-style: italic;
+          color: #2a2a2a;
+          margin-bottom: 15px;
+          font-size: 15px;
+          line-height: 1.7;
+        }
+        .testimonial-author {
+          font-weight: 600;
+          color: #4a5d23;
+          font-size: 14px;
+        }
+        .stats-box {
+          background-color: #e8f5e9;
+          padding: 25px;
+          margin: 30px 0;
+          border-radius: 8px;
+          text-align: center;
+        }
+        .stat-item {
+          margin-bottom: 15px;
+        }
+        .stat-number {
+          font-size: 32px;
+          font-weight: 700;
+          color: #4a5d23;
+          display: block;
+        }
+        .stat-label {
+          font-size: 14px;
+          color: #5a5a5a;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 40px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #4a5d23;
+          color: #ffffff !important;
+          padding: 18px 36px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 17px;
+          box-shadow: 0 4px 12px rgba(74, 93, 35, 0.3);
+        }
+        .cta-subtext {
+          font-size: 14px;
+          color: #666;
+          margin-top: 12px;
+        }
+        .price-highlight {
+          background-color: #fff4e6;
+          border: 2px dashed #f59e0b;
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 8px;
+          text-align: center;
+        }
+        .price-amount {
+          font-size: 36px;
+          font-weight: 700;
+          color: #f59e0b;
+        }
+        .price-period {
+          font-size: 16px;
+          color: #666;
+        }
+        .quote {
+          font-style: italic;
+          color: #4a5d23;
+          text-align: center;
+          font-size: 17px;
+          margin: 35px 0;
+          padding: 25px;
+          background-color: #f5f3ef;
+          border-radius: 8px;
+          line-height: 1.6;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+        .disclaimer {
+          font-size: 13px;
+          color: #888;
+          margin-top: 20px;
+          padding: 15px;
+          background-color: #f9f9f9;
+          border-radius: 6px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>¿Recuerdas por qué comenzaste?</h1>
+        </div>
+        
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Hace unos días completaste tu informe funcional inicial con nosotros. En ese momento, tu cuerpo te estaba dando señales claras de que algo necesitaba cambiar.</p>
+          
+          <p><strong>Esas señales no desaparecieron solas.</strong></p>
+        </div>
+
+        <div class="intro-box">
+          <p style="margin: 0; font-size: 16px; line-height: 1.7;">
+            La diferencia entre quienes revierten su resistencia a la insulina y quienes siguen atrapados en el ciclo no es el conocimiento inicial. <strong>Es la constancia y el acompañamiento correcto.</strong>
+          </p>
+        </div>
+
+        <h2>Lo que estás perdiendo cada semana sin suscripción:</h2>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-title">Chat ilimitado con Marvin Lira IA</div>
+            <div class="benefit-description">Consulta síntomas, dudas sobre alimentos, interpretación de análisis de sangre y ajustes personalizados las 24/7. Como tener un nutricionista funcional en tu bolsillo.</div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-title">Interpretación de tus análisis clínicos</div>
+            <div class="benefit-description">Sube tus estudios de glucosa, A1C, perfil lipídico o tiroides y recibe una interpretación funcional personalizada que tu médico tradicional no te dará.</div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-title">Recetas funcionales personalizadas</div>
+            <div class="benefit-description">Más de 50 recetas adaptadas a tu perfil metabólico: desayunos antiinflamatorios, snacks que estabilizan glucosa, cenas que mejoran tu sueño.</div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-title">Módulos educativos mensuales</div>
+            <div class="benefit-description">Aprende paso a paso sobre resistencia a la insulina, salud intestinal, manejo de estrés y optimización hormonal. Educación que transforma, no solo informa.</div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-title">Tracking personalizado de progreso</div>
+            <div class="benefit-description">Registra síntomas, patrones de sueño, niveles de energía y antojos. El sistema detecta mejoras que tú no ves y te mantiene motivado.</div>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-title">Actualizaciones de tu informe funcional</div>
+            <div class="benefit-description">Cada mes, un nuevo informe adaptado a tu progreso con recomendaciones ajustadas a tu nueva realidad metabólica.</div>
+          </div>
+        </div>
+
+        <div class="testimonial-box">
+          <div class="testimonial-text">
+            "Llevaba 3 años tomando metformina y mi A1C seguía en 7.8%. En 4 meses con TransformaDiabetes bajé a 5.6% y mi doctor redujo mi medicamento. Lo mejor: aprendí a leer mi cuerpo y ya no tengo antojos incontrolables."
+          </div>
+          <div class="testimonial-author">— María G., 52 años, Ciudad de México</div>
+        </div>
+
+        <div class="stats-box">
+          <div class="stat-item">
+            <span class="stat-number">78%</span>
+            <span class="stat-label">de usuarios reducen su A1C en 3 meses</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">92%</span>
+            <span class="stat-label">reportan más energía en las primeras 2 semanas</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">$5</span>
+            <span class="stat-label">USD/mes — menos que un café diario</span>
+          </div>
+        </div>
+
+        <h2>¿Por qué funciona TransformaDiabetes?</h2>
+
+        <div class="content">
+          <p><strong>No es una dieta más.</strong> Es educación funcional basada en ciencia que te enseña a:</p>
+          
+          <ul style="line-height: 1.8; margin: 20px 0;">
+            <li>Identificar qué alimentos específicos están saboteando tu glucosa</li>
+            <li>Interpretar las señales de tu cuerpo antes de que se conviertan en síntomas graves</li>
+            <li>Crear hábitos sostenibles que revierten la resistencia a la insulina de raíz</li>
+            <li>Reducir (o eliminar) medicamentos bajo supervisión médica</li>
+            <li>Recuperar tu energía, claridad mental y calidad de vida</li>
+          </ul>
+
+          <p>Y lo mejor: <strong>todo esto con acompañamiento diario por solo $5 USD al mes.</strong></p>
+        </div>
+
+        <div class="price-highlight">
+          <div class="price-amount">$5 USD</div>
+          <div class="price-period">por mes • Cancela cuando quieras</div>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/onboarding/checkout" class="cta-button">
+            Activar mi suscripción ahora
+          </a>
+          <div class="cta-subtext">Comienza hoy, transforma tu salud en 90 días</div>
+        </div>
+
+        <div class="quote">
+          "Tu cuerpo no está roto, está pidiendo ayuda.<br>
+          Dale las herramientas correctas y él hará el resto."
+        </div>
+
+        ${getConsultationFooter()}
+        
+        <div class="footer">
+          <div class="signature">
+            <p><strong>Equipo de Marvin Lira Nutrición Funcional</strong><br>
+            TransformaDiabetes<br><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+          </div>
+          <div class="disclaimer">
+            Programa educativo, no sustituto de orientación médica. Resultados individuales pueden variar.
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '¿Recuerdas por qué comenzaste? Tu salud te está esperando',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     console.log('[RESEND OK] Resend configurado correctamente');

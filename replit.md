@@ -30,6 +30,7 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - **Day 5**: Pre-urgency message (2 days remaining)
   - **Day 6**: Final urgency (1 day remaining)
   - **Days 8-10**: Post-trial follow-up sequence
+  - **Weekly Post-Trial Email**: Recurring motivational email for users who didn't subscribe after trial ended (status: `trial_ended`)
 - **User Progress Dashboard**: Interactive dashboard on Perfil page showing:
   - Current trial day (calculated in America/Mexico_City timezone)
   - Chat activity streak (consecutive days with at least one chat message)
@@ -82,10 +83,20 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - Only visible for trialing users
 - **Zero-Emoji Policy (ENFORCED)**: Complete elimination of emojis across entire codebase:
   - 267+ emojis removed from 28+ files (server/email.ts, server/routes.ts, all client components)
+  - 58 database reports cleaned (emojis replaced with • bullets)
+  - OpenAI prompts updated to prevent emoji generation in new reports
   - Unicode ranges cleaned: U+1F300-U+1F9FF, U+2600-U+27BF, U+1FA00-U+1FAFF, U+E0000-U+E007F
   - Replaced with Lucide icons for UI elements (Calendar, Menu, AlertCircle, Clock)
   - Professional text-only approach in emails and user-facing content
   - Validated via automated grep scanning (0 emojis confirmed)
+
+## API Endpoints & Automation
+- **Weekly Post-Trial Email Endpoint**: `POST /api/send-weekly-post-trial-emails`
+  - Sends motivational conversion emails to all users with `subscriptionStatus = 'trial_ended'`
+  - Highlights key benefits: unlimited chat, blood analysis interpretation, personalized recipes, functional education, progress tracking
+  - Returns stats: `totalUsers`, `emailsSent`, `errors`, and detailed `results` array
+  - **Automation Setup**: Call this endpoint weekly using external cron services (cron-job.org, EasyCron, or GitHub Actions)
+  - **Example cURL**: `curl -X POST https://your-replit-domain.replit.app/api/send-weekly-post-trial-emails`
 
 ## External Dependencies
 - **Payment Integration**: Stripe for $5/month subscriptions with a 7-day free trial.

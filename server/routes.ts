@@ -4,7 +4,7 @@ import { storage } from "./storage";
 import { db } from "./db";
 import { users } from "@shared/schema";
 import Stripe from "stripe";
-import { sendReactivationEmail } from "./email";
+import { sendReactivationEmail, sendWeeklyPostTrialEmail } from "./email";
 
 // Initialize Stripe with API key from environment
 const stripe = process.env.STRIPE_SECRET_KEY 
@@ -2268,6 +2268,76 @@ Devuelve SOLO el JSON, sin texto adicional.`;
       console.error("Error enviando correo de prueba:", error);
       res.status(500).json({ 
         error: "Error al enviar el correo",
+        details: error.message 
+      });
+    }
+  });
+
+  // Endpoint para enviar email semanal post-trial a usuarios que no se suscribieron
+  app.post("/api/send-weekly-post-trial-emails", async (req, res) => {
+    try {
+      // Buscar todos los usuarios con status trial_ended usando Drizzle
+      const { eq } = await import("drizzle-orm");
+      const trialEndedUsers = await db.select().from(users).where(eq(users.subscriptionStatus, 'trial_ended'));
+      
+      if (!trialEndedUsers || trialEndedUsers.length === 0) {
+        return res.json({ 
+          success: true,
+          message: 'No hay usuarios trial_ended para enviar email',
+          count: 0
+        });
+      }
+
+      let emailsSent = 0;
+      let errors = 0;
+      const results = [];
+
+      for (const user of trialEndedUsers) {
+        if (!user.email) {
+          results.push({ 
+            userId: user.id, 
+            status: 'skipped', 
+            reason: 'No email address' 
+          });
+          continue;
+        }
+
+        try {
+          await sendWeeklyPostTrialEmail(user.email);
+          emailsSent++;
+          results.push({ 
+            userId: user.id, 
+            email: user.email, 
+            status: 'sent' 
+          });
+          console.log(`Email semanal post-trial enviado a: ${user.email}`);
+        } catch (emailError: any) {
+          errors++;
+          results.push({ 
+            userId: user.id, 
+            email: user.email, 
+            status: 'error', 
+            error: emailError.message 
+          });
+          console.error(`Error enviando email a ${user.email}:`, emailError.message);
+        }
+      }
+
+      res.json({
+        success: true,
+        message: `Proceso completado: ${emailsSent} emails enviados, ${errors} errores`,
+        stats: {
+          totalUsers: trialEndedUsers.length,
+          emailsSent,
+          errors
+        },
+        results
+      });
+
+    } catch (error: any) {
+      console.error("Error en endpoint de emails semanales post-trial:", error);
+      res.status(500).json({ 
+        error: "Error al enviar emails semanales",
         details: error.message 
       });
     }
