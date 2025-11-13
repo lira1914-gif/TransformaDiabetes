@@ -666,15 +666,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const isCanceled = user.subscriptionStatus === 'canceled' || user.subscriptionStatus === 'cancelled';
       
       // El trial ha expirado si:
-      // - Han pasado más de 7 días Y
-      // - No tiene suscripción activa (no está en 'active' ni 'trialing')
-      const trialExpired = daysSinceStart >= TRIAL_DAYS && !isActive && !isTrialing;
+      // - Han pasado más de 7 días (sin importar el status)
+      const trialExpired = daysSinceStart >= TRIAL_DAYS && !isActive;
       
       // El usuario tiene acceso si:
-      // - Está en trial (trialing) O
-      // - Tiene suscripción activa O
-      // - Aún está dentro de los 7 días del trial (aunque no tenga status de Stripe)
-      const hasAccess = isTrialing || isActive || daysRemaining > 0;
+      // - Tiene suscripción activa ('active') O
+      // - Aún está dentro de los 7 días del trial (daysRemaining > 0)
+      // NO dar acceso solo por tener status 'trialing' si ya pasaron los 7 días
+      const hasAccess = isActive || (daysRemaining > 0);
 
       // 📧 Event-driven email automation with atomic flag updates
       // Día 6: Enviar recordatorio si el trial termina mañana (daysRemaining === 1)
