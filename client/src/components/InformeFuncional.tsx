@@ -76,7 +76,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
     const userId = localStorage.getItem('tm_user_id');
     if (userId) {
       apiRequest('POST', '/api/notify-module1-completed', { userId })
-        .then(() => console.log('✅ Email de cierre de Módulo 1 enviado'))
+        .then(() => console.log(' Email de cierre de Módulo 1 enviado'))
         .catch(error => console.error('Error enviando email de cierre:', error));
     }
     
@@ -90,7 +90,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
       className={`informe-funcional ${visible ? "fade-in" : ""}`}
       data-testid="informe-inicial"
     >
-      <h2>🌿 Tu Guía Funcional Personalizada — Inicio</h2>
+      <h2> Tu Guía Funcional Personalizada — Inicio</h2>
       <p className="subtitulo">
         "Tu cuerpo no está roto, solo se está protegiendo. Aprende a escuchar su
         mensaje con calma y curiosidad."
@@ -102,16 +102,16 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
           Basado en tu historial de salud, alimentación y estilo de vida, tu cuerpo está
           mostrando señales importantes. Durante los próximos 7 días, podrás usar el chat para
           compartir cómo te sientes cada día (sueño, digestión, energía, ánimo) y recibirás
-          recomendaciones personalizadas en tiempo real. 🧠💪
+          recomendaciones personalizadas en tiempo real. 
         </p>
       </div>
 
       <ul className="lista-funcional">
-        <li>⚖️ <strong>Equilibra tus comidas:</strong> combina grasa, fibra y proteína en cada plato. Esto ayuda a estabilizar tu glucosa y energía.</li>
-        <li>🔥 <strong>Reduce la carga inflamatoria:</strong> evita ultraprocesados, aceites refinados y azúcares añadidos.</li>
-        <li>💤 <strong>Repara con descanso:</strong> duerme 7–8 h, evita pantallas antes de dormir y realiza respiraciones profundas cada noche.</li>
-        <li>🫀 <strong>Apoya tu hígado y linfa:</strong> masaje suave con aceite de ricino (si la piel está sana), infusión de diente de león o cepillado seco antes de la ducha.</li>
-        <li>🌸 <strong>Calma tu sistema nervioso:</strong> 4–8 respiraciones pausadas antes de comer o cuando sientas ansiedad.</li>
+        <li> <strong>Equilibra tus comidas:</strong> combina grasa, fibra y proteína en cada plato. Esto ayuda a estabilizar tu glucosa y energía.</li>
+        <li> <strong>Reduce la carga inflamatoria:</strong> evita ultraprocesados, aceites refinados y azúcares añadidos.</li>
+        <li> <strong>Repara con descanso:</strong> duerme 7–8 h, evita pantallas antes de dormir y realiza respiraciones profundas cada noche.</li>
+        <li> <strong>Apoya tu hígado y linfa:</strong> masaje suave con aceite de ricino (si la piel está sana), infusión de diente de león o cepillado seco antes de la ducha.</li>
+        <li> <strong>Calma tu sistema nervioso:</strong> 4–8 respiraciones pausadas antes de comer o cuando sientas ansiedad.</li>
       </ul>
 
       <div className="bloque-extra">
@@ -131,7 +131,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
         <p>
           *Este contenido es educativo y no reemplaza la atención médica profesional.
           Ahora puedes usar el chat durante 7 días para compartir cómo te sientes y
-          recibir recomendaciones personalizadas basadas en tus síntomas diarios.* 🤖
+          recibir recomendaciones personalizadas basadas en tus síntomas diarios.* 
         </p>
       </div>
 
@@ -195,11 +195,11 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
               fontSize: '1rem',
               lineHeight: 2
             }}>
-              <li>🌿 <strong>Chat semanal ilimitado</strong> con Marvin Lira IA — tu guía personalizada</li>
-              <li>📚 <strong>Módulos educativos progresivos</strong> que se desbloquean cada semana</li>
-              <li>📊 <strong>Seguimiento personalizado</strong> de tu progreso funcional</li>
-              <li>💬 <strong>Guías de acción específicas</strong> basadas en tus síntomas únicos</li>
-              <li>👥 <strong>Comunidad de apoyo</strong> (próximamente)</li>
+              <li> <strong>Chat semanal ilimitado</strong> con Marvin Lira IA — tu guía personalizada</li>
+              <li> <strong>Módulos educativos progresivos</strong> que se desbloquean cada semana</li>
+              <li> <strong>Seguimiento personalizado</strong> de tu progreso funcional</li>
+              <li> <strong>Guías de acción específicas</strong> basadas en tus síntomas únicos</li>
+              <li> <strong>Comunidad de apoyo</strong> (próximamente)</li>
             </ul>
           </div>
 
@@ -217,7 +217,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
               transition: 'all 0.3s ease'
             }}
           >
-            🌸 Sí, quiero transformar mi salud
+             Sí, quiero transformar mi salud
           </button>
           
           <p style={{ 
@@ -227,7 +227,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
             marginBottom: 0,
             lineHeight: 1.6
           }}>
-            <span style={{ fontSize: '1rem' }}>🔒</span> Pago seguro con Stripe • Cancela cuando quieras
+            <span style={{ fontSize: '1rem' }}></span> Pago seguro con Stripe • Cancela cuando quieras
             <br />
             <span style={{ color: '#A15C38', fontWeight: 600 }}>Solo $5 USD/mes — menos de un café al día</span>
           </p>
@@ -251,7 +251,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
             margin: '0 0 1rem 0',
             lineHeight: 1.4
           }}>
-            💬 Mientras decides, prueba el chat gratis por 7 días
+             Mientras decides, prueba el chat gratis por 7 días
           </p>
           
           <p style={{ 
@@ -278,7 +278,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
               border: 'none'
             }}
           >
-            🌿 Probar el Chat Gratis
+             Probar el Chat Gratis
           </button>
           
           <p style={{ 
@@ -287,7 +287,7 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
             marginTop: '1rem',
             marginBottom: 0
           }}>
-            🎁 <span style={{ fontWeight: 600 }}>Acceso ilimitado</span> durante los próximos 7 días
+             <span style={{ fontWeight: 600 }}>Acceso ilimitado</span> durante los próximos 7 días
           </p>
         </div>
       )}

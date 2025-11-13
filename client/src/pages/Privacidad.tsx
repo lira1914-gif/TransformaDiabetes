@@ -118,7 +118,7 @@ export default function Privacidad() {
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#8C4E30'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#A15C38'}
               >
-                ⬅️ Volver al inicio
+                 Volver al inicio
               </Link>
             </div>
           </div>

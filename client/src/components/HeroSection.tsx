@@ -39,9 +39,9 @@ export default function HeroSection() {
   
   const getTooltipText = () => {
     if (isEnglish) {
-      return "✨ Start your functional transformation today";
+      return " Start your functional transformation today";
     }
-    return "✨ Empieza tu transformación funcional hoy";
+    return " Empieza tu transformación funcional hoy";
   };
 
   const getHeroTitle = () => {

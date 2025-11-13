@@ -69,7 +69,7 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
         localStorage.removeItem('tm_motivacion_done');
         
         setDiasRegistro(0);
-        alert('✅ Todos los datos borrados. Serás redirigido al inicio del onboarding.');
+        alert(' Todos los datos borrados. Serás redirigido al inicio del onboarding.');
         
         // Redirigir al inicio del onboarding
         window.location.href = '/onboarding/bienvenida';
@@ -188,7 +188,7 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
                 marginBottom: '1rem',
                 fontSize: '1rem'
               }}>
-                ✨ ¡Excelente! Has completado tu evaluación inicial.
+                 ¡Excelente! Has completado tu evaluación inicial.
               </p>
               <p style={{
                 color: '#6F6E66',
@@ -264,7 +264,7 @@ const Mes1Tracker = forwardRef<HTMLElement, Mes1TrackerProps>(
               onMouseEnter={(e) => e.currentTarget.style.background = '#b91c1c'}
               onMouseLeave={(e) => e.currentTarget.style.background = '#dc2626'}
             >
-              🗑️ Borrar datos de prueba
+               Borrar datos de prueba
             </button>
             <p style={{ fontSize: '0.8rem', color: '#6F6E66', marginTop: '0.5rem' }}>
               (Solo para desarrollo - Limpia el registro y permite empezar de nuevo)

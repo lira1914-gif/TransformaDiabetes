@@ -59,7 +59,7 @@ export default function SuscripcionSection() {
           </div>
 
           <div className="footer-note">
-            🔒 Pago seguro procesado por Stripe. Cancela cuando quieras desde tu perfil.
+             Pago seguro procesado por Stripe. Cancela cuando quieras desde tu perfil.
           </div>
           
           <p className="text-sm mt-4" style={{ color: '#6F6E66', textAlign: 'center' }}>
@@ -68,7 +68,7 @@ export default function SuscripcionSection() {
 
           <section className="disclaimer">
             <p>
-              <strong>🩺 Aviso importante:</strong><br />
+              <strong> Aviso importante:</strong><br />
               El contenido presentado en TransformaDiabetes tiene fines exclusivamente educativos y no sustituye el consejo, diagnóstico ni tratamiento médico profesional. 
               La información compartida busca ayudarte a comprender mejor las señales de tu cuerpo desde un enfoque de nutrición funcional y autoconocimiento.
             </p>

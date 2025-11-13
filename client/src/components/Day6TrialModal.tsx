@@ -70,7 +70,7 @@ export default function Day6TrialModal({ daysRemaining, hasAccess, isActive }: D
               className="text-2xl sm:text-3xl text-center font-bold leading-tight font-serif"
               style={{ color: '#556B2F' }}
             >
-              ✨ Has completado tu prueba funcional gratuita
+               Has completado tu prueba funcional gratuita
             </AlertDialogTitle>
           </AlertDialogHeader>
         </div>
@@ -103,7 +103,7 @@ export default function Day6TrialModal({ daysRemaining, hasAccess, isActive }: D
                 }}
               >
                 <p className="text-center font-semibold" style={{ color: '#6B7041' }}>
-                  💚 No pierdas tu avance — tu cuerpo ya empezó a transformarse
+                   No pierdas tu avance — tu cuerpo ya empezó a transformarse
                 </p>
               </div>
             </div>
@@ -121,7 +121,7 @@ export default function Day6TrialModal({ daysRemaining, hasAccess, isActive }: D
               data-testid="button-continue-trial-day6"
             >
               <span className="flex items-center justify-center gap-2">
-                🟩 Continuar mi transformación por $5 USD/mes
+                 Continuar mi transformación por $5 USD/mes
                 <ArrowRight className="w-4 h-4" />
               </span>
             </AlertDialogAction>

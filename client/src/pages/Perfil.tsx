@@ -61,7 +61,7 @@ export default function Perfil() {
           if (previousStatus === 'canceled' && currentStatus === 'active') {
             try {
               await apiRequest('POST', '/api/notify-reactivation', { userId });
-              console.log('✅ Email de reactivación enviado');
+              console.log(' Email de reactivación enviado');
             } catch (error) {
               console.error('Error enviando email de reactivación:', error);
             }
@@ -188,7 +188,7 @@ export default function Perfil() {
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <Clock className="w-6 h-6" style={{ color: '#6B7041' }} />
                     <h3 className="text-xl font-bold" style={{ color: '#3E3E2E' }}>
-                      🕓 Te quedan {trialStatus.daysRemaining} {trialStatus.daysRemaining === 1 ? 'día' : 'días'} de tu acceso gratuito
+                       Te quedan {trialStatus.daysRemaining} {trialStatus.daysRemaining === 1 ? 'día' : 'días'} de tu acceso gratuito
                     </h3>
                   </div>
                   <p className="text-sm" style={{ color: '#6F6E66' }}>
@@ -209,7 +209,7 @@ export default function Perfil() {
                   }}
                 >
                   <h3 className="text-2xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
-                    🌿 Tu periodo gratuito ha finalizado
+                     Tu periodo gratuito ha finalizado
                   </h3>
                   <p className="text-base mb-6 leading-relaxed" style={{ color: '#6F6E66' }}>
                     Para continuar recibiendo tus reportes personalizados y soporte funcional, activa tu suscripción por $5 USD/mes.
@@ -258,7 +258,7 @@ export default function Perfil() {
 
                 <div className="mb-6 pl-4 border-l-2" style={{ borderColor: '#6B7041' }}>
                   <p className="text-sm font-semibold mb-2" style={{ color: '#3E3E2E' }}>
-                    🔒 Seguridad y transparencia:
+                     Seguridad y transparencia:
                   </p>
                   <p className="text-sm leading-relaxed" style={{ color: '#6F6E66' }}>
                     El manejo de tus pagos y cancelaciones se realiza directamente con Stripe, una de las plataformas más seguras del mundo.
@@ -280,7 +280,7 @@ export default function Perfil() {
                     onMouseEnter={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#5A5E35')}
                     onMouseLeave={(e) => !isLoadingPortal && (e.currentTarget.style.backgroundColor = '#6B7041')}
                   >
-                    {isLoadingPortal ? "Abriendo portal seguro..." : "👉 Gestionar mi suscripción"}
+                    {isLoadingPortal ? "Abriendo portal seguro..." : " Gestionar mi suscripción"}
                   </button>
                   <p className="text-xs mt-2 text-center" style={{ color: '#9A998C' }}>
                     (Este botón abrirá una nueva ventana segura de Stripe.)

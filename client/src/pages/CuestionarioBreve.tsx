@@ -165,7 +165,7 @@ export default function CuestionarioBreve() {
       }
       
       toast({
-        title: "🧠 Analizando tu información...",
+        title: " Analizando tu información...",
         description: "Estamos creando tu guía funcional personalizada. Esto puede tomar 15-20 segundos.",
         duration: 25000,
       });
@@ -180,7 +180,7 @@ export default function CuestionarioBreve() {
         localStorage.setItem('tm_informe_ready', 'true');
         
         toast({
-          title: "🎉 ¡Listo!",
+          title: " ¡Listo!",
           description: "Tu guía funcional personalizada está lista. Preparándote para verla...",
         });
         
@@ -190,7 +190,7 @@ export default function CuestionarioBreve() {
       } catch (error) {
         console.error('Error generando reporte:', error);
         toast({
-          title: "⚠️ Error generando informe",
+          title: " Error generando informe",
           description: "Hubo un problema. Por favor intenta nuevamente.",
           variant: "destructive",
         });
@@ -199,7 +199,7 @@ export default function CuestionarioBreve() {
     onError: (error: any) => {
       console.error('Error guardando cuestionario:', error);
       toast({
-        title: "❌ Error al guardar",
+        title: " Error al guardar",
         description: "Hubo un problema guardando tu información. Por favor intenta nuevamente.",
         variant: "destructive",
       });
@@ -609,7 +609,7 @@ export default function CuestionarioBreve() {
               <>
                 <div>
                   <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
-                    1️⃣ ¿Qué área de tu salud te preocupa más últimamente? *
+                     ¿Qué área de tu salud te preocupa más últimamente? *
                   </Label>
                   <RadioGroup
                     value={formData.preocupacion_principal}
@@ -628,7 +628,7 @@ export default function CuestionarioBreve() {
 
                 <div>
                   <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
-                    2️⃣ ¿Qué describe mejor tu estado actual? *
+                     ¿Qué describe mejor tu estado actual? *
                   </Label>
                   <RadioGroup
                     value={formData.estado_actual}
@@ -652,7 +652,7 @@ export default function CuestionarioBreve() {
 
                 <div>
                   <Label className="text-base font-semibold mb-3 block" style={{ color: '#3A3A3A' }}>
-                    3️⃣ ¿Qué te gustaría lograr? *
+                     ¿Qué te gustaría lograr? *
                   </Label>
                   <RadioGroup
                     value={formData.objetivo}
@@ -789,7 +789,7 @@ export default function CuestionarioBreve() {
                   }}
                   data-testid="button-enviar"
                 >
-                  {saveFormMutation.isPending ? "Generando tu guía..." : "Ver mi guía funcional 🎯"}
+                  {saveFormMutation.isPending ? "Generando tu guía..." : "Ver mi guía funcional "}
                 </Button>
               )}
             </div>
@@ -799,7 +799,7 @@ export default function CuestionarioBreve() {
             className="text-xs text-center mt-6"
             style={{ color: '#6F6E66' }}
           >
-            🔒 Tu información está protegida y solo se usa para personalizar tu guía funcional
+             Tu información está protegida y solo se usa para personalizar tu guía funcional
           </p>
         </div>
       </main>

@@ -11,7 +11,7 @@ app.use('/api/stripe-webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// 🛡️ Protección contra bots y rutas sospechosas
+//  Protección contra bots y rutas sospechosas
 const blockedPaths = [
   "/wp-admin",
   "/wordpress",
@@ -36,24 +36,24 @@ app.use((req, res, next) => {
 
   // Bloquear rutas sospechosas
   if (blockedPaths.some(path => req.url.startsWith(path))) {
-    const logMessage = `🚫 Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
+    const logMessage = ` Ruta bloqueada: ${req.url} desde IP ${ip}\n`;
     fs.appendFileSync("blocked.log", logMessage);
     console.log(logMessage.trim());
-    return res.status(403).send("Acceso denegado 🚫");
+    return res.status(403).send("Acceso denegado ");
   }
 
   // Bloquear IPs en lista negra
   if (blockedIPs.includes(ip)) {
-    const logMessage = `🚫 IP bloqueada: ${ip}\n`;
+    const logMessage = ` IP bloqueada: ${ip}\n`;
     fs.appendFileSync("blocked.log", logMessage);
     console.log(logMessage.trim());
-    return res.status(403).send("Acceso denegado 🚫");
+    return res.status(403).send("Acceso denegado ");
   }
 
   next();
 });
 
-// 🛡️ Limitador de solicitudes (Rate Limiting) - Solo para rutas API
+//  Limitador de solicitudes (Rate Limiting) - Solo para rutas API
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 100, // máximo 100 requests por IP en 15 minutos
@@ -62,7 +62,7 @@ const limiter = rateLimit({
   legacyHeaders: false,
   handler: (req, res, _next, options) => {
     const ip = (req.headers["x-forwarded-for"] as string) || req.socket.remoteAddress || "unknown";
-    const logMessage = `⚠️ Límite alcanzado: ${ip} - ${req.url}\n`;
+    const logMessage = ` Límite alcanzado: ${ip} - ${req.url}\n`;
     fs.appendFileSync("blocked.log", logMessage);
     console.log(logMessage.trim());
     res.status(options.statusCode).send(options.message);

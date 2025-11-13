@@ -94,7 +94,7 @@ function getCombinedPatternKey(axis1: string, axis2: string): string {
 function loadPatronContent(axisName: string): PatronResult {
   const patronesContent: Record<string, PatronResult> = {
     "Metabólico": {
-      patron: "🩸 Patrón Metabólico",
+      patron: " Patrón Metabólico",
       descripcion: "Tu cuerpo busca equilibrio. El patrón metabólico indica una sobrecarga de glucosa o estrés energético.",
       recomendaciones: [
         "Reduce azúcares ocultos y alimentos procesados.",
@@ -105,7 +105,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Digestivo": {
-      patron: "💩 Patrón Digestivo",
+      patron: " Patrón Digestivo",
       descripcion: "Tu digestión refleja tu capacidad de asimilar la vida. Este patrón indica inflamación o lentitud intestinal.",
       recomendaciones: [
         "Mastica hasta que los alimentos pierdan textura.",
@@ -116,7 +116,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Estrés": {
-      patron: "🌙 Patrón de Estrés",
+      patron: " Patrón de Estrés",
       descripcion: "Tu sistema nervioso está en modo defensa. Este patrón revela agotamiento o exceso de alerta.",
       recomendaciones: [
         "Inicia el día con respiraciones profundas o exposición a la luz natural.",
@@ -127,7 +127,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Inflamatorio": {
-      patron: "🔥 Patrón Inflamatorio",
+      patron: " Patrón Inflamatorio",
       descripcion: "El fuego interno no siempre es visible. Este patrón señala inflamación crónica en tu organismo.",
       recomendaciones: [
         "Elimina gluten, lácteos y azúcar refinada durante 21 días.",
@@ -138,7 +138,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Metabólico-Digestivo": {
-      patron: "🩸 Metabólico–Digestivo",
+      patron: " Metabólico–Digestivo",
       descripcion: "Tu glucosa y tu digestión están conectadas. Ambos sistemas piden equilibrio.",
       recomendaciones: [
         "Come proteína y fibra en cada comida para estabilizar glucosa.",
@@ -149,7 +149,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Metabólico-Estrés": {
-      patron: "🩸 Metabólico–Estrés",
+      patron: " Metabólico–Estrés",
       descripcion: "El estrés eleva tu glucosa. Tu metabolismo necesita calma.",
       recomendaciones: [
         "Reduce azúcares y carbohidratos refinados que amplifican el estrés.",
@@ -160,7 +160,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Metabólico-Inflamatorio": {
-      patron: "🩸 Metabólico–Inflamatorio",
+      patron: " Metabólico–Inflamatorio",
       descripcion: "La inflamación crónica desregula tu glucosa. Ambos necesitan antiinflamación profunda.",
       recomendaciones: [
         "Elimina azúcares, gluten y aceites vegetales refinados.",
@@ -171,7 +171,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Digestivo-Estrés": {
-      patron: "💩 Digestivo–Estrés",
+      patron: " Digestivo–Estrés",
       descripcion: "El estrés altera tu digestión. Tu intestino necesita calma.",
       recomendaciones: [
         "Come sentado, sin pantallas, respirando antes de cada bocado.",
@@ -182,7 +182,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Digestivo-Inflamatorio": {
-      patron: "💩 Digestivo–Inflamatorio",
+      patron: " Digestivo–Inflamatorio",
       descripcion: "Tu intestino está inflamado. Necesita reparación y calma.",
       recomendaciones: [
         "Elimina gluten, lácteos y azúcar refinada durante 21 días.",
@@ -193,7 +193,7 @@ function loadPatronContent(axisName: string): PatronResult {
       ]
     },
     "Estrés-Inflamatorio": {
-      patron: "🔥 Estrés–Inflamatorio",
+      patron: " Estrés–Inflamatorio",
       descripcion: "El estrés crónico inflama todo tu cuerpo. Necesitas calma profunda.",
       recomendaciones: [
         "Practica respiración profunda o meditación diaria.",
@@ -270,7 +270,7 @@ export default function Resultados() {
               style={{ color: '#A15C38' }}
               data-testid="text-patron-result"
             >
-              🌿 Resultado: {patron.patron}
+               Resultado: {patron.patron}
             </h1>
             
             <p 
@@ -306,7 +306,7 @@ export default function Resultados() {
                 className="text-xl md:text-2xl font-bold mb-3"
                 style={{ color: '#556B2F' }}
               >
-                🌱 Tu siguiente paso
+                 Tu siguiente paso
               </h3>
               <p 
                 className="text-base mb-6"

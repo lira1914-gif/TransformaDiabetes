@@ -23,7 +23,7 @@ export default function MensajeFinalRegistro() {
     >
       <div style={{ maxWidth: '700px', margin: 'auto' }}>
         <h2 style={{ color: '#556B2F', marginBottom: '1rem' }}>
-          🌿 Has completado tu Registro Funcional
+           Has completado tu Registro Funcional
         </h2>
         <p style={{ color: '#3A3A3A', fontSize: '1.1rem', marginBottom: '1.2rem' }}>
           Tu cuerpo se comunica contigo todos los días — y ahora estás aprendiendo a escucharlo.
@@ -61,7 +61,7 @@ export default function MensajeFinalRegistro() {
         <p style={{ color: '#6F6E66', marginTop: '1rem', marginBottom: '2rem' }}>
           Recuerda: este proceso no se trata de control, sino de confianza.
           <br />
-          Estás creando una relación nueva con tu cuerpo. 🌱
+          Estás creando una relación nueva con tu cuerpo. 
         </p>
 
         <Button

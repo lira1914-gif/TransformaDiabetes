@@ -55,7 +55,7 @@ export default function Day8Banner({ daysRemaining, isActive }: Day8BannerProps)
           
           <div className="space-y-3 text-sm sm:text-base leading-relaxed" style={{ color: '#3A3A3A' }}>
             <p>
-              Gracias por probar la experiencia funcional de <strong>Marvin Lira Nutrición Funcional</strong> 🌿
+              Gracias por probar la experiencia funcional de <strong>Marvin Lira Nutrición Funcional</strong> 
             </p>
             <p>
               Durante estos días diste el primer paso para entender cómo tu cuerpo puede recuperar su equilibrio y energía.
@@ -69,15 +69,15 @@ export default function Day8Banner({ daysRemaining, isActive }: Day8BannerProps)
                 Al suscribirte, desbloquearás nuevamente:
               </p>
               <ul className="space-y-1 ml-4">
-                <li>✅ Tu panel funcional completo</li>
-                <li>✅ El chat interactivo con IA</li>
-                <li>✅ Los módulos mensuales de transformación</li>
-                <li>✅ Y acceso continuo a tus reportes personalizados</li>
+                <li> Tu panel funcional completo</li>
+                <li> El chat interactivo con IA</li>
+                <li> Los módulos mensuales de transformación</li>
+                <li> Y acceso continuo a tus reportes personalizados</li>
               </ul>
             </div>
 
             <p className="font-semibold" style={{ color: '#6B7041' }}>
-              💚 Tu cuerpo ya comenzó a mejorar — no detengas ese proceso.
+               Tu cuerpo ya comenzó a mejorar — no detengas ese proceso.
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export default function Day8Banner({ daysRemaining, isActive }: Day8BannerProps)
             }}
             data-testid="button-reactivate-day8-banner"
           >
-            🟩 Reactivar mi acceso ($5 USD/mes)
+             Reactivar mi acceso ($5 USD/mes)
             <ArrowRight className="w-4 h-4" />
           </button>
 

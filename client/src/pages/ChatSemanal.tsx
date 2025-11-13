@@ -28,13 +28,13 @@ interface WeeklyCheckin {
 }
 
 const SYSTEM_EMOJI: Record<string, string> = {
-  fecar: "🥦",
-  digestión: "🥦",
-  sueño: "🌙",
-  azúcar: "🍯",
-  energía: "🌿",
-  hidratación: "💧",
-  estrés: "🧘"
+  fecar: "",
+  digestión: "",
+  sueño: "",
+  azúcar: "",
+  energía: "",
+  hidratación: "",
+  estrés: ""
 };
 
 const SUGGESTED_QUESTIONS = [
@@ -228,7 +228,7 @@ export default function ChatSemanal() {
       <div className="container max-w-4xl mx-auto py-8 px-4">
         <div className="mb-8">
           <h1 className="text-3xl font-serif font-bold text-foreground mb-2">
-            Chat Semanal con Marvin Lira IA 🌿
+            Chat Semanal con Marvin Lira IA 
           </h1>
           <p className="text-muted-foreground">
             Comparte cómo te sentiste esta semana y recibe orientación funcional personalizada
@@ -379,7 +379,7 @@ export default function ChatSemanal() {
                   <div className="mb-4">
                     <div className="flex items-center gap-2 mb-2">
                       <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-lg">
-                        🌿
+                        
                       </div>
                       <span className="font-medium text-foreground">Marvin Lira IA</span>
                     </div>

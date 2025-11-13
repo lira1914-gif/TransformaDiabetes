@@ -30,7 +30,7 @@ export default function Diagnostico() {
 
   const questions = [
     {
-      emoji: "1️⃣",
+      emoji: "",
       text: "¿Qué área de tu salud te preocupa más últimamente?",
       options: [
         "Glucosa / resistencia a la insulina",
@@ -40,7 +40,7 @@ export default function Diagnostico() {
       ]
     },
     {
-      emoji: "2️⃣",
+      emoji: "",
       text: "¿Qué describe mejor tu estado actual?",
       options: [
         "Me cuesta bajar el azúcar o mantenerla estable",
@@ -50,7 +50,7 @@ export default function Diagnostico() {
       ]
     },
     {
-      emoji: "3️⃣",
+      emoji: "",
       text: "¿Qué te gustaría lograr?",
       options: [
         "Controlar mis niveles de azúcar",
@@ -105,7 +105,7 @@ export default function Diagnostico() {
               className="text-2xl md:text-3xl font-bold text-center mb-2"
               style={{ color: '#556B2F' }}
             >
-              Hola, {userName} 👋
+              Hola, {userName} 
               <br />
               Vamos a conocer cómo se está comunicando tu cuerpo.
             </h1>

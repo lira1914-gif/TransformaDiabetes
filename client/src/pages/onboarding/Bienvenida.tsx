@@ -42,7 +42,7 @@ export default function Bienvenida() {
         }}
       >
         <h1 style={{ color: '#556B2F', textAlign: 'center', fontSize: '2.5rem' }}>
-          ✨ Bienvenido a TransformaDiabetes Funcional
+           Bienvenido a TransformaDiabetes Funcional
         </h1>
         <h2 style={{ color: '#A15C38', textAlign: 'center', fontSize: '1.5rem', marginTop: '0.5rem' }}>
           Tu camino hacia el equilibrio comienza hoy
@@ -63,11 +63,11 @@ export default function Bienvenida() {
           textAlign: 'center',
           fontSize: '1.05rem'
         }}>
-          💡 Tu primer paso: Completar tu historial médico y luego registrar tus primeros 5 días de alimentación, sueño y digestión.
+           Tu primer paso: Completar tu historial médico y luego registrar tus primeros 5 días de alimentación, sueño y digestión.
         </div>
 
         <div style={{ textAlign: 'left', maxWidth: '700px', margin: '0 auto' }}>
-          <h3 style={{ color: '#556B2F', fontSize: '1.3rem' }}>📋 ¿Qué incluye tu suscripción?</h3>
+          <h3 style={{ color: '#556B2F', fontSize: '1.3rem' }}> ¿Qué incluye tu suscripción?</h3>
           <ul style={{ color: '#3A3A3A', lineHeight: 1.8, fontSize: '1.05rem' }}>
             <li>Análisis funcional de tu historial médico y hábitos.</li>
             <li>Interpretación personalizada de tus resultados y síntomas.</li>
@@ -77,7 +77,7 @@ export default function Bienvenida() {
             <li>Revisión de análisis de sangre y contexto clínico general.</li>
           </ul>
 
-          <h3 style={{ color: '#556B2F', fontSize: '1.3rem', marginTop: '2rem' }}>🧠 Antes de iniciar</h3>
+          <h3 style={{ color: '#556B2F', fontSize: '1.3rem', marginTop: '2rem' }}> Antes de iniciar</h3>
           <p style={{ color: '#3A3A3A', lineHeight: 1.6, fontSize: '1.05rem' }}>
             Primero, completarás un formulario de historial médico para que podamos conocer tu contexto de salud.
           </p>
@@ -134,9 +134,9 @@ export default function Bienvenida() {
             fontSize: '1.05rem'
           }}
         >
-          🌿 "Tu cuerpo no está roto, solo está protegiéndose.
+           "Tu cuerpo no está roto, solo está protegiéndose.
           <br />
-          Vamos a enseñarle cómo sentirse seguro otra vez." 🌿
+          Vamos a enseñarle cómo sentirse seguro otra vez." 
         </div>
       </div>
     </div>

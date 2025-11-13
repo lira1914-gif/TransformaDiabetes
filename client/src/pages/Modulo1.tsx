@@ -119,10 +119,10 @@ export default function Modulo1() {
               {/* Header */}
               <div className="mb-8">
                 <h1 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#3E3E2E' }}>
-                  🌿 Has completado el Módulo 1 — Empieza desde la raíz
+                   Has completado el Módulo 1 — Empieza desde la raíz
                 </h1>
                 <p className="text-xl font-medium mb-4" style={{ color: '#6F6E66' }}>
-                  ✨ Tu cuerpo ya está respondiendo.
+                   Tu cuerpo ya está respondiendo.
                 </p>
                 <p className="text-lg leading-relaxed" style={{ color: '#6F6E66' }}>
                   Has dado los primeros pasos hacia un equilibrio real: digestión más tranquila, energía más estable y sueño más reparador.
@@ -134,7 +134,7 @@ export default function Modulo1() {
               {/* Reflexión funcional */}
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
-                  🧭 Reflexión funcional:
+                   Reflexión funcional:
                 </h2>
                 <blockquote className="border-l-4 pl-4 mb-4" style={{ borderColor: '#6B7041' }}>
                   <p className="text-lg font-medium italic mb-3" style={{ color: '#6B7041' }}>
@@ -152,11 +152,11 @@ export default function Modulo1() {
               {/* Próximo paso */}
               <div className="mb-8">
                 <h2 className="text-xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
-                  🌱 Próximo paso:
+                   Próximo paso:
                 </h2>
                 <div className="bg-green-50 border border-green-200 rounded-lg p-5 mb-4">
                   <p className="font-medium mb-2" style={{ color: '#166534' }}>
-                    👉 Desbloquea el Módulo 2: "Equilibra desde adentro"
+                     Desbloquea el Módulo 2: "Equilibra desde adentro"
                   </p>
                   <p className="text-sm" style={{ color: '#15803D' }}>
                     para acceder a estrategias funcionales avanzadas, suplementos educativos con precauciones y tu nueva guía de acción personalizada.
@@ -201,7 +201,7 @@ export default function Modulo1() {
                   MÓDULO 1 — Empieza desde la raíz
                 </p>
                 <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
-                  🎉 ¡Bienvenido al Módulo 1 de tu Transformación Funcional!
+                   ¡Bienvenido al Módulo 1 de tu Transformación Funcional!
                 </h1>
                 <p className="text-xl font-medium" style={{ color: '#6F6E66' }}>
                   Tu cuerpo no está roto: solo está buscando equilibrio.
@@ -218,7 +218,7 @@ export default function Modulo1() {
                 {/* Objetivo de la semana */}
                 <div>
                   <h2 className="text-xl font-bold mb-3" style={{ color: '#3E3E2E' }}>
-                    🩺 Tu objetivo esta semana:
+                     Tu objetivo esta semana:
                   </h2>
                   <p className="text-lg font-medium mb-2" style={{ color: '#6B7041' }}>
                     Observar sin juzgar.
@@ -233,7 +233,7 @@ export default function Modulo1() {
                 {/* Guía de acción */}
                 <div>
                   <h2 className="text-xl font-bold mb-4" style={{ color: '#3E3E2E' }}>
-                    🌿 Tu guía de acción funcional:
+                     Tu guía de acción funcional:
                   </h2>
                   <ol className="space-y-2 ml-5 list-decimal">
                     <li style={{ color: '#6F6E66' }}>Registra tus días con calma.</li>
@@ -251,7 +251,7 @@ export default function Modulo1() {
                     Recuerda: mientras el cuerpo esté en alerta, no puede sanar.
                   </p>
                   <p className="text-sm" style={{ color: '#92400E' }}>
-                    🌱 Esta semana empieza la reconexión entre tu cuerpo y tu consciencia.
+                     Esta semana empieza la reconexión entre tu cuerpo y tu consciencia.
                     Nutri-Marvin te acompañará paso a paso en este proceso.
                   </p>
                 </div>
@@ -355,7 +355,7 @@ export default function Modulo1() {
               </p>
               <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                 <p className="text-sm font-medium" style={{ color: '#92400E' }}>
-                  💡 Recuerda: Tu cuerpo no está roto, solo necesita el apoyo correcto para volver a su equilibrio natural.
+                   Recuerda: Tu cuerpo no está roto, solo necesita el apoyo correcto para volver a su equilibrio natural.
                 </p>
               </div>
             </section>
@@ -411,7 +411,7 @@ export default function Modulo1() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-base flex items-center gap-2">
-                      <span className="text-xl">🥑</span>
+                      <span className="text-xl"></span>
                       Grasas saludables
                     </CardTitle>
                   </CardHeader>
@@ -426,7 +426,7 @@ export default function Modulo1() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-base flex items-center gap-2">
-                      <span className="text-xl">🥩</span>
+                      <span className="text-xl"></span>
                       Proteínas de calidad
                     </CardTitle>
                   </CardHeader>
@@ -441,7 +441,7 @@ export default function Modulo1() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-base flex items-center gap-2">
-                      <span className="text-xl">🥬</span>
+                      <span className="text-xl"></span>
                       Vegetales de hoja verde
                     </CardTitle>
                   </CardHeader>
@@ -456,7 +456,7 @@ export default function Modulo1() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-base flex items-center gap-2">
-                      <span className="text-xl">🫐</span>
+                      <span className="text-xl"></span>
                       Frutas con bajo índice glucémico
                     </CardTitle>
                   </CardHeader>
@@ -483,15 +483,15 @@ export default function Modulo1() {
                 </p>
                 <ul className="space-y-2 ml-5">
                   <li className="flex items-start gap-2">
-                    <span style={{ color: '#6B7041' }}>✓</span>
+                    <span style={{ color: '#6B7041' }}></span>
                     <span style={{ color: '#6F6E66' }}>¿Tienes energía sostenida o caes en un bajón?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span style={{ color: '#6B7041' }}>✓</span>
+                    <span style={{ color: '#6B7041' }}></span>
                     <span style={{ color: '#6F6E66' }}>¿Sientes inflamación abdominal o digestión pesada?</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span style={{ color: '#6B7041' }}>✓</span>
+                    <span style={{ color: '#6B7041' }}></span>
                     <span style={{ color: '#6F6E66' }}>¿Tienes antojos intensos de dulce 2-3 horas después?</span>
                   </li>
                 </ul>

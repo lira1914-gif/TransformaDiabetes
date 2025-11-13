@@ -14,7 +14,7 @@ const stripe = process.env.STRIPE_SECRET_KEY
 if (stripe) {
   console.log('Stripe initialized successfully');
 } else {
-  console.warn('⚠️ Stripe not configured: STRIPE_SECRET_KEY is missing');
+  console.warn(' Stripe not configured: STRIPE_SECRET_KEY is missing');
 }
 
 // Cachear conocimiento funcional en memoria (se carga solo una vez)
@@ -286,7 +286,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
       
       if (!webhookSecret) {
-        console.error("⚠️ STRIPE_WEBHOOK_SECRET no está configurado - no se puede verificar la firma del webhook");
+        console.error(" STRIPE_WEBHOOK_SECRET no está configurado - no se puede verificar la firma del webhook");
         return res.status(500).json({ 
           error: "Webhook secret no configurado" 
         });
@@ -311,19 +311,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
           webhookSecret
         );
       } catch (err: any) {
-        console.error(`⚠️ Error verificando firma del webhook: ${err.message}`);
+        console.error(` Error verificando firma del webhook: ${err.message}`);
         return res.status(400).json({ 
           error: `Firma del webhook inválida: ${err.message}` 
         });
       }
 
-      console.log(`✅ Webhook verificado: ${event.type}`);
+      console.log(` Webhook verificado: ${event.type}`);
 
       // Manejar eventos específicos
       switch (event.type) {
         case 'checkout.session.completed': {
           const session = event.data.object as Stripe.Checkout.Session;
-          console.log('💳 Checkout completado:', session.id);
+          console.log(' Checkout completado:', session.id);
           console.log('Customer:', session.customer);
           console.log('Subscription:', session.subscription);
 
@@ -332,7 +332,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const subscriptionId = session.subscription as string;
 
           if (!customerId || !subscriptionId) {
-            console.error('⚠️ Checkout session sin customer o subscription:', session.id);
+            console.error(' Checkout session sin customer o subscription:', session.id);
             break;
           }
 
@@ -340,7 +340,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const user = await storage.getUserByStripeCustomerId(customerId);
 
           if (!user) {
-            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            console.error(' No se encontró usuario con customerId:', customerId);
             break;
           }
 
@@ -352,19 +352,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
             unlockedModules: [1] // Desbloquear Módulo 1 inmediatamente
           });
 
-          console.log('✅ Usuario actualizado tras checkout:', user.id);
+          console.log(' Usuario actualizado tras checkout:', user.id);
           break;
         }
 
         case 'invoice.payment_succeeded': {
           const invoice = event.data.object as any;
-          console.log('💰 Pago exitoso:', invoice.id);
+          console.log(' Pago exitoso:', invoice.id);
           
           const customerId = invoice.customer as string;
           const subscriptionId = typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id;
 
           if (!customerId || !subscriptionId) {
-            console.error('⚠️ Invoice sin customer o subscription:', invoice.id);
+            console.error(' Invoice sin customer o subscription:', invoice.id);
             break;
           }
 
@@ -372,7 +372,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const user = await storage.getUserByStripeCustomerId(customerId);
 
           if (!user) {
-            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            console.error(' No se encontró usuario con customerId:', customerId);
             break;
           }
 
@@ -386,13 +386,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
             unlockedModules: [1] // Asegurar que Módulo 1 está desbloqueado
           });
 
-          console.log('✅ Usuario actualizado tras pago exitoso:', user.id);
+          console.log(' Usuario actualizado tras pago exitoso:', user.id);
           break;
         }
 
         case 'customer.subscription.updated': {
           const subscription = event.data.object as Stripe.Subscription;
-          console.log('🔄 Suscripción actualizada:', subscription.id);
+          console.log(' Suscripción actualizada:', subscription.id);
 
           const customerId = subscription.customer as string;
 
@@ -400,7 +400,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const user = await storage.getUserByStripeCustomerId(customerId);
 
           if (!user) {
-            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            console.error(' No se encontró usuario con customerId:', customerId);
             break;
           }
 
@@ -410,13 +410,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
             trialEnded: subscription.status === 'active' && !subscription.trial_end,
           });
 
-          console.log('✅ Usuario actualizado tras actualización de suscripción:', user.id);
+          console.log(' Usuario actualizado tras actualización de suscripción:', user.id);
           break;
         }
 
         case 'customer.subscription.deleted': {
           const subscription = event.data.object as Stripe.Subscription;
-          console.log('❌ Suscripción cancelada:', subscription.id);
+          console.log(' Suscripción cancelada:', subscription.id);
 
           const customerId = subscription.customer as string;
 
@@ -424,7 +424,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const user = await storage.getUserByStripeCustomerId(customerId);
 
           if (!user) {
-            console.error('⚠️ No se encontró usuario con customerId:', customerId);
+            console.error(' No se encontró usuario con customerId:', customerId);
             break;
           }
 
@@ -434,18 +434,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
             trialEnded: true,
           });
 
-          console.log('✅ Usuario actualizado tras cancelación:', user.id);
+          console.log(' Usuario actualizado tras cancelación:', user.id);
           break;
         }
 
         default:
-          console.log(`ℹ️ Evento de webhook no manejado: ${event.type}`);
+          console.log(` Evento de webhook no manejado: ${event.type}`);
       }
 
       // Responder a Stripe que el webhook fue recibido
       res.json({ received: true });
     } catch (error: any) {
-      console.error("❌ Error procesando webhook de Stripe:", error);
+      console.error(" Error procesando webhook de Stripe:", error);
       res.status(500).json({ 
         error: "Error procesando webhook",
         message: error.message 
@@ -484,7 +484,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Enviar email de reactivación
       await sendReactivationEmail(user.email);
 
-      console.log('✅ Email de reactivación enviado exitosamente');
+      console.log(' Email de reactivación enviado exitosamente');
 
       res.json({ 
         success: true,
@@ -533,13 +533,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const intakeForm = await storage.getIntakeFormByUserId(userId);
         userName = intakeForm?.nombre || undefined;
         if (!userName) {
-          console.log('📧 Usuario no tiene nombre registrado en intake form, usando saludo genérico');
+          console.log(' Usuario no tiene nombre registrado en intake form, usando saludo genérico');
         } else {
-          console.log('📧 Email será personalizado con nombre:', userName);
+          console.log(' Email será personalizado con nombre:', userName);
         }
       } catch (error) {
-        console.log('⚠️ Error obteniendo intake form:', error);
-        console.log('📧 Usando saludo genérico');
+        console.log(' Error obteniendo intake form:', error);
+        console.log(' Usando saludo genérico');
       }
 
       console.log('Enviando email de cierre de Módulo 1 a:', user.email, userName ? `(${userName})` : '');
@@ -548,7 +548,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { sendModule1CompletedEmail } = await import("./email");
       await sendModule1CompletedEmail(user.email, userName);
 
-      console.log('✅ Email de cierre de Módulo 1 enviado exitosamente');
+      console.log(' Email de cierre de Módulo 1 enviado exitosamente');
 
       res.json({ 
         success: true,
@@ -597,13 +597,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const intakeForm = await storage.getIntakeFormByUserId(userId);
         userName = intakeForm?.nombre || undefined;
         if (!userName) {
-          console.log('📧 Usuario no tiene nombre registrado en intake form, usando saludo genérico');
+          console.log(' Usuario no tiene nombre registrado en intake form, usando saludo genérico');
         } else {
-          console.log('📧 Email Módulo 2 será personalizado con nombre:', userName);
+          console.log(' Email Módulo 2 será personalizado con nombre:', userName);
         }
       } catch (error) {
-        console.log('⚠️ Error obteniendo intake form:', error);
-        console.log('📧 Usando saludo genérico');
+        console.log(' Error obteniendo intake form:', error);
+        console.log(' Usando saludo genérico');
       }
 
       console.log('Enviando email de cierre de Módulo 2 a:', user.email, userName ? `(${userName})` : '');
@@ -612,7 +612,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { sendModule2CompletedEmail } = await import("./email");
       await sendModule2CompletedEmail(user.email, userName);
 
-      console.log('✅ Email de cierre de Módulo 2 enviado exitosamente');
+      console.log(' Email de cierre de Módulo 2 enviado exitosamente');
 
       res.json({ 
         success: true,
@@ -675,7 +675,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // NO dar acceso solo por tener status 'trialing' si ya pasaron los 7 días
       const hasAccess = isActive || (daysRemaining > 0);
 
-      // 📧 Event-driven email automation with atomic flag updates
+      //  Event-driven email automation with atomic flag updates
       
       // Día 2: Engagement email (daysRemaining === 5, es el día 2 del trial)
       if (daysRemaining === 5 && !isActive) {
@@ -687,18 +687,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre para email día 2');
+              console.log(' No se pudo obtener nombre para email día 2');
             }
-            console.log('📧 Enviando email día 2 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 2 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay2EngagementEmail } = await import("./email");
             await sendDay2EngagementEmail(user.email, userName);
-            console.log('✅ Email día 2 enviado exitosamente');
+            console.log(' Email día 2 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 2:', error);
+            console.error(' Error enviando email día 2:', error);
             await storage.updateUser(userId, { day2EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 2 ya fue enviado');
+          console.log(' Email día 2 ya fue enviado');
         }
       }
 
@@ -712,18 +712,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre para email día 3');
+              console.log(' No se pudo obtener nombre para email día 3');
             }
-            console.log('📧 Enviando email día 3 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 3 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay3StoryEmail } = await import("./email");
             await sendDay3StoryEmail(user.email, userName);
-            console.log('✅ Email día 3 enviado exitosamente');
+            console.log(' Email día 3 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 3:', error);
+            console.error(' Error enviando email día 3:', error);
             await storage.updateUser(userId, { day3EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 3 ya fue enviado');
+          console.log(' Email día 3 ya fue enviado');
         }
       }
 
@@ -737,18 +737,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre para email día 4');
+              console.log(' No se pudo obtener nombre para email día 4');
             }
-            console.log('📧 Enviando email día 4 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 4 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay4ProgressEmail } = await import("./email");
             await sendDay4ProgressEmail(user.email, userName);
-            console.log('✅ Email día 4 enviado exitosamente');
+            console.log(' Email día 4 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 4:', error);
+            console.error(' Error enviando email día 4:', error);
             await storage.updateUser(userId, { day4EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 4 ya fue enviado');
+          console.log(' Email día 4 ya fue enviado');
         }
       }
 
@@ -762,18 +762,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre para email día 5');
+              console.log(' No se pudo obtener nombre para email día 5');
             }
-            console.log('📧 Enviando email día 5 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 5 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay5UrgencyEmail } = await import("./email");
             await sendDay5UrgencyEmail(user.email, userName);
-            console.log('✅ Email día 5 enviado exitosamente');
+            console.log(' Email día 5 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 5:', error);
+            console.error(' Error enviando email día 5:', error);
             await storage.updateUser(userId, { day5EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 5 ya fue enviado');
+          console.log(' Email día 5 ya fue enviado');
         }
       }
 
@@ -792,20 +792,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre del intake form para email día 6');
+              console.log(' No se pudo obtener nombre del intake form para email día 6');
             }
 
-            console.log('📧 Enviando email día 6 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 6 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay6ReminderEmail } = await import("./email");
             await sendDay6ReminderEmail(user.email, userName);
-            console.log('✅ Email día 6 enviado exitosamente');
+            console.log(' Email día 6 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 6:', error);
+            console.error(' Error enviando email día 6:', error);
             // Revert flag to allow retry on next visit
             await storage.updateUser(userId, { day6EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 6 ya fue enviado por otro request concurrente');
+          console.log(' Email día 6 ya fue enviado por otro request concurrente');
         }
       }
 
@@ -825,20 +825,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre del intake form para email día 8');
+              console.log(' No se pudo obtener nombre del intake form para email día 8');
             }
 
-            console.log('📧 Enviando email día 8 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 8 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay8FollowupEmail } = await import("./email");
             await sendDay8FollowupEmail(user.email, userName);
-            console.log('✅ Email día 8 enviado exitosamente');
+            console.log(' Email día 8 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 8:', error);
+            console.error(' Error enviando email día 8:', error);
             // Revert flag to allow retry on next visit
             await storage.updateUser(userId, { day8EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 8 ya fue enviado por otro request concurrente');
+          console.log(' Email día 8 ya fue enviado por otro request concurrente');
         }
       }
 
@@ -858,20 +858,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre del intake form para email día 9');
+              console.log(' No se pudo obtener nombre del intake form para email día 9');
             }
 
-            console.log('📧 Enviando email día 9 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 9 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay9FollowupEmail } = await import("./email");
             await sendDay9FollowupEmail(user.email, userName);
-            console.log('✅ Email día 9 enviado exitosamente');
+            console.log(' Email día 9 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 9:', error);
+            console.error(' Error enviando email día 9:', error);
             // Revert flag to allow retry on next visit
             await storage.updateUser(userId, { day9EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 9 ya fue enviado por otro request concurrente');
+          console.log(' Email día 9 ya fue enviado por otro request concurrente');
         }
       }
 
@@ -891,20 +891,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
               const intakeForm = await storage.getIntakeFormByUserId(userId);
               userName = intakeForm?.nombre || undefined;
             } catch (error) {
-              console.log('⚠️ No se pudo obtener nombre del intake form para email día 10');
+              console.log(' No se pudo obtener nombre del intake form para email día 10');
             }
 
-            console.log('📧 Enviando email día 10 a:', user.email, userName ? `(${userName})` : '');
+            console.log(' Enviando email día 10 a:', user.email, userName ? `(${userName})` : '');
             const { sendDay10FinalReminderEmail } = await import("./email");
             await sendDay10FinalReminderEmail(user.email, userName);
-            console.log('✅ Email día 10 enviado exitosamente');
+            console.log(' Email día 10 enviado exitosamente');
           } catch (error) {
-            console.error('❌ Error enviando email día 10:', error);
+            console.error(' Error enviando email día 10:', error);
             // Revert flag to allow retry on next visit
             await storage.updateUser(userId, { day10EmailSent: false });
           }
         } else {
-          console.log('⏭️ Email día 10 ya fue enviado por otro request concurrente');
+          console.log(' Email día 10 ya fue enviado por otro request concurrente');
         }
       }
 
@@ -987,19 +987,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { userId, email, ...formData } = req.body;
 
-      console.log('🔍 POST /api/intake-form - Datos recibidos:', { 
+      console.log(' POST /api/intake-form - Datos recibidos:', { 
         userId, 
         email, 
         nombre: formData.nombre 
       });
 
       if (!userId) {
-        console.error('❌ userId faltante en request');
+        console.error(' userId faltante en request');
         return res.status(400).json({ error: "userId es requerido" });
       }
 
       if (!email) {
-        console.error('❌ email faltante en request');
+        console.error(' email faltante en request');
         return res.status(400).json({ error: "email es requerido" });
       }
 
@@ -1017,7 +1017,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           // El usuario ya existe con este email, usar su ID existente
           user = existingUserByEmail;
           // Actualizar el userId en localStorage del cliente
-          console.log('✅ Usuario existente encontrado por email:', user.id, email);
+          console.log(' Usuario existente encontrado por email:', user.id, email);
         } else {
           // Crear usuario nuevo con estado de trial usando inserción directa
           // Módulo 1 desbloqueado automáticamente para usuarios de trial
@@ -1032,14 +1032,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           user = result[0];
           
           if (!user) {
-            console.error('❌ Error: No se pudo crear usuario en la base de datos');
+            console.error(' Error: No se pudo crear usuario en la base de datos');
             return res.status(500).json({ error: "Error al crear usuario" });
           }
           
-          console.log('✅ Usuario de trial creado con Módulo 1 desbloqueado:', userId, email);
+          console.log(' Usuario de trial creado con Módulo 1 desbloqueado:', userId, email);
         }
       } else {
-        console.log('✅ Usuario existente encontrado por ID:', userId);
+        console.log(' Usuario existente encontrado por ID:', userId);
       }
 
       // Usar el ID del usuario real (importante si se encontró por email)
@@ -1054,37 +1054,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let intakeForm;
       if (existing) {
         // Actualizar el existente
-        console.log('📝 Actualizando intake form existente para:', actualUserId);
+        console.log(' Actualizando intake form existente para:', actualUserId);
         intakeForm = await storage.updateIntakeForm(existing.id, formData);
       } else {
         // Crear uno nuevo con el userId correcto
-        console.log('📝 Creando nuevo intake form para:', actualUserId);
+        console.log(' Creando nuevo intake form para:', actualUserId);
         intakeForm = await storage.createIntakeForm({ userId: actualUserId, ...formData });
       }
       
       if (!intakeForm) {
-        console.error('❌ Error: No se pudo crear/actualizar intake form');
+        console.error(' Error: No se pudo crear/actualizar intake form');
         return res.status(500).json({ error: "Error al guardar intake form" });
       }
       
-      console.log('✅ Intake form guardado exitosamente');
+      console.log(' Intake form guardado exitosamente');
       
-      // 📧 ENVIAR EMAILS DE BIENVENIDA (cuando se completa el intake form por primera vez)
+      //  ENVIAR EMAILS DE BIENVENIDA (cuando se completa el intake form por primera vez)
       if (isFirstIntakeForm) {
-        console.log('📧 Primer intake form completado, enviando emails...');
+        console.log(' Primer intake form completado, enviando emails...');
         try {
           const { sendWelcomeEmail, sendEmail } = await import("./email");
           const userName = formData.nombre || 'Estimado usuario';
           
           // Email de bienvenida al usuario
-          console.log('📧 Enviando email de bienvenida a:', email, `(${userName})`);
+          console.log(' Enviando email de bienvenida a:', email, `(${userName})`);
           await sendWelcomeEmail(email, userName);
-          console.log('✅ Email de bienvenida enviado exitosamente');
+          console.log(' Email de bienvenida enviado exitosamente');
           
           // Email de notificación al admin
           const adminEmail = 'lira1914@gmail.com';
           const adminNotificationHtml = `
-            <h2>🎉 Nuevo registro en TransformaDiabetes</h2>
+            <h2> Nuevo registro en TransformaDiabetes</h2>
             <p><strong>Nombre:</strong> ${userName}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Edad:</strong> ${formData.edad || 'No especificada'}</p>
@@ -1097,22 +1097,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           await sendEmail({
             to: adminEmail,
-            subject: `🎉 Nuevo registro: ${userName}`,
+            subject: ` Nuevo registro: ${userName}`,
             html: adminNotificationHtml
           });
-          console.log('✅ Notificación enviada al admin');
+          console.log(' Notificación enviada al admin');
         } catch (emailError) {
           // No fallar el registro si el email falla
-          console.error('⚠️ Error enviando emails (no crítico):', emailError);
+          console.error(' Error enviando emails (no crítico):', emailError);
         }
       } else {
-        console.log('ℹ️ Intake form ya existía, no se envían emails de bienvenida');
+        console.log(' Intake form ya existía, no se envían emails de bienvenida');
       }
       
-      console.log('✅ Respondiendo con éxito al cliente');
+      console.log(' Respondiendo con éxito al cliente');
       res.json({ ...intakeForm, userId: actualUserId });
     } catch (error: any) {
-      console.error("❌ Error guardando intake form:", error);
+      console.error(" Error guardando intake form:", error);
       res.status(500).json({ error: "Error al guardar el formulario" });
     }
   });
@@ -1138,7 +1138,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { userId, dia, fecha, horaDormir, horaDespertar, vecesDesperto, momentos } = req.body;
 
-      console.log('📝 POST /api/daily-log - Recibiendo datos:', {
+      console.log(' POST /api/daily-log - Recibiendo datos:', {
         userId,
         dia,
         fecha,
@@ -1149,20 +1149,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       if (!userId || !dia || !fecha) {
-        console.error('❌ Faltan campos requeridos:', { userId: !!userId, dia: !!dia, fecha: !!fecha });
+        console.error(' Faltan campos requeridos:', { userId: !!userId, dia: !!dia, fecha: !!fecha });
         return res.status(400).json({ error: "userId, dia y fecha son requeridos" });
       }
 
       // Verificar que el usuario existe
       const userExists = await storage.getUser(userId);
       if (!userExists) {
-        console.error(`❌ Usuario no existe en la base de datos: ${userId}`);
+        console.error(` Usuario no existe en la base de datos: ${userId}`);
         return res.status(404).json({ 
           error: "Usuario no encontrado. Por favor completa el formulario de intake primero." 
         });
       }
 
-      console.log('✅ Usuario verificado, guardando daily log...');
+      console.log(' Usuario verificado, guardando daily log...');
 
       // Crear el daily log
       const dailyLog = await storage.createDailyLog({
@@ -1174,11 +1174,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         vecesDesperto,
       });
 
-      console.log('✅ Daily log creado:', dailyLog.id);
+      console.log(' Daily log creado:', dailyLog.id);
 
       // Crear los momentos asociados
       if (momentos && Array.isArray(momentos)) {
-        console.log(`📝 Guardando ${momentos.length} momentos...`);
+        console.log(` Guardando ${momentos.length} momentos...`);
         for (const momento of momentos) {
           await storage.createDailyLogMoment({
             dailyLogId: dailyLog.id,
@@ -1188,14 +1188,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
             evacuaciones: momento.evacuaciones,
           });
         }
-        console.log('✅ Momentos guardados exitosamente');
+        console.log(' Momentos guardados exitosamente');
       }
 
-      console.log('✅ Daily log completado exitosamente');
+      console.log(' Daily log completado exitosamente');
       res.json(dailyLog);
     } catch (error: any) {
-      console.error("❌ Error guardando daily log:", error);
-      console.error("❌ Error details:", {
+      console.error(" Error guardando daily log:", error);
+      console.error(" Error details:", {
         message: error.message,
         code: error.code,
         detail: error.detail
@@ -1294,7 +1294,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           unlockedModules: updatedUnlocked,
           newlyUnlocked,
           message: newlyUnlocked.length > 0 
-            ? "🎉 Tu cuerpo avanza en su proceso. Ya puedes acceder a tu nuevo módulo educativo."
+            ? " Tu cuerpo avanza en su proceso. Ya puedes acceder a tu nuevo módulo educativo."
             : null
         });
       }
@@ -1467,7 +1467,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           path.join(process.cwd(), 'server', 'conocimiento-funcional-condensado.txt'),
           'utf-8'
         );
-        console.log('✅ Conocimiento funcional cargado en cache');
+        console.log(' Conocimiento funcional cargado en cache');
       }
       const conocimientoFuncional = conocimientoFuncionalCache;
       
@@ -1476,16 +1476,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       if (moduleNumber === 1) {
         moduleInstructions = `
-🔹 MÓDULO 1 — "Empieza desde la raíz"
+ MÓDULO 1 — "Empieza desde la raíz"
 
 Instrucciones específicas:
 • NO recomendar suplementos, vitaminas, hierbas ni fitoterapia.
 • Enfocarte SOLO en educación, hábitos, alimentación funcional, descanso, hidratación, ritmo circadiano y consciencia corporal.`;
       } else {
         moduleInstructions = `
-🔹 MÓDULO ${moduleNumber} — "Apoyo Nutricional, Fitoterapia y Sistema Nervioso"
+ MÓDULO ${moduleNumber} — "Apoyo Nutricional, Fitoterapia y Sistema Nervioso"
 
-📋 CATEGORÍAS DE APOYO EDUCATIVO CON PRECAUCIONES
+ CATEGORÍAS DE APOYO EDUCATIVO CON PRECAUCIONES
 
 **Alimentos funcionales (digestivos)** — Incluir DENTRO de la sección Digestión y Eliminación (FECAR) cuando aplique:
 • Linaza molida → Favorece tránsito intestinal, fibra soluble y ácidos grasos antiinflamatorios.
@@ -1533,7 +1533,7 @@ Instrucciones específicas:
 • Gymnema → Reduce antojos de azúcar, apoya glucosa.
   Precaución: Con medicamentos para diabetes, consultar médico.
 
-⚙️ APLICACIÓN FUNCIONAL:
+ APLICACIÓN FUNCIONAL:
 1. Si el usuario muestra estreñimiento o tránsito lento → Incluir linaza/chía DENTRO de la sección Digestión y Eliminación (FECAR).
    Ejemplo: "Tu cuerpo muestra lentitud digestiva; puedes apoyar tu sistema con alimentos naturales como chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación. Recuerda acompañar siempre con buena hidratación, calma al comer y movimiento suave diario."
 
@@ -1541,12 +1541,12 @@ Instrucciones específicas:
 3. Si muestra inflamación/ánimo bajo → Incluir Omega 3 en recomendaciones.
 4. Si hay antojos intensos → Incluir Cromo, Canela o Gymnema.
 
-⚠️ NORMAS DE SEGURIDAD OBLIGATORIAS:
-• ❌ NO incluir dosis ni frecuencia.
-• ❌ NO usar frases tipo "debes tomar".
-• ✅ SIEMPRE incluir precauciones específicas cuando menciones linaza, chía, GABA, adaptógenos.
-• ✅ Recordar que los suplementos NO reemplazan los hábitos.
-• ✅ Incluir la frase clave cuando aplique: "Mientras el cuerpo esté en alerta, no puede sanar."
+ NORMAS DE SEGURIDAD OBLIGATORIAS:
+•  NO incluir dosis ni frecuencia.
+•  NO usar frases tipo "debes tomar".
+•  SIEMPRE incluir precauciones específicas cuando menciones linaza, chía, GABA, adaptógenos.
+•  Recordar que los suplementos NO reemplazan los hábitos.
+•  Incluir la frase clave cuando aplique: "Mientras el cuerpo esté en alerta, no puede sanar."
 
 FORMATO EDUCATIVO (no prescriptivo):
 "La linaza molida puede apoyar la eliminación, pero debe evitarse si estás tomando anticoagulantes o tienes diarrea."
@@ -1554,7 +1554,7 @@ FORMATO EDUCATIVO (no prescriptivo):
       }
       
       // Construir el mensaje del sistema con el conocimiento funcional
-      const systemMessage = `🌿 SYSTEM PROMPT — "GUÍA FUNCIONAL MARVIN LIRA" (v4 - Perfil Inicial)
+      const systemMessage = ` SYSTEM PROMPT — "GUÍA FUNCIONAL MARVIN LIRA" (v4 - Perfil Inicial)
 
 Rol:
 Eres un analista funcional de salud con el estilo y metodología de Marvin Lira | Nutrición Funcional.
@@ -1569,73 +1569,73 @@ ${conocimientoFuncional}
 
 ${moduleInstructions}
 
-🧠 ENFOQUE BASE — LA TRIFECTA FUNCIONAL
+ ENFOQUE BASE — LA TRIFECTA FUNCIONAL
 En cada informe, debes incluir y comentar brevemente estas tres áreas esenciales,
 ya que son los tres pilares del equilibrio metabólico y emocional según la metodología de Marvin Lira:
 
-🔹 Digestión y Eliminación (FECAR)
+ Digestión y Eliminación (FECAR)
 Estructura obligatoria:
 
-1️⃣ Observaciones:
+ Observaciones:
 "Se nota tránsito intestinal lento y sensación de pesadez después de comer."
 
-2️⃣ Hábito funcional:
+ Hábito funcional:
 "Come despacio, mastica al menos 20 veces por bocado y evita pantallas al comer."
 
 ${moduleNumber === 1 
   ? ''
-  : `3️⃣ Alimentos funcionales (solo si hay estreñimiento/tránsito lento):
+  : ` Alimentos funcionales (solo si hay estreñimiento/tránsito lento):
 "Puedes apoyar tu sistema con chía hidratada o linaza molida, que ayudan a lubricar el intestino y mejorar la eliminación."
 
-4️⃣ Precauciones:
+ Precauciones:
 • Linaza molida: evitar si tomas anticoagulantes o tienes diarrea. Asegura buena hidratación.
 • Chía hidratada: evitar si tomas anticoagulantes o tienes diverticulitis activa.
 `}
-5️⃣ Frase de consciencia:
+ Frase de consciencia:
 "Una digestión tranquila apaga la inflamación y enciende tu energía."
 
-🔹 SUEÑO — Ritmo circadiano y sistema nervioso
+ SUEÑO — Ritmo circadiano y sistema nervioso
 Estructura obligatoria:
 
-1️⃣ Observaciones:
+ Observaciones:
 "Tu cuerpo muestra signos de estrés prolongado: dificultad para conciliar el sueño o sensación de alerta constante."
 
-2️⃣ Hábito funcional:
+ Hábito funcional:
 "Apaga pantallas una hora antes de dormir y realiza respiraciones 4-7-8 antes de acostarte."
 
 ${moduleNumber === 1 
   ? ''
-  : `3️⃣ Apoyo natural (solo si hay estrés/insomnio):
+  : ` Apoyo natural (solo si hay estrés/insomnio):
 • Ashwagandha → ayuda a regular el cortisol y calmar el cuerpo.
 • GABA → calma el sistema nervioso y favorece el descanso.
 
-4️⃣ Precauciones:
+ Precauciones:
 • Ashwagandha: evitar en hipertiroidismo o embarazo.
 • GABA: evitar con fármacos sedantes o ansiolíticos.
 `}
-5️⃣ Frase de consciencia:
+ Frase de consciencia:
 "Mientras el cuerpo esté en alerta, no puede sanar."
 
-🔹 AZÚCAR — Glucosa y energía estable
+ AZÚCAR — Glucosa y energía estable
 Estructura obligatoria:
 
-1️⃣ Observaciones:
+ Observaciones:
 "Se detectan altibajos de energía y antojos frecuentes por dulce."
 
-2️⃣ Hábito funcional:
+ Hábito funcional:
 "Desayuna con proteína, fibra y grasa saludable (por ejemplo: huevo, aguacate y frijoles). Evita azúcares líquidos como jugos o refrescos."
 
 ${moduleNumber === 1 
   ? ''
-  : `3️⃣ Apoyo natural (solo si hay antojos intensos):
+  : ` Apoyo natural (solo si hay antojos intensos):
 • Cromo → ayuda a regular el deseo de azúcar.
 • Canela o Gymnema → equilibran la glucosa y reducen antojos.
 
-4️⃣ Precauciones:
+ Precauciones:
 • Precaución en uso de medicamentos para diabetes.
 • Siempre consultar antes con tu médico o nutricionista.
 `}
-5️⃣ Frase de consciencia:
+ Frase de consciencia:
 "El azúcar promete energía rápida, pero te la cobra con intereses; el equilibrio te sostiene todo el día."
 
 Estas tres áreas deben aparecer en todos los informes, incluso si el usuario no las mencionó directamente, porque son la base de todo proceso funcional.
@@ -1684,33 +1684,33 @@ ESTILO DE VIDA Y HÁBITOS:
 
 MÓDULO ACTUAL: ${moduleNumber}
 
-🧩 ESTRUCTURA DEL INFORME (FORMATO DE SALIDA)
+ ESTRUCTURA DEL INFORME (FORMATO DE SALIDA)
 
 Genera una "Guía Funcional Personalizada — Módulo ${moduleNumber}" siguiendo esta estructura:
 
-1. 🩺 QUÉ ESTÁ MOSTRANDO TU CUERPO
+1.  QUÉ ESTÁ MOSTRANDO TU CUERPO
 Explica el patrón funcional principal en lenguaje claro y empático.
 Hazlo sentir comprendido y con esperanza. (3-4 líneas)
 
-2. 🧠 LA TRIFECTA FUNCIONAL (bloque obligatorio)
+2.  LA TRIFECTA FUNCIONAL (bloque obligatorio)
 Incluir las tres áreas con subtítulos visuales usando estos emojis EXACTOS:
 
-🥦 Digestión y Eliminación (FECAR)
-🌙 Sueño y Sistema Nervioso
-🍯 Azúcar y Energía Estable
+ Digestión y Eliminación (FECAR)
+ Sueño y Sistema Nervioso
+ Azúcar y Energía Estable
 
 IMPORTANTE - Mantener este ORDEN EDUCATIVO dentro de cada bloque:
-1️⃣ Observaciones (qué muestra el cuerpo)
-2️⃣ Hábito funcional (acción concreta)
-3️⃣ Apoyo natural/suplemento educativo (solo Módulo 2+, cuando aplique)
-4️⃣ Precauciones específicas (si mencionaste apoyo natural)
-5️⃣ Frase de consciencia (mensaje inspirador)
+ Observaciones (qué muestra el cuerpo)
+ Hábito funcional (acción concreta)
+ Apoyo natural/suplemento educativo (solo Módulo 2+, cuando aplique)
+ Precauciones específicas (si mencionaste apoyo natural)
+ Frase de consciencia (mensaje inspirador)
 
 Principio clave: "Primero hábitos, luego apoyo."
 
 EJEMPLO DE ESTRUCTURA VISUAL:
 ⸻
-🥦 Digestión y Eliminación (FECAR)
+ Digestión y Eliminación (FECAR)
 
 Observaciones:
 "Se nota tránsito intestinal lento..."
@@ -1729,8 +1729,8 @@ Frase de consciencia:
 "Una digestión tranquila apaga la inflamación y enciende tu energía."
 ⸻
 
-3. 🌼 QUÉ PUEDES MEJORAR
-Subtítulo visual: "🌼 7 Hábitos funcionales que marcan la diferencia"
+3.  QUÉ PUEDES MEJORAR
+Subtítulo visual: " 7 Hábitos funcionales que marcan la diferencia"
 Lista numerada de 7 ajustes simples (hábitos, alimentos, descanso, hidratación, movimiento).
 Ejemplos:
 1. Dormir antes de las 11 p.m.
@@ -1743,8 +1743,8 @@ Ejemplos:
 
 ${moduleNumber === 1 
   ? `RECUERDA: NO mencionar suplementos en este módulo.`
-  : `4. 🌿 APOYO NUTRICIONAL Y FITOTERAPIA
-Subtítulo visual: "💊 Complementa tus hábitos, no los reemplaza."
+  : `4.  APOYO NUTRICIONAL Y FITOTERAPIA
+Subtítulo visual: " Complementa tus hábitos, no los reemplaza."
 Incluye solo los elementos que NO se mencionaron ya en la Trifecta.
 Formato educativo con precauciones:
 - Magnesio glicinato → Relaja músculos, mejora sueño y glucosa. Precaución: evitar en insuficiencia renal.
@@ -1760,7 +1760,7 @@ IMPORTANTE:
 - NO usar frases tipo "debes tomar".
 - Recordatorio final: "Consulta con tu médico antes de implementar cualquier suplemento."`}
 
-${moduleNumber === 1 ? '4' : '5'}. 💬 FRASE FINAL
+${moduleNumber === 1 ? '4' : '5'}.  FRASE FINAL
 Usar esta versión completa (4 líneas):
 "Esta guía es educativa y no reemplaza orientación médica.
 Tu cuerpo no está roto, está buscando equilibrio.
@@ -1803,7 +1803,7 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
       });
       
       const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2);
-      console.log(`⏱️ OpenAI respondió en ${elapsedTime}s`);
+      console.log(` OpenAI respondió en ${elapsedTime}s`);
 
       const aiResponse = completion.choices[0]?.message?.content;
       if (!aiResponse) {
@@ -1826,20 +1826,20 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
 
       console.log('Informe guardado en BD:', report.id);
 
-      // 📧 ENVIAR EMAIL DE REPORTE LISTO
+      //  ENVIAR EMAIL DE REPORTE LISTO
       try {
         const { sendReportReadyEmail } = await import("./email");
         const intakeForm = await storage.getIntakeFormByUserId(userId);
         const userName = intakeForm?.nombre || undefined;
         
         if (user.email) {
-          console.log('📧 Enviando email de reporte listo a:', user.email, userName ? `(${userName})` : '');
+          console.log(' Enviando email de reporte listo a:', user.email, userName ? `(${userName})` : '');
           await sendReportReadyEmail(user.email, userName, moduleNumber);
-          console.log('✅ Email de reporte listo enviado');
+          console.log(' Email de reporte listo enviado');
         }
       } catch (emailError) {
         // No fallar la generación del reporte si el email falla
-        console.error('⚠️ Error enviando email de reporte listo (no crítico):', emailError);
+        console.error(' Error enviando email de reporte listo (no crítico):', emailError);
       }
 
       res.json(report);
@@ -1854,13 +1854,13 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
 
   // TEST ENDPOINT
   app.post("/api/test-checkin", async (req, res) => {
-    console.log('🧪 TEST ENDPOINT LLAMADO - Body:', req.body);
+    console.log(' TEST ENDPOINT LLAMADO - Body:', req.body);
     res.json({ status: 'ok', message: 'test funcionando' });
   });
 
   // Weekly Checkin - Chat Funcional Interactivo
   app.post("/api/weekly-checkin", async (req, res) => {
-    console.log('🌿 ENDPOINT /api/weekly-checkin LLAMADO');
+    console.log(' ENDPOINT /api/weekly-checkin LLAMADO');
     try {
       console.log('POST /api/weekly-checkin - Body recibido:', JSON.stringify(req.body));
       const { userId, message } = req.body;
@@ -1889,7 +1889,7 @@ IMPORTANTE: Responde SOLO con el JSON, sin texto adicional antes o después.`;
       // Preparar el prompt para "Marvin Lira IA"
       const { openai } = await import("./openai");
 
-      const systemMessage = `Eres el asistente funcional "Marvin Lira IA" 🌿
+      const systemMessage = `Eres el asistente funcional "Marvin Lira IA" 
 Tu rol es escuchar cómo se siente el usuario día a día durante su prueba de 7 días y responder con empatía y claridad,
 explicando brevemente qué puede significar lo que siente y cómo puede apoyar su cuerpo desde la raíz.
 
@@ -1901,12 +1901,12 @@ PRINCIPIOS EDUCATIVOS:
 • Siempre cierras con una frase motivacional de consciencia
 
 EMOJIS EDUCATIVOS:
-🥦 Digestión y Eliminación (FECAR)
-🌙 sueño / descanso
-🍯 azúcar / glucosa / antojos
-🌿 energía / vitalidad
-💧 hidratación
-🧘 estrés / sistema nervioso
+ Digestión y Eliminación (FECAR)
+ sueño / descanso
+ azúcar / glucosa / antojos
+ energía / vitalidad
+ hidratación
+ estrés / sistema nervioso
 
 ESTRUCTURA DE RESPUESTA:
 1. Identifica los sistemas afectados (digestión, sueño, azúcar)
@@ -2231,7 +2231,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         return res.status(400).json({ error: "El campo 'to' es requerido" });
       }
 
-      console.log(`📧 Enviando correo de prueba tipo: ${type || 'custom'} a ${to}`);
+      console.log(` Enviando correo de prueba tipo: ${type || 'custom'} a ${to}`);
 
       if (type === 'welcome') {
         await sendWelcomeEmail(to, name);

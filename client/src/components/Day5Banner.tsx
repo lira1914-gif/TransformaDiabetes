@@ -56,7 +56,7 @@ export default function Day5Banner({ daysRemaining, isActive }: Day5BannerProps)
                 className="font-serif"
                 style={{ color: '#556B2F', fontSize: '1.25rem' }}
               >
-                🔔 Tu prueba gratuita está por terminar
+                 Tu prueba gratuita está por terminar
               </CardTitle>
             </div>
             <Button

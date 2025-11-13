@@ -488,28 +488,28 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
         <h2>Siguiente paso: Rastrear tus síntomas diarios</h2>
         
         <div class="module-box" style="border-left-color: #6b8e23;">
-          <div class="module-title" style="color: #6b8e23;">💬 Chat con Marvin Lira IA — Disponible ahora</div>
+          <div class="module-title" style="color: #6b8e23;"> Chat con Marvin Lira IA — Disponible ahora</div>
           <div class="module-subtitle">
             Durante tu prueba de 7 días, tienes acceso ilimitado al chat interactivo.
             Úsalo cada día para compartir:
           </div>
           
           <div class="pillar">
-            <div class="pillar-number">🌙 Cómo dormiste</div>
+            <div class="pillar-number"> Cómo dormiste</div>
             <div class="pillar-desc">
               ¿Cuántas horas? ¿Despertaste en la noche? ¿Cómo te sentiste al levantarte?
             </div>
           </div>
           
           <div class="pillar">
-            <div class="pillar-number">🍽️ Cómo estuvo tu digestión</div>
+            <div class="pillar-number"> Cómo estuvo tu digestión</div>
             <div class="pillar-desc">
               ¿Inflamación? ¿Estreñimiento? ¿Acidez? Observa sin juzgar.
             </div>
           </div>
           
           <div class="pillar">
-            <div class="pillar-number">⚡ Tu nivel de energía y ánimo</div>
+            <div class="pillar-number"> Tu nivel de energía y ánimo</div>
             <div class="pillar-desc">
               ¿Estable o con bajones? ¿Antojos de dulce? ¿Ansiedad? Todo es información valiosa.
             </div>
@@ -910,7 +910,7 @@ export async function sendReactivationEmail(to: string, name?: string): Promise<
     <body>
       <div class="container">
         <div class="header">
-          <h1>🌿 ${userName}</h1>
+          <h1>${userName}</h1>
         </div>
         
         <div class="content intro">
@@ -921,12 +921,12 @@ export async function sendReactivationEmail(to: string, name?: string): Promise<
         <div class="highlight">
           <p style="margin: 0; font-size: 16px; line-height: 1.6;">
             Tu cuerpo no se rindió — solo necesitaba una pausa.<br>
-            Hoy estás eligiendo continuar desde la raíz. 🌱
+            Hoy estás eligiendo continuar desde la raíz.
           </p>
         </div>
         
         <div class="button-container">
-          <a href="${baseUrl}/perfil" class="button">👉 Entrar a mi panel</a>
+          <a href="${baseUrl}/perfil" class="button">Entrar a mi panel</a>
         </div>
         
         <div class="quote">
@@ -942,7 +942,7 @@ export async function sendReactivationEmail(to: string, name?: string): Promise<
             <p>Con gratitud,<br>
             <strong>Marvin Lira</strong><br>
             Nutrición Funcional & Salud desde la raíz<br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -952,7 +952,7 @@ export async function sendReactivationEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '💚 Tu suscripción ha sido reactivada — ¡Nos alegra tenerte de vuelta!',
+    subject: 'Tu suscripción ha sido reactivada — ¡Nos alegra tenerte de vuelta!',
     html
   });
 }
@@ -1057,13 +1057,13 @@ export async function sendModule1CompletedEmail(to: string, name?: string): Prom
     <body>
       <div class="container">
         <div class="header">
-          <h1><span class="emoji">🌿</span> Has completado tu primer módulo</h1>
+          <h1>Has completado tu primer módulo</h1>
         </div>
         
         <div class="content">
           <p>${userName},</p>
           
-          <p><span class="emoji">✨</span> <strong>¡Felicidades! Has completado el Módulo 1 — "Empieza desde la raíz."</strong></p>
+          <p><strong>¡Felicidades! Has completado el Módulo 1 — "Empieza desde la raíz."</strong></p>
           
           <p>Este primer paso marca el inicio real de tu transformación funcional.<br>
           Has aprendido a observar las señales de tu cuerpo — digestión, energía, sueño y emociones — sin juzgarte.<br>
@@ -1071,7 +1071,7 @@ export async function sendModule1CompletedEmail(to: string, name?: string): Prom
         </div>
         
         <div class="highlight">
-          <h2><span class="emoji">🧭</span> Reflexión funcional</h2>
+          <h2>Reflexión funcional</h2>
           <div class="quote">
             "No se trata de controlar un síntoma, sino de entender la raíz."
           </div>
@@ -1082,26 +1082,26 @@ export async function sendModule1CompletedEmail(to: string, name?: string): Prom
         </div>
         
         <div class="content">
-          <h2><span class="emoji">🌱</span> Lo que viene ahora</h2>
+          <h2>Lo que viene ahora</h2>
           <p>El siguiente módulo, <strong>"Equilibra desde adentro,"</strong> te enseñará cómo fortalecer tus sistemas desde la nutrición funcional — con estrategias personalizadas y apoyo natural educativo (sin dosis ni marcas).</p>
         </div>
         
         <div class="cta-container">
           <a href="${baseUrl}/modulo-1" class="cta-button">
-            <span class="emoji">👉</span> Continuar al Módulo 2
+            Continuar al Módulo 2
           </a>
         </div>
         
         <div class="content" style="font-size: 14px; color: #6a6a6a; margin-top: 30px;">
-          <p><span class="emoji">💬</span> Si algo no funciona o tienes preguntas sobre tu acceso, puedes escribirnos desde el chat de soporte técnico dentro de la aplicación.</p>
+          <p>Si algo no funciona o tienes preguntas sobre tu acceso, puedes escribirnos desde el chat de soporte técnico dentro de la aplicación.</p>
         </div>
         
         <div class="footer">
           <div class="signature">
-            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
+            <p><strong>Marvin Lira</strong><br>
             Nutrición Funcional<br>
             <em>Tu cuerpo no está roto, solo está buscando equilibrio.</em><br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1111,7 +1111,7 @@ export async function sendModule1CompletedEmail(to: string, name?: string): Prom
   
   await sendEmail({
     to,
-    subject: '🌿 Has completado tu primer módulo — Tu cuerpo ya está respondiendo',
+    subject: 'Has completado tu primer módulo — Tu cuerpo ya está respondiendo',
     html
   });
 }
@@ -1226,27 +1226,27 @@ export async function sendModule2CompletedEmail(to: string, name?: string): Prom
     <body>
       <div class="container">
         <div class="header">
-          <h1><span class="emoji">🌿</span> Has completado el Módulo 2</h1>
+          <h1>Has completado el Módulo 2</h1>
         </div>
         
         <div class="content">
           <p>${userName},</p>
           
-          <p><span class="emoji">✨</span> <strong>¡Felicidades! Has completado el Módulo 2 — "Equilibra desde adentro."</strong></p>
+          <p><strong>¡Felicidades! Has completado el Módulo 2 — "Equilibra desde adentro."</strong></p>
           
           <p>Tu cuerpo ya no solo reacciona, ahora responde.<br>
           Durante este módulo aprendiste a observar cómo tu digestión, tu descanso y tus emociones se conectan con tu energía diaria.</p>
           
           <p>Has comenzado a cultivar equilibrio en tres niveles:</p>
           <ul class="benefits-list">
-            <li><span class="emoji">🌿</span> <strong>Digestivo:</strong> alivio y regularidad.</li>
-            <li><span class="emoji">💧</span> <strong>Glucémico:</strong> energía más estable y menos antojos.</li>
-            <li><span class="emoji">🌙</span> <strong>Nervioso:</strong> descanso más profundo, cuerpo más tranquilo.</li>
+            <li><strong>Digestivo:</strong> alivio y regularidad.</li>
+            <li><strong>Glucémico:</strong> energía más estable y menos antojos.</li>
+            <li><strong>Nervioso:</strong> descanso más profundo, cuerpo más tranquilo.</li>
           </ul>
         </div>
         
         <div class="highlight">
-          <h2><span class="emoji">🧭</span> Reflexión funcional</h2>
+          <h2>Reflexión funcional</h2>
           <div class="quote">
             "El equilibrio no se fuerza, se cultiva cada día con decisiones simples."
           </div>
@@ -1257,26 +1257,26 @@ export async function sendModule2CompletedEmail(to: string, name?: string): Prom
         </div>
         
         <div class="content">
-          <h2><span class="emoji">🌱</span> Tu siguiente paso</h2>
+          <h2>Tu siguiente paso</h2>
           <p>El Módulo 3, <strong>"Energía estable y metabolismo consciente,"</strong> te enseñará cómo mantener esa estabilidad y fortalecer tu metabolismo con estrategias de movimiento, ritmo y alimentación funcional.</p>
         </div>
         
         <div class="cta-container">
           <a href="${baseUrl}/modulo-3" class="cta-button">
-            <span class="emoji">👉</span> Desbloquear el Módulo 3
+            Desbloquear el Módulo 3
           </a>
         </div>
         
         <div class="content" style="font-size: 14px; color: #6a6a6a; margin-top: 30px;">
-          <p><span class="emoji">💬</span> Si tienes preguntas técnicas o problemas para acceder, puedes escribirnos al chat de soporte dentro de la aplicación.</p>
+          <p>Si tienes preguntas técnicas o problemas para acceder, puedes escribirnos al chat de soporte dentro de la aplicación.</p>
         </div>
         
         <div class="footer">
           <div class="signature">
-            <p><span class="emoji">🌿</span> <strong>Marvin Lira</strong><br>
+            <p><strong>Marvin Lira</strong><br>
             Nutrición Funcional<br>
             <em>Tu cuerpo no está roto, está buscando equilibrio.</em><br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1286,7 +1286,7 @@ export async function sendModule2CompletedEmail(to: string, name?: string): Prom
   
   await sendEmail({
     to,
-    subject: '🌿 Has completado el Módulo 2 — Tu cuerpo está encontrando su equilibrio',
+    subject: 'Has completado el Módulo 2 — Tu cuerpo está encontrando su equilibrio',
     html
   });
 }
@@ -1355,12 +1355,12 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
           <p><strong>Tu cuerpo ya empezó a responder.</strong><br>
           Durante estos días has dado los primeros pasos para entender mejor tus señales, equilibrar tu energía y reducir la inflamación.</p>
           
-          <p>👉 <strong>Mañana termina tu acceso gratuito a TransformaDiabetes</strong>, pero tu transformación apenas comienza.</p>
+          <p><strong>Mañana termina tu acceso gratuito a TransformaDiabetes</strong>, pero tu transformación apenas comienza.</p>
           
           <p>Si te está gustando el proceso, no lo detengas ahora.<br>
           Activa tu suscripción por solo <strong>$5 USD al mes</strong> (menos que un café al día) y continúa con el <strong>Módulo 1: Empieza desde la raíz</strong>, donde aprenderás a mantener tus niveles de glucosa estables sin dietas extremas ni restricciones.</p>
           
-          <p><strong>✅ Beneficios inmediatos al suscribirte:</strong></p>
+          <p><strong>Beneficios inmediatos al suscribirte:</strong></p>
           <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
             <li>Chat ilimitado con orientación funcional personalizada</li>
             <li>Acceso completo al Módulo 1 y módulos progresivos</li>
@@ -1374,10 +1374,10 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            🔗 Continuar mi transformación por $5/mes
+            Continuar mi transformación por $5/mes
           </a>
           <p style="margin-top: 15px; font-size: 14px; color: #888;">
-            🛡️ Cancela cuando quieras, sin preguntas
+            Cancela cuando quieras, sin preguntas
           </p>
         </div>
         
@@ -1387,8 +1387,8 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
           <div class="signature">
             <p>Con equilibrio,<br>
             <strong>Marvin Lira, Coach Funcional</strong><br>
-            TransformaDiabetes 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            TransformaDiabetes<br><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1398,7 +1398,7 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '⏰ Tu prueba termina mañana — no pierdas tu progreso',
+    subject: 'Tu prueba termina mañana — no pierdas tu progreso',
     html
   });
 }
@@ -1478,15 +1478,15 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
             <li>Cancelar cuando quieras, sin compromiso</li>
           </ul>
           
-          <p>💚 <strong>Reactiva tu cuenta hoy y continúa donde te quedaste:</strong></p>
+          <p><strong>Reactiva tu cuenta hoy y continúa donde te quedaste:</strong></p>
         </div>
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            👉 Retomar mi transformación por $5/mes
+            Retomar mi transformación por $5/mes
           </a>
           <p style="margin-top: 15px; font-size: 14px; color: #888;">
-            🛡️ Sin permanencia, cancela en cualquier momento
+            Sin permanencia, cancela en cualquier momento
           </p>
         </div>
 
@@ -1501,8 +1501,8 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
           <div class="signature">
             <p>Con aprecio,<br>
             <strong>Marvin Lira, Coach Funcional</strong><br>
-            TransformaDiabetes 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            TransformaDiabetes<br><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1512,7 +1512,7 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '🌱 Extrañamos tu presencia — tu transformación aún te espera',
+    subject: 'Extrañamos tu presencia — tu transformación aún te espera',
     html
   });
 }
@@ -1624,10 +1624,10 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
             Por solo $5 USD al mes, puedes continuar con el <strong>Módulo 1: Empieza desde la raíz</strong>, donde recibirás:
           </p>
           <div class="benefits-list">
-            <div class="benefit-item">🌱 Tu plan funcional personalizado</div>
-            <div class="benefit-item">💬 Acceso ilimitado al chat interactivo con IA</div>
-            <div class="benefit-item">📊 Seguimiento continuo de tus síntomas y progreso</div>
-            <div class="benefit-item">🌿 Contenido educativo exclusivo cada mes</div>
+            <div class="benefit-item">Tu plan funcional personalizado</div>
+            <div class="benefit-item">Acceso ilimitado al chat interactivo con IA</div>
+            <div class="benefit-item">Seguimiento continuo de tus síntomas y progreso</div>
+            <div class="benefit-item">Contenido educativo exclusivo cada mes</div>
           </div>
         </div>
 
@@ -1639,7 +1639,7 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
 
         <div class="cta-container">
           <p style="margin-top: 15px; font-size: 14px; color: #888;">
-            🛡️ Cancela cuando quieras, sin permanencia
+            Cancela cuando quieras, sin permanencia
           </p>
         </div>
 
@@ -1651,10 +1651,9 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
         
         <div class="footer">
           <div class="signature">
-            <p>💚<br>
-            <strong>Equipo de Marvin Lira Nutrición Funcional</strong><br>
+            <p><strong>Equipo de Marvin Lira Nutrición Funcional</strong><br>
             TransformaDiabetes<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
           <div class="disclaimer">
             Programa educativo, no sustituto de orientación médica.
@@ -1667,7 +1666,7 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '🌿 Tu cuerpo ya comenzó a mejorar — no detengas el proceso',
+    subject: 'Tu cuerpo ya comenzó a mejorar — no detengas el proceso',
     html
   });
 }
@@ -1793,13 +1792,13 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
     <body>
       <div class="container">
         <div class="warning-header">
-          <div class="warning-title">⚠️ Último día para conservar tu progreso funcional</div>
+          <div class="warning-title">Último día para conservar tu progreso funcional</div>
         </div>
         
         <div class="content">
           <p>Hola <strong>${userName}</strong>,</p>
           
-          <p>Tu acceso gratuito a Marvin Lira Nutrición Funcional 🌿 <strong>está por finalizar hoy</strong>.<br>
+          <p>Tu acceso gratuito a Marvin Lira Nutrición Funcional <strong>está por finalizar hoy</strong>.<br>
           Durante estos días, comenzaste a conectar con la raíz de tus síntomas y a darle a tu cuerpo lo que realmente necesita.</p>
           
           <p>Queremos que ese esfuerzo no se pierda.</p>
@@ -1807,10 +1806,10 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
 
         <div class="benefits-box">
           <div class="benefits-intro">Si reactivas hoy tu cuenta, conservarás:</div>
-          <div class="benefit-item">✅ Tu informe funcional inicial</div>
-          <div class="benefit-item">✅ El acceso a tu chat interactivo con IA</div>
-          <div class="benefit-item">✅ Los módulos de avance mensual</div>
-          <div class="benefit-item">✅ Todo tu historial y registros personales</div>
+          <div class="benefit-item">Tu informe funcional inicial</div>
+          <div class="benefit-item">El acceso a tu chat interactivo con IA</div>
+          <div class="benefit-item">Los módulos de avance mensual</div>
+          <div class="benefit-item">Todo tu historial y registros personales</div>
         </div>
 
         <div class="urgency-text">
@@ -1833,9 +1832,8 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
         
         <div class="footer">
           <div class="signature">
-            <p>💚<br>
-            <strong>Equipo de Marvin Lira Nutrición Funcional</strong><br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <p><strong>Equipo de Marvin Lira Nutrición Funcional</strong><br><br>
+            <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
           <div class="disclaimer">
             Programa educativo, no sustituto de orientación médica.
@@ -1848,7 +1846,7 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
   
   await sendEmail({
     to,
-    subject: '⚠️ Último día para conservar tu progreso funcional',
+    subject: 'Último día para conservar tu progreso funcional',
     html
   });
 }
@@ -1926,7 +1924,7 @@ export async function sendDay2EngagementEmail(to: string, name?: string): Promis
         <div class="content">
           <p>Hola <strong>${userName}</strong>,</p>
           
-          <p>¿Ya tuviste oportunidad de conversar con Marvin Lira IA? 🌿</p>
+          <p>¿Ya tuviste oportunidad de conversar con Marvin Lira IA? </p>
           
           <p>Recuerda que durante tu prueba gratuita de 7 días tienes <strong>acceso ilimitado al chat</strong> para hacer cualquier pregunta sobre tu salud funcional, síntomas, o dudas sobre nutrición.</p>
           
@@ -1934,7 +1932,7 @@ export async function sendDay2EngagementEmail(to: string, name?: string): Promis
         </div>
 
         <div class="suggestion-box">
-          <div style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;">💬 Ideas de preguntas que puedes hacer hoy:</div>
+          <div style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;"> Ideas de preguntas que puedes hacer hoy:</div>
           <div class="suggestion-item">• "¿Por qué tengo antojos de dulce por las tardes?"</div>
           <div class="suggestion-item">• "¿Qué puedo desayunar para estabilizar mi energía?"</div>
           <div class="suggestion-item">• "¿Cómo sé si tengo resistencia a la insulina?"</div>
@@ -1943,7 +1941,7 @@ export async function sendDay2EngagementEmail(to: string, name?: string): Promis
 
         <div class="cta-container">
           <a href="${baseUrl}/chat-semanal" class="cta-button">
-            💬 Ir al chat ahora
+             Ir al chat ahora
           </a>
         </div>
         
@@ -1956,8 +1954,8 @@ export async function sendDay2EngagementEmail(to: string, name?: string): Promis
         <div class="footer">
           <div class="signature">
             <p>Con equilibrio,<br>
-            <strong>Equipo TransformaDiabetes</strong> 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <strong>Equipo TransformaDiabetes</strong> <br><br>
+             <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -1967,7 +1965,7 @@ export async function sendDay2EngagementEmail(to: string, name?: string): Promis
   
   await sendEmail({
     to,
-    subject: '💬 ¿Ya usaste tu chat hoy? — Tienes 6 días restantes',
+    subject: ' ¿Ya usaste tu chat hoy? — Tienes 6 días restantes',
     html
   });
 }
@@ -2062,7 +2060,7 @@ export async function sendDay3StoryEmail(to: string, name?: string): Promise<voi
         </div>
 
         <div class="story-box">
-          <p style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;">📖 La historia de María (53 años, Diabetes Tipo 2)</p>
+          <p style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;"> La historia de María (53 años, Diabetes Tipo 2)</p>
           
           <div class="quote">
             "Tenía A1C en 8.2, tomaba 3 medicamentos, y me sentía cansada todo el tiempo. Mi doctor me decía que 'así es la diabetes' y que tendría que vivir con eso."
@@ -2071,18 +2069,18 @@ export async function sendDay3StoryEmail(to: string, name?: string): Promise<voi
           <p>María decidió darle una oportunidad al enfoque funcional. Empezó identificando sus patrones:</p>
           
           <div class="stats">
-            <div class="stat-item"><strong>✓ Descubrió</strong> que sus picos de glucosa venían de comer pan en el desayuno</div>
-            <div class="stat-item"><strong>✓ Aprendió</strong> a combinar proteínas con carbohidratos</div>
-            <div class="stat-item"><strong>✓ Mejoró</strong> su ritmo circadiano (dormía 5h, ahora 7h)</div>
-            <div class="stat-item"><strong>✓ Integró</strong> caminatas de 15 min después de comer</div>
+            <div class="stat-item"><strong> Descubrió</strong> que sus picos de glucosa venían de comer pan en el desayuno</div>
+            <div class="stat-item"><strong> Aprendió</strong> a combinar proteínas con carbohidratos</div>
+            <div class="stat-item"><strong> Mejoró</strong> su ritmo circadiano (dormía 5h, ahora 7h)</div>
+            <div class="stat-item"><strong> Integró</strong> caminatas de 15 min después de comer</div>
           </div>
           
           <p style="font-weight: 600; color: #2a2a2a; margin-top: 20px;">Sus resultados después de 3 meses:</p>
           <div class="stats" style="background-color: #e8f5e9;">
-            <div class="stat-item">🎯 A1C: 8.2 → <strong>6.1</strong></div>
-            <div class="stat-item">⚡ Energía: "Me levanto sin alarma y con ganas"</div>
-            <div class="stat-item">💊 Medicamentos: Redujo de 3 a 1 (con supervisión médica)</div>
-            <div class="stat-item">😊 Estado de ánimo: "Volví a sentirme yo misma"</div>
+            <div class="stat-item"> A1C: 8.2 → <strong>6.1</strong></div>
+            <div class="stat-item"> Energía: "Me levanto sin alarma y con ganas"</div>
+            <div class="stat-item"> Medicamentos: Redujo de 3 a 1 (con supervisión médica)</div>
+            <div class="stat-item"> Estado de ánimo: "Volví a sentirme yo misma"</div>
           </div>
           
           <div class="quote">
@@ -2100,7 +2098,7 @@ export async function sendDay3StoryEmail(to: string, name?: string): Promise<voi
 
         <div class="cta-container">
           <a href="${baseUrl}/chat-semanal" class="cta-button">
-            💬 Habla con Marvin Lira IA hoy
+             Habla con Marvin Lira IA hoy
           </a>
         </div>
         
@@ -2113,8 +2111,8 @@ export async function sendDay3StoryEmail(to: string, name?: string): Promise<voi
         <div class="footer">
           <div class="signature">
             <p>Con equilibrio,<br>
-            <strong>Equipo TransformaDiabetes</strong> 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            <strong>Equipo TransformaDiabetes</strong> <br><br>
+             <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -2124,7 +2122,7 @@ export async function sendDay3StoryEmail(to: string, name?: string): Promise<voi
   
   await sendEmail({
     to,
-    subject: '🌱 Cómo María redujo su A1C de 8.2 a 6.1 — Su historia',
+    subject: ' Cómo María redujo su A1C de 8.2 a 6.1 — Su historia',
     html
   });
 }
@@ -2207,17 +2205,17 @@ export async function sendDay4ProgressEmail(to: string, name?: string): Promise<
         <div class="content">
           <p>Hola <strong>${userName}</strong>,</p>
           
-          <p>Ya llevas <strong>4 días en TransformaDiabetes</strong>. 🎉</p>
+          <p>Ya llevas <strong>4 días en TransformaDiabetes</strong>. </p>
           
           <p>Quiero que te tomes un momento para reflexionar sobre lo que ya has logrado:</p>
         </div>
 
         <div class="progress-box">
-          <div style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;">✅ Lo que has logrado hasta ahora:</div>
-          <div class="progress-item">🔍 Completaste tu evaluación funcional completa</div>
-          <div class="progress-item">📊 Recibiste tu informe personalizado con recomendaciones</div>
-          <div class="progress-item">💬 Tienes acceso ilimitado al chat con Marvin Lira IA</div>
-          <div class="progress-item">🌿 Empezaste a entender las señales de tu cuerpo</div>
+          <div style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;"> Lo que has logrado hasta ahora:</div>
+          <div class="progress-item"> Completaste tu evaluación funcional completa</div>
+          <div class="progress-item"> Recibiste tu informe personalizado con recomendaciones</div>
+          <div class="progress-item"> Tienes acceso ilimitado al chat con Marvin Lira IA</div>
+          <div class="progress-item"> Empezaste a entender las señales de tu cuerpo</div>
         </div>
 
         <div class="content">
@@ -2227,7 +2225,7 @@ export async function sendDay4ProgressEmail(to: string, name?: string): Promise<
         </div>
 
         <div class="highlight">
-          <p style="margin-bottom: 15px;"><strong>💡 Reflexiona un momento:</strong></p>
+          <p style="margin-bottom: 15px;"><strong> Reflexiona un momento:</strong></p>
           <p>¿Qué has aprendido sobre tu cuerpo en estos 4 días?<br>
           ¿Hay algo que te haya sorprendido?<br>
           ¿Qué cambio pequeño podrías implementar hoy?</p>
@@ -2238,16 +2236,16 @@ export async function sendDay4ProgressEmail(to: string, name?: string): Promise<
           
           <p>Después de eso, si decides continuar, será solo <strong>$5 USD al mes</strong> para seguir con:</p>
           <p style="padding-left: 20px;">
-            ✓ Módulos educativos mensuales<br>
-            ✓ Chat ilimitado con IA funcional<br>
-            ✓ Seguimiento personalizado de tu progreso<br>
-            ✓ Acceso a todas las herramientas
+             Módulos educativos mensuales<br>
+             Chat ilimitado con IA funcional<br>
+             Seguimiento personalizado de tu progreso<br>
+             Acceso a todas las herramientas
           </p>
         </div>
 
         <div class="cta-container">
           <a href="${baseUrl}/chat-semanal" class="cta-button">
-            💬 Continuar mi transformación
+             Continuar mi transformación
           </a>
         </div>
         
@@ -2261,8 +2259,8 @@ export async function sendDay4ProgressEmail(to: string, name?: string): Promise<
           <div class="signature">
             <p>Con equilibrio,<br>
             <strong>Marvin Lira, Coach Funcional</strong><br>
-            TransformaDiabetes 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            TransformaDiabetes <br><br>
+             <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -2272,7 +2270,7 @@ export async function sendDay4ProgressEmail(to: string, name?: string): Promise<
   
   await sendEmail({
     to,
-    subject: '🎯 Tu progreso en 4 días — Ya estás transformando tu salud',
+    subject: ' Tu progreso en 4 días — Ya estás transformando tu salud',
     html
   });
 }
@@ -2366,13 +2364,13 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
         </div>
 
         <div class="urgency-box">
-          <p style="font-weight: 600; color: #b85c38; margin-bottom: 15px;">⏰ ¿Qué pasa después del día 7?</p>
+          <p style="font-weight: 600; color: #b85c38; margin-bottom: 15px;"> ¿Qué pasa después del día 7?</p>
           <p>Si no activas tu suscripción, <strong>perderás acceso a:</strong></p>
           <div style="margin-top: 15px;">
-            ❌ Chat ilimitado con Marvin Lira IA<br>
-            ❌ Módulos educativos progresivos<br>
-            ❌ Seguimiento personalizado de tu salud<br>
-            ❌ Todo tu historial y progreso
+             Chat ilimitado con Marvin Lira IA<br>
+             Módulos educativos progresivos<br>
+             Seguimiento personalizado de tu salud<br>
+             Todo tu historial y progreso
           </div>
         </div>
 
@@ -2383,11 +2381,11 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
         </div>
 
         <div class="benefits-box">
-          <div class="benefit-item">✅ <strong>Chat ilimitado</strong> con orientación funcional personalizada</div>
-          <div class="benefit-item">✅ <strong>Módulos educativos</strong> que se desbloquean cada mes</div>
-          <div class="benefit-item">✅ <strong>Seguimiento continuo</strong> de tu progreso</div>
-          <div class="benefit-item">✅ <strong>Actualizaciones constantes</strong> del sistema</div>
-          <div class="benefit-item">✅ <strong>Soporte dedicado</strong> cuando lo necesites</div>
+          <div class="benefit-item"> <strong>Chat ilimitado</strong> con orientación funcional personalizada</div>
+          <div class="benefit-item"> <strong>Módulos educativos</strong> que se desbloquean cada mes</div>
+          <div class="benefit-item"> <strong>Seguimiento continuo</strong> de tu progreso</div>
+          <div class="benefit-item"> <strong>Actualizaciones constantes</strong> del sistema</div>
+          <div class="benefit-item"> <strong>Soporte dedicado</strong> cuando lo necesites</div>
         </div>
 
         <div class="content">
@@ -2397,7 +2395,7 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            🔒 Asegurar mi acceso por $5/mes
+             Asegurar mi acceso por $5/mes
           </a>
           <div class="cta-subtext">Cancela cuando quieras, sin compromisos</div>
         </div>
@@ -2413,8 +2411,8 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
           <div class="signature">
             <p>Con equilibrio,<br>
             <strong>Marvin Lira, Coach Funcional</strong><br>
-            TransformaDiabetes 🌿<br><br>
-            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+            TransformaDiabetes <br><br>
+             <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
           </div>
         </div>
       </div>
@@ -2424,7 +2422,7 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
   
   await sendEmail({
     to,
-    subject: '⏰ Solo quedan 2 días — No pierdas tu progreso',
+    subject: 'Solo quedan 2 días — No pierdas tu progreso',
     html
   });
 }

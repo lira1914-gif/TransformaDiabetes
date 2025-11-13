@@ -65,7 +65,7 @@ const BloqueMotivacionalRotatorio = forwardRef<HTMLElement, BloqueMotivacionalRo
           marginBottom: '20px',
           fontSize: '1.6em'
         }}>
-          🌱 Mensaje Funcional del Día
+           Mensaje Funcional del Día
         </h2>
         
         <p 
@@ -103,7 +103,7 @@ const BloqueMotivacionalRotatorio = forwardRef<HTMLElement, BloqueMotivacionalRo
             color: '#556B2F',
             marginBottom: '1rem'
           }}>
-            🩺 Tu Proceso de Registro Funcional
+             Tu Proceso de Registro Funcional
           </h3>
           <p style={{ 
             maxWidth: '680px', 
@@ -115,7 +115,7 @@ const BloqueMotivacionalRotatorio = forwardRef<HTMLElement, BloqueMotivacionalRo
             <br />
             A partir de hoy, empezamos a conocer cómo se comporta tu cuerpo desde la raíz.  
             <br /><br />
-            🩺 Primero completaremos tu <strong>formulario personal de salud</strong> — esto nos ayudará a entender tu historia, síntomas y hábitos actuales.  
+             Primero completaremos tu <strong>formulario personal de salud</strong> — esto nos ayudará a entender tu historia, síntomas y hábitos actuales.  
             <br /><br />
             Luego pasaremos al <strong>registro funcional de 5 días</strong>, donde podrás anotar lo que comes, cómo duermes y cómo responde tu cuerpo.
           </p>

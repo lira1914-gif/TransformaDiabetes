@@ -18,7 +18,7 @@ export default function MensajePostIntake({ onContinue }: MensajePostIntakeProps
     >
       <div style={{ maxWidth: '700px', margin: 'auto' }}>
         <h2 style={{ color: '#556B2F', marginBottom: '1rem' }}>
-          Excelente 🌿
+          Excelente 
         </h2>
         <p style={{ color: '#3A3A3A', fontSize: '1.1rem', marginBottom: '1.2rem' }}>
           Gracias por compartir tu historia funcional.
@@ -31,7 +31,7 @@ export default function MensajePostIntake({ onContinue }: MensajePostIntakeProps
           para encontrar los patrones que afectan tu energía y equilibrio.
         </p>
         <h3 style={{ color: '#A15C38', marginBottom: '1rem' }}>
-          📔 Tu siguiente paso:
+           Tu siguiente paso:
         </h3>
         <p style={{ color: '#3A3A3A', fontSize: '1.05rem', marginBottom: '1.5rem' }}>
           Completa tu <strong>Registro Funcional de 5 Días</strong>.

@@ -66,19 +66,19 @@ export default function ReactivacionConfirmada() {
               
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <span className="text-lg font-bold" style={{ color: '#6B7041' }}>1️⃣</span>
+                  <span className="text-lg font-bold" style={{ color: '#6B7041' }}></span>
                   <p className="text-sm" style={{ color: '#6F6E66' }}>
                     Mantendrás tu historial y tus informes anteriores.
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-lg font-bold" style={{ color: '#6B7041' }}>2️⃣</span>
+                  <span className="text-lg font-bold" style={{ color: '#6B7041' }}></span>
                   <p className="text-sm" style={{ color: '#6F6E66' }}>
                     Podrás volver a acceder a tu módulo actual y los próximos.
                   </p>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-lg font-bold" style={{ color: '#6B7041' }}>3️⃣</span>
+                  <span className="text-lg font-bold" style={{ color: '#6B7041' }}></span>
                   <p className="text-sm" style={{ color: '#6F6E66' }}>
                     En los siguientes días, recibirás una actualización automática con tus nuevos contenidos educativos.
                   </p>

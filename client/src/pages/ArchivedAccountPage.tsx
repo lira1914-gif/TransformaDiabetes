@@ -104,7 +104,7 @@ export default function ArchivedAccountPage({ userName }: ArchivedAccountPagePro
               "Sanar no es empezar de cero,<br />
               es retomar el camino con más claridad."
             </p>
-            <span className="text-2xl mt-2 inline-block">🌱</span>
+            <span className="text-2xl mt-2 inline-block"></span>
           </div>
         </CardContent>
       </Card>

@@ -28,7 +28,7 @@ export default function Guia() {
             className="text-2xl md:text-3xl font-bold mb-6"
             style={{ color: '#556B2F' }}
           >
-            🌱 Mini Guía Funcional: Revertir la Resistencia a la Insulina
+             Mini Guía Funcional: Revertir la Resistencia a la Insulina
           </h2>
 
           {/* Entendiendo tu metabolismo */}
@@ -37,7 +37,7 @@ export default function Guia() {
               className="text-xl md:text-2xl font-bold mb-3"
               style={{ color: '#3A3A3A' }}
             >
-              🔎 Entendiendo tu metabolismo
+               Entendiendo tu metabolismo
             </h3>
             <p 
               className="text-base leading-relaxed"
@@ -55,7 +55,7 @@ export default function Guia() {
               className="text-xl md:text-2xl font-bold mb-3"
               style={{ color: '#3A3A3A' }}
             >
-              🚫 Lo que bloquea tu metabolismo
+               Lo que bloquea tu metabolismo
             </h3>
             <ul className="space-y-3">
               <li style={{ color: '#6F6E66' }}>
@@ -81,7 +81,7 @@ export default function Guia() {
               className="text-xl md:text-2xl font-bold mb-3"
               style={{ color: '#3A3A3A' }}
             >
-              ✅ Lo que ayuda a revertirla
+               Lo que ayuda a revertirla
             </h3>
             <ul className="space-y-3">
               <li style={{ color: '#6F6E66' }}>
@@ -115,7 +115,7 @@ export default function Guia() {
                 color: '#6F6E66'
               }}
             >
-              💫 Tu cuerpo no puede sanar en estado de alerta. Dale permiso para descansar y reparar.
+               Tu cuerpo no puede sanar en estado de alerta. Dale permiso para descansar y reparar.
             </div>
           </section>
 
@@ -127,7 +127,7 @@ export default function Guia() {
               className="text-xl md:text-2xl font-bold mb-3"
               style={{ color: '#3A3A3A' }}
             >
-              🌿 Tips funcionales extra
+               Tips funcionales extra
             </h3>
             <ul className="space-y-3">
               <li style={{ color: '#6F6E66' }}>
@@ -161,7 +161,7 @@ export default function Guia() {
               className="text-xl md:text-2xl font-bold mb-3"
               style={{ color: '#3A3A3A' }}
             >
-              🚀 Da tu siguiente paso
+               Da tu siguiente paso
             </h3>
             <p 
               className="text-base leading-relaxed mb-4"
@@ -177,17 +177,17 @@ export default function Guia() {
               Incluye:
             </p>
             <ul className="space-y-2 mb-4">
-              <li style={{ color: '#6F6E66' }}>✓ Evaluación funcional completa y revisión de tus hábitos</li>
-              <li style={{ color: '#6F6E66' }}>✓ Revisión e interpretación de tus análisis de sangre</li>
-              <li style={{ color: '#6F6E66' }}>✓ Plan de alimentación y estilo de vida individualizado</li>
-              <li style={{ color: '#6F6E66' }}>✓ Suplementación y seguimiento mensual</li>
+              <li style={{ color: '#6F6E66' }}> Evaluación funcional completa y revisión de tus hábitos</li>
+              <li style={{ color: '#6F6E66' }}> Revisión e interpretación de tus análisis de sangre</li>
+              <li style={{ color: '#6F6E66' }}> Plan de alimentación y estilo de vida individualizado</li>
+              <li style={{ color: '#6F6E66' }}> Suplementación y seguimiento mensual</li>
             </ul>
 
             <p 
               className="font-semibold mb-4"
               style={{ color: '#3A3A3A' }}
             >
-              💲 Inversión: $5/mes con acceso completo a guías, recetas y acompañamiento funcional.
+               Inversión: $5/mes con acceso completo a guías, recetas y acompañamiento funcional.
             </p>
 
             <button

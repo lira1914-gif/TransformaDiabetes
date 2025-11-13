@@ -70,7 +70,7 @@ export default function Day7TrialModal({ daysRemaining, hasAccess, isActive }: D
               className="text-2xl sm:text-3xl text-center font-bold leading-tight font-serif"
               style={{ color: '#556B2F' }}
             >
-              🌱 Tu prueba gratuita ha finalizado, pero tu proceso apenas comienza
+               Tu prueba gratuita ha finalizado, pero tu proceso apenas comienza
             </AlertDialogTitle>
           </AlertDialogHeader>
         </div>
@@ -99,12 +99,12 @@ export default function Day7TrialModal({ daysRemaining, hasAccess, isActive }: D
                 }}
               >
                 <p className="text-center font-semibold" style={{ color: '#A15C38' }}>
-                  🔒 El chat funcional y los módulos están reservados para miembros activos del programa
+                   El chat funcional y los módulos están reservados para miembros activos del programa
                 </p>
               </div>
 
               <p className="text-center">
-                👉 Activa tu suscripción por <strong>$5 USD/mes</strong> y sigue avanzando con tu 
+                 Activa tu suscripción por <strong>$5 USD/mes</strong> y sigue avanzando con tu 
                 guía personalizada, sesiones educativas y acompañamiento continuo.
               </p>
             </div>

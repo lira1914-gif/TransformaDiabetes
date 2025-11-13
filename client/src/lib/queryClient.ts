@@ -17,7 +17,7 @@ export async function apiRequest(
     ? url 
     : `${window.location.origin}${url.startsWith('/') ? url : '/' + url}`;
   
-  console.log(`🌐 apiRequest: ${method} ${absoluteUrl}`, data ? { data } : '');
+  console.log(` apiRequest: ${method} ${absoluteUrl}`, data ? { data } : '');
   
   const res = await fetch(absoluteUrl, {
     method,
@@ -26,7 +26,7 @@ export async function apiRequest(
     credentials: "include",
   });
 
-  console.log(`📡 Response status: ${res.status} ${res.statusText}`);
+  console.log(` Response status: ${res.status} ${res.statusText}`);
   
   await throwIfResNotOk(res);
   return res;

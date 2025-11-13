@@ -11,11 +11,11 @@ async function extractDocx() {
     const text = result.value;
     
     await fs.writeFile(outputPath, text, 'utf-8');
-    console.log('✅ Contenido extraído exitosamente');
-    console.log(`📄 Archivo guardado en: ${outputPath}`);
-    console.log(`📊 Longitud del contenido: ${text.length} caracteres`);
+    console.log(' Contenido extraído exitosamente');
+    console.log(` Archivo guardado en: ${outputPath}`);
+    console.log(` Longitud del contenido: ${text.length} caracteres`);
   } catch (error) {
-    console.error('❌ Error extrayendo el documento:', error);
+    console.error(' Error extrayendo el documento:', error);
     process.exit(1);
   }
 }

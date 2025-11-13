@@ -77,7 +77,7 @@ export default function FormularioSalud() {
           fontWeight: 700,
           marginBottom: '0.5rem'
         }}>
-          🩺 Formulario Personal de Salud
+           Formulario Personal de Salud
         </h1>
 
         <p style={{ 

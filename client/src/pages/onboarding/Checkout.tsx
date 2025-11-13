@@ -184,7 +184,7 @@ export default function Checkout() {
           borderRadius: '12px',
           textAlign: 'center',
         }}>
-          <h2 style={{ color: '#A15C38', marginBottom: '1rem' }}>⚠️ Error</h2>
+          <h2 style={{ color: '#A15C38', marginBottom: '1rem' }}> Error</h2>
           <p style={{ color: '#3A3A3A', marginBottom: '2rem' }}>{error}</p>
           <button
             onClick={() => setLocation('/')}
@@ -249,7 +249,7 @@ export default function Checkout() {
           fontSize: '2rem',
           marginBottom: '0.5rem',
         }}>
-          🌿 Suscripción TransformaDiabetes
+           Suscripción TransformaDiabetes
         </h1>
         <p style={{
           color: '#3A3A3A',
@@ -275,7 +275,7 @@ export default function Checkout() {
           color: '#666',
           textAlign: 'center',
         }}>
-          🔒 Pago seguro procesado por Stripe
+           Pago seguro procesado por Stripe
         </p>
       </div>
 

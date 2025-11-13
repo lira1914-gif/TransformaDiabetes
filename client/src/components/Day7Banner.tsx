@@ -49,7 +49,7 @@ export default function Day7Banner({ daysRemaining, isActive }: Day7BannerProps)
             className="text-lg sm:text-xl font-bold font-serif"
             style={{ color: '#556B2F' }}
           >
-            🌿 Tu prueba termina hoy
+             Tu prueba termina hoy
           </h3>
           
           <div className="space-y-2 text-sm sm:text-base leading-relaxed" style={{ color: '#3A3A3A' }}>
@@ -63,7 +63,7 @@ export default function Day7Banner({ daysRemaining, isActive }: Day7BannerProps)
               Recuerda: no se trata de controlar el azúcar, sino de entender tu cuerpo para revertir la resistencia a la insulina desde la raíz.
             </p>
             <p>
-              💚 <strong>Activa tu suscripción hoy</strong> y sigue con el <strong>Módulo 1: Empieza desde la raíz</strong>.<br/>
+               <strong>Activa tu suscripción hoy</strong> y sigue con el <strong>Módulo 1: Empieza desde la raíz</strong>.<br/>
               Tu cuerpo ya empezó a responder, no lo detengas ahora.
             </p>
           </div>
@@ -78,7 +78,7 @@ export default function Day7Banner({ daysRemaining, isActive }: Day7BannerProps)
             }}
             data-testid="button-continue-day7-banner"
           >
-            🟩 Continuar mi transformación ($5 USD/mes)
+             Continuar mi transformación ($5 USD/mes)
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

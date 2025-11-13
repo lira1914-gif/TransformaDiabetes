@@ -134,7 +134,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       return await response.json();
     },
     onSuccess: async (data: any) => {
-      console.log('📥 Respuesta del servidor:', data);
+      console.log(' Respuesta del servidor:', data);
       
       // Marcar intake como completado
       localStorage.setItem('tm_intake_done', 'true');
@@ -142,10 +142,10 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       // Guardar userId si viene en la respuesta (nuevo usuario de trial)
       // IMPORTANTE: Usar el userId de la respuesta si existe (usuario existente por email)
       const userId = data.userId || localStorage.getItem('tm_user_id');
-      console.log('🔑 userId a usar para generar reporte:', userId);
+      console.log(' userId a usar para generar reporte:', userId);
       
       if (data.userId) {
-        console.log('💾 Actualizando localStorage con userId del servidor:', data.userId);
+        console.log(' Actualizando localStorage con userId del servidor:', data.userId);
         localStorage.setItem('tm_user_id', data.userId);
       }
       
@@ -155,15 +155,15 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       }
       
       toast({
-        title: "✅ Historial guardado",
+        title: " Historial guardado",
         description: "Tu información ha sido registrada correctamente.",
       });
       
       // Validación defensiva: asegurar que tenemos un userId válido
       if (!userId) {
-        console.error('❌ No se pudo obtener userId para generar el reporte');
+        console.error(' No se pudo obtener userId para generar el reporte');
         toast({
-          title: "⚠️ Error de configuración",
+          title: " Error de configuración",
           description: "No se pudo identificar tu usuario. Por favor recarga la página e intenta nuevamente.",
           variant: "destructive",
         });
@@ -172,14 +172,14 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
       
       // Mostrar mensaje de progreso mientras se genera el informe
       toast({
-        title: "🧠 Analizando tu información...",
+        title: " Analizando tu información...",
         description: "Estamos creando tu guía funcional personalizada. Esto puede tomar 15-20 segundos.",
         duration: 25000, // Mostrar por 25 segundos
       });
       
       try {
         // Generar reporte inmediatamente con módulo 1
-        console.log('✅ Generando reporte para userId:', userId);
+        console.log(' Generando reporte para userId:', userId);
         await apiRequest('POST', '/api/generate-report', {
           userId,
           moduleNumber: 1
@@ -189,7 +189,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
         localStorage.setItem('tm_informe_ready', 'true');
         
         toast({
-          title: "🎉 ¡Listo!",
+          title: " ¡Listo!",
           description: "Tu guía funcional personalizada está lista. Te redirigiremos ahora...",
         });
         
@@ -198,9 +198,9 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
           onComplete();
         }, 1000);
       } catch (error) {
-        console.error('❌ Error generando reporte:', error);
+        console.error(' Error generando reporte:', error);
         toast({
-          title: "⚠️ Error generando informe",
+          title: " Error generando informe",
           description: "Hubo un problema generando tu informe. Por favor intenta nuevamente.",
           variant: "destructive",
         });
@@ -209,7 +209,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
     onError: (error: any) => {
       console.error('Error guardando intake form:', error);
       toast({
-        title: "❌ Error al guardar",
+        title: " Error al guardar",
         description: "Hubo un problema guardando tu información. Por favor intenta nuevamente.",
         variant: "destructive",
       });
@@ -355,7 +355,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
         }}
       >
         <h2 style={{ color: '#556B2F', textAlign: 'center', marginBottom: '1rem' }}>
-          🌿 Formulario de Ingreso
+           Formulario de Ingreso
         </h2>
         <p style={{ color: '#6F6E66', textAlign: 'center', marginBottom: '1rem' }}>
           Esta información es estrictamente confidencial y será utilizada únicamente para fines de evaluación nutricional funcional.
@@ -369,7 +369,7 @@ export default function IntakeForm({ onComplete }: IntakeFormProps) {
           textAlign: 'center'
         }}>
           <p style={{ color: '#8B6914', fontSize: '0.9rem', margin: 0, lineHeight: '1.5' }}>
-            ℹ️ <strong>Nota:</strong> No estás obligado/a a llenar todos los campos, pero <strong>entre más información tengamos, mejor</strong> podremos crear un cuadro completo de tu salud para personalizar tus recomendaciones.
+             <strong>Nota:</strong> No estás obligado/a a llenar todos los campos, pero <strong>entre más información tengamos, mejor</strong> podremos crear un cuadro completo de tu salud para personalizar tus recomendaciones.
           </p>
         </div>
 

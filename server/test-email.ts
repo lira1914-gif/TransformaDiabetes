@@ -1,16 +1,16 @@
 import { verifyEmailConnection, sendEmail } from './email';
 
 async function testEmail() {
-  console.log('🧪 Probando configuración SMTP...\n');
+  console.log(' Probando configuración SMTP...\n');
   
   const isConnected = await verifyEmailConnection();
   
   if (!isConnected) {
-    console.error('❌ No se pudo verificar la conexión SMTP');
+    console.error(' No se pudo verificar la conexión SMTP');
     process.exit(1);
   }
   
-  console.log('\n📧 Enviando correo de prueba...\n');
+  console.log('\n Enviando correo de prueba...\n');
   
   try {
     await sendEmail({
@@ -19,7 +19,7 @@ async function testEmail() {
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #fffdf8;">
           <div style="background-color: white; padding: 30px; border-radius: 8px; max-width: 500px; margin: 0 auto;">
-            <h1 style="color: #4a5d23; font-family: Georgia, serif;">✅ Configuración exitosa</h1>
+            <h1 style="color: #4a5d23; font-family: Georgia, serif;"> Configuración exitosa</h1>
             <p>El servidor SMTP de TransformaDiabetes está funcionando correctamente.</p>
             <p><strong>Servidor:</strong> mail.privateemail.com<br>
             <strong>Puerto:</strong> 465 (SSL/TLS)<br>
@@ -32,10 +32,10 @@ async function testEmail() {
       `
     });
     
-    console.log('\n✅ Correo de prueba enviado exitosamente');
-    console.log('📬 Revisa la bandeja de entrada de contacto@transformadiabetes.online');
+    console.log('\n Correo de prueba enviado exitosamente');
+    console.log(' Revisa la bandeja de entrada de contacto@transformadiabetes.online');
   } catch (error) {
-    console.error('\n❌ Error enviando correo de prueba:', error);
+    console.error('\n Error enviando correo de prueba:', error);
     process.exit(1);
   }
 }
