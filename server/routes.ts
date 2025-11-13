@@ -1693,11 +1693,11 @@ Explica el patrón funcional principal en lenguaje claro y empático.
 Hazlo sentir comprendido y con esperanza. (3-4 líneas)
 
 2.  LA TRIFECTA FUNCIONAL (bloque obligatorio)
-Incluir las tres áreas con subtítulos visuales usando estos emojis EXACTOS:
+Incluir las tres áreas con subtítulos descriptivos:
 
- Digestión y Eliminación (FECAR)
- Sueño y Sistema Nervioso
- Azúcar y Energía Estable
+• Digestión y Eliminación (FECAR)
+• Sueño y Sistema Nervioso
+• Azúcar y Energía Estable
 
 IMPORTANTE - Mantener este ORDEN EDUCATIVO dentro de cada bloque:
  Observaciones (qué muestra el cuerpo)
@@ -1708,9 +1708,9 @@ IMPORTANTE - Mantener este ORDEN EDUCATIVO dentro de cada bloque:
 
 Principio clave: "Primero hábitos, luego apoyo."
 
-EJEMPLO DE ESTRUCTURA VISUAL:
+EJEMPLO DE ESTRUCTURA:
 ⸻
- Digestión y Eliminación (FECAR)
+• Digestión y Eliminación (FECAR)
 
 Observaciones:
 "Se nota tránsito intestinal lento..."
@@ -1730,7 +1730,7 @@ Frase de consciencia:
 ⸻
 
 3.  QUÉ PUEDES MEJORAR
-Subtítulo visual: " 7 Hábitos funcionales que marcan la diferencia"
+Subtítulo: "7 Hábitos funcionales que marcan la diferencia"
 Lista numerada de 7 ajustes simples (hábitos, alimentos, descanso, hidratación, movimiento).
 Ejemplos:
 1. Dormir antes de las 11 p.m.
@@ -1744,7 +1744,7 @@ Ejemplos:
 ${moduleNumber === 1 
   ? `RECUERDA: NO mencionar suplementos en este módulo.`
   : `4.  APOYO NUTRICIONAL Y FITOTERAPIA
-Subtítulo visual: " Complementa tus hábitos, no los reemplaza."
+Subtítulo: "Complementa tus hábitos, no los reemplaza."
 Incluye solo los elementos que NO se mencionaron ya en la Trifecta.
 Formato educativo con precauciones:
 - Magnesio glicinato → Relaja músculos, mejora sueño y glucosa. Precaución: evitar en insuficiencia renal.
@@ -1768,7 +1768,7 @@ Mientras el cuerpo esté en alerta, no puede sanar.
 Sanar no es controlar un síntoma, es entender la raíz."
 
 EXTENSIÓN: 300–500 palabras (conciso y directo).
-FORMATO VISUAL: Usa subtítulos y emojis para hacerlo más visual y amigable.
+FORMATO: Usa subtítulos y listas con viñetas para hacerlo más claro y amigable. NO uses emojis.
 LENGUAJE: Completamente claro, sin abreviaturas técnicas.
 
 FORMATO DE RESPUESTA - Responde ÚNICAMENTE en formato JSON con esta estructura exacta:
