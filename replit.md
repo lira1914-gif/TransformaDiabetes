@@ -97,6 +97,11 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - Returns stats: `totalUsers`, `emailsSent`, `errors`, and detailed `results` array
   - **Automation Setup**: Call this endpoint weekly using external cron services (cron-job.org, EasyCron, or GitHub Actions)
   - **Example cURL**: `curl -X POST https://transformadiabetes.online/api/send-weekly-post-trial-emails`
+- **Resend Welcome Emails Endpoint**: `POST /api/resend-welcome-emails`
+  - Manually resends welcome emails to users who completed intake but didn't receive welcome email
+  - Tracks sent status via `welcomeEmailSent` field in database
+  - Sends admin notification with summary of results
+  - **Example cURL**: `curl -X POST https://transformadiabetes.online/api/resend-welcome-emails`
 
 ## External Dependencies
 - **Payment Integration**: Stripe for $5/month subscriptions with a 7-day free trial.
