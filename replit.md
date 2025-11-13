@@ -96,7 +96,7 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - Highlights key benefits: unlimited chat, blood analysis interpretation, personalized recipes, functional education, progress tracking
   - Returns stats: `totalUsers`, `emailsSent`, `errors`, and detailed `results` array
   - **Automation Setup**: Call this endpoint weekly using external cron services (cron-job.org, EasyCron, or GitHub Actions)
-  - **Example cURL**: `curl -X POST https://your-replit-domain.replit.app/api/send-weekly-post-trial-emails`
+  - **Example cURL**: `curl -X POST https://transformadiabetes.online/api/send-weekly-post-trial-emails`
 
 ## External Dependencies
 - **Payment Integration**: Stripe for $5/month subscriptions with a 7-day free trial.
