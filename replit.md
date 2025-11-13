@@ -65,6 +65,27 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
 - **Stripe Customer Portal Integration**: Enables users to self-manage their subscriptions (payment methods, billing history, cancellations, reactivations).
 - **Dynamic User Management**: User IDs (`tm_user_id`) are stored in localStorage; temporary IDs for trial users are replaced with permanent Stripe customer IDs upon subscription.
 - **Cancellation/Reactivation Pages**: Custom confirmation pages are provided for subscription cancellation and reactivation.
+- **Consulta Gratuita Header Link**: Persistent header link to free consultation booking (visible after informe completion):
+  - Desktop: Positioned between TrialCounter and navigation menu
+  - Mobile: Accessible via hamburger menu
+  - Uses Calendar icon (Lucide) instead of emoji
+  - Language selector (ES/EN) uses text labels instead of flag emojis
+- **Email Footer Consistency**: Reusable consultation footer added to:
+  - Welcome email (Day 0)
+  - Report Ready email (post-intake)
+  - Trial reminder emails (Days 6-10)
+  - Footer includes WhatsApp link and professional tone without emojis
+- **Visual Countdown Urgency**: Dynamic countdown component in ProgressDashboard (Perfil page):
+  - Displays when ≤3 days remaining in trial
+  - Color-coded urgency: Green (3 days) → Yellow (2 days) → Red (≤1 day)
+  - Uses Lucide icons (AlertCircle, Clock) for visual cues
+  - Only visible for trialing users
+- **Zero-Emoji Policy (ENFORCED)**: Complete elimination of emojis across entire codebase:
+  - 267+ emojis removed from 28+ files (server/email.ts, server/routes.ts, all client components)
+  - Unicode ranges cleaned: U+1F300-U+1F9FF, U+2600-U+27BF, U+1FA00-U+1FAFF, U+E0000-U+E007F
+  - Replaced with Lucide icons for UI elements (Calendar, Menu, AlertCircle, Clock)
+  - Professional text-only approach in emails and user-facing content
+  - Validated via automated grep scanning (0 emojis confirmed)
 
 ## External Dependencies
 - **Payment Integration**: Stripe for $5/month subscriptions with a 7-day free trial.
