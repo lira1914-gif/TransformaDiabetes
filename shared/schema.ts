@@ -13,6 +13,7 @@ export const users = pgTable("users", {
   unlockedModules: jsonb("unlocked_modules").$type<number[]>().default(sql`'[]'::jsonb`),
   trialStartDate: timestamp("trial_start_date"),
   trialEnded: boolean("trial_ended").default(false),
+  welcomeEmailSent: boolean("welcome_email_sent").default(false),
   day2EmailSent: boolean("day2_email_sent").default(false),
   day3EmailSent: boolean("day3_email_sent").default(false),
   day4EmailSent: boolean("day4_email_sent").default(false),

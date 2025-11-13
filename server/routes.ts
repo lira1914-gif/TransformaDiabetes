@@ -1081,6 +1081,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await sendWelcomeEmail(email, userName);
           console.log(' Email de bienvenida enviado exitosamente');
           
+          // Marcar que se envió el email de bienvenida
+          await db.update(users).set({ welcomeEmailSent: true }).where(eq(users.id, actualUserId));
+          console.log(' welcomeEmailSent actualizado a true');
+          
           // Email de notificación al admin
           const adminEmail = 'lira1914@gmail.com';
           const adminNotificationHtml = `
@@ -1101,9 +1105,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
             html: adminNotificationHtml
           });
           console.log(' Notificación enviada al admin');
-        } catch (emailError) {
-          // No fallar el registro si el email falla
-          console.error(' Error enviando emails (no crítico):', emailError);
+        } catch (emailError: any) {
+          // CRÍTICO: Si falla el email, notificar al admin inmediatamente
+          console.error('🚨 ERROR CRÍTICO enviando emails de bienvenida:', emailError);
+          console.error('Usuario:', email, '('+actualUserId+')');
+          console.error('Stack:', emailError.stack);
+          
+          // Intentar notificar al admin del error
+          try {
+            const { sendEmail } = await import("./email");
+            await sendEmail({
+              to: 'lira1914@gmail.com',
+              subject: '🚨 ERROR: Email de bienvenida falló',
+              html: `
+                <h2>Error enviando email de bienvenida</h2>
+                <p><strong>Usuario:</strong> ${email}</p>
+                <p><strong>User ID:</strong> ${actualUserId}</p>
+                <p><strong>Error:</strong> ${emailError.message}</p>
+                <p><strong>Stack:</strong></p>
+                <pre>${emailError.stack}</pre>
+                <p><strong>Fecha:</strong> ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}</p>
+              `
+            });
+          } catch (notificationError) {
+            console.error('🚨 No se pudo enviar notificación de error al admin:', notificationError);
+          }
         }
       } else {
         console.log(' Intake form ya existía, no se envían emails de bienvenida');
