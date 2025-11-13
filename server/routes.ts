@@ -1082,7 +1082,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.log(' Email de bienvenida enviado exitosamente');
           
           // Marcar que se envió el email de bienvenida
-          await db.update(users).set({ welcomeEmailSent: true }).where(eq(users.id, actualUserId));
+          const { eq: eqOp } = await import("drizzle-orm");
+          await db.update(users).set({ welcomeEmailSent: true }).where(eqOp(users.id, actualUserId));
           console.log(' welcomeEmailSent actualizado a true');
           
           // Email de notificación al admin
@@ -2296,6 +2297,109 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         error: "Error al enviar el correo",
         details: error.message 
       });
+    }
+  });
+
+  // Endpoint para reenviar emails de bienvenida a usuarios que no los recibieron
+  app.post("/api/resend-welcome-emails", async (req, res) => {
+    try {
+      const { eq } = await import("drizzle-orm");
+      const { sendWelcomeEmail, sendEmail } = await import("./email");
+      
+      // Buscar usuarios que tienen intake form pero no recibieron email de bienvenida
+      const usersWithoutWelcomeEmail = await db
+        .select({
+          userId: users.id,
+          email: users.email,
+          welcomeEmailSent: users.welcomeEmailSent
+        })
+        .from(users)
+        .innerJoin(intakeForms, eq(users.id, intakeForms.userId))
+        .where(eq(users.welcomeEmailSent, false));
+      
+      if (usersWithoutWelcomeEmail.length === 0) {
+        return res.json({
+          success: true,
+          message: 'No hay usuarios pendientes de recibir email de bienvenida',
+          count: 0
+        });
+      }
+      
+      let emailsSent = 0;
+      let errors = 0;
+      const results: any[] = [];
+      
+      for (const user of usersWithoutWelcomeEmail) {
+        try {
+          // Obtener nombre del intake form
+          const intakeForm = await storage.getIntakeFormByUserId(user.userId);
+          const userName = intakeForm?.nombre || 'Estimado usuario';
+          
+          // Enviar email de bienvenida
+          await sendWelcomeEmail(user.email, userName);
+          
+          // Marcar como enviado
+          await db.update(users)
+            .set({ welcomeEmailSent: true })
+            .where(eq(users.id, user.userId));
+          
+          emailsSent++;
+          results.push({
+            userId: user.userId,
+            email: user.email,
+            status: 'sent'
+          });
+          
+          console.log(`✅ Email de bienvenida reenviado a: ${user.email}`);
+        } catch (error: any) {
+          errors++;
+          results.push({
+            userId: user.userId,
+            email: user.email,
+            status: 'error',
+            error: error.message
+          });
+          console.error(`❌ Error reenviando email a ${user.email}:`, error);
+        }
+      }
+      
+      // Notificar al admin con resumen
+      try {
+        await sendEmail({
+          to: 'lira1914@gmail.com',
+          subject: `📧 Resumen: ${emailsSent} emails de bienvenida reenviados`,
+          html: `
+            <h2>Reenvío de Emails de Bienvenida</h2>
+            <p><strong>Total usuarios:</strong> ${usersWithoutWelcomeEmail.length}</p>
+            <p><strong>Emails enviados:</strong> ${emailsSent}</p>
+            <p><strong>Errores:</strong> ${errors}</p>
+            <hr>
+            <h3>Detalle:</h3>
+            ${results.map(r => `
+              <p>
+                <strong>${r.email}</strong>: ${r.status}
+                ${r.error ? `<br><em>Error: ${r.error}</em>` : ''}
+              </p>
+            `).join('')}
+          `
+        });
+      } catch (notifError) {
+        console.error('Error enviando notificación al admin:', notifError);
+      }
+      
+      res.json({
+        success: true,
+        message: `Proceso completado: ${emailsSent} emails enviados, ${errors} errores`,
+        stats: {
+          totalUsers: usersWithoutWelcomeEmail.length,
+          emailsSent,
+          errors
+        },
+        results
+      });
+    } catch (error: any) {
+      console.error('Error en reenvío de emails de bienvenida:', error);
+      res.status(500).json({ error: error.message });
     }
   });
 
