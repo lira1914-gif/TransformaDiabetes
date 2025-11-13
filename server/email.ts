@@ -44,6 +44,25 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
   }
 }
 
+function getConsultationFooter(): string {
+  const consultationUrl = 'https://my.practicebetter.io/#/67ee0d2ede79d5983d604c7f/bookings?s=67ee0fcade79d5983d609b52&flavor=mobileapp&step=date';
+  
+  return `
+    <div style="background-color: #f0f7f0; padding: 25px; border-radius: 8px; margin: 30px 0; text-align: center; border: 2px solid #4a5d23;">
+      <p style="margin: 0 0 15px 0; font-size: 16px; font-weight: 600; color: #4a5d23;">
+        📞 ¿Tienes dudas sobre tu proceso?
+      </p>
+      <p style="margin: 0 0 20px 0; font-size: 15px; color: #5a5a5a; line-height: 1.6;">
+        Agenda una <strong>consulta inicial gratuita de 15 minutos</strong> conmigo.<br>
+        Sin compromiso, sin tarjeta, solo orientación funcional personalizada.
+      </p>
+      <a href="${consultationUrl}" style="display: inline-block; background-color: #4a5d23; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">
+        Agendar mi consulta gratuita
+      </a>
+    </div>
+  `;
+}
+
 export async function sendWelcomeEmail(to: string, name?: string): Promise<void> {
   const userName = name || 'Estimado usuario';
   const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
@@ -1335,7 +1354,15 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
           <p>👉 <strong>Mañana termina tu acceso gratuito a TransformaDiabetes</strong>, pero tu transformación apenas comienza.</p>
           
           <p>Si te está gustando el proceso, no lo detengas ahora.<br>
-          Activa tu suscripción por solo <strong>$5 USD al mes</strong> y continúa con el <strong>Módulo 1: Empieza desde la raíz</strong>, donde aprenderás a mantener tus niveles de glucosa estables sin dietas extremas ni restricciones.</p>
+          Activa tu suscripción por solo <strong>$5 USD al mes</strong> (menos que un café al día) y continúa con el <strong>Módulo 1: Empieza desde la raíz</strong>, donde aprenderás a mantener tus niveles de glucosa estables sin dietas extremas ni restricciones.</p>
+          
+          <p><strong>✅ Beneficios inmediatos al suscribirte:</strong></p>
+          <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+            <li>Chat ilimitado con orientación funcional personalizada</li>
+            <li>Acceso completo al Módulo 1 y módulos progresivos</li>
+            <li>Tus registros y progreso guardados para siempre</li>
+            <li>Cancela cuando quieras, sin compromiso</li>
+          </ul>
           
           <p><strong>Tu cuerpo no está roto — solo necesita apoyo constante.</strong><br>
           Dale la oportunidad de seguir mejorando.</p>
@@ -1343,9 +1370,14 @@ export async function sendDay6ReminderEmail(to: string, name?: string): Promise<
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            🔗 Continuar mi transformación
+            🔗 Continuar mi transformación por $5/mes
           </a>
+          <p style="margin-top: 15px; font-size: 14px; color: #888;">
+            🛡️ Cancela cuando quieras, sin preguntas
+          </p>
         </div>
+        
+        ${getConsultationFooter()}
         
         <div class="footer">
           <div class="signature">
@@ -1434,22 +1466,32 @@ export async function sendDay8FollowupEmail(to: string, name?: string): Promise<
           <p>En TransformaDiabetes, <strong>no se trata solo de controlar el azúcar</strong>,<br>
           sino de entender lo que tu cuerpo necesita para sanar desde la raíz.</p>
           
-          <p>Vuelve a tu guía, tus registros y tu chat funcional —<br>
-          allí está el camino que ya comenzaste.</p>
+          <p>Por solo <strong>$5 USD al mes</strong> (el precio de un café), puedes:</p>
+          <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+            <li>Retomar tu chat funcional ilimitado con Marvin IA</li>
+            <li>Acceder a tus registros y progreso guardados</li>
+            <li>Continuar con módulos progresivos personalizados</li>
+            <li>Cancelar cuando quieras, sin compromiso</li>
+          </ul>
           
           <p>💚 <strong>Reactiva tu cuenta hoy y continúa donde te quedaste:</strong></p>
         </div>
 
         <div class="cta-container">
           <a href="${baseUrl}/onboarding/checkout" class="cta-button">
-            👉 Retomar mi transformación
+            👉 Retomar mi transformación por $5/mes
           </a>
+          <p style="margin-top: 15px; font-size: 14px; color: #888;">
+            🛡️ Sin permanencia, cancela en cualquier momento
+          </p>
         </div>
 
         <div class="content" style="font-size: 15px; color: #6a6a6a; text-align: center;">
           <p><strong>Tu bienestar no tiene fecha de expiración,<br>
           solo necesita continuidad.</strong></p>
         </div>
+        
+        ${getConsultationFooter()}
         
         <div class="footer">
           <div class="signature">
@@ -1591,9 +1633,17 @@ export async function sendDay9FollowupEmail(to: string, name?: string): Promise<
           </a>
         </div>
 
+        <div class="cta-container">
+          <p style="margin-top: 15px; font-size: 14px; color: #888;">
+            🛡️ Cancela cuando quieras, sin permanencia
+          </p>
+        </div>
+
         <div class="quote">
           "Tu cuerpo no está roto — solo necesita constancia, claridad y apoyo."
         </div>
+        
+        ${getConsultationFooter()}
         
         <div class="footer">
           <div class="signature">
@@ -1774,6 +1824,8 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
           "No es un salto gigante lo que transforma tu salud,<br>
           sino los pasos pequeños y constantes que das cada día."
         </div>
+        
+        ${getConsultationFooter()}
         
         <div class="footer">
           <div class="signature">
