@@ -44,6 +44,21 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - Primary CTA highlighting most critical next step
   - Auto-hides when 100% complete to reduce UI clutter
   - Backend tracking via PUT /api/users/:userId endpoint
+- **Chat Reminder Banner**: In-app reminder system to re-engage inactive users:
+  - Banner appears when user hasn't used chat in 24+ hours during active trial
+  - Displays "Hace X horas que no hablas con Marvin. ¿Cómo te sientes hoy?"
+  - CTA button navigates directly to chat ("Ir al chat")
+  - Dismissable with daily reset (localStorage tracking)
+  - Only visible on key pages (perfil, módulos), hidden on landing/onboarding/chat
+  - Automatically disappears after user sends new chat message (cache invalidation)
+  - Backend endpoint: GET /api/chat-reminder-status/:userId
+- **Suggested Questions (Chat Starter Prompts)**: Interactive question chips to guide new users:
+  - Displays 4 clickable question suggestions for users with <3 messages
+  - Questions cover key functional medicine topics (glucose, sleep, diet, symptoms)
+  - Auto-fills chat input on click or keyboard (Enter/Space)
+  - Fully accessible (role="button", keyboard navigation)
+  - Auto-hides after 3 messages to reduce clutter
+  - No backend changes needed (uses existing checkins data)
 - **Informe Funcional**: A dedicated page displays AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Educational content modules are progressively unlocked based on subscription duration, controlled by server-side access.
 - **Weekly Check-in Chat System ("Marvin Lira IA")**: An interactive chat powered by GPT-4o offers personalized functional medicine guidance.

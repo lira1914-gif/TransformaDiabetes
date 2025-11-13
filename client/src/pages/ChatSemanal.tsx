@@ -37,6 +37,13 @@ const SYSTEM_EMOJI: Record<string, string> = {
   estrés: "🧘"
 };
 
+const SUGGESTED_QUESTIONS = [
+  "¿Qué alimentos debo evitar para controlar mi glucosa?",
+  "¿Cómo puedo mejorar mi sueño?",
+  "¿Qué cambios puedo hacer en mi alimentación hoy?",
+  "¿Qué síntomas debería monitorear cada día?"
+];
+
 export default function ChatSemanal() {
   const [message, setMessage] = useState("");
   const [, setLocation] = useLocation();
@@ -266,6 +273,36 @@ export default function ChatSemanal() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
+                {/* Preguntas sugeridas para usuarios nuevos */}
+                {(!checkins || checkins.length < 3) && (
+                  <div className="mb-4" data-testid="suggested-questions-container">
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Preguntas para empezar:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {SUGGESTED_QUESTIONS.map((question, index) => (
+                        <Badge
+                          key={index}
+                          variant="outline"
+                          role="button"
+                          tabIndex={0}
+                          className="cursor-pointer hover-elevate text-left"
+                          onClick={() => setMessage(question)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setMessage(question);
+                            }
+                          }}
+                          data-testid={`suggested-question-${index}`}
+                        >
+                          {question}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <Textarea
                     data-testid="input-weekly-message"
