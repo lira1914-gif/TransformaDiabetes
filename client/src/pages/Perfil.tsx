@@ -12,6 +12,7 @@ import Day8Banner from "@/components/Day8Banner";
 import Day7Banner from "@/components/Day7Banner";
 import { TrialStatus, IntakeForm } from "@/types/trial";
 import ArchivedAccountPage from "@/pages/ArchivedAccountPage";
+import ProgressDashboard from "@/components/ProgressDashboard";
 
 export default function Perfil() {
   const [, setLocation] = useLocation();
@@ -164,7 +165,12 @@ export default function Perfil() {
             <p className="text-base sm:text-lg mb-4" style={{ color: '#6F6E66' }}>
               Administra tu suscripción y acceso a TransformaDiabetes
             </p>
+          </div>
 
+          {/* Dashboard de Progreso */}
+          {userId && <ProgressDashboard userId={userId} />}
+
+          <div className="text-center">
             {trialStatus?.isTrialing && trialStatus?.daysRemaining > 0 && (
               <div className="max-w-2xl mx-auto mb-8">
                 <div 

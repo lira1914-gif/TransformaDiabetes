@@ -1927,6 +1927,131 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     }
   });
 
+  // Get User Progress Stats
+  app.get("/api/user-progress/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+
+      // Obtener usuario y checkins
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Obtener TODO el historial de checkins (sin límite de tiempo)
+      // Nota: a pesar del nombre "weekly", este método devuelve TODOS los checkins del usuario
+      const checkins = await storage.getWeeklyCheckinsByUserId(userId);
+      
+      // Ordenar defensivamente por createdAt DESC (más reciente primero)
+      // Esto asegura que checkins[0] siempre sea el más reciente
+      checkins.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+      // Helper: Normalizar fecha a día calendario en timezone Mexico
+      // Usa Intl.DateTimeFormat para evitar problemas de conversión doble
+      const toCalendarDay = (date: Date): string => {
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'America/Mexico_City',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        });
+        return formatter.format(date); // Returns YYYY-MM-DD
+      };
+
+      // Calcular estadísticas del chat
+      const chatStats = {
+        totalMessages: checkins.length,
+        // Bug fix: Normalizar lastUsedDate al mismo formato de día calendario
+        lastUsedDate: checkins.length > 0 ? toCalendarDay(new Date(checkins[0].createdAt)) : null,
+        totalActiveDays: 0,
+        currentStreak: 0
+      };
+
+      if (checkins.length > 0) {
+        // Agrupar por día calendario único (ya normalizados a timezone México)
+        const uniqueDays = new Set(
+          checkins.map(c => toCalendarDay(new Date(c.createdAt)))
+        );
+        chatStats.totalActiveDays = uniqueDays.size;
+
+        // Calcular racha actual (días consecutivos hasta el último día usado)
+        // Trabaja directamente con strings YYYY-MM-DD para evitar timezone double-conversion
+        const sortedDays = Array.from(uniqueDays).sort().reverse();
+        let streak = 0;
+
+        if (sortedDays.length > 0) {
+          const mostRecentDay = sortedDays[0]; // String YYYY-MM-DD
+
+          // Helper: Restar días de un string YYYY-MM-DD sin conversión de timezone
+          const subtractDays = (dateStr: string, days: number): string => {
+            // Usar noon UTC para evitar problemas de timezone boundary
+            const date = new Date(dateStr + 'T12:00:00Z');
+            date.setUTCDate(date.getUTCDate() - days);
+            return date.toISOString().split('T')[0];
+          };
+
+          // Contar días consecutivos hacia atrás verificando existencia en el Set
+          // Esto evita romper la racha por gaps en el array ordenado
+          let currentDay = mostRecentDay;
+          while (uniqueDays.has(currentDay)) {
+            streak++;
+            currentDay = subtractDays(currentDay, 1);
+          }
+        }
+
+        chatStats.currentStreak = streak;
+      }
+
+      // Calcular progreso del trial
+      const trialStartDate = new Date(user.trialStartDate!);
+      const now = new Date();
+      const msPerDay = 24 * 60 * 60 * 1000;
+      const trialLength = 7;
+      
+      const daysElapsed = Math.floor((now.getTime() - trialStartDate.getTime()) / msPerDay);
+      const daysCompleted = Math.max(0, Math.min(daysElapsed, trialLength));
+      const daysRemaining = Math.max(0, trialLength - daysElapsed);
+      const percentComplete = Math.round((daysCompleted / trialLength) * 100);
+
+      const trialProgress = {
+        daysCompleted,
+        daysRemaining,
+        percentComplete
+      };
+
+      // Generar acciones sugeridas basado en reglas
+      const suggestedActions: string[] = [];
+      const isSubscribed = user.subscriptionStatus === 'active';
+
+      if (chatStats.currentStreak === 0) {
+        suggestedActions.push("Inicia tu racha hoy: haz tu primera consulta con Marvin");
+      } else if (chatStats.currentStreak < 3) {
+        suggestedActions.push("Mantén tu racha: continúa tu conversación con Marvin");
+      } else {
+        suggestedActions.push(`¡Increíble! Llevas ${chatStats.currentStreak} días consecutivos`);
+      }
+
+      if (!isSubscribed && daysRemaining <= 2 && daysRemaining > 0) {
+        suggestedActions.push("Tu trial termina pronto: asegura acceso ilimitado suscribiéndote");
+      } else if (!isSubscribed && daysRemaining > 2) {
+        suggestedActions.push("Explora todas las funciones durante tu trial gratuito");
+      }
+
+      if (chatStats.totalMessages < 5) {
+        suggestedActions.push("Prueba preguntas sobre nutrición, síntomas o progreso");
+      }
+
+      res.json({
+        chatStats,
+        trialProgress,
+        suggestedActions
+      });
+    } catch (error: any) {
+      console.error("Error obteniendo progreso del usuario:", error);
+      res.status(500).json({ error: "Error al obtener el progreso" });
+    }
+  });
+
   // Test email endpoint (development only)
   app.post("/api/test-email", async (req, res) => {
     if (process.env.NODE_ENV !== 'development') {

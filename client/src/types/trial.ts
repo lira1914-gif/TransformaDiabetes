@@ -14,3 +14,18 @@ export interface TrialStatus {
 export interface IntakeForm {
   nombre?: string;
 }
+
+export interface UserProgress {
+  chatStats: {
+    currentStreak: number;
+    totalActiveDays: number;
+    lastUsedDate: string | null;
+    totalMessages: number;
+  };
+  trialProgress: {
+    daysCompleted: number;
+    daysRemaining: number;
+    percentComplete: number;
+  };
+  suggestedActions: string[];
+}
