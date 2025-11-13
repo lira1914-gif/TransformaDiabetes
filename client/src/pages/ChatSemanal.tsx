@@ -92,6 +92,7 @@ export default function ChatSemanal() {
     onSuccess: async () => {
       // Invalidar queries para actualizar UI
       queryClient.invalidateQueries({ queryKey: ['/api/weekly-checkins', userId] });
+      queryClient.invalidateQueries({ queryKey: ['/api/chat-reminder-status', userId] });
       
       // Marcar primer chat completado si es el primer mensaje
       if (checkins?.length === 0 || !checkins) {

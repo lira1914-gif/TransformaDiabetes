@@ -926,6 +926,62 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Chat reminder status endpoint
+  app.get("/api/chat-reminder-status/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+
+      // Obtener usuario
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Verificar estado del trial
+      const TRIAL_DAYS = 7;
+      const now = new Date();
+      const startDate = user.trialStartDate || user.subscriptionStartDate || user.createdAt;
+      
+      if (!startDate) {
+        return res.json({ needsReminder: false, lastChatAt: null, hoursSinceLastChat: null });
+      }
+
+      const daysSinceStart = Math.floor((now.getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24));
+      const daysRemaining = Math.max(0, TRIAL_DAYS - daysSinceStart);
+      const isActive = user.subscriptionStatus === 'active';
+      const isInActiveTrial = daysRemaining > 0 && !isActive;
+
+      // Solo mostrar recordatorio si está en trial activo
+      if (!isInActiveTrial) {
+        return res.json({ needsReminder: false, lastChatAt: null, hoursSinceLastChat: null });
+      }
+
+      // Obtener último checkin
+      const lastCheckin = await storage.getLatestWeeklyCheckin(userId);
+      
+      if (!lastCheckin) {
+        // No ha usado el chat nunca, mostrar recordatorio
+        return res.json({ needsReminder: true, lastChatAt: null, hoursSinceLastChat: null });
+      }
+
+      // Calcular horas desde el último chat
+      const lastChatAt = new Date(lastCheckin.createdAt);
+      const hoursSinceLastChat = (now.getTime() - lastChatAt.getTime()) / (1000 * 60 * 60);
+
+      // Mostrar recordatorio si >24h sin actividad
+      const needsReminder = hoursSinceLastChat >= 24;
+
+      res.json({
+        needsReminder,
+        lastChatAt: lastChatAt.toISOString(),
+        hoursSinceLastChat: Math.floor(hoursSinceLastChat)
+      });
+    } catch (error: any) {
+      console.error("Error obteniendo estado de recordatorio de chat:", error);
+      res.status(500).json({ error: "Error al obtener estado de recordatorio" });
+    }
+  });
+
   // Intake Form routes
   app.post("/api/intake-form", async (req, res) => {
     try {

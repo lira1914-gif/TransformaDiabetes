@@ -30,6 +30,20 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - **Day 5**: Pre-urgency message (2 days remaining)
   - **Day 6**: Final urgency (1 day remaining)
   - **Days 8-10**: Post-trial follow-up sequence
+- **User Progress Dashboard**: Interactive dashboard on Perfil page showing:
+  - Current trial day (calculated in America/Mexico_City timezone)
+  - Chat activity streak (consecutive days with at least one chat message)
+  - Percentage of trial completed (visual progress bar)
+  - Context-aware suggested actions based on user status
+- **Onboarding Checklist System**: Visual 4-step guided onboarding displayed on Perfil page:
+  - Step 1: Complete initial questionnaire (auto-tracked via intakeForm existence)
+  - Step 2: Receive functional report (auto-tracked via report existence)
+  - Step 3: **Make first consultation with Marvin** (tracked via `firstChatCompletedAt` timestamp)
+  - Step 4: Review complete report (tracked via `reportViewedAt` timestamp)
+  - Progress bar showing completion percentage
+  - Primary CTA highlighting most critical next step
+  - Auto-hides when 100% complete to reduce UI clutter
+  - Backend tracking via PUT /api/users/:userId endpoint
 - **Informe Funcional**: A dedicated page displays AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Educational content modules are progressively unlocked based on subscription duration, controlled by server-side access.
 - **Weekly Check-in Chat System ("Marvin Lira IA")**: An interactive chat powered by GPT-4o offers personalized functional medicine guidance.

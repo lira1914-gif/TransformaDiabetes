@@ -47,3 +47,9 @@ export interface OnboardingProgress {
   isComplete: boolean;
   nextStep: OnboardingStep | null;
 }
+
+export interface ChatReminderStatus {
+  needsReminder: boolean;
+  lastChatAt: string | null;
+  hoursSinceLastChat: number | null;
+}

@@ -1,8 +1,9 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import ChatReminderBanner from "@/components/ChatReminderBanner";
 import Home from "@/pages/Home";
 import PreRegistro from "@/pages/PreRegistro";
 import Diagnostico from "@/pages/Diagnostico";
@@ -68,10 +69,30 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+
+  // Determinar si mostrar el banner de recordatorio
+  // NO mostrar en: landing, onboarding, chat, páginas legales
+  const hideBannerRoutes = [
+    '/',
+    '/chat-semanal',
+    '/cuestionario',
+    '/privacidad',
+    '/terminos',
+    '/reembolsos',
+    '/cancelacion-confirmada',
+    '/reactivacion-confirmada',
+  ];
+  
+  const shouldShowBanner = 
+    !hideBannerRoutes.includes(location) && 
+    !location.startsWith('/onboarding/');
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
+        {shouldShowBanner && <ChatReminderBanner />}
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
