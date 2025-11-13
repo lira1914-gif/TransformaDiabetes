@@ -33,13 +33,13 @@ export async function sendEmail(options: EmailOptions): Promise<void> {
       throw error;
     }
 
-    console.log('✅ Email enviado:', data?.id);
-    console.log('📧 Destinatario:', options.to);
+    console.log('[EMAIL ENVIADO]', data?.id);
+    console.log('[DESTINATARIO]', options.to);
     if (options.bcc) {
-      console.log('📧 BCC:', options.bcc);
+      console.log('[BCC]', options.bcc);
     }
   } catch (error) {
-    console.error('❌ Error enviando email:', error);
+    console.error('[ERROR] Error enviando email:', error);
     throw error;
   }
 }
@@ -50,7 +50,7 @@ function getConsultationFooter(): string {
   return `
     <div style="background-color: #f0f7f0; padding: 25px; border-radius: 8px; margin: 30px 0; text-align: center; border: 2px solid #4a5d23;">
       <p style="margin: 0 0 15px 0; font-size: 16px; font-weight: 600; color: #4a5d23;">
-        📞 ¿Tienes dudas sobre tu proceso?
+        ¿Tienes dudas sobre tu proceso?
       </p>
       <p style="margin: 0 0 20px 0; font-size: 15px; color: #5a5a5a; line-height: 1.6;">
         Agenda una <strong>consulta inicial gratuita de 15 minutos</strong> conmigo.<br>
@@ -252,6 +252,8 @@ export async function sendWelcomeEmail(to: string, name?: string): Promise<void>
             Tu proceso no se trata de controlar síntomas, sino de entender causas y recuperar confianza en tu cuerpo.
           </p>
         </div>
+        
+        ${getConsultationFooter()}
         
         <div class="footer">
           <div class="signature">
@@ -529,6 +531,8 @@ export async function sendReportReadyEmail(to: string, name?: string, moduleNumb
             Empieza con calma, con intención, y celebra cada mejora.
           </p>
         </div>
+        
+        ${getConsultationFooter()}
         
         <div class="footer">
           <div class="signature">
@@ -2427,10 +2431,10 @@ export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<v
 
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
-    console.log('✅ Resend configurado correctamente');
+    console.log('[RESEND OK] Resend configurado correctamente');
     return true;
   } catch (error) {
-    console.error('❌ Error con Resend:', error);
+    console.error('[RESEND ERROR] Error con Resend:', error);
     return false;
   }
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
+import { Calendar, Menu } from "lucide-react";
 import logoImage from "@assets/generated_images/TransformaDiabetes_complete_logo_with_tagline_2f0190f6.png";
 import TrialCounter from "./TrialCounter";
 import { TrialStatus } from "@/types/trial";
@@ -98,16 +99,17 @@ export default function Header() {
       <button
         id="menu-toggle"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className="md:hidden text-2xl"
+        className="md:hidden"
         style={{ 
           background: 'none',
           border: 'none',
           color: '#4B4B3B',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          padding: '4px'
         }}
         data-testid="button-mobile-menu"
       >
-        ☰
+        <Menu className="w-6 h-6" />
       </button>
 
       {/* Selector de Idioma - Solo en Landing */}
@@ -125,7 +127,7 @@ export default function Header() {
           }}
           data-testid="button-language-toggle"
         >
-          <span>{language === 'es' ? '🇪🇸 ES' : '🇺🇸 EN'}</span>
+          <span>{language === 'es' ? 'ES' : 'EN'}</span>
           <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>⇄</span>
         </button>
       )}
@@ -134,6 +136,27 @@ export default function Header() {
       <div className="hidden md:block">
         <TrialCounter />
       </div>
+
+      {/* Enlace Consulta Gratuita - Desktop */}
+      <a
+        href="https://my.practicebetter.io/#/67ee0d2ede79d5983d604c7f/bookings?s=67ee0fcade79d5983d609b52&flavor=mobileapp&step=date"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-md transition-all hover:opacity-80"
+        style={{
+          backgroundColor: 'rgba(74, 93, 35, 0.1)',
+          color: '#4a5d23',
+          border: '1px solid rgba(74, 93, 35, 0.25)',
+          fontSize: '0.875rem',
+          fontWeight: 500,
+          textDecoration: 'none',
+          cursor: 'pointer'
+        }}
+        data-testid="link-consulta-gratuita"
+      >
+        <Calendar className="w-4 h-4" />
+        <span>Consulta Gratuita</span>
+      </a>
 
       {/* Menú de Navegación Desktop */}
       <nav className="hidden md:flex items-center gap-6">
@@ -187,6 +210,27 @@ export default function Header() {
             <TrialCounter />
           </div>
           
+          {/* Enlace Consulta Gratuita - Móvil */}
+          <a
+            href="https://my.practicebetter.io/#/67ee0d2ede79d5983d604c7f/bookings?s=67ee0fcade79d5983d609b52&flavor=mobileapp&step=date"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-3 py-2 rounded-md transition-all hover:opacity-80 mb-2"
+            style={{
+              backgroundColor: 'rgba(74, 93, 35, 0.1)',
+              color: '#4a5d23',
+              border: '1px solid rgba(74, 93, 35, 0.25)',
+              fontSize: '0.875rem',
+              fontWeight: 500,
+              textDecoration: 'none',
+              cursor: 'pointer'
+            }}
+            data-testid="link-consulta-gratuita-mobile"
+          >
+            <Calendar className="w-4 h-4" />
+            <span>Agenda tu Consulta Gratuita</span>
+          </a>
+          
           {/* Selector de Idioma (móvil) - Solo en Landing */}
           {location === "/" && (
             <button
@@ -202,7 +246,7 @@ export default function Header() {
               }}
               data-testid="button-language-toggle-mobile"
             >
-              <span>{language === 'es' ? '🇪🇸 Español' : '🇺🇸 English'}</span>
+              <span>{language === 'es' ? 'Español' : 'English'}</span>
               <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>⇄</span>
             </button>
           )}
