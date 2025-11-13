@@ -1797,6 +1797,582 @@ export async function sendDay10FinalReminderEmail(to: string, name?: string): Pr
   });
 }
 
+export async function sendDay2EngagementEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .suggestion-box {
+          background-color: #f5f3ef;
+          border-left: 4px solid #4a5d23;
+          padding: 20px;
+          margin: 25px 0;
+          border-radius: 4px;
+        }
+        .suggestion-item {
+          margin: 12px 0;
+          padding-left: 10px;
+          color: #2a2a2a;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #4a5d23;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>¿Ya tuviste oportunidad de conversar con Marvin Lira IA? 🌿</p>
+          
+          <p>Recuerda que durante tu prueba gratuita de 7 días tienes <strong>acceso ilimitado al chat</strong> para hacer cualquier pregunta sobre tu salud funcional, síntomas, o dudas sobre nutrición.</p>
+          
+          <p><strong>No estás solo en este proceso</strong> — el chat está aquí para guiarte paso a paso.</p>
+        </div>
+
+        <div class="suggestion-box">
+          <div style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;">💬 Ideas de preguntas que puedes hacer hoy:</div>
+          <div class="suggestion-item">• "¿Por qué tengo antojos de dulce por las tardes?"</div>
+          <div class="suggestion-item">• "¿Qué puedo desayunar para estabilizar mi energía?"</div>
+          <div class="suggestion-item">• "¿Cómo sé si tengo resistencia a la insulina?"</div>
+          <div class="suggestion-item">• "Quiero mejorar mi sueño, ¿qué me recomiendas?"</div>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/chat-semanal" class="cta-button">
+            💬 Ir al chat ahora
+          </a>
+        </div>
+        
+        <div class="content">
+          <p style="color: #6a6a6a; font-size: 15px; font-style: italic;">
+            Cada pregunta que hagas te acerca un paso más a comprender tu cuerpo y recuperar tu salud.
+          </p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>Con equilibrio,<br>
+            <strong>Equipo TransformaDiabetes</strong> 🌿<br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '💬 ¿Ya usaste tu chat hoy? — Tienes 6 días restantes',
+    html
+  });
+}
+
+export async function sendDay3StoryEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .story-box {
+          background-color: #f9f8f5;
+          padding: 25px;
+          margin: 25px 0;
+          border-radius: 8px;
+          border: 1px solid #e8e6df;
+        }
+        .quote {
+          font-style: italic;
+          color: #4a5d23;
+          font-size: 17px;
+          margin: 20px 0;
+          padding-left: 20px;
+          border-left: 3px solid #4a5d23;
+        }
+        .stats {
+          background-color: #f5f3ef;
+          padding: 15px;
+          border-radius: 6px;
+          margin: 15px 0;
+        }
+        .stat-item {
+          margin: 8px 0;
+          color: #2a2a2a;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #4a5d23;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Hoy quiero compartir contigo la historia de <strong>María</strong>, quien hace 4 meses estaba exactamente donde tú estás ahora.</p>
+        </div>
+
+        <div class="story-box">
+          <p style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;">📖 La historia de María (53 años, Diabetes Tipo 2)</p>
+          
+          <div class="quote">
+            "Tenía A1C en 8.2, tomaba 3 medicamentos, y me sentía cansada todo el tiempo. Mi doctor me decía que 'así es la diabetes' y que tendría que vivir con eso."
+          </div>
+          
+          <p>María decidió darle una oportunidad al enfoque funcional. Empezó identificando sus patrones:</p>
+          
+          <div class="stats">
+            <div class="stat-item"><strong>✓ Descubrió</strong> que sus picos de glucosa venían de comer pan en el desayuno</div>
+            <div class="stat-item"><strong>✓ Aprendió</strong> a combinar proteínas con carbohidratos</div>
+            <div class="stat-item"><strong>✓ Mejoró</strong> su ritmo circadiano (dormía 5h, ahora 7h)</div>
+            <div class="stat-item"><strong>✓ Integró</strong> caminatas de 15 min después de comer</div>
+          </div>
+          
+          <p style="font-weight: 600; color: #2a2a2a; margin-top: 20px;">Sus resultados después de 3 meses:</p>
+          <div class="stats" style="background-color: #e8f5e9;">
+            <div class="stat-item">🎯 A1C: 8.2 → <strong>6.1</strong></div>
+            <div class="stat-item">⚡ Energía: "Me levanto sin alarma y con ganas"</div>
+            <div class="stat-item">💊 Medicamentos: Redujo de 3 a 1 (con supervisión médica)</div>
+            <div class="stat-item">😊 Estado de ánimo: "Volví a sentirme yo misma"</div>
+          </div>
+          
+          <div class="quote">
+            "No fue magia — fue entender qué necesitaba mi cuerpo y darle las herramientas correctas. TransformaDiabetes me enseñó que mi cuerpo SÍ puede sanar."
+          </div>
+        </div>
+
+        <div class="content">
+          <p><strong>Tu historia puede ser similar.</strong></p>
+          
+          <p>María empezó exactamente como tú: con dudas, con miedo, pero con la esperanza de que había algo mejor.</p>
+          
+          <p>La diferencia fue <strong>dar el siguiente paso</strong>.</p>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/chat-semanal" class="cta-button">
+            💬 Habla con Marvin Lira IA hoy
+          </a>
+        </div>
+        
+        <div class="content">
+          <p style="color: #6a6a6a; font-size: 15px;">
+            Tienes <strong>5 días restantes</strong> de acceso gratuito — úsalos para descubrir qué necesita tu cuerpo.
+          </p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>Con equilibrio,<br>
+            <strong>Equipo TransformaDiabetes</strong> 🌿<br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '🌱 Cómo María redujo su A1C de 8.2 a 6.1 — Su historia',
+    html
+  });
+}
+
+export async function sendDay4ProgressEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .progress-box {
+          background-color: #f5f3ef;
+          padding: 25px;
+          margin: 25px 0;
+          border-radius: 8px;
+        }
+        .progress-item {
+          margin: 15px 0;
+          padding-left: 15px;
+        }
+        .highlight {
+          background-color: #e8f5e9;
+          padding: 20px;
+          border-radius: 8px;
+          margin: 20px 0;
+          border-left: 4px solid #4a5d23;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #4a5d23;
+          color: #ffffff !important;
+          padding: 16px 32px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p>Ya llevas <strong>4 días en TransformaDiabetes</strong>. 🎉</p>
+          
+          <p>Quiero que te tomes un momento para reflexionar sobre lo que ya has logrado:</p>
+        </div>
+
+        <div class="progress-box">
+          <div style="font-weight: 600; color: #4a5d23; margin-bottom: 15px;">✅ Lo que has logrado hasta ahora:</div>
+          <div class="progress-item">🔍 Completaste tu evaluación funcional completa</div>
+          <div class="progress-item">📊 Recibiste tu informe personalizado con recomendaciones</div>
+          <div class="progress-item">💬 Tienes acceso ilimitado al chat con Marvin Lira IA</div>
+          <div class="progress-item">🌿 Empezaste a entender las señales de tu cuerpo</div>
+        </div>
+
+        <div class="content">
+          <p><strong>Eso es mucho más de lo que la mayoría de las personas logran.</strong></p>
+          
+          <p>La transformación de tu salud no sucede en un día — sucede en los pequeños pasos consistentes que tomas cada día.</p>
+        </div>
+
+        <div class="highlight">
+          <p style="margin-bottom: 15px;"><strong>💡 Reflexiona un momento:</strong></p>
+          <p>¿Qué has aprendido sobre tu cuerpo en estos 4 días?<br>
+          ¿Hay algo que te haya sorprendido?<br>
+          ¿Qué cambio pequeño podrías implementar hoy?</p>
+        </div>
+
+        <div class="content">
+          <p>Recuerda que tienes <strong>3 días más de acceso gratuito</strong> al chat y a todo el sistema.</p>
+          
+          <p>Después de eso, si decides continuar, será solo <strong>$5 USD al mes</strong> para seguir con:</p>
+          <p style="padding-left: 20px;">
+            ✓ Módulos educativos mensuales<br>
+            ✓ Chat ilimitado con IA funcional<br>
+            ✓ Seguimiento personalizado de tu progreso<br>
+            ✓ Acceso a todas las herramientas
+          </p>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/chat-semanal" class="cta-button">
+            💬 Continuar mi transformación
+          </a>
+        </div>
+        
+        <div class="content">
+          <p style="color: #6a6a6a; font-size: 15px; font-style: italic;">
+            "El mejor momento para plantar un árbol fue hace 20 años. El segundo mejor momento es ahora."
+          </p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>Con equilibrio,<br>
+            <strong>Marvin Lira, Coach Funcional</strong><br>
+            TransformaDiabetes 🌿<br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '🎯 Tu progreso en 4 días — Ya estás transformando tu salud',
+    html
+  });
+}
+
+export async function sendDay5UrgencyEmail(to: string, name?: string): Promise<void> {
+  const userName = name || 'Hola';
+  const baseUrl = process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : 'http://localhost:5000';
+  
+  const html = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          line-height: 1.7;
+          color: #3a3a3a;
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #fffdf8;
+        }
+        .container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 40px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .content {
+          font-size: 16px;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+        .urgency-box {
+          background-color: #fff3e0;
+          padding: 25px;
+          margin: 25px 0;
+          border-radius: 8px;
+          border-left: 4px solid #b85c38;
+        }
+        .benefits-box {
+          background-color: #f5f3ef;
+          padding: 20px;
+          margin: 20px 0;
+          border-radius: 8px;
+        }
+        .benefit-item {
+          margin: 10px 0;
+          padding-left: 10px;
+        }
+        .cta-container {
+          text-align: center;
+          margin: 35px 0;
+        }
+        .cta-button {
+          display: inline-block;
+          background-color: #b85c38;
+          color: #ffffff !important;
+          padding: 18px 36px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: 700;
+          font-size: 17px;
+        }
+        .cta-subtext {
+          margin-top: 12px;
+          font-size: 14px;
+          color: #6a6a6a;
+        }
+        .footer {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid #e0e0e0;
+        }
+        .signature {
+          font-size: 15px;
+          color: #5a5a5a;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="content">
+          <p>Hola <strong>${userName}</strong>,</p>
+          
+          <p><strong>Solo quedan 2 días de tu acceso gratuito.</strong></p>
+          
+          <p>En estos 5 días has dado pasos importantes hacia comprender tu cuerpo y recuperar tu salud. Has recibido tu informe funcional, tienes acceso al chat ilimitado, y estás aprendiendo sobre nutrición funcional.</p>
+        </div>
+
+        <div class="urgency-box">
+          <p style="font-weight: 600; color: #b85c38; margin-bottom: 15px;">⏰ ¿Qué pasa después del día 7?</p>
+          <p>Si no activas tu suscripción, <strong>perderás acceso a:</strong></p>
+          <div style="margin-top: 15px;">
+            ❌ Chat ilimitado con Marvin Lira IA<br>
+            ❌ Módulos educativos progresivos<br>
+            ❌ Seguimiento personalizado de tu salud<br>
+            ❌ Todo tu historial y progreso
+          </div>
+        </div>
+
+        <div class="content">
+          <p><strong>No dejes que tu progreso se detenga ahora.</strong></p>
+          
+          <p>Por solo <strong>$5 USD al mes</strong> (menos que un café por semana), puedes continuar tu transformación y recibir:</p>
+        </div>
+
+        <div class="benefits-box">
+          <div class="benefit-item">✅ <strong>Chat ilimitado</strong> con orientación funcional personalizada</div>
+          <div class="benefit-item">✅ <strong>Módulos educativos</strong> que se desbloquean cada mes</div>
+          <div class="benefit-item">✅ <strong>Seguimiento continuo</strong> de tu progreso</div>
+          <div class="benefit-item">✅ <strong>Actualizaciones constantes</strong> del sistema</div>
+          <div class="benefit-item">✅ <strong>Soporte dedicado</strong> cuando lo necesites</div>
+        </div>
+
+        <div class="content">
+          <p style="font-weight: 600; color: #2a2a2a;">La pregunta es simple:</p>
+          <p>¿Vale la pena invertir $5 al mes en tu salud, energía y bienestar?</p>
+        </div>
+
+        <div class="cta-container">
+          <a href="${baseUrl}/onboarding/checkout" class="cta-button">
+            🔒 Asegurar mi acceso por $5/mes
+          </a>
+          <div class="cta-subtext">Cancela cuando quieras, sin compromisos</div>
+        </div>
+        
+        <div class="content">
+          <p style="color: #6a6a6a; font-size: 15px; font-style: italic;">
+            Tu cuerpo no está roto — solo necesita las herramientas correctas.<br>
+            Dale la oportunidad de seguir sanando.
+          </p>
+        </div>
+        
+        <div class="footer">
+          <div class="signature">
+            <p>Con equilibrio,<br>
+            <strong>Marvin Lira, Coach Funcional</strong><br>
+            TransformaDiabetes 🌿<br><br>
+            📩 <a href="mailto:contacto@transformadiabetes.online" style="color: #4a5d23;">contacto@transformadiabetes.online</a></p>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  await sendEmail({
+    to,
+    subject: '⏰ Solo quedan 2 días — No pierdas tu progreso',
+    html
+  });
+}
+
 export async function verifyEmailConnection(): Promise<boolean> {
   try {
     console.log('✅ Resend configurado correctamente');

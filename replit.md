@@ -22,7 +22,14 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
 - **Enhanced Onboarding Flow**: A 5-step intake questionnaire collects personal information (supporting imperial units with backend conversion), health status, diagnoses/medications, functional questions, and detailed symptoms. This leads directly to AI report generation and immediate chat access during the 7-day trial.
 - **Subscription CTAs**: Prominent calls-to-action in the `InformeFuncional` encourage trial users to subscribe, detailing benefits like unlimited chat, progressive modules, and personalized tracking for $5/month.
 - **Chat Access During Trial**: Trial users receive unlimited chat access with "Marvin Lira IA" for 7 days from intake completion; continued access requires subscription.
-- **7-Day Free Trial Management**: The system includes progressive messaging (banners, modals, emails) on days 5, 6, 7, 8, 9, and 10 to guide users through the trial, encourage subscription, and manage access post-trial.
+- **7-Day Free Trial Management**: The system includes progressive messaging (banners, modals, emails) on days 2, 3, 4, 5, 6, 7, 8, 9, and 10 to guide users through the trial, encourage subscription, and manage access post-trial.
+- **User Retention Email Strategy**: Automated engagement emails sent during critical trial days:
+  - **Day 2**: Activation reminder with suggested chat questions
+  - **Day 3**: Success story/testimonial to maintain motivation
+  - **Day 4**: Progress reflection and value reminder
+  - **Day 5**: Pre-urgency message (2 days remaining)
+  - **Day 6**: Final urgency (1 day remaining)
+  - **Days 8-10**: Post-trial follow-up sequence
 - **Informe Funcional**: A dedicated page displays AI-generated personalized reports with 5 key functional recommendations.
 - **Module Unlock System**: Educational content modules are progressively unlocked based on subscription duration, controlled by server-side access.
 - **Weekly Check-in Chat System ("Marvin Lira IA")**: An interactive chat powered by GPT-4o offers personalized functional medicine guidance.

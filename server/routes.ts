@@ -676,6 +676,107 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const hasAccess = isActive || (daysRemaining > 0);
 
       // 📧 Event-driven email automation with atomic flag updates
+      
+      // Día 2: Engagement email (daysRemaining === 5, es el día 2 del trial)
+      if (daysRemaining === 5 && !isActive) {
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day2EmailSent');
+        if (wonRace) {
+          try {
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre para email día 2');
+            }
+            console.log('📧 Enviando email día 2 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay2EngagementEmail } = await import("./email");
+            await sendDay2EngagementEmail(user.email, userName);
+            console.log('✅ Email día 2 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 2:', error);
+            await storage.updateUser(userId, { day2EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 2 ya fue enviado');
+        }
+      }
+
+      // Día 3: Success story email (daysRemaining === 4, es el día 3 del trial)
+      if (daysRemaining === 4 && !isActive) {
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day3EmailSent');
+        if (wonRace) {
+          try {
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre para email día 3');
+            }
+            console.log('📧 Enviando email día 3 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay3StoryEmail } = await import("./email");
+            await sendDay3StoryEmail(user.email, userName);
+            console.log('✅ Email día 3 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 3:', error);
+            await storage.updateUser(userId, { day3EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 3 ya fue enviado');
+        }
+      }
+
+      // Día 4: Progress email (daysRemaining === 3, es el día 4 del trial)
+      if (daysRemaining === 3 && !isActive) {
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day4EmailSent');
+        if (wonRace) {
+          try {
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre para email día 4');
+            }
+            console.log('📧 Enviando email día 4 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay4ProgressEmail } = await import("./email");
+            await sendDay4ProgressEmail(user.email, userName);
+            console.log('✅ Email día 4 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 4:', error);
+            await storage.updateUser(userId, { day4EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 4 ya fue enviado');
+        }
+      }
+
+      // Día 5: Urgency email (daysRemaining === 2, es el día 5 del trial)
+      if (daysRemaining === 2 && !isActive) {
+        const wonRace = await storage.markEmailAsSentIfNotSent(userId, 'day5EmailSent');
+        if (wonRace) {
+          try {
+            let userName: string | undefined;
+            try {
+              const intakeForm = await storage.getIntakeFormByUserId(userId);
+              userName = intakeForm?.nombre || undefined;
+            } catch (error) {
+              console.log('⚠️ No se pudo obtener nombre para email día 5');
+            }
+            console.log('📧 Enviando email día 5 a:', user.email, userName ? `(${userName})` : '');
+            const { sendDay5UrgencyEmail } = await import("./email");
+            await sendDay5UrgencyEmail(user.email, userName);
+            console.log('✅ Email día 5 enviado exitosamente');
+          } catch (error) {
+            console.error('❌ Error enviando email día 5:', error);
+            await storage.updateUser(userId, { day5EmailSent: false });
+          }
+        } else {
+          console.log('⏭️ Email día 5 ya fue enviado');
+        }
+      }
+
       // Día 6: Enviar recordatorio si el trial termina mañana (daysRemaining === 1)
       // No check !user.day6EmailSent here - rely entirely on atomic DB operation
       if (daysRemaining === 1 && !isActive) {
