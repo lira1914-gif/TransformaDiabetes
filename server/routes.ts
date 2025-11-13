@@ -891,6 +891,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Verificar si ya existe un intake form para este usuario
       const existing = await storage.getIntakeFormByUserId(actualUserId);
+      
+      // Rastrear si es la primera vez que se crea el intake form
+      const isFirstIntakeForm = !existing;
 
       let intakeForm;
       if (existing) {
@@ -910,9 +913,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.log('✅ Intake form guardado exitosamente');
       
-      // 📧 ENVIAR EMAILS DE BIENVENIDA (solo para nuevos usuarios)
-      if (isNewUser) {
-        console.log('📧 Usuario nuevo detectado, enviando emails...');
+      // 📧 ENVIAR EMAILS DE BIENVENIDA (cuando se completa el intake form por primera vez)
+      if (isFirstIntakeForm) {
+        console.log('📧 Primer intake form completado, enviando emails...');
         try {
           const { sendWelcomeEmail, sendEmail } = await import("./email");
           const userName = formData.nombre || 'Estimado usuario';
@@ -947,7 +950,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.error('⚠️ Error enviando emails (no crítico):', emailError);
         }
       } else {
-        console.log('ℹ️ Usuario existente, no se envían emails de bienvenida');
+        console.log('ℹ️ Intake form ya existía, no se envían emails de bienvenida');
       }
       
       console.log('✅ Respondiendo con éxito al cliente');
