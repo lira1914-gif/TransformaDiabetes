@@ -89,8 +89,22 @@ export default function ChatSemanal() {
       
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      // Invalidar queries para actualizar UI
       queryClient.invalidateQueries({ queryKey: ['/api/weekly-checkins', userId] });
+      
+      // Marcar primer chat completado si es el primer mensaje
+      if (checkins?.length === 0 || !checkins) {
+        try {
+          await apiRequest('PUT', `/api/users/${userId}`, {
+            firstChatCompletedAt: new Date().toISOString()
+          });
+          queryClient.invalidateQueries({ queryKey: ['/api/onboarding-progress', userId] });
+        } catch (error) {
+          console.error('Error marking first chat completed:', error);
+        }
+      }
+      
       setMessage("");
     },
     onError: (error: Error) => {

@@ -13,6 +13,7 @@ import Day7Banner from "@/components/Day7Banner";
 import { TrialStatus, IntakeForm } from "@/types/trial";
 import ArchivedAccountPage from "@/pages/ArchivedAccountPage";
 import ProgressDashboard from "@/components/ProgressDashboard";
+import OnboardingChecklist from "@/components/OnboardingChecklist";
 
 export default function Perfil() {
   const [, setLocation] = useLocation();
@@ -169,6 +170,9 @@ export default function Perfil() {
 
           {/* Dashboard de Progreso */}
           {userId && <ProgressDashboard userId={userId} />}
+
+          {/* Checklist de Onboarding */}
+          {userId && <OnboardingChecklist userId={userId} />}
 
           <div className="text-center">
             {trialStatus?.isTrialing && trialStatus?.daysRemaining > 0 && (

@@ -1327,6 +1327,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Update user (for onboarding tracking)
+  app.put("/api/users/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const updates = req.body;
+
+      // Validar que el usuario existe
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      // Actualizar solo campos permitidos de onboarding
+      const allowedFields = ['reportViewedAt', 'firstChatCompletedAt'];
+      const filteredUpdates: any = {};
+      
+      for (const field of allowedFields) {
+        if (updates[field] !== undefined) {
+          filteredUpdates[field] = updates[field];
+        }
+      }
+
+      if (Object.keys(filteredUpdates).length === 0) {
+        return res.status(400).json({ error: "No hay campos válidos para actualizar" });
+      }
+
+      // Actualizar usuario
+      const updatedUser = await storage.updateUser(userId, filteredUpdates);
+      
+      res.json(updatedUser);
+    } catch (error: any) {
+      console.error("Error actualizando usuario:", error);
+      res.status(500).json({ error: "Error al actualizar el usuario" });
+    }
+  });
+
   // Generate AI Report endpoint
   app.post("/api/generate-report", async (req, res) => {
     try {
@@ -2049,6 +2085,76 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     } catch (error: any) {
       console.error("Error obteniendo progreso del usuario:", error);
       res.status(500).json({ error: "Error al obtener el progreso" });
+    }
+  });
+
+  // Get Onboarding Progress
+  app.get("/api/onboarding-progress/:userId", async (req, res) => {
+    try {
+      const { userId } = req.params;
+
+      // Obtener usuario, intake form y reporte
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      const intakeForm = await storage.getIntakeFormByUserId(userId);
+      const report = await storage.getReportByUserId(userId);
+      const checkins = await storage.getWeeklyCheckinsByUserId(userId);
+
+      // Calcular pasos completados
+      const steps = [
+        {
+          id: "intake",
+          title: "Completar cuestionario inicial",
+          completed: !!intakeForm,
+          completedAt: intakeForm?.createdAt,
+          link: "/onboarding/paso-1"
+        },
+        {
+          id: "report",
+          title: "Recibir informe funcional personalizado",
+          completed: !!report,
+          completedAt: report?.createdAt,
+          link: "/informe-funcional"
+        },
+        {
+          id: "first_chat",
+          title: "Hacer primera consulta con Marvin",
+          completed: !!user.firstChatCompletedAt,
+          completedAt: user.firstChatCompletedAt,
+          link: "/chat-semanal",
+          isPrimaryCTA: true
+        },
+        {
+          id: "view_report",
+          title: "Revisar tu informe completo",
+          completed: !!user.reportViewedAt,
+          completedAt: user.reportViewedAt,
+          link: "/informe-funcional"
+        }
+      ];
+
+      const completedSteps = steps.filter(s => s.completed).length;
+      const totalSteps = steps.length;
+      const percentComplete = Math.round((completedSteps / totalSteps) * 100);
+      const isComplete = completedSteps === totalSteps;
+
+      // Obtener siguiente paso sugerido
+      const nextStep = steps.find(s => !s.completed);
+
+      res.json({
+        steps,
+        completedSteps,
+        totalSteps,
+        percentComplete,
+        isComplete,
+        nextStep: nextStep || null
+      });
+    } catch (error: any) {
+      console.error("Error obteniendo progreso de onboarding:", error);
+      res.status(500).json({ error: "Error al obtener el progreso de onboarding" });
     }
   });
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { TrialStatus } from "@/types/trial";
 
 interface InformeFuncionalProps {
@@ -37,6 +37,31 @@ export default function InformeFuncional({ readOnly = false }: InformeFuncionalP
     const timer = setTimeout(() => setVisible(true), 200);
     return () => clearTimeout(timer);
   }, []);
+
+  // Marcar que el usuario vio el informe (solo la primera vez)
+  useEffect(() => {
+    if (!userId) return;
+
+    const markReportViewed = async () => {
+      try {
+        // Marcar reportViewedAt en el backend
+        await apiRequest('PUT', `/api/users/${userId}`, {
+          reportViewedAt: new Date().toISOString()
+        });
+        // Invalidar query de onboarding para actualizar UI
+        queryClient.invalidateQueries({ queryKey: ['/api/onboarding-progress', userId] });
+      } catch (error) {
+        console.error('Error marking report as viewed:', error);
+      }
+    };
+
+    // Solo marcar una vez por sesión para evitar requests innecesarios
+    const sessionKey = 'tm_report_viewed_session';
+    if (!sessionStorage.getItem(sessionKey)) {
+      sessionStorage.setItem(sessionKey, 'true');
+      markReportViewed();
+    }
+  }, [userId]);
 
   const handleOpenChat = () => {
     // Durante el trial, simplemente abrir el chat

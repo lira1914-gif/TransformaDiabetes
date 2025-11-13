@@ -29,3 +29,21 @@ export interface UserProgress {
   };
   suggestedActions: string[];
 }
+
+export interface OnboardingStep {
+  id: string;
+  title: string;
+  completed: boolean;
+  completedAt: string | null;
+  link: string;
+  isPrimaryCTA?: boolean;
+}
+
+export interface OnboardingProgress {
+  steps: OnboardingStep[];
+  completedSteps: number;
+  totalSteps: number;
+  percentComplete: number;
+  isComplete: boolean;
+  nextStep: OnboardingStep | null;
+}

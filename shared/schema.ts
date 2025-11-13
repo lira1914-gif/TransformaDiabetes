@@ -21,6 +21,8 @@ export const users = pgTable("users", {
   day8EmailSent: boolean("day8_email_sent").default(false),
   day9EmailSent: boolean("day9_email_sent").default(false),
   day10EmailSent: boolean("day10_email_sent").default(false),
+  reportViewedAt: timestamp("report_viewed_at"),
+  firstChatCompletedAt: timestamp("first_chat_completed_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
