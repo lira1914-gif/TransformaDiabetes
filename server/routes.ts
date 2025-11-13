@@ -1401,7 +1401,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       for (const field of allowedFields) {
         if (updates[field] !== undefined) {
-          filteredUpdates[field] = updates[field];
+          // Convertir string ISO timestamp a Date object para Drizzle
+          filteredUpdates[field] = new Date(updates[field]);
         }
       }
 

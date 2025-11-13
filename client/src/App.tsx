@@ -14,6 +14,7 @@ import Perfil from "@/pages/Perfil";
 import Analisis from "@/pages/Analisis";
 import Guia from "@/pages/Guia";
 import ChatSemanal from "@/pages/ChatSemanal";
+import InformeFuncional from "@/pages/InformeFuncional";
 import Modulo1 from "@/pages/Modulo1";
 import Privacidad from "@/pages/Privacidad";
 import Terminos from "@/pages/Terminos";
@@ -46,6 +47,7 @@ function Router() {
       <Route path="/analisis" component={Analisis} />
       <Route path="/guia" component={Guia} />
       <Route path="/chat-semanal" component={ChatSemanal} />
+      <Route path="/informe-funcional" component={InformeFuncional} />
       <Route path="/modulo-1" component={Modulo1} />
       <Route path="/privacidad" component={Privacidad} />
       <Route path="/terminos" component={Terminos} />
