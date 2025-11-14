@@ -2511,11 +2511,15 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         sendDay9FollowupEmail,
         sendDay10FinalReminderEmail
       } = await import("./email");
+      const { utcToZonedTime } = await import("date-fns-tz");
+      const { differenceInCalendarDays } = await import("date-fns");
       
       console.log('📧 Iniciando proceso de envío de emails automáticos...');
       
       const TRIAL_DAYS = 7;
+      const MEXICO_TZ = 'America/Mexico_City';
       const now = new Date();
+      const nowMexico = utcToZonedTime(now, MEXICO_TZ);
       
       // Buscar usuarios en trial activo o trial_ended reciente (para emails post-trial)
       const trialUsers = await db
@@ -2544,7 +2548,9 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         try {
           if (!user.trialStartDate) continue;
           
-          const daysSinceStart = Math.floor((now.getTime() - new Date(user.trialStartDate).getTime()) / (1000 * 60 * 60 * 24));
+          // Calcular días usando días calendario en timezone México
+          const trialStartMexico = utcToZonedTime(new Date(user.trialStartDate), MEXICO_TZ);
+          const daysSinceStart = differenceInCalendarDays(nowMexico, trialStartMexico);
           const daysRemaining = Math.max(0, TRIAL_DAYS - daysSinceStart);
           const isActive = user.subscriptionStatus === 'active';
           
@@ -2702,23 +2708,26 @@ Devuelve SOLO el JSON, sin texto adicional.`;
   // CRON ENDPOINT: Expirar trials después de 7 días
   app.post("/api/cron/expire-trials", async (req, res) => {
     try {
-      const { eq, and, or, lt, sql: drizzleSql } = await import("drizzle-orm");
+      const { eq, and, or, isNotNull, sql: drizzleSql } = await import("drizzle-orm");
       const { sendEmail } = await import("./email");
+      const { utcToZonedTime } = await import("date-fns-tz");
+      const { differenceInCalendarDays } = await import("date-fns");
       
       console.log('🔄 Iniciando proceso de expiración de trials...');
       
-      // Fecha de hace 7 días
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      const TRIAL_DAYS = 7;
+      const MEXICO_TZ = 'America/Mexico_City';
+      const now = new Date();
+      const nowMexico = utcToZonedTime(now, MEXICO_TZ);
       
-      // Buscar usuarios cuyo trial debería haber expirado
-      const expiredTrialUsers = await db
+      // Buscar usuarios en trial que no han expirado aún
+      const trialUsers = await db
         .select()
         .from(users)
         .where(
           and(
-            // Trial start date fue hace más de 7 días
-            lt(users.trialStartDate, sevenDaysAgo),
+            // Tienen fecha de inicio de trial
+            isNotNull(users.trialStartDate),
             // NO tienen suscripción activa
             or(
               eq(users.subscriptionStatus, 'trialing'),
@@ -2730,40 +2739,41 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           )
         );
       
-      if (expiredTrialUsers.length === 0) {
-        console.log('✅ No hay trials para expirar');
-        return res.json({
-          success: true,
-          message: 'No hay trials para expirar',
-          expired: 0
-        });
-      }
-      
-      console.log(`📊 Encontrados ${expiredTrialUsers.length} trials para expirar`);
+      console.log(`📊 Encontrados ${trialUsers.length} usuarios en trial activo`);
       
       let expired = 0;
       let errors = 0;
       const results: any[] = [];
       
-      for (const user of expiredTrialUsers) {
+      // Filtrar y expirar los que tengan >= 7 días calendario
+      for (const user of trialUsers) {
         try {
-          // Actualizar usuario a trial_ended
-          await db.update(users)
-            .set({ 
-              trialEnded: true,
-              subscriptionStatus: 'trial_ended'
-            })
-            .where(eq(users.id, user.id));
+          if (!user.trialStartDate) continue;
           
-          expired++;
-          results.push({
-            userId: user.id,
-            email: user.email,
-            trialStartDate: user.trialStartDate,
-            status: 'expired'
-          });
+          // Calcular días usando días calendario en timezone México
+          const trialStartMexico = utcToZonedTime(new Date(user.trialStartDate), MEXICO_TZ);
+          const daysSinceStart = differenceInCalendarDays(nowMexico, trialStartMexico);
           
-          console.log(`✅ Trial expirado: ${user.email}`);
+          // Expirar si han pasado 7 o más días calendario
+          if (daysSinceStart >= TRIAL_DAYS) {
+            await db.update(users)
+              .set({ 
+                trialEnded: true,
+                subscriptionStatus: 'trial_ended'
+              })
+              .where(eq(users.id, user.id));
+            
+            expired++;
+            results.push({
+              userId: user.id,
+              email: user.email,
+              trialStartDate: user.trialStartDate,
+              daysSinceStart,
+              status: 'expired'
+            });
+            
+            console.log(`✅ Trial expirado: ${user.email} (${daysSinceStart} días)`);
+          }
         } catch (error: any) {
           errors++;
           results.push({
@@ -2774,6 +2784,15 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           });
           console.error(`❌ Error expirando trial de ${user.email}:`, error);
         }
+      }
+      
+      if (expired === 0) {
+        console.log('✅ No hay trials para expirar');
+        return res.json({
+          success: true,
+          message: 'No hay trials para expirar',
+          expired: 0
+        });
       }
       
       // Notificar al admin
