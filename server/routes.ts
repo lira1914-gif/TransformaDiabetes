@@ -2557,14 +2557,21 @@ Devuelve SOLO el JSON, sin texto adicional.`;
             // No es crítico si no hay nombre
           }
           
+          // Helper para enviar email con rate limiting
+          const sendWithDelay = async (emailFn: () => Promise<void>, day: number) => {
+            await emailFn();
+            emailsSent++;
+            results.push({ userId: user.id, email: user.email, day, status: 'sent' });
+            console.log(`✅ Email día ${day} enviado a: ${user.email}`);
+            // Delay de 600ms para respetar rate limit de Resend (2 emails/segundo)
+            await new Promise(resolve => setTimeout(resolve, 600));
+          };
+          
           // Día 2: daysRemaining === 5
           if (daysRemaining === 5 && !isActive && !user.day2EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day2EmailSent');
             if (wonRace) {
-              await sendDay2EngagementEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 2, status: 'sent' });
-              console.log(`✅ Email día 2 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay2EngagementEmail(user.email, userName), 2);
             }
           }
           
@@ -2572,10 +2579,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysRemaining === 4 && !isActive && !user.day3EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day3EmailSent');
             if (wonRace) {
-              await sendDay3StoryEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 3, status: 'sent' });
-              console.log(`✅ Email día 3 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay3StoryEmail(user.email, userName), 3);
             }
           }
           
@@ -2583,10 +2587,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysRemaining === 3 && !isActive && !user.day4EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day4EmailSent');
             if (wonRace) {
-              await sendDay4ProgressEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 4, status: 'sent' });
-              console.log(`✅ Email día 4 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay4ProgressEmail(user.email, userName), 4);
             }
           }
           
@@ -2594,10 +2595,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysRemaining === 2 && !isActive && !user.day5EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day5EmailSent');
             if (wonRace) {
-              await sendDay5UrgencyEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 5, status: 'sent' });
-              console.log(`✅ Email día 5 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay5UrgencyEmail(user.email, userName), 5);
             }
           }
           
@@ -2605,10 +2603,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysRemaining === 1 && !isActive && !user.day6EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day6EmailSent');
             if (wonRace) {
-              await sendDay6ReminderEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 6, status: 'sent' });
-              console.log(`✅ Email día 6 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay6ReminderEmail(user.email, userName), 6);
             }
           }
           
@@ -2616,10 +2611,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysSinceStart >= 8 && !isActive && !user.day8EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day8EmailSent');
             if (wonRace) {
-              await sendDay8FollowupEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 8, status: 'sent' });
-              console.log(`✅ Email día 8 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay8FollowupEmail(user.email, userName), 8);
             }
           }
           
@@ -2627,10 +2619,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysSinceStart >= 9 && !isActive && !user.day9EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day9EmailSent');
             if (wonRace) {
-              await sendDay9FollowupEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 9, status: 'sent' });
-              console.log(`✅ Email día 9 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay9FollowupEmail(user.email, userName), 9);
             }
           }
           
@@ -2638,10 +2627,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (daysSinceStart >= 10 && !isActive && !user.day10EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day10EmailSent');
             if (wonRace) {
-              await sendDay10FinalReminderEmail(user.email, userName);
-              emailsSent++;
-              results.push({ userId: user.id, email: user.email, day: 10, status: 'sent' });
-              console.log(`✅ Email día 10 enviado a: ${user.email}`);
+              await sendWithDelay(() => sendDay10FinalReminderEmail(user.email, userName), 10);
             }
           }
           
