@@ -2496,6 +2496,223 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     }
   });
 
+  // CRON ENDPOINT: Enviar emails de días 2-10 automáticamente
+  app.post("/api/cron/send-trial-emails", async (req, res) => {
+    try {
+      const { eq, and, or, isNotNull } = await import("drizzle-orm");
+      const { sendEmail } = await import("./email");
+      const { 
+        sendDay2EngagementEmail,
+        sendDay3StoryEmail,
+        sendDay4ProgressEmail,
+        sendDay5UrgencyEmail,
+        sendDay6ReminderEmail,
+        sendDay8FollowupEmail,
+        sendDay9FollowupEmail,
+        sendDay10FinalReminderEmail
+      } = await import("./email");
+      
+      console.log('📧 Iniciando proceso de envío de emails automáticos...');
+      
+      const TRIAL_DAYS = 7;
+      const now = new Date();
+      
+      // Buscar usuarios en trial activo o trial_ended reciente (para emails post-trial)
+      const trialUsers = await db
+        .select()
+        .from(users)
+        .where(
+          and(
+            // Tienen fecha de inicio de trial
+            isNotNull(users.trialStartDate),
+            // NO tienen suscripción activa
+            or(
+              eq(users.subscriptionStatus, 'trialing'),
+              eq(users.subscriptionStatus, 'trial'),
+              eq(users.subscriptionStatus, 'trial_ended')
+            )
+          )
+        );
+      
+      console.log(`📊 Encontrados ${trialUsers.length} usuarios para procesar`);
+      
+      let emailsSent = 0;
+      let errors = 0;
+      const results: any[] = [];
+      
+      for (const user of trialUsers) {
+        try {
+          if (!user.trialStartDate) continue;
+          
+          const daysSinceStart = Math.floor((now.getTime() - new Date(user.trialStartDate).getTime()) / (1000 * 60 * 60 * 24));
+          const daysRemaining = Math.max(0, TRIAL_DAYS - daysSinceStart);
+          const isActive = user.subscriptionStatus === 'active';
+          
+          // Obtener nombre del usuario
+          let userName: string | undefined;
+          try {
+            const intakeForm = await storage.getIntakeFormByUserId(user.id);
+            userName = intakeForm?.nombre || undefined;
+          } catch (error) {
+            // No es crítico si no hay nombre
+          }
+          
+          // Día 2: daysRemaining === 5
+          if (daysRemaining === 5 && !isActive && !user.day2EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day2EmailSent');
+            if (wonRace) {
+              await sendDay2EngagementEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 2, status: 'sent' });
+              console.log(`✅ Email día 2 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 3: daysRemaining === 4
+          if (daysRemaining === 4 && !isActive && !user.day3EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day3EmailSent');
+            if (wonRace) {
+              await sendDay3StoryEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 3, status: 'sent' });
+              console.log(`✅ Email día 3 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 4: daysRemaining === 3
+          if (daysRemaining === 3 && !isActive && !user.day4EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day4EmailSent');
+            if (wonRace) {
+              await sendDay4ProgressEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 4, status: 'sent' });
+              console.log(`✅ Email día 4 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 5: daysRemaining === 2
+          if (daysRemaining === 2 && !isActive && !user.day5EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day5EmailSent');
+            if (wonRace) {
+              await sendDay5UrgencyEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 5, status: 'sent' });
+              console.log(`✅ Email día 5 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 6: daysRemaining === 1
+          if (daysRemaining === 1 && !isActive && !user.day6EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day6EmailSent');
+            if (wonRace) {
+              await sendDay6ReminderEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 6, status: 'sent' });
+              console.log(`✅ Email día 6 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 8: daysSinceStart >= 8
+          if (daysSinceStart >= 8 && !isActive && !user.day8EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day8EmailSent');
+            if (wonRace) {
+              await sendDay8FollowupEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 8, status: 'sent' });
+              console.log(`✅ Email día 8 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 9: daysSinceStart >= 9
+          if (daysSinceStart >= 9 && !isActive && !user.day9EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day9EmailSent');
+            if (wonRace) {
+              await sendDay9FollowupEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 9, status: 'sent' });
+              console.log(`✅ Email día 9 enviado a: ${user.email}`);
+            }
+          }
+          
+          // Día 10: daysSinceStart >= 10
+          if (daysSinceStart >= 10 && !isActive && !user.day10EmailSent) {
+            const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day10EmailSent');
+            if (wonRace) {
+              await sendDay10FinalReminderEmail(user.email, userName);
+              emailsSent++;
+              results.push({ userId: user.id, email: user.email, day: 10, status: 'sent' });
+              console.log(`✅ Email día 10 enviado a: ${user.email}`);
+            }
+          }
+          
+        } catch (error: any) {
+          errors++;
+          results.push({
+            userId: user.id,
+            email: user.email,
+            status: 'error',
+            error: error.message
+          });
+          console.error(`❌ Error procesando usuario ${user.email}:`, error);
+        }
+      }
+      
+      // Notificar al admin solo si se enviaron emails
+      if (emailsSent > 0) {
+        try {
+          await sendEmail({
+            to: 'lira1914@gmail.com',
+            subject: `📧 ${emailsSent} emails de trial enviados - TransformaDiabetes`,
+            html: `
+              <h2>Proceso de Emails Automáticos</h2>
+              <p><strong>Fecha:</strong> ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}</p>
+              <p><strong>Emails enviados:</strong> ${emailsSent}</p>
+              <p><strong>Errores:</strong> ${errors}</p>
+              <hr>
+              <h3>Detalle de emails enviados:</h3>
+              <ul>
+                ${results.filter(r => r.status === 'sent').map(r => `
+                  <li><strong>${r.email}</strong> - Día ${r.day}</li>
+                `).join('')}
+              </ul>
+              ${errors > 0 ? `
+                <hr>
+                <h3>Errores:</h3>
+                <ul>
+                  ${results.filter(r => r.status === 'error').map(r => `
+                    <li><strong>${r.email}</strong> - ${r.error}</li>
+                  `).join('')}
+                </ul>
+              ` : ''}
+              <hr>
+              <p><small>Este proceso se ejecuta automáticamente cada día para enviar emails de retención.</small></p>
+            `
+          });
+          console.log('📧 Notificación enviada al admin');
+        } catch (emailError) {
+          console.error('❌ Error enviando notificación al admin:', emailError);
+        }
+      }
+      
+      res.json({
+        success: true,
+        message: `Proceso completado: ${emailsSent} emails enviados, ${errors} errores`,
+        stats: {
+          totalProcessed: trialUsers.length,
+          emailsSent,
+          errors
+        },
+        results: results.filter(r => r.status === 'sent')
+      });
+    } catch (error: any) {
+      console.error('🚨 Error en proceso de emails automáticos:', error);
+      res.status(500).json({ 
+        error: 'Error en proceso de emails',
+        details: error.message 
+      });
+    }
+  });
+
   // CRON ENDPOINT: Expirar trials después de 7 días
   app.post("/api/cron/expire-trials", async (req, res) => {
     try {

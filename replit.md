@@ -91,17 +91,36 @@ Client-side routing is managed by Wouter, featuring smooth scrolling. The landin
   - Validated via automated grep scanning (0 emojis confirmed)
 
 ## API Endpoints & Automation
-- **Weekly Post-Trial Email Endpoint**: `POST /api/send-weekly-post-trial-emails`
-  - Sends motivational conversion emails to all users with `subscriptionStatus = 'trial_ended'`
-  - Highlights key benefits: unlimited chat, blood analysis interpretation, personalized recipes, functional education, progress tracking
-  - Returns stats: `totalUsers`, `emailsSent`, `errors`, and detailed `results` array
-  - **Automation Setup**: Call this endpoint weekly using external cron services (cron-job.org, EasyCron, or GitHub Actions)
-  - **Example cURL**: `curl -X POST https://transformadiabetes.online/api/send-weekly-post-trial-emails`
-- **Resend Welcome Emails Endpoint**: `POST /api/resend-welcome-emails`
+
+### Automated Cron Jobs (Required for Production)
+The platform requires three automated cron jobs to function correctly. See `CRON_SETUP.md` for detailed setup instructions.
+
+- **Trial Expiration Job**: `POST /api/cron/expire-trials`
+  - **Frequency**: Daily at midnight (America/Mexico_City)
+  - **Function**: Automatically marks trials as expired after 7 days
+  - **Updates**: Sets `trialEnded = true` and `subscriptionStatus = 'trial_ended'`
+  - **Notifications**: Sends admin email with count of expired trials
+  - **Critical**: Required for blocking free access after trial period
+
+- **Automated Email Job**: `POST /api/cron/send-trial-emails`
+  - **Frequency**: Daily at 9:00 AM (America/Mexico_City)
+  - **Function**: Sends trial day emails (2-10) independent of user visits
+  - **Email Days**: Days 2, 3, 4, 5, 6 (pre-expiration) + Days 8, 9, 10 (post-trial follow-up)
+  - **Rate Limit Handling**: Respects Resend's 2 emails/second limit
+  - **Notifications**: Sends admin email only when emails are sent
+  - **Critical**: Required for user engagement and retention
+
+- **Weekly Post-Trial Email Job**: `POST /api/send-weekly-post-trial-emails`
+  - **Frequency**: Weekly on Mondays at 10:00 AM (America/Mexico_City)
+  - **Function**: Sends motivational conversion emails to users with `subscriptionStatus = 'trial_ended'`
+  - **Highlights**: unlimited chat, blood analysis interpretation, personalized recipes, functional education, progress tracking
+  - **Returns**: Stats with `totalUsers`, `emailsSent`, `errors`, and detailed `results` array
+
+### Manual/Recovery Endpoints
+- **Resend Welcome Emails**: `POST /api/resend-welcome-emails`
   - Manually resends welcome emails to users who completed intake but didn't receive welcome email
   - Tracks sent status via `welcomeEmailSent` field in database
   - Sends admin notification with summary of results
-  - **Example cURL**: `curl -X POST https://transformadiabetes.online/api/resend-welcome-emails`
 
 ## External Dependencies
 - **Payment Integration**: Stripe for $5/month subscriptions with a 7-day free trial.
