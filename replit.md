@@ -134,3 +134,25 @@ The platform requires three automated cron jobs to function correctly. See `CRON
 - **AI Integration**: OpenAI GPT-4o for AI-generated reports and the "Marvin Lira IA" chat system.
 - **Analytics**: Google Analytics 4 (GA4) for tracking user behavior.
 - **Support Chat**: Chatbase floating chat widget for technical support.
+
+## Deployment Options
+The application is designed to run on Node.js platforms that support persistent Express servers:
+
+### Recommended Platforms
+- **Railway** (primary recommendation): Native Node.js support, automatic GitHub deployment, built-in cron jobs, $5-10/month
+- **Render**: Node.js native, free tier available, good for production
+- **DigitalOcean App Platform**: Scalable, stable, $5-12/month
+- **Heroku**: Classic Node.js hosting, mature platform, $5-7/month
+
+### Not Recommended
+- **Vercel**: Designed for serverless functions, requires complete architecture rewrite. Current Express monolith with WebSockets incompatible without major refactoring.
+
+### Migration Documentation
+- `RAILWAY_MIGRATION.md`: Complete step-by-step guide for Railway deployment (30 minutes)
+- `ENV_CHECKLIST.md`: Checklist of all required environment variables
+- `DEPLOYMENT_OPTIONS.md`: Comparison of all deployment platforms with pros/cons
+
+### Railway Configuration
+- Server uses `process.env.PORT` (line 129 in server/index.ts) - Railway compatible
+- `railway.json` configures build and deployment settings
+- Cron jobs: recommended to continue using cron-job.org (already configured) or use Railway native cron
