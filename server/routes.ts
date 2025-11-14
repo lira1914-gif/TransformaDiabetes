@@ -2563,44 +2563,44 @@ Devuelve SOLO el JSON, sin texto adicional.`;
             emailsSent++;
             results.push({ userId: user.id, email: user.email, day, status: 'sent' });
             console.log(`✅ Email día ${day} enviado a: ${user.email}`);
-            // Delay de 600ms para respetar rate limit de Resend (2 emails/segundo)
-            await new Promise(resolve => setTimeout(resolve, 600));
+            // Delay de 700ms para respetar rate limit de Resend (2 emails/segundo)
+            await new Promise(resolve => setTimeout(resolve, 700));
           };
           
-          // Día 2: daysRemaining === 5
-          if (daysRemaining === 5 && !isActive && !user.day2EmailSent) {
+          // Día 2: daysSinceStart === 1 (han pasado 1 día completo)
+          if (daysSinceStart === 1 && !isActive && !user.day2EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day2EmailSent');
             if (wonRace) {
               await sendWithDelay(() => sendDay2EngagementEmail(user.email, userName), 2);
             }
           }
           
-          // Día 3: daysRemaining === 4
-          if (daysRemaining === 4 && !isActive && !user.day3EmailSent) {
+          // Día 3: daysSinceStart === 2
+          if (daysSinceStart === 2 && !isActive && !user.day3EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day3EmailSent');
             if (wonRace) {
               await sendWithDelay(() => sendDay3StoryEmail(user.email, userName), 3);
             }
           }
           
-          // Día 4: daysRemaining === 3
-          if (daysRemaining === 3 && !isActive && !user.day4EmailSent) {
+          // Día 4: daysSinceStart === 3
+          if (daysSinceStart === 3 && !isActive && !user.day4EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day4EmailSent');
             if (wonRace) {
               await sendWithDelay(() => sendDay4ProgressEmail(user.email, userName), 4);
             }
           }
           
-          // Día 5: daysRemaining === 2
-          if (daysRemaining === 2 && !isActive && !user.day5EmailSent) {
+          // Día 5: daysSinceStart === 4
+          if (daysSinceStart === 4 && !isActive && !user.day5EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day5EmailSent');
             if (wonRace) {
               await sendWithDelay(() => sendDay5UrgencyEmail(user.email, userName), 5);
             }
           }
           
-          // Día 6: daysRemaining === 1
-          if (daysRemaining === 1 && !isActive && !user.day6EmailSent) {
+          // Día 6: daysSinceStart === 5
+          if (daysSinceStart === 5 && !isActive && !user.day6EmailSent) {
             const wonRace = await storage.markEmailAsSentIfNotSent(user.id, 'day6EmailSent');
             if (wonRace) {
               await sendWithDelay(() => sendDay6ReminderEmail(user.email, userName), 6);
