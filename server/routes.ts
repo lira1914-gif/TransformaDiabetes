@@ -2363,24 +2363,47 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         }
       }
       
-      // Notificar al admin con resumen
+      // Notificar al admin con resumen Y detalles de cada usuario
       try {
+        const successfulUsers = results.filter(r => r.status === 'sent');
+        
+        let detailsHtml = '';
+        for (const result of successfulUsers) {
+          const intakeForm = await storage.getIntakeFormByUserId(result.userId);
+          const userName = intakeForm?.nombre || 'Usuario';
+          const userAge = intakeForm?.edad || 'No especificada';
+          const userWeight = intakeForm?.pesoActual || 'No especificado';
+          
+          detailsHtml += `
+            <div style="border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 6px;">
+              <h3>📧 ${userName}</h3>
+              <p><strong>Email:</strong> ${result.email}</p>
+              <p><strong>Edad:</strong> ${userAge} años</p>
+              <p><strong>Peso:</strong> ${userWeight}</p>
+              <p><strong>User ID:</strong> ${result.userId}</p>
+              <p><small>Email de bienvenida reenviado exitosamente</small></p>
+            </div>
+          `;
+        }
+        
         await sendEmail({
           to: 'lira1914@gmail.com',
-          subject: `📧 Resumen: ${emailsSent} emails de bienvenida reenviados`,
+          subject: `📧 ${emailsSent} nuevos registros - Emails reenviados`,
           html: `
             <h2>Reenvío de Emails de Bienvenida</h2>
             <p><strong>Total usuarios:</strong> ${usersWithoutWelcomeEmail.length}</p>
             <p><strong>Emails enviados:</strong> ${emailsSent}</p>
             <p><strong>Errores:</strong> ${errors}</p>
             <hr>
-            <h3>Detalle:</h3>
-            ${results.map(r => `
-              <p>
-                <strong>${r.email}</strong>: ${r.status}
-                ${r.error ? `<br><em>Error: ${r.error}</em>` : ''}
-              </p>
-            `).join('')}
+            <h3>Detalles de Usuarios:</h3>
+            ${detailsHtml}
+            ${errors > 0 ? `
+              <hr>
+              <h3 style="color: #b85c38;">Errores:</h3>
+              ${results.filter(r => r.status === 'error').map(r => `
+                <p><strong>${r.email}</strong>: ${r.error}</p>
+              `).join('')}
+            ` : ''}
           `
         });
       } catch (notifError) {
