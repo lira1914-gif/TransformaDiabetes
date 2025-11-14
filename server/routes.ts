@@ -2496,6 +2496,132 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     }
   });
 
+  // CRON ENDPOINT: Expirar trials después de 7 días
+  app.post("/api/cron/expire-trials", async (req, res) => {
+    try {
+      const { eq, and, or, lt, sql: drizzleSql } = await import("drizzle-orm");
+      const { sendEmail } = await import("./email");
+      
+      console.log('🔄 Iniciando proceso de expiración de trials...');
+      
+      // Fecha de hace 7 días
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      
+      // Buscar usuarios cuyo trial debería haber expirado
+      const expiredTrialUsers = await db
+        .select()
+        .from(users)
+        .where(
+          and(
+            // Trial start date fue hace más de 7 días
+            lt(users.trialStartDate, sevenDaysAgo),
+            // NO tienen suscripción activa
+            or(
+              eq(users.subscriptionStatus, 'trialing'),
+              eq(users.subscriptionStatus, 'trial'),
+              drizzleSql`${users.subscriptionStatus} IS NULL`
+            ),
+            // NO ya están marcados como expirados
+            eq(users.trialEnded, false)
+          )
+        );
+      
+      if (expiredTrialUsers.length === 0) {
+        console.log('✅ No hay trials para expirar');
+        return res.json({
+          success: true,
+          message: 'No hay trials para expirar',
+          expired: 0
+        });
+      }
+      
+      console.log(`📊 Encontrados ${expiredTrialUsers.length} trials para expirar`);
+      
+      let expired = 0;
+      let errors = 0;
+      const results: any[] = [];
+      
+      for (const user of expiredTrialUsers) {
+        try {
+          // Actualizar usuario a trial_ended
+          await db.update(users)
+            .set({ 
+              trialEnded: true,
+              subscriptionStatus: 'trial_ended'
+            })
+            .where(eq(users.id, user.id));
+          
+          expired++;
+          results.push({
+            userId: user.id,
+            email: user.email,
+            trialStartDate: user.trialStartDate,
+            status: 'expired'
+          });
+          
+          console.log(`✅ Trial expirado: ${user.email}`);
+        } catch (error: any) {
+          errors++;
+          results.push({
+            userId: user.id,
+            email: user.email,
+            status: 'error',
+            error: error.message
+          });
+          console.error(`❌ Error expirando trial de ${user.email}:`, error);
+        }
+      }
+      
+      // Notificar al admin
+      try {
+        await sendEmail({
+          to: 'lira1914@gmail.com',
+          subject: `🔔 ${expired} trials expirados - TransformaDiabetes`,
+          html: `
+            <h2>Proceso de Expiración de Trials</h2>
+            <p><strong>Fecha:</strong> ${new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })}</p>
+            <p><strong>Trials expirados:</strong> ${expired}</p>
+            <p><strong>Errores:</strong> ${errors}</p>
+            <hr>
+            <h3>Usuarios afectados:</h3>
+            <ul>
+              ${results.map(r => `
+                <li>
+                  <strong>${r.email}</strong> 
+                  (Trial inicio: ${r.trialStartDate ? new Date(r.trialStartDate).toLocaleDateString('es-MX') : 'N/A'})
+                  - ${r.status === 'expired' ? '✅ Expirado' : '❌ Error: ' + r.error}
+                </li>
+              `).join('')}
+            </ul>
+            <hr>
+            <p><small>Este proceso se ejecuta automáticamente cada día para marcar trials expirados.</small></p>
+          `
+        });
+        console.log('📧 Notificación enviada al admin');
+      } catch (emailError) {
+        console.error('❌ Error enviando notificación al admin:', emailError);
+      }
+      
+      res.json({
+        success: true,
+        message: `Proceso completado: ${expired} trials expirados, ${errors} errores`,
+        stats: {
+          totalProcessed: expiredTrialUsers.length,
+          expired,
+          errors
+        },
+        results
+      });
+    } catch (error: any) {
+      console.error('🚨 Error en proceso de expiración de trials:', error);
+      res.status(500).json({ 
+        error: 'Error en proceso de expiración',
+        details: error.message 
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
