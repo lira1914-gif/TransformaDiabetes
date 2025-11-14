@@ -2511,7 +2511,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
         sendDay9FollowupEmail,
         sendDay10FinalReminderEmail
       } = await import("./email");
-      const { utcToZonedTime } = await import("date-fns-tz");
+      const { toZonedTime } = await import("date-fns-tz");
       const { differenceInCalendarDays } = await import("date-fns");
       
       console.log('📧 Iniciando proceso de envío de emails automáticos...');
@@ -2519,7 +2519,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
       const TRIAL_DAYS = 7;
       const MEXICO_TZ = 'America/Mexico_City';
       const now = new Date();
-      const nowMexico = utcToZonedTime(now, MEXICO_TZ);
+      const nowMexico = toZonedTime(now, MEXICO_TZ);
       
       // Buscar usuarios en trial activo o trial_ended reciente (para emails post-trial)
       const trialUsers = await db
@@ -2549,7 +2549,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (!user.trialStartDate) continue;
           
           // Calcular días usando días calendario en timezone México
-          const trialStartMexico = utcToZonedTime(new Date(user.trialStartDate), MEXICO_TZ);
+          const trialStartMexico = toZonedTime(new Date(user.trialStartDate), MEXICO_TZ);
           const daysSinceStart = differenceInCalendarDays(nowMexico, trialStartMexico);
           const daysRemaining = Math.max(0, TRIAL_DAYS - daysSinceStart);
           const isActive = user.subscriptionStatus === 'active';
@@ -2710,7 +2710,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
     try {
       const { eq, and, or, isNotNull, sql: drizzleSql } = await import("drizzle-orm");
       const { sendEmail } = await import("./email");
-      const { utcToZonedTime } = await import("date-fns-tz");
+      const { toZonedTime } = await import("date-fns-tz");
       const { differenceInCalendarDays } = await import("date-fns");
       
       console.log('🔄 Iniciando proceso de expiración de trials...');
@@ -2718,7 +2718,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
       const TRIAL_DAYS = 7;
       const MEXICO_TZ = 'America/Mexico_City';
       const now = new Date();
-      const nowMexico = utcToZonedTime(now, MEXICO_TZ);
+      const nowMexico = toZonedTime(now, MEXICO_TZ);
       
       // Buscar usuarios en trial que no han expirado aún
       const trialUsers = await db
@@ -2751,7 +2751,7 @@ Devuelve SOLO el JSON, sin texto adicional.`;
           if (!user.trialStartDate) continue;
           
           // Calcular días usando días calendario en timezone México
-          const trialStartMexico = utcToZonedTime(new Date(user.trialStartDate), MEXICO_TZ);
+          const trialStartMexico = toZonedTime(new Date(user.trialStartDate), MEXICO_TZ);
           const daysSinceStart = differenceInCalendarDays(nowMexico, trialStartMexico);
           
           // Expirar si han pasado 7 o más días calendario
